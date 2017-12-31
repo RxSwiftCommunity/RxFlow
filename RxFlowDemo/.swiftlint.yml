@@ -1,0 +1,49 @@
+disabled_rules: # rule identifiers to exclude from running
+  - todo
+
+opt_in_rules: # some rules are only opt-in
+  - empty_count
+
+included:
+  - RxFlowDemo
+
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Carthage
+  - Pods
+
+force_cast: warning # implicitly
+force_try:
+  severity: warning # explicitly
+
+type_body_length:
+  - 300 # warning
+  - 400 # error
+
+type_name:
+  min_length: 4 # only warning
+  max_length: # warning and error
+    warning: 40
+    error: 50
+  excluded: iPhone # excluded via string
+
+identifier_name:
+  min_length: # only min_length
+    error: 3 # only error
+  excluded: # excluded via string array
+    - id
+    - URL
+    - GlobalAPIKey
+
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji)
+
+function_body_length:
+  - 75
+  - 100
+
+file_length:
+  warning: 600
+  error: 1200
+
+line_length:
+  warning: 200
+  error: 250

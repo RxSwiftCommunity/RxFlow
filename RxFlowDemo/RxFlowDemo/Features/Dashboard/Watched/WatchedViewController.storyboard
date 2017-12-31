@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vFf-Cc-3q4">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Watched View Controller-->
+        <scene sceneID="pv8-ht-M0K">
+            <objects>
+                <viewController id="vFf-Cc-3q4" customClass="WatchedViewController" customModule="WeavyDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="J3f-A1-1Yj"/>
+                        <viewControllerLayoutGuide type="bottom" id="REd-hg-ejW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TRD-V9-6JA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uPy-7z-5Cq">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="I2O-od-WWh">
+                                    <size key="itemSize" width="182" height="240"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="movieCollectionViewCell" id="B0W-Ro-p88" customClass="MovieCollectionViewCell" customModule="WeavyDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="182" height="240"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="182" height="240"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="terminator" translatesAutoresizingMaskIntoConstraints="NO" id="y0G-AH-atu">
+                                                    <rect key="frame" x="8" y="8" width="166" height="224"/>
+                                                </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aAx-8m-ui5">
+                                                    <rect key="frame" x="8" y="8" width="166" height="224"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terminator" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGo-EN-AD7">
+                                                            <rect key="frame" x="0.0" y="199" width="166" height="25"/>
+                                                            <color key="backgroundColor" red="0.85789750649999996" green="0.85789750649999996" blue="0.85789750649999996" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="25" id="e3A-wl-BGP"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="TGo-EN-AD7" secondAttribute="bottom" id="81I-dz-jmV"/>
+                                                        <constraint firstAttribute="trailing" secondItem="TGo-EN-AD7" secondAttribute="trailing" id="CgW-IZ-vig"/>
+                                                        <constraint firstItem="TGo-EN-AD7" firstAttribute="leading" secondItem="aAx-8m-ui5" secondAttribute="leading" id="egJ-IE-GTD"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailingMargin" secondItem="aAx-8m-ui5" secondAttribute="trailing" id="0gF-P5-Bf2"/>
+                                            <constraint firstItem="aAx-8m-ui5" firstAttribute="top" secondItem="B0W-Ro-p88" secondAttribute="topMargin" id="2gt-zS-ak4"/>
+                                            <constraint firstItem="aAx-8m-ui5" firstAttribute="leading" secondItem="B0W-Ro-p88" secondAttribute="leadingMargin" id="9nc-sF-PFR"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="y0G-AH-atu" secondAttribute="bottom" id="M10-B7-b3l"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="aAx-8m-ui5" secondAttribute="bottom" id="RUO-Nw-4iJ"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="y0G-AH-atu" secondAttribute="trailing" id="kfC-y5-or8"/>
+                                            <constraint firstItem="y0G-AH-atu" firstAttribute="leading" secondItem="B0W-Ro-p88" secondAttribute="leadingMargin" id="oaW-bX-SUY"/>
+                                            <constraint firstItem="y0G-AH-atu" firstAttribute="top" secondItem="B0W-Ro-p88" secondAttribute="topMargin" id="rgC-BD-0OU"/>
+                                        </constraints>
+                                        <size key="customSize" width="182" height="240"/>
+                                        <connections>
+                                            <outlet property="movieImage" destination="y0G-AH-atu" id="aHL-Og-Yv3"/>
+                                            <outlet property="movieTitle" destination="TGo-EN-AD7" id="JrL-oi-QRT"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="uPy-7z-5Cq" secondAttribute="trailing" id="08b-PS-xNY"/>
+                            <constraint firstItem="uPy-7z-5Cq" firstAttribute="top" secondItem="J3f-A1-1Yj" secondAttribute="bottom" id="7l2-Ox-apk"/>
+                            <constraint firstItem="uPy-7z-5Cq" firstAttribute="leading" secondItem="TRD-V9-6JA" secondAttribute="leading" id="YBJ-cb-9Nn"/>
+                            <constraint firstItem="uPy-7z-5Cq" firstAttribute="bottom" secondItem="REd-hg-ejW" secondAttribute="top" id="ciB-br-dbj"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="moviesCollection" destination="uPy-7z-5Cq" id="XmX-9U-Cog"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JF8-em-oAh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="21.600000000000001" y="110.19490254872565"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="terminator" width="324" height="431"/>
+    </resources>
+</document>

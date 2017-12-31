@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vFf-Cc-3q4">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Cast Detail View Controller-->
+        <scene sceneID="pv8-ht-M0K">
+            <objects>
+                <viewController id="vFf-Cc-3q4" customClass="CastDetailViewController" customModule="WeavyDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="J3f-A1-1Yj"/>
+                        <viewControllerLayoutGuide type="bottom" id="REd-hg-ejW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TRD-V9-6JA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gv7-8d-eDp">
+                                <rect key="frame" x="0.0" y="137" width="375" height="211"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwJ-oP-xdp">
+                                        <rect key="frame" x="20" y="20" width="335" height="171"/>
+                                        <string key="text">Susan Alexandra Weaver (born October 8, 1949), known professionally as Sigourney Weaver, is an American actress and film producer. Following her film debut as a minor character in Annie Hall (1977), she quickly came to prominence in 1979 with her first lead role as Ellen Ripley in Alien. She reprised the role in three sequels: Aliens (1986), for which she was nominated for the Academy Award for Best Actress; Alien 3 (1992), and Alien: Resurrection (1997). She is also known for her starring roles in the box-office hits Ghostbusters (1984), Ghostbusters II (1989), and Avatar (2009)</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="211" id="OV9-bi-e5E"/>
+                                    <constraint firstItem="kwJ-oP-xdp" firstAttribute="leading" secondItem="gv7-8d-eDp" secondAttribute="leading" constant="20" symbolic="YES" id="S3j-CJ-qVd"/>
+                                    <constraint firstItem="kwJ-oP-xdp" firstAttribute="top" secondItem="gv7-8d-eDp" secondAttribute="top" constant="20" symbolic="YES" id="dqg-YX-lnp"/>
+                                    <constraint firstAttribute="trailing" secondItem="kwJ-oP-xdp" secondAttribute="trailing" constant="20" symbolic="YES" id="hMc-41-KzT"/>
+                                    <constraint firstAttribute="bottom" secondItem="kwJ-oP-xdp" secondAttribute="bottom" constant="20" symbolic="YES" id="x1A-mi-mV5"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sigourney" translatesAutoresizingMaskIntoConstraints="NO" id="1Uw-eF-keQ">
+                                <rect key="frame" x="139" y="30" width="97" height="97"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="1Uw-eF-keQ" secondAttribute="height" multiplier="1:1" id="yWh-3b-DXz"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gv7-8d-eDp" firstAttribute="leading" secondItem="TRD-V9-6JA" secondAttribute="leading" id="IaF-ci-gUw"/>
+                            <constraint firstItem="1Uw-eF-keQ" firstAttribute="top" secondItem="J3f-A1-1Yj" secondAttribute="bottom" constant="10" id="PG1-IR-hPN"/>
+                            <constraint firstAttribute="trailing" secondItem="gv7-8d-eDp" secondAttribute="trailing" id="Sm0-iC-Zy3"/>
+                            <constraint firstItem="gv7-8d-eDp" firstAttribute="top" secondItem="1Uw-eF-keQ" secondAttribute="bottom" constant="10" id="eHk-hu-QeD"/>
+                            <constraint firstItem="1Uw-eF-keQ" firstAttribute="centerX" secondItem="TRD-V9-6JA" secondAttribute="centerX" id="rBM-GO-ttY"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="castBanner" destination="1Uw-eF-keQ" id="nns-rA-Mjj"/>
+                        <outlet property="castBio" destination="kwJ-oP-xdp" id="uwf-25-jcc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JF8-em-oAh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="21.600000000000001" y="110.19490254872565"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="sigourney" width="97" height="97"/>
+    </resources>
+</document>
