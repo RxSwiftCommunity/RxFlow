@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let window = self.window else { return false }
 
         coordinator.rx.didNavigate.subscribe(onNext: { (flow, step) in
-            print ("did knit to flow=\(flow) and step=\(step)")
+            print ("did navigate to flow=\(flow) and step=\(step)")
         }).disposed(by: self.disposeBag)
 
         Flows.whenReady(flow: mainFlow, block: { [unowned window] (root) in
