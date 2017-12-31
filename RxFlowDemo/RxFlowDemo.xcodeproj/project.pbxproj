@@ -11,7 +11,7 @@
 		1A8FBE111FF845EE00389464 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A8FBE0E1FF845EE00389464 /* RxSwift.framework */; };
 		1A8FBE121FF845EE00389464 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A8FBE0F1FF845EE00389464 /* RxCocoa.framework */; };
 		1A8FBE261FF8480C00389464 /* WishlistFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE211FF8480B00389464 /* WishlistFlow.swift */; };
-		1A8FBE271FF8480C00389464 /* DemoWeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE221FF8480C00389464 /* DemoWeft.swift */; };
+		1A8FBE271FF8480C00389464 /* DemoStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE221FF8480C00389464 /* DemoStep.swift */; };
 		1A8FBE281FF8480C00389464 /* SettingsFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE231FF8480C00389464 /* SettingsFlow.swift */; };
 		1A8FBE291FF8480C00389464 /* MainFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE241FF8480C00389464 /* MainFlow.swift */; };
 		1A8FBE2A1FF8480C00389464 /* WatchedFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE251FF8480C00389464 /* WatchedFlow.swift */; };
@@ -55,7 +55,7 @@
 		1A8FBE0E1FF845EE00389464 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		1A8FBE0F1FF845EE00389464 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		1A8FBE211FF8480B00389464 /* WishlistFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishlistFlow.swift; sourceTree = "<group>"; };
-		1A8FBE221FF8480C00389464 /* DemoWeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoWeft.swift; sourceTree = "<group>"; };
+		1A8FBE221FF8480C00389464 /* DemoStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoStep.swift; sourceTree = "<group>"; };
 		1A8FBE231FF8480C00389464 /* SettingsFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsFlow.swift; sourceTree = "<group>"; };
 		1A8FBE241FF8480C00389464 /* MainFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainFlow.swift; sourceTree = "<group>"; };
 		1A8FBE251FF8480C00389464 /* WatchedFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchedFlow.swift; sourceTree = "<group>"; };
@@ -123,7 +123,7 @@
 		1A8FBE1F1FF847EB00389464 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				1A8FBE221FF8480C00389464 /* DemoWeft.swift */,
+				1A8FBE221FF8480C00389464 /* DemoStep.swift */,
 				1A8FBE241FF8480C00389464 /* MainFlow.swift */,
 				1A8FBE231FF8480C00389464 /* SettingsFlow.swift */,
 				1A8FBE251FF8480C00389464 /* WatchedFlow.swift */,
@@ -404,7 +404,7 @@
 				1A8FBE351FF84B5300389464 /* MoviesHelper.swift in Sources */,
 				1A8FBE281FF8480C00389464 /* SettingsFlow.swift in Sources */,
 				1A8FBE641FF84BFE00389464 /* CastViewModel.swift in Sources */,
-				1A8FBE271FF8480C00389464 /* DemoWeft.swift in Sources */,
+				1A8FBE271FF8480C00389464 /* DemoStep.swift in Sources */,
 				1A8FBE601FF84BFE00389464 /* MovieViewModel.swift in Sources */,
 				1A8FBE361FF84B5300389464 /* MoviesRepository.swift in Sources */,
 				1A8FBE681FF84BFE00389464 /* WishlistViewController.swift in Sources */,
