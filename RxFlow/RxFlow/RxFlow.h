@@ -3,7 +3,7 @@
 //  RxFlow
 //
 //  Created by Thibault Wittemberg on 17-12-30.
-//  Copyright © 2017 WarpFactor. All rights reserved.
+//  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

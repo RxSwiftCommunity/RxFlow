@@ -3,7 +3,7 @@
 //  WeavyDemo
 //
 //  Created by Thibault Wittemberg on 17-09-06.
-//  Copyright © 2017 Warp Factor. All rights reserved.
+//  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
 import UIKit

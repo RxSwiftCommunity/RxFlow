@@ -3,7 +3,7 @@
 //  RxFlowDemo
 //
 //  Created by Thibault Wittemberg on 17-12-03.
-//  Copyright © 2017 Warp Factor. All rights reserved.
+//  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
 import RxFlow

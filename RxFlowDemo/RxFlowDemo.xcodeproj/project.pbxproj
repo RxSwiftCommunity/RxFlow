@@ -301,7 +301,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0920;
-				ORGANIZATIONNAME = WarpFactor;
+				ORGANIZATIONNAME = RxSwiftCommunity;
 				TargetAttributes = {
 					1AF854AE1FF832AE00271B52 = {
 						CreatedOnToolsVersion = 9.2;
