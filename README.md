@@ -1,4 +1,4 @@
-\| <img alt="RxFlow Logo" src="https://raw.githubusercontent.com/RxSwiftCommunity/RxFlow/develop/Resources/RxFlow_logo.png" width="200"/> | <ul align="left"><li><a href="#about">About</a><li><a href="#navigation-concerns">Navigation concerns</a><li><a href="#rxflow-aims-to">RxFlow aims to</a><li><a href="#installation">Installation</a><li><a href="#the-core-principles">The core principles</a><li><a href="#how-to-use-rxflow">How to use RxFlow</a><li><a href="#tools-and-dependencies">Tools and dependencies</a></ul> |
+| <img alt="RxFlow Logo" src="https://raw.githubusercontent.com/RxSwiftCommunity/RxFlow/develop/Resources/RxFlow_logo.png" width="200"/> | <ul align="left"><li><a href="#about">About</a><li><a href="#navigation-concerns">Navigation concerns</a><li><a href="#rxflow-aims-to">RxFlow aims to</a><li><a href="#installation">Installation</a><li><a href="#the-core-principles">The core principles</a><li><a href="#how-to-use-rxflow">How to use RxFlow</a><li><a href="#tools-and-dependencies">Tools and dependencies</a></ul> |
 | -------------- | -------------- |
 | Travis CI | [![Build Status](https://travis-ci.org/twittemb/RxFlow.svg?branch=develop)](https://travis-ci.org/twittemb/RxFlow) |
 | Frameworks | [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/RxFlow.svg?style=flat)](http://cocoapods.org/pods/RxFlow) |
@@ -8,7 +8,7 @@
 <span style="float:none" />
 
 # About
-RxFlow is a navigation framework for iOS applications based on a Flow Coordinator pattern
+RxFlow is a navigation framework for iOS applications based on a Flow Coordinator pattern.
 
 This README is a short story of the whole conception process that led me to this framework.
 
@@ -102,7 +102,7 @@ The **Coordinator** will listen for these **Steps** and call the **Flow**â€™s â€
 A **Step** can even embed inner values (such as Ids, URLs, ...) that will be propagated to screens presented by the **Flows**.
 
 ## Coordinator
-A **Coordinator** is a just a tool for the developper. Once he has defined the suitable combinations of **Flows** and **Steps** representing the navigation possibilities, the job of the **Coordinator** is to weave these combinaisons into patterns, according to navigation **Steps** changes induced by **Steppers**. 
+A **Coordinator** is a just a tool for the developper. Once he has defined the suitable combinations of **Flows** and **Steps** representing the navigation possibilities, the job of the **Coordinator** is to mix these combinaisons into a consistent navigation, according to navigation **Steps** changes induced by **Steppers**. 
 
 It is up to the developper to:
 - define the **Flows** that represent in the best possible way its application sections (such as Dashboard, Onboarding, Settings, ...) in which significant navigation actions are needed
