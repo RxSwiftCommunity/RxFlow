@@ -19,7 +19,7 @@ RxFlow aims to
   s.homepage     = "https://github.com/RxSwiftCommunity/RxFlow"
   s.screenshots  = "https://raw.githubusercontent.com/RxSwiftCommunity/RxFlow/develop/Resources/RxFlow_logo.png"
   s.license      = { :type => "MIT", :file => "LICENSE" }
-  s.author             = { "Thibault Wittemberg" => "thibault.wittemberg@gmail.com" }
+  s.authors      = { "Thibault Wittemberg" => "thibault.wittemberg@gmail.com", "RxSwiftCommunity" => "https://github.com/RxSwiftCommunity" }
   s.social_media_url   = "http://twitter.com/thwittem"
   s.platform     = :ios
   s.ios.deployment_target = "9.3"

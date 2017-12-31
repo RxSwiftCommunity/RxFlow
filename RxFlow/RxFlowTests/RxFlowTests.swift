@@ -7,7 +7,6 @@
 //
 
 import XCTest
-@testable import RxFlow
 
 class RxFlowTests: XCTestCase {
     
