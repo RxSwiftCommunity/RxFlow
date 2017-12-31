@@ -12,11 +12,6 @@ RxFlow is a navigation framework for iOS applications based on a Flow Coordinato
 
 This README is a short story of the whole conception process that led me to this framework.
 
-For a really detailed explanation, take a look at my blog:
-- RxFlow Part 1 ([The theory](https://twittemb.github.io/swift/coordinator/reactive/rxswift/2017/11/08/rxflow-part-1/))
-- RxFlow Part 2 ([In practice](https://twittemb.github.io/swift/coordinator/reactive/rxswift/2017/12/09/rxflow-part-2/))
-- RxFlow Part 3 ([Tips and Tricks](https://twittemb.github.io/swift/coordinator/reactive/rxswift/2017/12/22/rxflow-part-3-tips-and-tricks/))
-
 # Navigation concerns
 Regarding navigation within an iOS application, two choices are available:
 - Use the builtin mechanism provided by Apple and Xcode: storyboards and segues
