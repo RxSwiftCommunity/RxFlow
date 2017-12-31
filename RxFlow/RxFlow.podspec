@@ -24,7 +24,7 @@ RxFlow aims to
   s.platform     = :ios
   s.ios.deployment_target = "9.3"
   s.source       = { :git => "https://github.com/RxSwiftCommunity/RxFlow.git", :tag => s.version.to_s }
-  s.source_files  = "RxFlow/**/*.swift"
+  s.source_files  = "RxFlow/RxFlow/**/*.swift"
   s.frameworks  = 'UIKit'
   s.requires_arc     = true  
   s.dependency 'RxSwift', '>= 4.0.0'
