@@ -22,13 +22,13 @@
 		1A8FBDFE1FF8337800389464 /* Flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDF11FF8337800389464 /* Flow.swift */; };
 		1A8FBE011FF8428E00389464 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A8FBDFF1FF8428E00389464 /* RxCocoa.framework */; };
 		1A8FBE021FF8428E00389464 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A8FBE001FF8428E00389464 /* RxSwift.framework */; };
-		1AF854961FF8328D00271B52 /* RxFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF8548C1FF8328D00271B52 /* RxFlow.framework */; };
-		1AF8549B1FF8328D00271B52 /* RxFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF8549A1FF8328D00271B52 /* RxFlowTests.swift */; };
+		1A8FBE781FF9783100389464 /* RxFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE771FF9783100389464 /* RxFlowTests.swift */; };
+		1A8FBE7A1FF9783100389464 /* RxFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF8548C1FF8328D00271B52 /* RxFlow.framework */; };
 		1AF8549D1FF8328D00271B52 /* RxFlow.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AF8548F1FF8328D00271B52 /* RxFlow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1AF854971FF8328D00271B52 /* PBXContainerItemProxy */ = {
+		1A8FBE7B1FF9783100389464 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1AF854831FF8328D00271B52 /* Project object */;
 			proxyType = 1;
@@ -55,29 +55,29 @@
 		1A8FBDF11FF8337800389464 /* Flow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flow.swift; sourceTree = "<group>"; };
 		1A8FBDFF1FF8428E00389464 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		1A8FBE001FF8428E00389464 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		1A8FBE751FF9783100389464 /* RxFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A8FBE771FF9783100389464 /* RxFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxFlowTests.swift; sourceTree = "<group>"; };
+		1A8FBE791FF9783100389464 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AF8548C1FF8328D00271B52 /* RxFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AF8548F1FF8328D00271B52 /* RxFlow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxFlow.h; sourceTree = "<group>"; };
 		1AF854901FF8328D00271B52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1AF854951FF8328D00271B52 /* RxFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1AF8549A1FF8328D00271B52 /* RxFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxFlowTests.swift; sourceTree = "<group>"; };
-		1AF8549C1FF8328D00271B52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1A8FBE721FF9783100389464 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A8FBE7A1FF9783100389464 /* RxFlow.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1AF854881FF8328D00271B52 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				1A8FBE011FF8428E00389464 /* RxCocoa.framework in Frameworks */,
 				1A8FBE021FF8428E00389464 /* RxSwift.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1AF854921FF8328D00271B52 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1AF854961FF8328D00271B52 /* RxFlow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,11 +107,20 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		1A8FBE761FF9783100389464 /* RxFlowTests */ = {
+			isa = PBXGroup;
+			children = (
+				1A8FBE771FF9783100389464 /* RxFlowTests.swift */,
+				1A8FBE791FF9783100389464 /* Info.plist */,
+			);
+			path = RxFlowTests;
+			sourceTree = "<group>";
+		};
 		1AF854821FF8328D00271B52 = {
 			isa = PBXGroup;
 			children = (
 				1AF8548E1FF8328D00271B52 /* RxFlow */,
-				1AF854991FF8328D00271B52 /* RxFlowTests */,
+				1A8FBE761FF9783100389464 /* RxFlowTests */,
 				1AF8548D1FF8328D00271B52 /* Products */,
 				1A8FBDDE1FF8331900389464 /* Frameworks */,
 			);
@@ -121,7 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				1AF8548C1FF8328D00271B52 /* RxFlow.framework */,
-				1AF854951FF8328D00271B52 /* RxFlowTests.xctest */,
+				1A8FBE751FF9783100389464 /* RxFlowTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,15 +153,6 @@
 			path = RxFlow;
 			sourceTree = "<group>";
 		};
-		1AF854991FF8328D00271B52 /* RxFlowTests */ = {
-			isa = PBXGroup;
-			children = (
-				1AF8549A1FF8328D00271B52 /* RxFlowTests.swift */,
-				1AF8549C1FF8328D00271B52 /* Info.plist */,
-			);
-			path = RxFlowTests;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -167,6 +167,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		1A8FBE741FF9783100389464 /* RxFlowTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1A8FBE7D1FF9783100389464 /* Build configuration list for PBXNativeTarget "RxFlowTests" */;
+			buildPhases = (
+				1A8FBE711FF9783100389464 /* Sources */,
+				1A8FBE721FF9783100389464 /* Frameworks */,
+				1A8FBE731FF9783100389464 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1A8FBE7C1FF9783100389464 /* PBXTargetDependency */,
+			);
+			name = RxFlowTests;
+			productName = RxFlowTests;
+			productReference = 1A8FBE751FF9783100389464 /* RxFlowTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		1AF8548B1FF8328D00271B52 /* RxFlow */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1AF854A01FF8328D00271B52 /* Build configuration list for PBXNativeTarget "RxFlow" */;
@@ -187,24 +205,6 @@
 			productReference = 1AF8548C1FF8328D00271B52 /* RxFlow.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		1AF854941FF8328D00271B52 /* RxFlowTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1AF854A31FF8328D00271B52 /* Build configuration list for PBXNativeTarget "RxFlowTests" */;
-			buildPhases = (
-				1AF854911FF8328D00271B52 /* Sources */,
-				1AF854921FF8328D00271B52 /* Frameworks */,
-				1AF854931FF8328D00271B52 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1AF854981FF8328D00271B52 /* PBXTargetDependency */,
-			);
-			name = RxFlowTests;
-			productName = RxFlowTests;
-			productReference = 1AF854951FF8328D00271B52 /* RxFlowTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -215,13 +215,13 @@
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = RxSwiftCommunity;
 				TargetAttributes = {
+					1A8FBE741FF9783100389464 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
 					1AF8548B1FF8328D00271B52 = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 0920;
-						ProvisioningStyle = Automatic;
-					};
-					1AF854941FF8328D00271B52 = {
-						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -239,20 +239,20 @@
 			projectRoot = "";
 			targets = (
 				1AF8548B1FF8328D00271B52 /* RxFlow */,
-				1AF854941FF8328D00271B52 /* RxFlowTests */,
+				1A8FBE741FF9783100389464 /* RxFlowTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1AF8548A1FF8328D00271B52 /* Resources */ = {
+		1A8FBE731FF9783100389464 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1AF854931FF8328D00271B52 /* Resources */ = {
+		1AF8548A1FF8328D00271B52 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -297,6 +297,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1A8FBE711FF9783100389464 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A8FBE781FF9783100389464 /* RxFlowTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1AF854871FF8328D00271B52 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -317,25 +325,45 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1AF854911FF8328D00271B52 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1AF8549B1FF8328D00271B52 /* RxFlowTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1AF854981FF8328D00271B52 /* PBXTargetDependency */ = {
+		1A8FBE7C1FF9783100389464 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1AF8548B1FF8328D00271B52 /* RxFlow */;
-			targetProxy = 1AF854971FF8328D00271B52 /* PBXContainerItemProxy */;
+			targetProxy = 1A8FBE7B1FF9783100389464 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		1A8FBE7E1FF9783100389464 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3V5265LQM9;
+				INFOPLIST_FILE = RxFlowTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxFlowTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1A8FBE7F1FF9783100389464 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3V5265LQM9;
+				INFOPLIST_FILE = RxFlowTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxFlowTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		1AF8549E1FF8328D00271B52 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -504,39 +532,18 @@
 			};
 			name = Release;
 		};
-		1AF854A41FF8328D00271B52 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3V5265LQM9;
-				INFOPLIST_FILE = RxFlowTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxFlowTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		1AF854A51FF8328D00271B52 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3V5265LQM9;
-				INFOPLIST_FILE = RxFlowTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxFlowTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1A8FBE7D1FF9783100389464 /* Build configuration list for PBXNativeTarget "RxFlowTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A8FBE7E1FF9783100389464 /* Debug */,
+				1A8FBE7F1FF9783100389464 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1AF854861FF8328D00271B52 /* Build configuration list for PBXProject "RxFlow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -551,15 +558,6 @@
 			buildConfigurations = (
 				1AF854A11FF8328D00271B52 /* Debug */,
 				1AF854A21FF8328D00271B52 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1AF854A31FF8328D00271B52 /* Build configuration list for PBXNativeTarget "RxFlowTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1AF854A41FF8328D00271B52 /* Debug */,
-				1AF854A51FF8328D00271B52 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

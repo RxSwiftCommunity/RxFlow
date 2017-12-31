@@ -2,8 +2,8 @@
 //  RxFlowTests.swift
 //  RxFlowTests
 //
-//  Created by Thibault Wittemberg on 17-12-30.
-//  Copyright © 2017 WarpFactor. All rights reserved.
+//  Created by Thibault Wittemberg on 17-12-31.
+//  Copyright © 2017 RxSwiftCommunity. All rights reserved.
 //
 
 import XCTest
