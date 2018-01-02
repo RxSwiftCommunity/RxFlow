@@ -252,6 +252,6 @@ A demo application is provided to illustrate the core mechanisms. Pretty much ev
 
 RxFlow relies on:
 - SwiftLint for static code analysis ([Github SwiftLint](https://github.com/realm/SwiftLint))
-- RxSwift to expose Wefts into Observables the Loom can react to ([Github RxSwift](https://github.com/ReactiveX/RxSwift))
+- RxSwift to expose Steps as Observables the Coordinator can react to ([Github RxSwift](https://github.com/ReactiveX/RxSwift))
 - Reusable in the Demo App to ease the storyboard cutting into atomic ViewControllers ([Github Reusable](https://github.com/AliSoftware/Reusable))
 
