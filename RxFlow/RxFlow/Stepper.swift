@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import RxCocoa
 
 private var subjectContext: UInt8 = 0
 
@@ -25,7 +26,7 @@ public class OneStepper: Stepper {
     ///
     /// - Parameter singleStep: the step to be emitted once initialized
     public init(withSingleStep singleStep: Step) {
-        self.step.onNext(singleStep)
+        self.step.accept(singleStep)
     }
 }
 
@@ -39,12 +40,12 @@ class NoneStepper: OneStepper {
 public extension Stepper {
 
     /// The step Subject in which to publish new Steps
-    public var step: BehaviorSubject<Step> {
+    public var step: BehaviorRelay<Step> {
         return self.synchronized {
-            if let subject = objc_getAssociatedObject(self, &subjectContext) as? BehaviorSubject<Step> {
+            if let subject = objc_getAssociatedObject(self, &subjectContext) as? BehaviorRelay<Step> {
                 return subject
             }
-            let newSubject = BehaviorSubject<Step>(value: NoStep())
+            let newSubject = BehaviorRelay<Step>(value: NoStep())
             objc_setAssociatedObject(self, &subjectContext, newSubject, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return newSubject
         }
