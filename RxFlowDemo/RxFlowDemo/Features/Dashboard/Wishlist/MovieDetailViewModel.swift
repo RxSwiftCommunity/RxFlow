@@ -42,6 +42,6 @@ class MovieDetailViewModel: Stepper {
     }
 
     func pick (castId: Int) {
-        self.step.onNext(DemoStep.castPicked(withCastId: castId))
+        self.step.accept(DemoStep.castPicked(withCastId: castId))
     }
 }

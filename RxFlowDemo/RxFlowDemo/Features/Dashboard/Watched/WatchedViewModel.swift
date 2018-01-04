@@ -21,7 +21,7 @@ class WatchedViewModel: Stepper {
     }
 
     public func pick (movieId: Int) {
-        self.step.onNext(DemoStep.moviePicked(withMovieId: movieId))
+        self.step.accept(DemoStep.moviePicked(withMovieId: movieId))
     }
 
 }
