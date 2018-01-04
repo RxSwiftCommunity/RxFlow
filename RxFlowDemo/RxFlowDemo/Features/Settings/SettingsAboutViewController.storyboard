@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZpY-pk-hEw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZpY-pk-hEw">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,39 +13,42 @@
         <!--Settings About View Controller-->
         <scene sceneID="35H-hz-Gvf">
             <objects>
-                <viewController id="ZpY-pk-hEw" customClass="SettingsAboutViewController" customModule="WeavyDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ZpY-pk-hEw" customClass="SettingsAboutViewController" customModule="RxFlowDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ed2-hv-zBh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="weavy_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Jz3-1y-fjv">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="p5G-4i-5hc"/>
-                                </constraints>
-                            </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Q8Z-zM-AHU">
-                                <rect key="frame" x="8" y="208" width="359" height="459"/>
+                                <rect key="frame" x="16" y="269" width="343" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">This is an example application to show the possibilities of Weavy. 
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="7mD-uN-5hf"/>
+                                </constraints>
+                                <string key="text">This is an example application to show the possibilities of RxFlow. 
 
-Weavy is a navigation framework based on a weaving concept. Feel free to contribute: 
+RxFlow is a navigation framework based on a Reactive Flow Coordinator concept. Feel free to contribute: 
 
-https://github.com/twittemb/Weavy</string>
+https://github.com/RxSwiftCommunity/RxFlow</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RxFlow_logo_small" translatesAutoresizingMaskIntoConstraints="NO" id="Jz3-1y-fjv">
+                                <rect key="frame" x="0.0" y="161" width="375" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="M9o-I8-9Au"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Q8Z-zM-AHU" firstAttribute="top" secondItem="Jz3-1y-fjv" secondAttribute="bottom" constant="8" symbolic="YES" id="0Sc-cb-bdd"/>
-                            <constraint firstItem="Q8Z-zM-AHU" firstAttribute="leading" secondItem="Jz3-1y-fjv" secondAttribute="leading" constant="8" id="1C1-ai-RgN"/>
-                            <constraint firstItem="Q8Z-zM-AHU" firstAttribute="bottom" secondItem="PsQ-6u-iLj" secondAttribute="bottom" id="K6i-xe-bpV"/>
-                            <constraint firstAttribute="trailing" secondItem="Jz3-1y-fjv" secondAttribute="trailing" id="WT2-9L-Khg"/>
-                            <constraint firstItem="Jz3-1y-fjv" firstAttribute="leading" secondItem="ed2-hv-zBh" secondAttribute="leading" id="Zgq-uU-7ON"/>
-                            <constraint firstItem="Q8Z-zM-AHU" firstAttribute="trailing" secondItem="Jz3-1y-fjv" secondAttribute="trailing" constant="-8" id="b7n-LF-GAc"/>
-                            <constraint firstItem="PsQ-6u-iLj" firstAttribute="top" secondItem="Jz3-1y-fjv" secondAttribute="top" constant="20" id="mMs-R9-4pf"/>
+                            <constraint firstItem="Q8Z-zM-AHU" firstAttribute="leading" secondItem="PsQ-6u-iLj" secondAttribute="leading" constant="16" id="Q6E-gy-tP5"/>
+                            <constraint firstItem="Q8Z-zM-AHU" firstAttribute="centerX" secondItem="PsQ-6u-iLj" secondAttribute="centerX" id="SOh-Tx-HCv"/>
+                            <constraint firstItem="Jz3-1y-fjv" firstAttribute="leading" secondItem="ed2-hv-zBh" secondAttribute="leading" id="mVa-Dt-q38"/>
+                            <constraint firstItem="PsQ-6u-iLj" firstAttribute="trailing" secondItem="Q8Z-zM-AHU" secondAttribute="trailing" constant="16" id="nQO-Of-03f"/>
+                            <constraint firstItem="Jz3-1y-fjv" firstAttribute="centerX" secondItem="Q8Z-zM-AHU" secondAttribute="centerX" id="oil-du-Ami"/>
+                            <constraint firstItem="Q8Z-zM-AHU" firstAttribute="centerY" secondItem="PsQ-6u-iLj" secondAttribute="centerY" id="x03-3a-rkj"/>
+                            <constraint firstItem="Q8Z-zM-AHU" firstAttribute="top" secondItem="Jz3-1y-fjv" secondAttribute="bottom" constant="8" symbolic="YES" id="yTG-Om-KzE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PsQ-6u-iLj"/>
                     </view>
@@ -56,6 +59,6 @@ https://github.com/twittemb/Weavy</string>
         </scene>
     </scenes>
     <resources>
-        <image name="weavy_logo" width="180" height="180"/>
+        <image name="RxFlow_logo_small" width="512" height="226"/>
     </resources>
 </document>
