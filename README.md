@@ -194,6 +194,25 @@ class WatchedViewModel: Stepper {
 }
 ```
 
+### Is it possible to coordinate multiple Flows ?
+
+Of course, it is the aim of a Coordinator. As a Flow is a Presentable, a Flow can launch one other Flow or even several other Flows.
+
+For instance, from the WishlistFlow, we launch the SettingsFlow in a popup.
+
+```swift
+private func navigateToSettings () -> [Flowable] {     
+    let settingsStepper = SettingsStepper()
+    let settingsFlow = SettingsFlow(withService: self.service, andStepper: settingsStepper)
+    Flows.whenReady(flow: settingsFlow, block: { [unowned self] (root: UISplitViewController) in
+        self.rootViewController.present(root, animated: true)
+    })
+    return [Flowable(nextPresentable: settingsFlow, nextStepper: settingsStepper)]
+}
+```
+
+For a more complex case, see the **MainFlow.swift** file in which we handle a UITabBarController.
+
 ### How to bootstrap the RxFlow process
 
 The coordination process is pretty straightfoward and happens in the AppDelegate.
