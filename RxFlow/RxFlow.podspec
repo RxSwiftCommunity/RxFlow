@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "RxFlow"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.summary      = "RxFlow is a navigation framework for iOS applications based on a Reactive Coordinator pattern."
 
   s.description  = <<-DESC
@@ -22,7 +22,7 @@ RxFlow aims to
   s.authors      = { "Thibault Wittemberg" => "thibault.wittemberg@gmail.com", "RxSwiftCommunity" => "https://github.com/RxSwiftCommunity" }
   s.social_media_url   = "http://twitter.com/thwittem"
   s.platform     = :ios
-  s.ios.deployment_target = "9.3"
+  s.ios.deployment_target = "9.0"
   s.source       = { :git => "https://github.com/RxSwiftCommunity/RxFlow.git", :tag => s.version.to_s }
   s.source_files  = "RxFlow/RxFlow/**/*.swift"
   s.frameworks  = 'UIKit'
