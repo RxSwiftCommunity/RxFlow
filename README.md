@@ -188,7 +188,7 @@ class WatchedViewModel: Stepper {
     // when a movie is picked, a new Step is emitted.
     // That will trigger a navigation action within the WatchedFlow
     public func pick (movieId: Int) {
-        self.step.onNext(DemoStep.moviePicked(withMovieId: movieId))
+        self.step.accept(DemoStep.moviePicked(withMovieId: movieId))
     }
 
 }
