@@ -89,10 +89,10 @@ class WishlistWarp: Flow {
 class WishlistStepper: Stepper {
 
     init() {
-        self.step.onNext(DemoStep.movieList)
+        self.step.accept(DemoStep.movieList)
     }
 
     @objc func settings () {
-        self.step.onNext(DemoStep.settings)
+        self.step.accept(DemoStep.settings)
     }
 }

@@ -70,10 +70,10 @@ class SettingsFlow: Flow {
 class SettingsStepper: Stepper {
 
     init() {
-        self.step.onNext(DemoStep.settings)
+        self.step.accept(DemoStep.settings)
     }
 
     @objc func settingsDone () {
-        self.step.onNext(DemoStep.settingsDone)
+        self.step.accept(DemoStep.settingsDone)
     }
 }

@@ -21,7 +21,7 @@ class SettingsViewController: UIViewController, StoryboardBased, Stepper {
 
         // Do any additional setup after loading the view.
         self.proceedButton.rx.tap.subscribe(onNext: { [unowned self] _ in
-            self.step.onNext(DemoStep.apiKeyIsComplete)
+            self.step.accept(DemoStep.apiKeyIsComplete)
         }).disposed(by: self.disposeBag)
 
     }
