@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:RxFlow/RxFlow.xcodeproj">
+      location = "group:RxFlow.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:RxFlowDemo/RxFlowDemo.xcodeproj">
