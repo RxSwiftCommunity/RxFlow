@@ -65,7 +65,81 @@ extension Flow {
 /// Utility functions to synchronize Flows readyness
 public class Flows {
 
-    // swiftlint:disable line_length
+    // swiftlint:disable function_parameter_count
+    /// Allow to be triggered only when Flows given as parameters are ready to be displayed.
+    /// Once it is the case, the block is executed
+    ///
+    /// - Parameters:
+    ///   - flow1: first Flow to be observed
+    ///   - flow2: second Flow to be observed
+    ///   - flow3: third Flow to be observed
+    ///   - flow4: fourth Flow to be observed
+    ///   - flow5: fifth Flow to be observed
+    ///   - block: block to execute whenever the Flows are ready to use
+    public static func whenReady<RootType1: UIViewController,
+        RootType2: UIViewController,
+        RootType3: UIViewController,
+        RootType4: UIViewController,
+        RootType5: UIViewController> (flow1: Flow,
+                                      flow2: Flow,
+                                      flow3: Flow,
+                                      flow4: Flow,
+                                      flow5: Flow,
+                                      block: @escaping (_ flow1Root: RootType1, _ flow2Root: RootType2, _ flow3Root: RootType3, _ flow4Root: RootType4, _ flow5Root: RootType5) -> Void) {
+        guard   let root1 = flow1.root as? RootType1,
+            let root2 = flow2.root as? RootType2,
+            let root3 = flow3.root as? RootType3,
+            let root4 = flow4.root as? RootType4,
+            let root5 = flow5.root as? RootType5 else {
+                fatalError ("Type mismatch, Flows roots types do not match the types awaited in the block")
+        }
+
+        _ = Observable<Void>.zip(flow1.rxFlowReady.asObservable(),
+                                 flow2.rxFlowReady.asObservable(),
+                                 flow3.rxFlowReady.asObservable(),
+                                 flow4.rxFlowReady.asObservable(),
+                                 flow5.rxFlowReady.asObservable()) { (_, _, _, _, _) in
+                                    return Void()
+            }.take(1).subscribe(onNext: { (_) in
+                block(root1, root2, root3, root4, root5)
+            })
+    }
+    // swiftlint:enable function_parameter_count
+
+    /// Allow to be triggered only when Flows given as parameters are ready to be displayed.
+    /// Once it is the case, the block is executed
+    ///
+    /// - Parameters:
+    ///   - flow1: first Flow to be observed
+    ///   - flow2: second Flow to be observed
+    ///   - flow3: third Flow to be observed
+    ///   - flow4: fourth Flow to be observed
+    ///   - block: block to execute whenever the Flows are ready to use
+    public static func whenReady<RootType1: UIViewController,
+        RootType2: UIViewController,
+        RootType3: UIViewController,
+        RootType4: UIViewController> (flow1: Flow,
+                                      flow2: Flow,
+                                      flow3: Flow,
+                                      flow4: Flow,
+                                      block: @escaping (_ flow1Root: RootType1, _ flow2Root: RootType2, _ flow3Root: RootType3, _ flow4Root: RootType4) -> Void) {
+        guard   let root1 = flow1.root as? RootType1,
+                let root2 = flow2.root as? RootType2,
+                let root3 = flow3.root as? RootType3,
+                let root4 = flow4.root as? RootType4 else {
+                fatalError ("Type mismatch, Flows roots types do not match the types awaited in the block")
+        }
+
+        _ = Observable<Void>.zip(flow1.rxFlowReady.asObservable(),
+                                 flow2.rxFlowReady.asObservable(),
+                                 flow3.rxFlowReady.asObservable(),
+                                 flow4.rxFlowReady.asObservable()) { (_, _, _, _) in
+            return Void()
+            }.take(1).subscribe(onNext: { (_) in
+                block(root1, root2, root3, root4)
+            })
+    }
+
     /// Allow to be triggered only when Flows given as parameters are ready to be displayed.
     /// Once it is the case, the block is executed
     ///
@@ -74,22 +148,26 @@ public class Flows {
     ///   - flow2: second Flow to be observed
     ///   - flow3: third Flow to be observed
     ///   - block: block to execute whenever the Flows are ready to use
-    public static func whenReady<RootType1: UIViewController, RootType2: UIViewController, RootType3: UIViewController> (flow1: Flow,
-                                                                                                                         flow2: Flow,
-                                                                                                                         flow3: Flow,
-                                                                                                                         block: @escaping (_ warp1Root: RootType1, _ warp2Root: RootType2, _ warp3Root: RootType3) -> Void) {
-        _ = Observable<Void>.zip(flow1.rxFlowReady.asObservable(), flow2.rxFlowReady.asObservable(), flow3.rxFlowReady.asObservable()) { (_, _, _) in
+    public static func whenReady<RootType1: UIViewController,
+        RootType2: UIViewController,
+        RootType3: UIViewController> (flow1: Flow,
+                                      flow2: Flow,
+                                      flow3: Flow,
+                                      block: @escaping (_ flow1Root: RootType1, _ flow2Root: RootType2, _ flow3Root: RootType3) -> Void) {
+        guard   let root1 = flow1.root as? RootType1,
+                let root2 = flow2.root as? RootType2,
+                let root3 = flow3.root as? RootType3 else {
+                fatalError ("Type mismatch, Flows roots types do not match the types awaited in the block")
+        }
+
+        _ = Observable<Void>.zip(flow1.rxFlowReady.asObservable(),
+                                 flow2.rxFlowReady.asObservable(),
+                                 flow3.rxFlowReady.asObservable()) { (_, _, _) in
             return Void()
             }.take(1).subscribe(onNext: { (_) in
-                guard   let root1 = flow1.root as? RootType1,
-                    let root2 = flow2.root as? RootType2,
-                    let root3 = flow3.root as? RootType3 else {
-                        fatalError ("Type mismatch, Flows roots types do not match the types awaited in the block")
-                }
                 block(root1, root2, root3)
             })
     }
-    // swiftlint:enable line_length
 
     /// Allow to be triggered only when Flows given as parameters are ready to be displayed.
     /// Once it is the case, the block is executed
@@ -101,13 +179,15 @@ public class Flows {
     public static func whenReady<RootType1: UIViewController, RootType2: UIViewController> (flow1: Flow,
                                                                                             flow2: Flow,
                                                                                             block: @escaping (_ flow1Root: RootType1, _ flow2Root: RootType2) -> Void) {
-        _ = Observable<Void>.zip(flow1.rxFlowReady.asObservable(), flow2.rxFlowReady.asObservable()) { (_, _) in
+        guard   let root1 = flow1.root as? RootType1,
+                let root2 = flow2.root as? RootType2 else {
+                fatalError ("Type mismatch, Flows root types do not match the types awaited in the block")
+        }
+
+        _ = Observable<Void>.zip(flow1.rxFlowReady.asObservable(),
+                                 flow2.rxFlowReady.asObservable()) { (_, _) in
             return Void()
             }.take(1).subscribe(onNext: { (_) in
-                guard   let root1 = flow1.root as? RootType1,
-                    let root2 = flow2.root as? RootType2 else {
-                        fatalError ("Type mismatch, Flows root types do not match the types awaited in the block")
-                }
                 block(root1, root2)
             })
     }
@@ -118,11 +198,12 @@ public class Flows {
     /// - Parameters:
     ///   - flow1: Flow to be observed
     ///   - block: block to execute whenever the Flow is ready to use
-    public static func whenReady<RootType: UIViewController> (flow: Flow, block: @escaping (_ flowRoot: RootType) -> Void) {
-        _ = flow.rxFlowReady.subscribe(onSuccess: { (_) in
-            guard let root = flow.root as? RootType else {
-                fatalError ("Type mismatch, Flow root type does not match the type awaited in the block")
-            }
+    public static func whenReady<RootType: UIViewController> (flow1: Flow, block: @escaping (_ flowRoot1: RootType) -> Void) {
+        guard let root = flow1.root as? RootType else {
+            fatalError ("Type mismatch, Flow root type does not match the type awaited in the block")
+        }
+
+        _ = flow1.rxFlowReady.subscribe(onSuccess: { (_) in
             block(root)
         })
     }

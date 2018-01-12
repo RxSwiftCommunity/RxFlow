@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print ("did navigate to flow=\(flow) and step=\(step)")
         }).disposed(by: self.disposeBag)
 
-        Flows.whenReady(flow: mainFlow, block: { [unowned window] (root) in
+        Flows.whenReady(flow1: mainFlow, block: { [unowned window] (root) in
             window.rootViewController = root
         })
 

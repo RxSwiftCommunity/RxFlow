@@ -48,6 +48,7 @@ class MainFlow: Flow {
         let wishlistStepper = WishlistStepper()
         let wishListFlow = WishlistWarp(withService: self.service, andStepper: wishlistStepper)
         let watchedFlow = WatchedFlow(withService: self.service)
+
         Flows.whenReady(flow1: wishListFlow, flow2: watchedFlow, block: { [unowned self] (root1: UINavigationController, root2: UINavigationController) in
             let tabBarItem1 = UITabBarItem(title: "Wishlist", image: UIImage(named: "wishlist"), selectedImage: nil)
             let tabBarItem2 = UITabBarItem(title: "Watched", image: UIImage(named: "watched"), selectedImage: nil)

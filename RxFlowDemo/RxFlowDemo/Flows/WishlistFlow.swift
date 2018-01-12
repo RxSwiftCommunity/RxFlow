@@ -79,7 +79,7 @@ class WishlistWarp: Flow {
     private func navigateToSettings () -> [Flowable] {
         let settingsStepper = SettingsStepper()
         let settingsFlow = SettingsFlow(withService: self.service, andStepper: settingsStepper)
-        Flows.whenReady(flow: settingsFlow, block: { [unowned self] (root: UISplitViewController) in
+        Flows.whenReady(flow1: settingsFlow, block: { [unowned self] (root: UISplitViewController) in
             self.rootViewController.present(root, animated: true)
         })
         return [Flowable(nextPresentable: settingsFlow, nextStepper: settingsStepper)]
