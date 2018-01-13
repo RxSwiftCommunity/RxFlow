@@ -46,7 +46,7 @@ class MainFlow: Flow {
     private func navigationToDashboardScreen () -> [Flowable] {
         let tabbarController = UITabBarController()
         let wishlistStepper = WishlistStepper()
-        let wishListFlow = WishlistWarp(withService: self.service, andStepper: wishlistStepper)
+        let wishListFlow = WishlistFlow(withService: self.service, andStepper: wishlistStepper)
         let watchedFlow = WatchedFlow(withService: self.service)
 
         Flows.whenReady(flow1: wishListFlow, flow2: watchedFlow, block: { [unowned self] (root1: UINavigationController, root2: UINavigationController) in

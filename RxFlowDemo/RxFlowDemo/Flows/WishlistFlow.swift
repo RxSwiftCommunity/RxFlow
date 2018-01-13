@@ -10,7 +10,7 @@ import RxFlow
 import RxSwift
 import UIKit
 
-class WishlistWarp: Flow {
+class WishlistFlow: Flow {
 
     var root: UIViewController {
         return self.rootViewController
