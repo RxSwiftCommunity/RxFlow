@@ -64,7 +64,25 @@ extension Flow {
 
 /// Utility functions to synchronize Flows readyness
 public class Flows {
-
+    /// Allow to be triggered only when Flows given as parameters are ready to be displayed.
+    /// Once it is the case, the block is executed
+    ///
+    /// - Parameters:
+    ///   - flows: Flow(s) to be observed
+    ///   - block: block to execute whenever the Flows are ready to use
+    public static func whenReady<RootType: UIViewController>(flows: [Flow],
+                                                             block: @escaping ([RootType]) -> Void) {
+        let flowObservables = flows.map { $0.rxFlowReady.asObservable() }
+        let roots = flows.flatMap { $0.root as? RootType }
+        guard roots.count == flows.count else {
+            fatalError ("Type mismatch, Flows roots types do not match the types awaited in the block")
+        }
+        _ = Observable<Void>.zip(flowObservables, { (_) in
+            return Void()
+        }).take(1).subscribe(onNext: { (_) in
+            block(roots)
+        })
+    }
     // swiftlint:disable function_parameter_count
     /// Allow to be triggered only when Flows given as parameters are ready to be displayed.
     /// Once it is the case, the block is executed
