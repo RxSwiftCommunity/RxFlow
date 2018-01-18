@@ -11,7 +11,7 @@
 		1A8FBDF31FF8337800389464 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDE61FF8337700389464 /* UIViewController+Rx.swift */; };
 		1A8FBDF41FF8337800389464 /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDE71FF8337700389464 /* Stepper.swift */; };
 		1A8FBDF51FF8337800389464 /* UIWindow+Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDE81FF8337700389464 /* UIWindow+Presentable.swift */; };
-		1A8FBDF61FF8337800389464 /* Flowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDE91FF8337700389464 /* Flowable.swift */; };
+		1A8FBDF61FF8337800389464 /* NavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDE91FF8337700389464 /* NavigationItem.swift */; };
 		1A8FBDF71FF8337800389464 /* UIWindow+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDEA1FF8337700389464 /* UIWindow+Rx.swift */; };
 		1A8FBDF81FF8337800389464 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDEB1FF8337700389464 /* Coordinator.swift */; };
 		1A8FBDF91FF8337800389464 /* Rx+Pausable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDEC1FF8337700389464 /* Rx+Pausable.swift */; };
@@ -44,7 +44,7 @@
 		1A8FBDE61FF8337700389464 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		1A8FBDE71FF8337700389464 /* Stepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stepper.swift; sourceTree = "<group>"; };
 		1A8FBDE81FF8337700389464 /* UIWindow+Presentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Presentable.swift"; sourceTree = "<group>"; };
-		1A8FBDE91FF8337700389464 /* Flowable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flowable.swift; sourceTree = "<group>"; };
+		1A8FBDE91FF8337700389464 /* NavigationItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationItem.swift; sourceTree = "<group>"; };
 		1A8FBDEA1FF8337700389464 /* UIWindow+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Rx.swift"; sourceTree = "<group>"; };
 		1A8FBDEB1FF8337700389464 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		1A8FBDEC1FF8337700389464 /* Rx+Pausable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rx+Pausable.swift"; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 				1A8FBDEF1FF8337700389464 /* HasDisposeBag.swift */,
 				1A8FBDEB1FF8337700389464 /* Coordinator.swift */,
 				1A8FBDF11FF8337800389464 /* Flow.swift */,
-				1A8FBDE91FF8337700389464 /* Flowable.swift */,
+				1A8FBDE91FF8337700389464 /* NavigationItem.swift */,
 				1A8FBDF01FF8337800389464 /* Step.swift */,
 				1A8FBDEE1FF8337700389464 /* Presentable.swift */,
 				1A8FBDE71FF8337700389464 /* Stepper.swift */,
@@ -320,7 +320,7 @@
 				1A8FBDF51FF8337800389464 /* UIWindow+Presentable.swift in Sources */,
 				1A8FBDF91FF8337800389464 /* Rx+Pausable.swift in Sources */,
 				1A8FBDFE1FF8337800389464 /* Flow.swift in Sources */,
-				1A8FBDF61FF8337800389464 /* Flowable.swift in Sources */,
+				1A8FBDF61FF8337800389464 /* NavigationItem.swift in Sources */,
 				1A8FBDFD1FF8337800389464 /* Step.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

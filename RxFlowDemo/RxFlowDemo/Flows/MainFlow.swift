@@ -24,8 +24,8 @@ class MainFlow: Flow {
         self.service = service
     }
 
-    func navigate(to step: Step) -> [Flowable] {
-        guard let step = step as? DemoStep else { return Flowable.noFlow }
+    func navigate(to step: Step) -> [NavigationItem] {
+        guard let step = step as? DemoStep else { return NavigationItem.noNavigation }
 
         switch step {
         case .apiKey:
@@ -33,17 +33,17 @@ class MainFlow: Flow {
         case .apiKeyIsComplete:
             return navigationToDashboardScreen()
         default:
-            return Flowable.noFlow
+            return NavigationItem.noNavigation
         }
     }
 
-    private func navigationToApiScreen () -> [Flowable] {
+    private func navigationToApiScreen () -> [NavigationItem] {
         let settingsViewController = SettingsViewController.instantiate()
         rootViewController.pushViewController(settingsViewController, animated: false)
-        return [Flowable(nextPresentable: settingsViewController, nextStepper: settingsViewController)]
+        return [NavigationItem(nextPresentable: settingsViewController, nextStepper: settingsViewController)]
     }
 
-    private func navigationToDashboardScreen () -> [Flowable] {
+    private func navigationToDashboardScreen () -> [NavigationItem] {
         let tabbarController = UITabBarController()
         let wishlistStepper = WishlistStepper()
         let wishListFlow = WishlistFlow(withService: self.service, andStepper: wishlistStepper)
@@ -61,7 +61,7 @@ class MainFlow: Flow {
             self.rootViewController.pushViewController(tabbarController, animated: true)
         })
 
-        return ([Flowable(nextPresentable: wishListFlow, nextStepper: wishlistStepper),
-                 Flowable(nextPresentable: watchedFlow, nextStepper: OneStepper(withSingleStep: DemoStep.movieList))])
+        return ([NavigationItem(nextPresentable: wishListFlow, nextStepper: wishlistStepper),
+                 NavigationItem(nextPresentable: watchedFlow, nextStepper: OneStepper(withSingleStep: DemoStep.movieList))])
     }
 }

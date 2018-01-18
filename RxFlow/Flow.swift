@@ -14,12 +14,12 @@ private var subjectContext: UInt8 = 0
 /// A Flow defines a clear navigation area. Combined to a Step it leads to a navigation action
 public protocol Flow: Presentable {
 
-    /// Resolves Flowable according to the Step, in the context of this very Flow
+    /// Resolves NavigationItems according to the Step, in the context of this very Flow
     ///
     /// - Parameters:
     ///   - step: the Step emitted by one of the Steppers declared in the Flow
-    /// - Returns: the Flowables matching the Step. This Flowables determines the next navigation steps (Presentables to display / Steppers to listen)
-    func navigate (to step: Step) -> [Flowable]
+    /// - Returns: the NavigationItems matching the Step. These NavigationItems determines the next navigation steps (Presentables to display / Steppers to listen)
+    func navigate (to step: Step) -> [NavigationItem]
 
     /// the UIViewController on which rely the navigation inside this Flow. This method must always give the same instance
     var root: UIViewController { get }
