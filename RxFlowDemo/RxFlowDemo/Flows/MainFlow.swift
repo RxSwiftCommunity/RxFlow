@@ -24,8 +24,8 @@ class MainFlow: Flow {
         self.service = service
     }
 
-    func navigate(to step: Step) -> [Flowable] {
-        guard let step = step as? DemoStep else { return Flowable.noFlow }
+    func navigate(to step: Step) -> [NextFlowItem] {
+        guard let step = step as? DemoStep else { return NextFlowItem.noNavigation }
 
         switch step {
         case .apiKey:
@@ -33,17 +33,17 @@ class MainFlow: Flow {
         case .apiKeyIsComplete:
             return navigationToDashboardScreen()
         default:
-            return Flowable.noFlow
+            return NextFlowItem.noNavigation
         }
     }
 
-    private func navigationToApiScreen () -> [Flowable] {
+    private func navigationToApiScreen () -> [NextFlowItem] {
         let settingsViewController = SettingsViewController.instantiate()
         rootViewController.pushViewController(settingsViewController, animated: false)
-        return [Flowable(nextPresentable: settingsViewController, nextStepper: settingsViewController)]
+        return [NextFlowItem(nextPresentable: settingsViewController, nextStepper: settingsViewController)]
     }
 
-    private func navigationToDashboardScreen () -> [Flowable] {
+    private func navigationToDashboardScreen () -> [NextFlowItem] {
         let tabbarController = UITabBarController()
         let wishlistStepper = WishlistStepper()
         let wishListFlow = WishlistFlow(withService: self.service, andStepper: wishlistStepper)
@@ -61,7 +61,7 @@ class MainFlow: Flow {
             self.rootViewController.pushViewController(tabbarController, animated: true)
         })
 
-        return ([Flowable(nextPresentable: wishListFlow, nextStepper: wishlistStepper),
-                 Flowable(nextPresentable: watchedFlow, nextStepper: OneStepper(withSingleStep: DemoStep.movieList))])
+        return ([NextFlowItem(nextPresentable: wishListFlow, nextStepper: wishlistStepper),
+                 NextFlowItem(nextPresentable: watchedFlow, nextStepper: OneStepper(withSingleStep: DemoStep.movieList))])
     }
 }
