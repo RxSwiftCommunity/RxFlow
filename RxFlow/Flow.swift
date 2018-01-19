@@ -27,21 +27,6 @@ public protocol Flow: Presentable {
 
 extension Flow {
 
-    /// Rx Observable that triggers a bool indicating if the current Flow is being displayed
-    public var rxVisible: Observable<Bool> {
-        return self.root.rxVisible
-    }
-
-    /// Rx Observable (Single trait) triggered when this Flow is displayed for the first time
-    public var rxFirstTimeVisible: Single<Void> {
-        return self.root.rxFirstTimeVisible
-    }
-
-    /// Rx Observable (Single trait) triggered when this Flow is dismissed
-    public var rxDismissed: Single<Void> {
-        return self.root.rxDismissed
-    }
-
     /// Inner/hidden Rx Subject in which we push the "Ready" event
     var flowReadySubject: PublishSubject<Bool> {
         return self.synchronized {
