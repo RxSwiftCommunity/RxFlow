@@ -49,6 +49,7 @@ extension Flow {
 
 /// Utility functions to synchronize Flows readyness
 public class Flows {
+
     /// Allow to be triggered only when Flows given as parameters are ready to be displayed.
     /// Once it is the case, the block is executed
     ///
@@ -68,6 +69,7 @@ public class Flows {
             block(roots)
         })
     }
+
     // swiftlint:disable function_parameter_count
     /// Allow to be triggered only when Flows given as parameters are ready to be displayed.
     /// Once it is the case, the block is executed

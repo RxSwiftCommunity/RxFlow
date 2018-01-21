@@ -86,10 +86,18 @@ class WishlistFlow: Flow {
     }
 }
 
-class WishlistStepper: Stepper {
+class WishlistStepper: Stepper, HasDisposeBag {
 
     init() {
         self.step.accept(DemoStep.movieList)
+
+        // example of a periodic check of something to could lead to a global navigation action
+        // for instance it could be an Interval in which we check the session validity. In case of
+        // invalidity we could trigger a new Step (sessionInvalid for instance) that would lead to
+        // a login popup
+//        Observable<Int>.interval(5, scheduler: MainScheduler.instance).subscribe(onNext: { [unowned self] (_) in
+//            self.step.accept(DemoStep.settings)
+//        }).disposed(by: self.disposeBag)
     }
 
     @objc func settings () {
