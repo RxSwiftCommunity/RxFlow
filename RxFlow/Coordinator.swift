@@ -13,7 +13,7 @@ protocol FlowCoordinatorDelegate: class {
 
     /// Used to tell the delegate a new Flow is to be coordinated
     ///
-    /// - Parameter nextFlowItem: this NextFlowItem taht has a Flow kind of nextPresentable
+    /// - Parameter nextFlowItem: this NextFlowItem that has a Flow kind of nextPresentable
     func navigateToAnotherFlow (withNextFlowItem nextFlowItem: NextFlowItem)
 
     /// Used to triggered the delegate before the Flow/Step is handled
