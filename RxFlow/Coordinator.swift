@@ -64,6 +64,9 @@ class FlowCoordinator {
             let nextFlowItems = self.flow.navigate(to: step)
             self.delegate.didNavigate(to: self.flow, with: step)
 
+            // when first presentable is discovered we can assume the Flow is ready to be used (its root can be used in other Flows)
+            self.flow.flowReadySubject.onNext(true)
+
             // we know which NextFlowItems have been produced by this navigation action
             // each one of these NextFlowItems will lead to other navigation actions (for example, new Flows to handle and new Steppers to listen)
             nextFlowItems.forEach({ [unowned self] (nextFlowItem) in
@@ -96,9 +99,6 @@ class FlowCoordinator {
 
                     }).disposed(by: self.disposeBag)
                 }
-
-                // when first presentable is discovered we can assume the Flow is ready to be used (its root can be used in other Flows)
-                self.flow.flowReadySubject.onNext(true)
             })
         }).disposed(by: self.disposeBag)
 
