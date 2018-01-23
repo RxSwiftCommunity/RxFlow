@@ -22,16 +22,26 @@ protocol FlowCoordinatorDelegate: class {
     ///   - flow: the Flow that is being navigated
     ///   - step: the Step that is being navigated
     func willNavigate (to flow: Flow, with step: Step)
+
+    /// Used to triggered the delegate after the Flow/Step is handled
+    ///
+    /// - Parameters:
+    ///   - flow: the Flow that is being navigated
+    ///   - step: the Step that is being navigated
     func didNavigate (to flow: Flow, with step: Step)
 }
 
 /// A FlowCoordinator handles the navigation inside a dedicated Flow
 /// It will listen for Steps emitted be the Flow's Stepper companion or
 /// the Steppers produced by the Flow.navigate(to:) function along the way
-class FlowCoordinator {
+class FlowCoordinator: HasDisposeBag {
 
     /// The Flow to be coordinated
     private let flow: Flow
+
+    /// The Stepper that drives the Flow
+    /// It will trigger some Steps at the Flow level
+    private let stepper: Stepper
 
     /// The Rx subject that holds all the Steps trigerred either by the Flow's Stepper
     /// or by the Steppers produced by the Flow.navigate(to:) function
@@ -41,71 +51,80 @@ class FlowCoordinator {
     /// in the case of a new Flow to coordinate or before and after a navigation action
     private weak var delegate: FlowCoordinatorDelegate!
 
-    internal let disposeBag = DisposeBag()
-
     /// Initialize a FlowCoordinator
     ///
     /// - Parameter flow: The Flow to coordinate
-    init(for flow: Flow, withDelegate delegate: FlowCoordinatorDelegate) {
+    init(for flow: Flow, andStepper stepper: Stepper, withDelegate delegate: FlowCoordinatorDelegate) {
         self.flow = flow
+        self.stepper = stepper
         self.delegate = delegate
     }
 
     /// Launch the coordination process
     ///
     /// - Parameter stepper: The Stepper that goes with the Flow. It will trigger some Steps at the Flow level
-    func coordinate (listeningTo stepper: Stepper) {
+    func coordinate () {
 
-        // Steps can be emitted by the Stepper companion of the Flow or the Steppers in the NextFlowItems fired by the Flow.navigate(to:) function
-        self.steps.asObservable().subscribe(onNext: { [unowned self] (step) in
+        _ = self.steps
+            .do(onNext: { [unowned self] (step) in
+                // trigger the delegate before the navigation is done
+                self.delegate.willNavigate(to: self.flow, with: step)
+            })
+            .map { [unowned self] (step) -> (Step, [NextFlowItem]) in
+                // do the navigation according to the Flow and the Step
+                // Retrieve the NextFlowItems
+                return (step, self.flow.navigate(to: step))
+            }
+            .do(onNext: { [unowned self] (step, _) in
+                // when first presentable is discovered we can assume the Flow is ready to be used (its root can be used in other Flows)
+                self.flow.flowReadySubject.onNext(true)
 
-            // a new Step has been triggered for this Flow. Let's navigate it and see what NextFlowItems come from that
-            self.delegate.willNavigate(to: self.flow, with: step)
-            let nextFlowItems = self.flow.navigate(to: step)
-            self.delegate.didNavigate(to: self.flow, with: step)
-
-            // when first presentable is discovered we can assume the Flow is ready to be used (its root can be used in other Flows)
-            self.flow.flowReadySubject.onNext(true)
-
-            // we know which NextFlowItems have been produced by this navigation action
-            // each one of these NextFlowItems will lead to other navigation actions (for example, new Flows to handle and new Steppers to listen)
-            nextFlowItems.forEach({ [unowned self] (nextFlowItem) in
-
-                // if the NextFlowItems's next presentable represents a Flow, it has to be processed at a higher level because
+                // trigger the delegate after the navigation is done
+                self.delegate.didNavigate(to: self.flow, with: step)
+            })
+            .flatMap { (arg) -> Observable<NextFlowItem> in
+                // flatten the Observable<[NextFlowItem]> into Observable<NextFlowItem>
+                // we know which NextFlowItem have been produced by this navigation action
+                // each one of these NextFlowItems will lead to other navigation actions (for example, new Flows to handle and new Steppers to listen)
+                let (_, nextFlowItems) = arg
+                return Observable.from(nextFlowItems)
+            }
+            .do(onNext: { [unowned self] (nextFlowItem) in
+                // if the NextFlowItem's next presentable represents a Flow, it has to be processed at a higher level because
                 // the FlowCoordinator only knowns about the Flow it's in charge of.
-                // The FlowCoordinator will expose through its delegate
+                // The FlowCoordinator will expose the new Flow through its delegate
                 if nextFlowItem.nextPresentable is Flow {
                     self.delegate.navigateToAnotherFlow(withNextFlowItem: nextFlowItem)
-                } else {
-                    // the NextFlowItem's next presentable is not a Flow, it can be processed at the FlowCoordinator level
-
-                    // we have to wait for the Presentable to be displayed at least once to be able to
-                    // listen to the Stepper. Indeed, we do not want to emit other navigation actions
-                    // until there is a first ViewController in the hierarchy
-                    let nextPresentable = nextFlowItem.nextPresentable
-                    let nextStepper = nextFlowItem.nextStepper
-                    nextPresentable.rxFirstTimeVisible.subscribe(onSuccess: { [unowned self, unowned nextPresentable, unowned nextStepper] (_) in
-
-                        // we listen to the Presentable's Stepper. For each new Step value, we trigger a new navigation process
-                        // this is the core principle of the whole mechanism.
-                        // The process is paused each time the Presntable is not currently displayed,
-                        // for instance when another Presentable is on top of it in the ViewControllers hierarchy.
-                        nextStepper.steps
-                            .pausable(nextPresentable.rxVisible.startWith(true))
-                            .asDriver(onErrorJustReturn: NoStep()).drive(onNext: { [unowned self] (step) in
-                                // the nextPresentable's Stepper fires a new Step
-                                self.steps.onNext(step)
-                            }).disposed(by: nextPresentable.disposeBag)
-
-                    }).disposed(by: self.disposeBag)
                 }
             })
-        }).disposed(by: self.disposeBag)
+            .filter { (nextFlowItem) -> Bool in
+                // at that point, only the NextFlowItems that handle a non Flow nextPresentable
+                // should be processed
+                return !(nextFlowItem.nextPresentable is Flow)
+            }
+            .flatMap { (nextFlowItem) -> Observable<Step> in
+                // Steps are ok to be listened to. The steps can only be triggerd
+                // when the presentable is displayed
+                let presentable = nextFlowItem.nextPresentable
+                let stepper = nextFlowItem.nextStepper
+                return stepper
+                    .steps
+                    .pausable(withPauser: presentable.rxVisible)
+            }
+            .takeUntil(self.flow.rxDismissed.asObservable())
+            .asDriver(onErrorJustReturn: NoStep()).drive(onNext: { [weak self] (step) in
+                // the nextPresentable's Stepper fires a new Step
+                self?.steps.onNext(step)
+            })
 
         // we listen for the Warp dedicated Weftable
-        stepper.steps.pausable(self.flow.rxVisible.startWith(true)).asDriver(onErrorJustReturn: NoStep()).drive(onNext: { [unowned self] (step) in
-            // the Flow's Stepper fires a new Step (the initial Step for exemple)
-            self.steps.onNext(step)
+        self.stepper
+            .steps
+            .pausable(afterCount: 1, withPauser: self.flow.rxVisible)
+            .asDriver(onErrorJustReturn: NoStep())
+            .drive(onNext: { [weak self] (step) in
+                // the Flow's Stepper fires a new Step (the initial Step for exemple)
+                self?.steps.onNext(step)
         }).disposed(by: flow.disposeBag)
 
     }
@@ -113,10 +132,9 @@ class FlowCoordinator {
 
 /// The only purpose of a Coordinator is to handle the navigation that is
 /// declared in the Flows of the application.
-final public class Coordinator {
+final public class Coordinator: HasDisposeBag {
 
     private var flowCoordinators = [FlowCoordinator]()
-    private let disposeBag = DisposeBag()
     internal let willNavigateSubject = PublishSubject<(String, String)>()
     internal let didNavigateSubject = PublishSubject<(String, String)>()
 
@@ -132,13 +150,13 @@ final public class Coordinator {
     public func coordinate (flow: Flow, withStepper stepper: Stepper) {
 
         // a new FlowCoordinator will handle this Flow navigation
-        let flowCoordinator = FlowCoordinator(for: flow, withDelegate: self)
+        let flowCoordinator = FlowCoordinator(for: flow, andStepper: stepper, withDelegate: self)
 
         // we stack the FlowCoordinators so that we do not lose there reference (whereas it could be a leak)
         self.flowCoordinators.append(flowCoordinator)
 
         // let's coordinate the Flow
-        flowCoordinator.coordinate(listeningTo: stepper)
+        flowCoordinator.coordinate()
 
         // clear the fFowCoordinators stack when the Flow has been dismissed (its root has been dismissed)
         let flowIndex = self.flowCoordinators.count-1

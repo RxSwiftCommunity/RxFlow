@@ -9,7 +9,7 @@
 import RxSwift
 import RxFlow
 
-class WishlistViewModel: Stepper {
+class WishlistViewModel: Stepper, HasDisposeBag {
 
     let movies: [MovieViewModel]
 
