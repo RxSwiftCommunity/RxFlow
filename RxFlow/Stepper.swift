@@ -41,6 +41,20 @@ final public class CompositeStepper: Stepper {
     }
 }
 
+// A Stepper that combines multiple steppers
+final public class CompositeStepper: Stepper {
+    /// the Rx Obsersable that will emits new Steps
+    public private(set) var steps: Observable<Step>
+    
+    /// Initialise
+    ///
+    /// - Parameter steppers: Steppers will be observered
+    public init(steppers: [Stepper]) {
+        let allSteps = steppers.map { $0.steps }
+        steps = Observable.merge(allSteps)
+    }
+}
+
 /// a Stepper that triggers NoStep.
 final class NoneStepper: OneStepper {
     convenience init() {
