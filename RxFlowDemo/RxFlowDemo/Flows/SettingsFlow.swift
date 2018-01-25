@@ -43,7 +43,7 @@ class SettingsFlow: Flow {
 
             let settingsViewController = SettingsViewController.instantiate()
             settingsViewController.title = "Api Key"
-            self.rootViewController.showDetailViewController(settingsViewController, sender: nil)
+//            self.rootViewController.showDetailViewController(settingsViewController, sender: nil)
 
             return [NextFlowItem(nextPresentable: settingsListViewController, nextStepper: settingsListViewController),
                     NextFlowItem(nextPresentable: settingsViewController, nextStepper: settingsViewController)]
