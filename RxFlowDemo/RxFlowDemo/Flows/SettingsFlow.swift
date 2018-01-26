@@ -20,7 +20,6 @@ class SettingsFlow: Flow {
     let settingsStepper: SettingsStepper
     init(withService service: MoviesService, andStepper stepper: SettingsStepper) {
         self.settingsStepper = stepper
-        self.rootViewController.preferredDisplayMode = .allVisible
     }
 
     func navigate(to step: Step) -> [NextFlowItem] {
@@ -29,8 +28,13 @@ class SettingsFlow: Flow {
         switch step {
         case .settings:
             let navigationController = UINavigationController()
-
             let settingsListViewController = SettingsListViewController.instantiate()
+            let settingsViewController = SettingsViewController.instantiate()
+
+            self.rootViewController.viewControllers = [navigationController, settingsViewController]
+            self.rootViewController.preferredDisplayMode = .allVisible
+
+            settingsViewController.title = "Api Key"
 
             navigationController.viewControllers = [settingsListViewController]
             if let navigationBarItem = navigationController.navigationBar.items?[0] {
@@ -39,11 +43,6 @@ class SettingsFlow: Flow {
                                                      action: #selector(SettingsStepper.settingsDone))
                 navigationBarItem.setRightBarButton(settingsButton, animated: false)
             }
-            self.rootViewController.viewControllers = [navigationController]
-
-            let settingsViewController = SettingsViewController.instantiate()
-            settingsViewController.title = "Api Key"
-            self.rootViewController.showDetailViewController(settingsViewController, sender: nil)
 
             return [NextFlowItem(nextPresentable: settingsListViewController, nextStepper: settingsListViewController),
                     NextFlowItem(nextPresentable: settingsViewController, nextStepper: settingsViewController)]
