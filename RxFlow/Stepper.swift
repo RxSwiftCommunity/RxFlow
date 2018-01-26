@@ -22,7 +22,7 @@ public protocol Stepper: Synchronizable {
 /// A Simple Stepper that has one goal: emit a single Step once initialized
 public class OneStepper: Stepper {
 
-    /// Initialise the OneStepper
+    /// Initialize the OneStepper
     ///
     /// - Parameter singleStep: the step to be emitted once initialized
     public init(withSingleStep singleStep: Step) {
@@ -32,15 +32,16 @@ public class OneStepper: Stepper {
 
 // A Stepper that combines multiple steppers
 final public class CompositeStepper: Stepper {
+
     /// the Rx Obsersable that will emits new Steps
     public private(set) var steps: Observable<Step>
-    
-    /// Initialise
+
+    /// Initialize
     ///
-    /// - Parameter steppers: Steppers will be observered
+    /// - Parameter steppers: all these Steppers will be observered by the Coordinator
     public init(steppers: [Stepper]) {
         let allSteps = steppers.map { $0.steps }
-        steps = Observable.merge(allSteps)
+        self.steps = Observable.merge(allSteps)
     }
 }
 
