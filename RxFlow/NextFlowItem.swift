@@ -31,9 +31,18 @@ public struct NextFlowItem {
         self.nextPresentable = presentable
         self.nextStepper = stepper
     }
+}
 
-    /// A empty NextFlowItem's array
-    public static var noNavigation: [NextFlowItem] {
-        return []
-    }
+/// NextFlowItems reprent the next things that will trigger
+/// navigation actions inside a Flow
+///
+/// - multiple: a Flow will trigger several NextFlowItem at the same time for the same Step
+/// - one: a Flow will trigger only one NextFlowItem for a Step
+/// - none: no further navigation will be triggered for a Step
+/// - stepNotHandled: the Step matches no NextFlowItem at all
+public enum NextFlowItems {
+    case multiple (flowItems: [NextFlowItem])
+    case one (flowItem: NextFlowItem)
+    case none
+    case stepNotHandled
 }

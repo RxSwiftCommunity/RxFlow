@@ -25,9 +25,9 @@ class WishlistFlow: Flow {
         self.wishlistStepper = stepper
     }
 
-    func navigate(to step: Step) -> [NextFlowItem] {
+    func navigate(to step: Step) -> NextFlowItems {
 
-        guard let step = step as? DemoStep else { return NextFlowItem.noNavigation }
+        guard let step = step as? DemoStep else { return NextFlowItems.stepNotHandled }
 
         switch step {
 
@@ -39,13 +39,16 @@ class WishlistFlow: Flow {
             return navigateToCastDetailScreen(with: castId)
         case .settings:
             return navigateToSettings()
+        case .settingsDone:
+            self.rootViewController.presentedViewController?.dismiss(animated: true)
+            return NextFlowItems.none
         default:
-            return NextFlowItem.noNavigation
+            return NextFlowItems.stepNotHandled
         }
 
     }
 
-    private func navigateToMovieListScreen () -> [NextFlowItem] {
+    private func navigateToMovieListScreen () -> NextFlowItems {
         let viewModel = WishlistViewModel(with: self.service)
         let viewController = WishlistViewController.instantiate(with: viewModel)
         viewController.title = "Wishlist"
@@ -57,32 +60,32 @@ class WishlistFlow: Flow {
                                                                 action: #selector(WishlistStepper.settings)),
                                                 animated: false)
         }
-        return [NextFlowItem(nextPresentable: viewController, nextStepper: viewModel)]
+        return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: viewController, nextStepper: viewModel))
     }
 
-    private func navigateToMovieDetailScreen (with movieId: Int) -> [NextFlowItem] {
+    private func navigateToMovieDetailScreen (with movieId: Int) -> NextFlowItems {
         let viewModel = MovieDetailViewModel(withService: self.service, andMovieId: movieId)
         let viewController = MovieDetailViewController.instantiate(with: viewModel)
         viewController.title = viewModel.title
         self.rootViewController.pushViewController(viewController, animated: true)
-        return [NextFlowItem(nextPresentable: viewController, nextStepper: viewModel)]
+        return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: viewController, nextStepper: viewModel))
     }
 
-    private func navigateToCastDetailScreen (with castId: Int) -> [NextFlowItem] {
+    private func navigateToCastDetailScreen (with castId: Int) -> NextFlowItems {
         let viewModel = CastDetailViewModel(withService: self.service, andCastId: castId)
         let viewController = CastDetailViewController.instantiate(with: viewModel)
         viewController.title = viewModel.name
         self.rootViewController.pushViewController(viewController, animated: true)
-        return NextFlowItem.noNavigation
+        return NextFlowItems.none
     }
 
-    private func navigateToSettings () -> [NextFlowItem] {
+    private func navigateToSettings () -> NextFlowItems {
         let settingsStepper = SettingsStepper()
         let settingsFlow = SettingsFlow(withService: self.service, andStepper: settingsStepper)
         Flows.whenReady(flow1: settingsFlow, block: { [unowned self] (root: UISplitViewController) in
             self.rootViewController.present(root, animated: true)
         })
-        return [NextFlowItem(nextPresentable: settingsFlow, nextStepper: settingsStepper)]
+        return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: settingsFlow, nextStepper: settingsStepper))
     }
 }
 

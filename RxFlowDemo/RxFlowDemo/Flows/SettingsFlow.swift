@@ -22,8 +22,8 @@ class SettingsFlow: Flow {
         self.settingsStepper = stepper
     }
 
-    func navigate(to step: Step) -> [NextFlowItem] {
-        guard let step = step as? DemoStep else { return NextFlowItem.noNavigation }
+    func navigate(to step: Step) -> NextFlowItems {
+        guard let step = step as? DemoStep else { return NextFlowItems.stepNotHandled }
 
         switch step {
         case .settings:
@@ -44,23 +44,20 @@ class SettingsFlow: Flow {
                 navigationBarItem.setRightBarButton(settingsButton, animated: false)
             }
 
-            return [NextFlowItem(nextPresentable: settingsListViewController, nextStepper: settingsListViewController),
-                    NextFlowItem(nextPresentable: settingsViewController, nextStepper: settingsViewController)]
+            return NextFlowItems.multiple(flowItems: [NextFlowItem(nextPresentable: settingsListViewController, nextStepper: settingsListViewController),
+                                                      NextFlowItem(nextPresentable: settingsViewController, nextStepper: settingsViewController)])
         case .apiKey:
             let settingsViewController = SettingsViewController.instantiate()
             settingsViewController.title = "Api Key"
             self.rootViewController.showDetailViewController(settingsViewController, sender: nil)
-            return NextFlowItem.noNavigation
+            return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: settingsViewController, nextStepper: settingsViewController))
         case .about:
             let settingsAboutViewController = SettingsAboutViewController.instantiate()
             settingsAboutViewController.title = "About"
             self.rootViewController.showDetailViewController(settingsAboutViewController, sender: nil)
-            return NextFlowItem.noNavigation
-        case .settingsDone:
-            self.rootViewController.dismiss(animated: true)
-            return NextFlowItem.noNavigation
+            return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: settingsAboutViewController, nextStepper: settingsAboutViewController))
         default:
-            return NextFlowItem.noNavigation
+            return NextFlowItems.stepNotHandled
         }
 
     }

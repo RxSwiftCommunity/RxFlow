@@ -19,7 +19,7 @@ public protocol Flow: Presentable {
     /// - Parameters:
     ///   - step: the Step emitted by one of the Steppers declared in the Flow
     /// - Returns: the NextFlowItems matching the Step. These NextFlowItems determines the next navigation steps (Presentables to display / Steppers to listen)
-    func navigate (to step: Step) -> [NextFlowItem]
+    func navigate (to step: Step) -> NextFlowItems
 
     /// the UIViewController on which rely the navigation inside this Flow. This method must always give the same instance
     var root: UIViewController { get }

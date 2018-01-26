@@ -22,9 +22,9 @@ class WatchedFlow: Flow {
         self.service = service
     }
 
-    func navigate(to step: Step) -> [NextFlowItem] {
+    func navigate(to step: Step) -> NextFlowItems {
 
-        guard let step = step as? DemoStep else { return NextFlowItem.noNavigation }
+        guard let step = step as? DemoStep else { return NextFlowItems.stepNotHandled }
 
         switch step {
 
@@ -35,33 +35,33 @@ class WatchedFlow: Flow {
         case .castPicked(let castId):
             return navigateToCastDetailScreen(with: castId)
         default:
-            return NextFlowItem.noNavigation
+            return NextFlowItems.stepNotHandled
         }
 
     }
 
-    private func navigateToMovieListScreen () -> [NextFlowItem] {
+    private func navigateToMovieListScreen () -> NextFlowItems {
         let viewModel = WatchedViewModel(with: self.service)
         let viewController = WatchedViewController.instantiate(with: viewModel)
         viewController.title = "Watched"
         self.rootViewController.pushViewController(viewController, animated: true)
-        return [NextFlowItem(nextPresentable: viewController, nextStepper: viewModel)]
+        return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: viewController, nextStepper: viewModel))
     }
 
-    private func navigateToMovieDetailScreen (with movieId: Int) -> [NextFlowItem] {
+    private func navigateToMovieDetailScreen (with movieId: Int) -> NextFlowItems {
         let viewModel = MovieDetailViewModel(withService: self.service, andMovieId: movieId)
         let viewController = MovieDetailViewController.instantiate(with: viewModel)
         viewController.title = viewModel.title
         self.rootViewController.pushViewController(viewController, animated: true)
-        return [NextFlowItem(nextPresentable: viewController, nextStepper: viewModel)]
+        return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: viewController, nextStepper: viewModel))
     }
 
-    private func navigateToCastDetailScreen (with castId: Int) -> [NextFlowItem] {
+    private func navigateToCastDetailScreen (with castId: Int) -> NextFlowItems {
         let viewModel = CastDetailViewModel(withService: self.service, andCastId: castId)
         let viewController = CastDetailViewController.instantiate(with: viewModel)
         viewController.title = viewModel.name
         self.rootViewController.pushViewController(viewController, animated: true)
-        return NextFlowItem.noNavigation
+        return NextFlowItems.none
     }
 
 }
