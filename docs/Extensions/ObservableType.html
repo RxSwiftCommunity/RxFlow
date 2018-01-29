@@ -31,6 +31,9 @@
             <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Classes/CompositeStepper.html">CompositeStepper</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/Coordinator.html">Coordinator</a>
               </li>
               <li class="nav-group-task">
@@ -42,6 +45,14 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/NextFlowItems.html">NextFlowItems</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -49,12 +60,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/Reactive.html">Reactive</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIViewController.html">UIViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIWindow.html">UIWindow</a>
               </li>
             </ul>
           </li>
@@ -109,9 +114,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7RxSwift14ObservableTypeP0A4FlowE8pausableAA0C0Cy1EQzGqd__AaBRd__SbAHRtd__lF"></a>
-                    <a name="//apple_ref/swift/Method/pausable(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7RxSwift14ObservableTypeP0A4FlowE8pausableAA0C0Cy1EQzGqd__AaBRd__SbAHRtd__lF">pausable(_:)</a>
+                    <a name="/s:7RxSwift14ObservableTypeP0A4FlowE8pausableAA0C0Cy1EQzGqd__10withPauser_tAaBRd__SbAHRtd__lF"></a>
+                    <a name="//apple_ref/swift/Method/pausable(withPauser:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7RxSwift14ObservableTypeP0A4FlowE8pausableAA0C0Cy1EQzGqd__10withPauser_tAaBRd__SbAHRtd__lF">pausable(withPauser:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -128,7 +133,7 @@ seealso: <a href="http://reactivex.io/documentation/operators/backpressure.html"
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">pausable</span><span class="o">&lt;</span><span class="kt">P</span><span class="p">:</span> <span class="kt">ObservableType</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">_</span> <span class="nv">pauser</span><span class="p">:</span> <span class="kt">P</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">E</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">P</span><span class="o">.</span><span class="kt">E</span> <span class="o">==</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">pausable</span><span class="o">&lt;</span><span class="kt">P</span><span class="p">:</span> <span class="kt">ObservableType</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">withPauser</span> <span class="nv">pauser</span><span class="p">:</span> <span class="kt">P</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">E</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">P</span><span class="o">.</span><span class="kt">E</span> <span class="o">==</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -158,12 +163,78 @@ seealso: <a href="http://reactivex.io/documentation/operators/backpressure.html"
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7RxSwift14ObservableTypeP0A4FlowE8pausableAA0C0Cy1EQzGSi10afterCount_qd__10withPausertAaBRd__SbAHRtd__lF"></a>
+                    <a name="//apple_ref/swift/Method/pausable(afterCount:withPauser:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7RxSwift14ObservableTypeP0A4FlowE8pausableAA0C0Cy1EQzGSi10afterCount_qd__10withPausertAaBRd__SbAHRtd__lF">pausable(afterCount:withPauser:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Pauses the elements of the source observable sequence based on the latest element from the second observable sequence.
+The pause is available only after a certain count of events. Before the number of emitted events reaches that count
+the Pauser will not be taken care of. When the Pauser is active, elements are ignored unless the second sequence
+has most recently emitted <code>true</code>.
+seealso: <a href="http://reactivex.io/documentation/operators/backpressure.html">pausable operator on reactivex.io</a></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">pausable</span><span class="o">&lt;</span><span class="kt">P</span><span class="p">:</span> <span class="kt">ObservableType</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">afterCount</span> <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">withPauser</span> <span class="nv">pauser</span><span class="p">:</span> <span class="kt">P</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">E</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">P</span><span class="o">.</span><span class="kt">E</span> <span class="o">==</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>count</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the number of events before considering the pauser parameter</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pauser</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The observable sequence used to pause the source observable sequence.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The observable sequence which is paused based upon the pauser observable sequence.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-01-19)</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-01-29)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

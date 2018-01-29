@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Reactive Extension Reference</title>
+    <title>NextFlowItems Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Extension/Reactive" class="dashAnchor"></a>
-    <a title="Reactive Extension Reference"></a>
+    <a name="//apple_ref/swift/Enum/NextFlowItems" class="dashAnchor"></a>
+    <a title="NextFlowItems Enumeration Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">RxFlow Docs</a> (100% documented)</p>
@@ -21,7 +21,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">RxFlow Reference</a>
         <img id="carat" src="../img/carat.png" />
-        Reactive Extension Reference
+        NextFlowItems Enumeration Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -99,14 +99,23 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Reactive</h1>
+            <h1>NextFlowItems</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">struct</span> <span class="kt">Reactive</span><span class="o">&lt;</span><span class="kt">Base</span><span class="o">&gt;</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">NextFlowItems</span></code></pre>
 
                 </div>
               </div>
-            
+            <p>NextFlowItems reprent the next things that will trigger
+navigation actions inside a Flow</p>
+
+<ul>
+<li>multiple: a Flow will trigger several NextFlowItem at the same time for the same Step</li>
+<li>one: a Flow will trigger only one NextFlowItem for a Step</li>
+<li>none: no further navigation will be triggered for a Step</li>
+<li>stepNotHandled: the Step matches no NextFlowItem at all</li>
+</ul>
+
           </section>
           <section class="section task-group-section">
             <div class="task-group">
@@ -114,9 +123,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7RxSwift8ReactiveV0A4FlowSo16UIViewControllerCRbzlE22firstTimeViewDidAppearAA17PrimitiveSequenceVyAA11SingleTraitOytGv"></a>
-                    <a name="//apple_ref/swift/Property/firstTimeViewDidAppear" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7RxSwift8ReactiveV0A4FlowSo16UIViewControllerCRbzlE22firstTimeViewDidAppearAA17PrimitiveSequenceVyAA11SingleTraitOytGv">firstTimeViewDidAppear</a>
+                    <a name="/s:6RxFlow04NextB5ItemsO8multipleACSayAA0cB4ItemVG04flowD0_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/multiple" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow04NextB5ItemsO8multipleACSayAA0cB4ItemVG04flowD0_tcACmF">multiple</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -124,68 +133,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Rx observable, triggered when the view has appeared for the first time</p>
+                        <p>a Flow will trigger several NextFlowItem at the same time for the same Step</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">firstTimeViewDidAppear</span><span class="p">:</span> <span class="kt">Single</span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7RxSwift8ReactiveV0A4FlowSo16UIViewControllerCRbzlE9dismissed0A5Cocoa12ControlEventVySbGv"></a>
-                    <a name="//apple_ref/swift/Property/dismissed" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7RxSwift8ReactiveV0A4FlowSo16UIViewControllerCRbzlE9dismissed0A5Cocoa12ControlEventVySbGv">dismissed</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Rx observable, triggered when the view is being dismissed</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">dismissed</span><span class="p">:</span> <span class="kt">ControlEvent</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7RxSwift8ReactiveV0A4FlowSo16UIViewControllerCRbzlE9displayedAA10ObservableCySbGv"></a>
-                    <a name="//apple_ref/swift/Property/displayed" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7RxSwift8ReactiveV0A4FlowSo16UIViewControllerCRbzlE9displayedAA10ObservableCySbGv">displayed</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Rx observable, triggered when the view appearance state changes</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">displayed</span><span class="p">:</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">multiple</span> <span class="p">(</span><span class="nv">flowItems</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/NextFlowItem.html">NextFlowItem</a></span><span class="p">])</span></code></pre>
 
                         </div>
                       </div>
@@ -199,9 +154,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7RxSwift8ReactiveV0A4FlowSo8UIWindowCRbzlE15windowDidAppearAA17PrimitiveSequenceVyAA11SingleTraitOytGv"></a>
-                    <a name="//apple_ref/swift/Property/windowDidAppear" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7RxSwift8ReactiveV0A4FlowSo8UIWindowCRbzlE15windowDidAppearAA17PrimitiveSequenceVyAA11SingleTraitOytGv">windowDidAppear</a>
+                    <a name="/s:6RxFlow04NextB5ItemsO3oneAcA0cB4ItemV04flowF0_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/one" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow04NextB5ItemsO3oneAcA0cB4ItemV04flowF0_tcACmF">one</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -209,14 +164,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Rx Single that is triggered once the UIWindow is displayed</p>
+                        <p>a Flow will trigger only one NextFlowItem for a Step</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">windowDidAppear</span><span class="p">:</span> <span class="kt">Single</span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">one</span> <span class="p">(</span><span class="nv">flowItem</span><span class="p">:</span> <span class="kt"><a href="../Structs/NextFlowItem.html">NextFlowItem</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -230,9 +185,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7RxSwift8ReactiveV0A4FlowAD11CoordinatorCRbzlE12willNavigateAA10ObservableCySS_SStGv"></a>
-                    <a name="//apple_ref/swift/Property/willNavigate" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7RxSwift8ReactiveV0A4FlowAD11CoordinatorCRbzlE12willNavigateAA10ObservableCySS_SStGv">willNavigate</a>
+                    <a name="/s:6RxFlow04NextB5ItemsO4noneA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/none" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow04NextB5ItemsO4noneA2CmF">none</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -240,26 +195,30 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Rx Observable triggered before the Coordinator navigates a Flow/Step</p>
+                        <p>no further navigation will be triggered for a Step</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">willNavigate</span><span class="p">:</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="k">none</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7RxSwift8ReactiveV0A4FlowAD11CoordinatorCRbzlE11didNavigateAA10ObservableCySS_SStGv"></a>
-                    <a name="//apple_ref/swift/Property/didNavigate" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7RxSwift8ReactiveV0A4FlowAD11CoordinatorCRbzlE11didNavigateAA10ObservableCySS_SStGv">didNavigate</a>
+                    <a name="/s:6RxFlow04NextB5ItemsO14stepNotHandledA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/stepNotHandled" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow04NextB5ItemsO14stepNotHandledA2CmF">stepNotHandled</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -267,14 +226,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Rx Observable triggered after the Coordinator navigates a Flow/Step</p>
+                        <p>the Step matches no NextFlowItem at all</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">didNavigate</span><span class="p">:</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">stepNotHandled</span></code></pre>
 
                         </div>
                       </div>

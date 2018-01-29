@@ -17,6 +17,11 @@ You will find a very detail explanation of the whole project on my blog:
 - [RxFlow Part 2: In Practice](https://twittemb.github.io/swift/coordinator/reactive/rxflow/reactive%20programming/2017/12/09/rxflow-part-2-in-practice/)
 - [RxFlow Part 3: Tips and Tricks](https://twittemb.github.io/swift/coordinator/reactive/rxswift/reactive%20programming/rxflow/2017/12/22/rxflow-part-3-tips-and-tricks/)
 
+# Migrating from v1.0.x to v1.1.0
+There are two major changes that must be taken care of if you want to use the v1.1 when coming from an older version:
+- **Flowable** has been replaced by **NextFlowItem**. It's exactly the same idea between those 2 names, but "Flowable" was too much related to a Protocol naming convention. The **Flow.navigate(to:)** function has to return a **NextFlowItems**, which is an enum that represents different possibilities of NextFlowItem (multiple, one, none, ...). Take a look at the code snippets below to see some examples.
+- In order to improve RxFlow consistency, it seemed obvious that a Flow that presents a UIViewController also **HAS** to dismiss it. In previous versions, a child Flow was dismissed by itself and not by the Flow that presented it. In the Demo Application you will find an example with the WishlistFlow dismissing the SettingsFlow for the **settingsDone** Step.
+
 # Navigation concerns
 Regarding navigation within an iOS application, two choices are available:
 - Use the builtin mechanism provided by Apple and Xcode: storyboards and segues
@@ -125,9 +130,9 @@ class WatchedFlow: Flow {
         self.service = service
     }
 
-    func navigate(to step: Step) -> [NextFlowItem] {
+    func navigate(to step: Step) -> NextFlowItems {
 
-        guard let step = step as? DemoStep else { return NextFlowItem.noNavigation }
+        guard let step = step as? DemoStep else { return NextFlowItems.stepIsNotHandled }
 
         switch step {
 
@@ -138,32 +143,32 @@ class WatchedFlow: Flow {
         case .castPicked(let castId):
             return navigateToCastDetailScreen(with: castId)
         default:
-            return NextFlowItem.noNavigation
+            return NextFlowItems.stepIsNotHandled
     	}
     }
 
-    private func navigateToMovieListScreen () -> [NextFlowItem] {
+    private func navigateToMovieListScreen () -> NextFlowItems {
         let viewModel = WatchedViewModel(with: self.service)
         let viewController = WatchedViewController.instantiate(with: viewModel)
         viewController.title = "Watched"
         self.rootViewController.pushViewController(viewController, animated: true)
-        return [NextFlowItem(nextPresentable: viewController, nextStepper: viewModel)]
+	return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: viewController, nextStepper: viewModel))
     }
 
-    private func navigateToMovieDetailScreen (with movieId: Int) -> [NextFlowItem] {
+    private func navigateToMovieDetailScreen (with movieId: Int) -> NextFlowItems {
         let viewModel = MovieDetailViewModel(withService: self.service, andMovieId: movieId)
         let viewController = MovieDetailViewController.instantiate(with: viewModel)
         viewController.title = viewModel.title
         self.rootViewController.pushViewController(viewController, animated: true)
-        return [NextFlowItem(nextPresentable: viewController, nextStepper: viewModel)]
+	return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: viewController, nextStepper: viewModel))
     }
 
-    private func navigateToCastDetailScreen (with castId: Int) -> [NextFlowItem] {
+    private func navigateToCastDetailScreen (with castId: Int) -> NextFlowItems {
         let viewModel = CastDetailViewModel(withService: self.service, andCastId: castId)
         let viewController = CastDetailViewController.instantiate(with: viewModel)
         viewController.title = viewModel.name
         self.rootViewController.pushViewController(viewController, animated: true)
-        return NextFlowItem.noNavigation
+        return NextFlowItems.none
     }
 }
 ```
@@ -201,13 +206,13 @@ Of course, it is the aim of a Coordinator. As a Flow is a Presentable, a Flow ca
 For instance, from the WishlistFlow, we launch the SettingsFlow in a popup.
 
 ```swift
-private func navigateToSettings () -> [NextFlowItem] {     
+private func navigateToSettings () -> NextFlowItems {     
     let settingsStepper = SettingsStepper()
     let settingsFlow = SettingsFlow(withService: self.service, andStepper: settingsStepper)
     Flows.whenReady(flow: settingsFlow, block: { [unowned self] (root: UISplitViewController) in
         self.rootViewController.present(root, animated: true)
     })
-    return [NextFlowItem(nextPresentable: settingsFlow, nextStepper: settingsStepper)]
+    return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: settingsFlow, nextStepper: settingsStepper))
 }
 ```
 

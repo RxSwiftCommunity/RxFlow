@@ -31,6 +31,9 @@
             <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Classes/CompositeStepper.html">CompositeStepper</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/Coordinator.html">Coordinator</a>
               </li>
               <li class="nav-group-task">
@@ -42,6 +45,14 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/NextFlowItems.html">NextFlowItems</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -49,12 +60,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/Reactive.html">Reactive</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIViewController.html">UIViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions/UIWindow.html">UIWindow</a>
               </li>
             </ul>
           </li>
@@ -114,6 +119,9 @@
                     <a name="//apple_ref/swift/Property/rxVisible" class="dashAnchor"></a>
                     <a class="token" href="#/s:6RxFlow11PresentableP9rxVisible0A5Swift10ObservableCySbGv">rxVisible</a>
                     </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -121,6 +129,11 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Rx Observable that triggers a bool indicating if the current Presentable is being displayed (applies to UIViewController, Warp or UIWindow for instance)</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Rx Observable that triggers a bool indicating if the current UIWindow is being displayed</p>
 
                       </div>
                       <div class="declaration">
@@ -141,6 +154,9 @@
                     <a name="//apple_ref/swift/Property/rxFirstTimeVisible" class="dashAnchor"></a>
                     <a class="token" href="#/s:6RxFlow11PresentableP18rxFirstTimeVisible0A5Swift17PrimitiveSequenceVyAE11SingleTraitOytGv">rxFirstTimeVisible</a>
                     </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -148,6 +164,11 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Rx Observable (Single trait) triggered when this presentable is displayed for the first time</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Rx Observable (Single trait) triggered when this UIWindow is displayed for the first time</p>
 
                       </div>
                       <div class="declaration">
@@ -168,6 +189,9 @@
                     <a name="//apple_ref/swift/Property/rxDismissed" class="dashAnchor"></a>
                     <a class="token" href="#/s:6RxFlow11PresentableP11rxDismissed0A5Swift17PrimitiveSequenceVyAE11SingleTraitOytGv">rxDismissed</a>
                     </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -175,6 +199,11 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Rx Observable (Single trait) triggered when this presentable is dismissed</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Rx Observable (Single trait) triggered when this UIWindow is dismissed</p>
 
                       </div>
                       <div class="declaration">
@@ -193,7 +222,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-01-19)</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-01-29)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

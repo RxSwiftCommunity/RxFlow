@@ -15,6 +15,7 @@ private var subjectContext: UInt8 = 0
 /// The Step changes lead to navigation actions in the context of a specific Flow
 public protocol Stepper: Synchronizable {
 
+    /// The Observable corresponding to the Steps triggered by the Stepper
     var steps: Observable<Step> { get }
 
 }
@@ -30,7 +31,8 @@ public class OneStepper: Stepper {
     }
 }
 
-// A Stepper that combines multiple steppers
+/// A Stepper that combines multiple steppers. All those Steppers will be associated
+/// to the Presentable that is given within the NextFlowItem
 final public class CompositeStepper: Stepper {
 
     /// the Rx Obsersable that will emits new Steps

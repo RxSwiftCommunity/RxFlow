@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Extensions  Reference</title>
+    <title>Enumerations  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,7 +10,7 @@
     
   </head>
   <body>
-    <a title="Extensions  Reference"></a>
+    <a title="Enumerations  Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="index.html">RxFlow Docs</a> (100% documented)</p>
@@ -20,7 +20,7 @@
       <p id="breadcrumbs">
         <a href="index.html">RxFlow Reference</a>
         <img id="carat" src="img/carat.png" />
-        Extensions  Reference
+        Enumerations  Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -98,8 +98,8 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Extensions</h1>
-            <p>The following extensions are available globally.</p>
+            <h1>Enumerations</h1>
+            <p>The following enumerations are available globally.</p>
 
           </section>
           <section class="section task-group-section">
@@ -108,9 +108,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7RxSwift8ReactiveV"></a>
-                    <a name="//apple_ref/swift/Extension/Reactive" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7RxSwift8ReactiveV">Reactive</a>
+                    <a name="/s:6RxFlow04NextB5ItemsO"></a>
+                    <a name="//apple_ref/swift/Enum/NextFlowItems" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow04NextB5ItemsO">NextFlowItems</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -118,45 +118,23 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
-                        <a href="Extensions/Reactive.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">struct</span> <span class="kt">Reactive</span><span class="o">&lt;</span><span class="kt">Base</span><span class="o">&gt;</span></code></pre>
+                        <p>NextFlowItems reprent the next things that will trigger
+navigation actions inside a Flow</p>
 
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7RxSwift14ObservableTypeP"></a>
-                    <a name="//apple_ref/swift/Extension/ObservableType" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7RxSwift14ObservableTypeP">ObservableType</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/ObservableType.html" class="slightly-smaller">See more</a>
+<ul>
+<li>multiple: a Flow will trigger several NextFlowItem at the same time for the same Step</li>
+<li>one: a Flow will trigger only one NextFlowItem for a Step</li>
+<li>none: no further navigation will be triggered for a Step</li>
+<li>stepNotHandled: the Step matches no NextFlowItem at all</li>
+</ul>
+
+                        <a href="Enums/NextFlowItems.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">ObservableType</span> <span class="p">:</span> <span class="kt">ObservableConvertibleType</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">NextFlowItems</span></code></pre>
 
                         </div>
                       </div>
