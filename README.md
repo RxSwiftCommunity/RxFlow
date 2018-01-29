@@ -114,7 +114,7 @@ The following **Flow** is used as a Navigation stack. All you have to do is:
 - declare a root UIViewController on which your navigation will be based
 - implement the **navigate(to:)** function to transform a **Step** into a navigation action
 
-The **navigate(to:)** function returns an array of **NextFlowItems**. This is how the next navigation actions will be produced (the **Stepper** defined in a **NextFlowItem** will emit the next **Steps**)
+The **navigate(to:)** function returns a **NextFlowItems**. This is how the next navigation actions will be produced (the **Stepper** defined in a **NextFlowItem** will emit the next **Steps**)
 
 ```swift
 class WatchedFlow: Flow {
