@@ -27,6 +27,18 @@ class SettingsFlow: Flow {
 
         switch step {
         case .settings:
+            return navigateToSettingsScreen()
+        case .apiKey:
+            return navigateToApiKeyScreen()
+        case .about:
+            return navigateToAboutScreen()
+        default:
+            return NextFlowItems.stepNotHandled
+        }
+
+    }
+    
+    private func navigateToSettingsScreen () -> NextFlowItems {
             let navigationController = UINavigationController()
             let settingsListViewController = SettingsListViewController.instantiate()
             let settingsViewController = SettingsViewController.instantiate()
@@ -46,21 +58,23 @@ class SettingsFlow: Flow {
 
             return NextFlowItems.multiple(flowItems: [NextFlowItem(nextPresentable: settingsListViewController, nextStepper: settingsListViewController),
                                                       NextFlowItem(nextPresentable: settingsViewController, nextStepper: settingsViewController)])
-        case .apiKey:
+    }
+    
+    private func navigateToApiKeyScreen () -> NextFlowItems {
             let settingsViewController = SettingsViewController.instantiate()
             settingsViewController.title = "Api Key"
             self.rootViewController.showDetailViewController(settingsViewController, sender: nil)
             return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: settingsViewController, nextStepper: settingsViewController))
-        case .about:
+    }
+    
+    private func navigateToAboutScreen () -> NextFlowItems {
             let settingsAboutViewController = SettingsAboutViewController.instantiate()
             settingsAboutViewController.title = "About"
             self.rootViewController.showDetailViewController(settingsAboutViewController, sender: nil)
             return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: settingsAboutViewController, nextStepper: settingsAboutViewController))
-        default:
-            return NextFlowItems.stepNotHandled
-        }
-
     }
+    
+    
 }
 
 class SettingsStepper: Stepper {
