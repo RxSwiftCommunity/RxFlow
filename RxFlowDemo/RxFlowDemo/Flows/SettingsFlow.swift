@@ -37,7 +37,7 @@ class SettingsFlow: Flow {
         }
 
     }
-    
+
     private func navigateToSettingsScreen () -> NextFlowItems {
             let navigationController = UINavigationController()
             let settingsListViewController = SettingsListViewController.instantiate()
@@ -59,22 +59,21 @@ class SettingsFlow: Flow {
             return NextFlowItems.multiple(flowItems: [NextFlowItem(nextPresentable: settingsListViewController, nextStepper: settingsListViewController),
                                                       NextFlowItem(nextPresentable: settingsViewController, nextStepper: settingsViewController)])
     }
-    
+
     private func navigateToApiKeyScreen () -> NextFlowItems {
             let settingsViewController = SettingsViewController.instantiate()
             settingsViewController.title = "Api Key"
             self.rootViewController.showDetailViewController(settingsViewController, sender: nil)
             return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: settingsViewController, nextStepper: settingsViewController))
     }
-    
+
     private func navigateToAboutScreen () -> NextFlowItems {
             let settingsAboutViewController = SettingsAboutViewController.instantiate()
             settingsAboutViewController.title = "About"
             self.rootViewController.showDetailViewController(settingsAboutViewController, sender: nil)
             return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: settingsAboutViewController, nextStepper: settingsAboutViewController))
     }
-    
-    
+
 }
 
 class SettingsStepper: Stepper {

@@ -15,7 +15,7 @@ protocol ViewModelBased: class {
     var viewModel: ViewModel { get set }
 }
 
-extension StoryboardBased where Self: UIViewController & ViewModelBased {
+extension ViewModelBased where Self: StoryboardBased & UIViewController {
     static func instantiate (with viewModel: ViewModel) -> Self {
         let viewController = Self.instantiate()
         viewController.viewModel = viewModel
