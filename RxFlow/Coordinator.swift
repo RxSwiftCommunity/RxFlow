@@ -42,7 +42,8 @@ class FlowCoordinator: HasDisposeBag {
     internal var parentFlowCoordinator: FlowCoordinator?
 
     /// The Flow to be coordinated
-    private let flow: Flow
+	// It is fileprivate because it is used in Coordinator, to set view to UIWindow's root
+    fileprivate let flow: Flow
 
     /// The Stepper that drives the Flow
     /// It will trigger some Steps at the Flow level
@@ -170,10 +171,17 @@ class FlowCoordinator: HasDisposeBag {
 /// declared in the Flows of the application.
 final public class Coordinator: HasDisposeBag {
 
-    private var flowCoordinators = [FlowCoordinator]()
     internal let willNavigateSubject = PublishSubject<(String, String)>()
     internal let didNavigateSubject = PublishSubject<(String, String)>()
-
+	private let rootView: ContainerVC = ContainerVC()
+	private var flowCoordinators = [FlowCoordinator]() {
+		// I admit this feels little bit weird, but its very shor and works flawlessly
+		didSet {
+			guard let firstFlow = flowCoordinators.first, self.rootView.rootFlow == nil else { return }
+			self.rootView.set(RootFlow: firstFlow.flow)
+		}
+	}
+	public var container: ContainerVC { return self.rootView }
     /// Initialize the Coordinator
     public init() {
     }
@@ -221,6 +229,11 @@ extension Coordinator: FlowCoordinatorDelegate {
     func navigateToAnotherFlow (withParentFlowCoordinator parentFlowCoordinator: FlowCoordinator, withNextFlowItem nextFlowItem: NextFlowItem) {
 
         if let nextFlow = nextFlowItem.nextPresentable as? Flow {
+		// if next flow is suppose to be rootflow then remove all child flow coordinators and remove view from container
+			if nextFlowItem.isRootFlowItem {
+				self.flowCoordinators = []
+				self.rootView.removeContent()
+			}
             self.coordinate(flow: nextFlow, withStepper: nextFlowItem.nextStepper, withParrentFlowCoordinator: parentFlowCoordinator)
         }
     }

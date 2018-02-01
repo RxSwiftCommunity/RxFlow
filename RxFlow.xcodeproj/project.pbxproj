@@ -25,6 +25,7 @@
 		1A8FBE781FF9783100389464 /* RxFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE771FF9783100389464 /* RxFlowTests.swift */; };
 		1A8FBE7A1FF9783100389464 /* RxFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF8548C1FF8328D00271B52 /* RxFlow.framework */; };
 		1AF8549D1FF8328D00271B52 /* RxFlow.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AF8548F1FF8328D00271B52 /* RxFlow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		287F848220234A1D0058503B /* ContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287F848120234A1D0058503B /* ContainerVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		1AF8548C1FF8328D00271B52 /* RxFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AF8548F1FF8328D00271B52 /* RxFlow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxFlow.h; sourceTree = "<group>"; };
 		1AF854901FF8328D00271B52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		287F848120234A1D0058503B /* ContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				1A8FBDF01FF8337800389464 /* Step.swift */,
 				1A8FBDEE1FF8337700389464 /* Presentable.swift */,
 				1A8FBDE71FF8337700389464 /* Stepper.swift */,
+				287F848120234A1D0058503B /* ContainerVC.swift */,
 			);
 			path = RxFlow;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				1A8FBDF21FF8337800389464 /* UIViewController+Presentable.swift in Sources */,
 				1A8FBDF71FF8337800389464 /* UIWindow+Rx.swift in Sources */,
 				1A8FBDF81FF8337800389464 /* Coordinator.swift in Sources */,
+				287F848220234A1D0058503B /* ContainerVC.swift in Sources */,
 				1A8FBDF51FF8337800389464 /* UIWindow+Presentable.swift in Sources */,
 				1A8FBDF91FF8337800389464 /* Rx+Pausable.swift in Sources */,
 				1A8FBDFE1FF8337800389464 /* Flow.swift in Sources */,

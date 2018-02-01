@@ -22,14 +22,20 @@ public struct NextFlowItem {
     /// Presentable is displayed
     let nextStepper: Stepper
 
+	/// Flag to determin if this flow is suppose to be root in UIWindow, this mechanism
+	/// proved support to swap flows. In future it would be good to have mechanism to
+	/// swap flows event in spacific place in hierarchy.
+	var isRootFlowItem: Bool
+
     /// Initialize a new NextFlowItem
     ///
     /// - Parameters:
     ///   - nextPresentable: the next presentable to be handled by the Coordinator
     ///   - nextStepper: the next Steper to be handled by the Coordinator
-    public init(nextPresentable presentable: Presentable, nextStepper stepper: Stepper) {
+    public init(nextPresentable presentable: Presentable, nextStepper stepper: Stepper, isRootFlowable isRoot: Bool = false) {
         self.nextPresentable = presentable
         self.nextStepper = stepper
+		self.isRootFlowItem = isRoot
     }
 }
 
