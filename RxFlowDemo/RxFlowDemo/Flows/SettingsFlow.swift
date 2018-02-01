@@ -33,7 +33,7 @@ class SettingsFlow: Flow {
         case .about:
             return navigateToAboutScreen()
         default:
-            return NextFlowItems.stepNotHandle
+            return NextFlowItems.stepNotHandled
         }
 
     }
