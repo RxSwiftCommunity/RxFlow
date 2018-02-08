@@ -6,7 +6,8 @@
 //  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
-struct MovieViewModel {
+struct MovieViewModel: ViewModel {
+
     let id: Int
     let title: String
     let image: String

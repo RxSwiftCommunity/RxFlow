@@ -8,39 +8,48 @@
 
 import RxFlow
 
-class MovieDetailViewModel: Stepper {
+class MovieDetailViewModel: ServicesViewModel {
 
-    let casts: [CastViewModel]
-    let title: String
-    let description: String
-    let year: String
-    let director: String
-    let writer: String
-    let budget: String
-    let image: String
+    var services: MoviesService! {
+        didSet {
+            let movie = self.services.movie(forId: movieId)
 
-    init(withService service: MoviesService, andMovieId movieId: Int) {
+            self.casts = services.casts(for: movie).map({ (cast) -> CastViewModel in
+                return CastViewModel (id: cast.id, name: cast.name, image: cast.image)
+            })
 
-        let movie = service.movie(forId: movieId)
+            self.title = movie.title
+            self.description = movie.description
+            self.year = "\(movie.year)"
+            self.director = movie.director
+            self.writer = movie.writer
+            self.image = movie.image
 
-        self.casts = service.casts(for: movie).map({ (cast) -> CastViewModel in
-            return CastViewModel (id: cast.id, name: cast.name, image: cast.image)
-        })
-
-        self.title = movie.title
-        self.description = movie.description
-        self.year = "\(movie.year)"
-        self.director = movie.director
-        self.writer = movie.writer
-        self.image = movie.image
-
-        let currencyFormatter = NumberFormatter()
-        currencyFormatter.usesGroupingSeparator = true
-        currencyFormatter.numberStyle = NumberFormatter.Style.currency
-        currencyFormatter.locale = NSLocale.current
-        self.budget = currencyFormatter.string(from: NSNumber(value: movie.budget))!
+            let currencyFormatter = NumberFormatter()
+            currencyFormatter.usesGroupingSeparator = true
+            currencyFormatter.numberStyle = NumberFormatter.Style.currency
+            currencyFormatter.locale = NSLocale.current
+            self.budget = currencyFormatter.string(from: NSNumber(value: movie.budget))!
+        }
     }
 
+    private(set) var casts = [CastViewModel]()
+    private(set) var title = ""
+    private(set) var description = ""
+    private(set) var year = ""
+    private(set) var director = ""
+    private(set) var writer = ""
+    private(set) var budget = ""
+    private(set) var image = ""
+
+    public let movieId: Int
+
+    init(withMovieId id: Int) {
+        self.movieId = id
+    }
+}
+
+extension MovieDetailViewModel: Stepper {
     func pick (castId: Int) {
         self.step.accept(DemoStep.castPicked(withCastId: castId))
     }

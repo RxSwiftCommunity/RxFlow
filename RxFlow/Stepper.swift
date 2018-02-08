@@ -13,7 +13,7 @@ private var subjectContext: UInt8 = 0
 
 /// a Stepper has only one purpose is: emits Steps that correspond to specific navigation states.
 /// The Step changes lead to navigation actions in the context of a specific Flow
-public protocol Stepper: Synchronizable {
+public protocol Stepper: class, Synchronizable {
 
     /// The Observable corresponding to the Steps triggered by the Stepper
     var steps: Observable<Step> { get }

@@ -35,7 +35,6 @@ class SettingsFlow: Flow {
         default:
             return NextFlowItems.stepNotHandled
         }
-
     }
 
     private func navigateToSettingsScreen () -> NextFlowItems {

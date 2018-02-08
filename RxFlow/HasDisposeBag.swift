@@ -14,7 +14,7 @@ import RxSwift
 private var disposeBagContext: UInt8 = 0
 
 /// Each HasDisposeBag offers a unique Rx DisposeBag instance
-public protocol HasDisposeBag: Synchronizable {
+public protocol HasDisposeBag: class, Synchronizable {
 
     /// a unique Rx DisposeBag instance
     var disposeBag: DisposeBag { get }

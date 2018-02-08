@@ -6,16 +6,24 @@
 //  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
-class CastDetailViewModel {
+class CastDetailViewModel: ServicesViewModel {
 
-    let name: String
-    let image: String
-    let bio: String
+    var services: MoviesService! {
+        didSet {
+            let cast = self.services.cast(forId: castId)
+            self.name = cast.name
+            self.image = cast.image
+            self.bio = cast.bio
+        }
+    }
 
-    init(withService service: MoviesService, andCastId castId: Int) {
-        let cast = service.cast(forId: castId)
-        self.name = cast.name
-        self.image = cast.image
-        self.bio = cast.bio
+    private(set) var name = ""
+    private(set) var image = ""
+    private(set) var bio = ""
+
+    public let castId: Int
+
+    init(withCastId id: Int) {
+        self.castId = id
     }
 }

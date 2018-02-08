@@ -14,10 +14,10 @@ import RxCocoa
 
 class CastDetailViewController: UIViewController, StoryboardBased, ViewModelBased {
 
+    var viewModel: CastDetailViewModel!
+
     @IBOutlet private weak var castBanner: UIImageView!
     @IBOutlet private weak var castBio: UILabel!
-
-    var viewModel: CastDetailViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()

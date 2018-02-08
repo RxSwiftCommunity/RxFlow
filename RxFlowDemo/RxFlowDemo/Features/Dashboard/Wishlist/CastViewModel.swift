@@ -6,7 +6,8 @@
 //  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
-struct CastViewModel {
+struct CastViewModel: ViewModel {
+
     let id: Int
     let name: String
     let image: String

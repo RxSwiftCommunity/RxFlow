@@ -37,31 +37,26 @@ class WatchedFlow: Flow {
         default:
             return NextFlowItems.stepNotHandled
         }
-
     }
 
     private func navigateToMovieListScreen () -> NextFlowItems {
-        let viewModel = WatchedViewModel(with: self.service)
-        let viewController = WatchedViewController.instantiate(with: viewModel)
+        let viewController = WatchedViewController.instantiate(withViewModel: WatchedViewModel(), andServices: self.service)
         viewController.title = "Watched"
         self.rootViewController.pushViewController(viewController, animated: true)
-        return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: viewController, nextStepper: viewModel))
+        return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: viewController, nextStepper: viewController.viewModel))
     }
 
     private func navigateToMovieDetailScreen (with movieId: Int) -> NextFlowItems {
-        let viewModel = MovieDetailViewModel(withService: self.service, andMovieId: movieId)
-        let viewController = MovieDetailViewController.instantiate(with: viewModel)
-        viewController.title = viewModel.title
+        let viewController = MovieDetailViewController.instantiate(withViewModel: MovieDetailViewModel(withMovieId: movieId), andServices: self.service)
+        viewController.title = viewController.viewModel.title
         self.rootViewController.pushViewController(viewController, animated: true)
-        return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: viewController, nextStepper: viewModel))
+        return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: viewController, nextStepper: viewController.viewModel))
     }
 
     private func navigateToCastDetailScreen (with castId: Int) -> NextFlowItems {
-        let viewModel = CastDetailViewModel(withService: self.service, andCastId: castId)
-        let viewController = CastDetailViewController.instantiate(with: viewModel)
-        viewController.title = viewModel.name
+        let viewController = CastDetailViewController.instantiate(withViewModel: CastDetailViewModel(withCastId: castId), andServices: self.service)
+        viewController.title = viewController.viewModel.name
         self.rootViewController.pushViewController(viewController, animated: true)
         return NextFlowItems.none
     }
-
 }
