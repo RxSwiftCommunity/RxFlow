@@ -18,9 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var coordinator = Coordinator()
     let movieService = MoviesService()
-    lazy var mainFlow = {
-        return MainFlow(with: self.movieService)
-    }()
+    var appFlow: AppFlow!
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -31,11 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print ("did navigate to flow=\(flow) and step=\(step)")
         }).disposed(by: self.disposeBag)
 
-        Flows.whenReady(flow1: mainFlow, block: { [unowned window] (root) in
-            window.rootViewController = root
-        })
+        self.appFlow = AppFlow(withWindow: window, andService: self.movieService)
 
-        coordinator.coordinate(flow: mainFlow, withStepper: OneStepper(withSingleStep: DemoStep.apiKey))
+        coordinator.coordinate(flow: self.appFlow, withStepper: OneStepper(withSingleStep: DemoStep.apiKey))
 
         return true
     }

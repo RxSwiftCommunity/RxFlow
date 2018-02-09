@@ -12,7 +12,7 @@ import UIKit
 
 class WishlistFlow: Flow {
 
-    var root: UIViewController {
+    var root: Presentable {
         return self.rootViewController
     }
 

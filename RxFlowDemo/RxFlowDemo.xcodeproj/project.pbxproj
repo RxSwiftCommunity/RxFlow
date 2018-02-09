@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A25DE81202D3CFE00F1C4B8 /* AppFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A25DE80202D3CFE00F1C4B8 /* AppFlow.swift */; };
 		1A8FBE101FF845EE00389464 /* Reusable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A8FBE0D1FF845EE00389464 /* Reusable.framework */; };
 		1A8FBE111FF845EE00389464 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A8FBE0E1FF845EE00389464 /* RxSwift.framework */; };
 		1A8FBE121FF845EE00389464 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A8FBE0F1FF845EE00389464 /* RxCocoa.framework */; };
@@ -67,6 +68,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A25DE80202D3CFE00F1C4B8 /* AppFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlow.swift; sourceTree = "<group>"; };
 		1A8FBE0D1FF845EE00389464 /* Reusable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reusable.framework; path = Carthage/Build/iOS/Reusable.framework; sourceTree = "<group>"; };
 		1A8FBE0E1FF845EE00389464 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		1A8FBE0F1FF845EE00389464 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				1A8FBE221FF8480C00389464 /* DemoStep.swift */,
+				1A25DE80202D3CFE00F1C4B8 /* AppFlow.swift */,
 				1A8FBE241FF8480C00389464 /* MainFlow.swift */,
 				1A8FBE231FF8480C00389464 /* SettingsFlow.swift */,
 				1A8FBE251FF8480C00389464 /* WatchedFlow.swift */,
@@ -421,6 +424,7 @@
 				1A8FBE4A1FF84BB200389464 /* SettingsAboutViewController.swift in Sources */,
 				1A8FBE701FF84C2C00389464 /* WatchedViewModel.swift in Sources */,
 				1A8FBE341FF84B5300389464 /* CastsHelper.swift in Sources */,
+				1A25DE81202D3CFE00F1C4B8 /* AppFlow.swift in Sources */,
 				1A8FBE351FF84B5300389464 /* MoviesHelper.swift in Sources */,
 				1A8FBE281FF8480C00389464 /* SettingsFlow.swift in Sources */,
 				1A8FBE641FF84BFE00389464 /* CastViewModel.swift in Sources */,

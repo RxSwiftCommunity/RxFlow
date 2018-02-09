@@ -1,26 +1,25 @@
 //
-//  MainFlow.swift
+//  AppFlow.swift
 //  RxFlowDemo
 //
-//  Created by Thibault Wittemberg on 17-08-09.
-//  Copyright (c) RxSwiftCommunity. All rights reserved.
+//  Created by Thibault Wittemberg on 18-02-08.
+//  Copyright © 2018 RxSwiftCommunity. All rights reserved.
 //
 
+import Foundation
 import RxFlow
-import RxSwift
 
-class MainFlow: Flow {
+class AppFlow: Flow {
 
     var root: Presentable {
-        return self.rootViewController
+        return self.rootWindow
     }
 
-    private let rootViewController: UINavigationController
+    private let rootWindow: UIWindow
     private let service: MoviesService
 
-    init(with service: MoviesService) {
-        self.rootViewController = UINavigationController()
-        self.rootViewController.setNavigationBarHidden(true, animated: false)
+    init(withWindow window: UIWindow, andService service: MoviesService) {
+        self.rootWindow = window
         self.service = service
     }
 
@@ -35,11 +34,12 @@ class MainFlow: Flow {
         default:
             return NextFlowItems.stepNotHandled
         }
+
     }
 
     private func navigationToApiScreen () -> NextFlowItems {
         let settingsViewController = SettingsViewController.instantiate()
-        rootViewController.pushViewController(settingsViewController, animated: false)
+        self.rootWindow.rootViewController = settingsViewController
         return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: settingsViewController, nextStepper: settingsViewController))
     }
 
@@ -58,10 +58,11 @@ class MainFlow: Flow {
             root2.title = "Watched"
 
             tabbarController.setViewControllers([root1, root2], animated: false)
-            self.rootViewController.pushViewController(tabbarController, animated: true)
+            self.rootWindow.rootViewController = tabbarController
         })
 
         return NextFlowItems.multiple(flowItems: [NextFlowItem(nextPresentable: wishListFlow, nextStepper: wishlistStepper),
                                                   NextFlowItem(nextPresentable: watchedFlow, nextStepper: OneStepper(withSingleStep: DemoStep.movieList))])
     }
+
 }

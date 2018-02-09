@@ -11,7 +11,7 @@ import RxSwift
 
 class SettingsFlow: Flow {
 
-    var root: UIViewController {
+    var root: Presentable {
         return self.rootViewController
     }
 
