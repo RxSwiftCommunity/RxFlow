@@ -16,53 +16,50 @@ class AppFlow: Flow {
     }
 
     private let rootWindow: UIWindow
-    private let service: MoviesService
+    private let services: AppServices
 
-    init(withWindow window: UIWindow, andService service: MoviesService) {
+    init(withWindow window: UIWindow, andServices services: AppServices) {
         self.rootWindow = window
-        self.service = service
+        self.services = services
     }
 
     func navigate(to step: Step) -> NextFlowItems {
-        guard let step = step as? DemoStep else { return NextFlowItems.stepNotHandled }
+        guard let step = step as? DemoStep else { return NextFlowItems.none }
 
         switch step {
-        case .apiKey:
-            return navigationToApiScreen()
-        case .apiKeyIsComplete:
+        case .onboarding:
+            return navigationToOnboardingScreen()
+        case .onboardingIsComplete, .dashboard:
             return navigationToDashboardScreen()
         default:
-            return NextFlowItems.stepNotHandled
+            return NextFlowItems.none
         }
-
     }
 
-    private func navigationToApiScreen () -> NextFlowItems {
-        let settingsViewController = SettingsViewController.instantiate()
-        self.rootWindow.rootViewController = settingsViewController
-        return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: settingsViewController, nextStepper: settingsViewController))
+    private func navigationToOnboardingScreen () -> NextFlowItems {
+        let onboardingFlow = OnboardingFlow(withServices: self.services)
+        Flows.whenReady(flow1: onboardingFlow) { [unowned self] (root) in
+            self.rootWindow.rootViewController = root
+        }
+        return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: onboardingFlow, nextStepper: OneStepper(withSingleStep: DemoStep.login)))
     }
 
     private func navigationToDashboardScreen () -> NextFlowItems {
-        let tabbarController = UITabBarController()
-        let wishlistStepper = WishlistStepper()
-        let wishListFlow = WishlistFlow(withService: self.service, andStepper: wishlistStepper)
-        let watchedFlow = WatchedFlow(withService: self.service)
-
-        Flows.whenReady(flow1: wishListFlow, flow2: watchedFlow, block: { [unowned self] (root1: UINavigationController, root2: UINavigationController) in
-            let tabBarItem1 = UITabBarItem(title: "Wishlist", image: UIImage(named: "wishlist"), selectedImage: nil)
-            let tabBarItem2 = UITabBarItem(title: "Watched", image: UIImage(named: "watched"), selectedImage: nil)
-            root1.tabBarItem = tabBarItem1
-            root1.title = "Wishlist"
-            root2.tabBarItem = tabBarItem2
-            root2.title = "Watched"
-
-            tabbarController.setViewControllers([root1, root2], animated: false)
-            self.rootWindow.rootViewController = tabbarController
-        })
-
-        return NextFlowItems.multiple(flowItems: [NextFlowItem(nextPresentable: wishListFlow, nextStepper: wishlistStepper),
-                                                  NextFlowItem(nextPresentable: watchedFlow, nextStepper: OneStepper(withSingleStep: DemoStep.movieList))])
+        let dashboardFlow = DashboardFlow(withServices: self.services)
+        Flows.whenReady(flow1: dashboardFlow) { [unowned self] (root) in
+            self.rootWindow.rootViewController = root
+        }
+        return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: dashboardFlow, nextStepper: OneStepper(withSingleStep: DemoStep.dashboard)))
     }
 
+}
+
+class AppStepper: Stepper {
+    init(withServices services: AppServices) {
+        if services.preferencesService.isOnboarded() {
+            self.step.accept(DemoStep.dashboard)
+        } else {
+            self.step.accept(DemoStep.onboarding)
+        }
+    }
 }

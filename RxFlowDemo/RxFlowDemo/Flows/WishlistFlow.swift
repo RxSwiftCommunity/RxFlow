@@ -18,16 +18,16 @@ class WishlistFlow: Flow {
 
     private let rootViewController = UINavigationController()
     private let wishlistStepper: WishlistStepper
-    private let service: MoviesService
+    private let services: AppServices
 
-    init(withService service: MoviesService, andStepper stepper: WishlistStepper) {
-        self.service = service
+    init(withServices services: AppServices, andStepper stepper: WishlistStepper) {
+        self.services = services
         self.wishlistStepper = stepper
     }
 
     func navigate(to step: Step) -> NextFlowItems {
 
-        guard let step = step as? DemoStep else { return NextFlowItems.stepNotHandled }
+        guard let step = step as? DemoStep else { return NextFlowItems.none }
 
         switch step {
 
@@ -39,16 +39,16 @@ class WishlistFlow: Flow {
             return navigateToCastDetailScreen(with: castId)
         case .settings:
             return navigateToSettings()
-        case .settingsDone:
+        case .settingsIsComplete:
             self.rootViewController.presentedViewController?.dismiss(animated: true)
             return NextFlowItems.none
         default:
-            return NextFlowItems.stepNotHandled
+            return NextFlowItems.none
         }
     }
 
     private func navigateToMovieListScreen () -> NextFlowItems {
-        let viewController = WishlistViewController.instantiate(withViewModel: WishlistViewModel(), andServices: self.service)
+        let viewController = WishlistViewController.instantiate(withViewModel: WishlistViewModel(), andServices: self.services)
         viewController.title = "Wishlist"
         self.rootViewController.pushViewController(viewController, animated: true)
         if let navigationBarItem = self.rootViewController.navigationBar.items?[0] {
@@ -62,14 +62,14 @@ class WishlistFlow: Flow {
     }
 
     private func navigateToMovieDetailScreen (with movieId: Int) -> NextFlowItems {
-        let viewController = MovieDetailViewController.instantiate(withViewModel: MovieDetailViewModel(withMovieId: movieId), andServices: self.service)
+        let viewController = MovieDetailViewController.instantiate(withViewModel: MovieDetailViewModel(withMovieId: movieId), andServices: self.services)
         viewController.title = viewController.viewModel.title
         self.rootViewController.pushViewController(viewController, animated: true)
         return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: viewController, nextStepper: viewController.viewModel))
     }
 
     private func navigateToCastDetailScreen (with castId: Int) -> NextFlowItems {
-        let viewController = CastDetailViewController.instantiate(withViewModel: CastDetailViewModel(withCastId: castId), andServices: self.service)
+        let viewController = CastDetailViewController.instantiate(withViewModel: CastDetailViewModel(withCastId: castId), andServices: self.services)
         viewController.title = viewController.viewModel.name
         self.rootViewController.pushViewController(viewController, animated: true)
         return NextFlowItems.none
@@ -77,7 +77,7 @@ class WishlistFlow: Flow {
 
     private func navigateToSettings () -> NextFlowItems {
         let settingsStepper = SettingsStepper()
-        let settingsFlow = SettingsFlow(withService: self.service, andStepper: settingsStepper)
+        let settingsFlow = SettingsFlow(withServices: self.services, andStepper: settingsStepper)
         Flows.whenReady(flow1: settingsFlow, block: { [unowned self] (root: UISplitViewController) in
             self.rootViewController.present(root, animated: true)
         })

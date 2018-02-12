@@ -6,6 +6,10 @@
 //  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
+protocol HasMoviesService {
+    var moviesService: MoviesService { get }
+}
+
 class MoviesService {
 
     func wishlistMovies () -> [Movie] {

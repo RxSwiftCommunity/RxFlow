@@ -8,13 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		1A25DE81202D3CFE00F1C4B8 /* AppFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A25DE80202D3CFE00F1C4B8 /* AppFlow.swift */; };
+		1A25DE83202FB62500F1C4B8 /* PreferencesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A25DE82202FB62500F1C4B8 /* PreferencesService.swift */; };
+		1A25DE85203129F200F1C4B8 /* OnboardingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A25DE84203129F200F1C4B8 /* OnboardingFlow.swift */; };
+		1A25DE872035185000F1C4B8 /* SettingsLoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A25DE862035185000F1C4B8 /* SettingsLoginViewController.storyboard */; };
+		1A25DE8920351B8F00F1C4B8 /* SettingsLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A25DE8820351B8F00F1C4B8 /* SettingsLoginViewController.swift */; };
+		1A25DE8B20351E1D00F1C4B8 /* DashboardFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A25DE8A20351E1D00F1C4B8 /* DashboardFlow.swift */; };
+		1A350D062038F6E9002DDE02 /* SettingsApiKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A350D052038F6E9002DDE02 /* SettingsApiKeyViewModel.swift */; };
 		1A8FBE101FF845EE00389464 /* Reusable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A8FBE0D1FF845EE00389464 /* Reusable.framework */; };
 		1A8FBE111FF845EE00389464 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A8FBE0E1FF845EE00389464 /* RxSwift.framework */; };
 		1A8FBE121FF845EE00389464 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A8FBE0F1FF845EE00389464 /* RxCocoa.framework */; };
 		1A8FBE261FF8480C00389464 /* WishlistFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE211FF8480B00389464 /* WishlistFlow.swift */; };
 		1A8FBE271FF8480C00389464 /* DemoStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE221FF8480C00389464 /* DemoStep.swift */; };
 		1A8FBE281FF8480C00389464 /* SettingsFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE231FF8480C00389464 /* SettingsFlow.swift */; };
-		1A8FBE291FF8480C00389464 /* MainFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE241FF8480C00389464 /* MainFlow.swift */; };
 		1A8FBE2A1FF8480C00389464 /* WatchedFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE251FF8480C00389464 /* WatchedFlow.swift */; };
 		1A8FBE2D1FF84B2500389464 /* ViewModelBased.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE2C1FF84B2500389464 /* ViewModelBased.swift */; };
 		1A8FBE341FF84B5300389464 /* CastsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE2F1FF84B5300389464 /* CastsHelper.swift */; };
@@ -28,8 +33,8 @@
 		1A8FBE481FF84BB200389464 /* SettingsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE421FF84BB200389464 /* SettingsListViewController.swift */; };
 		1A8FBE491FF84BB200389464 /* SettingsListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A8FBE431FF84BB200389464 /* SettingsListViewController.storyboard */; };
 		1A8FBE4A1FF84BB200389464 /* SettingsAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE441FF84BB200389464 /* SettingsAboutViewController.swift */; };
-		1A8FBE4B1FF84BB200389464 /* SettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A8FBE451FF84BB200389464 /* SettingsViewController.storyboard */; };
-		1A8FBE4C1FF84BB200389464 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE461FF84BB200389464 /* SettingsViewController.swift */; };
+		1A8FBE4B1FF84BB200389464 /* SettingsApiKeyViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A8FBE451FF84BB200389464 /* SettingsApiKeyViewController.storyboard */; };
+		1A8FBE4C1FF84BB200389464 /* SettingsApiKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE461FF84BB200389464 /* SettingsApiKeyViewController.swift */; };
 		1A8FBE521FF84BF300389464 /* MovieViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE511FF84BF300389464 /* MovieViewCell.swift */; };
 		1A8FBE5E1FF84BFE00389464 /* WishlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE531FF84BFE00389464 /* WishlistViewModel.swift */; };
 		1A8FBE5F1FF84BFE00389464 /* CastDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A8FBE541FF84BFE00389464 /* CastDetailViewController.storyboard */; };
@@ -69,13 +74,18 @@
 
 /* Begin PBXFileReference section */
 		1A25DE80202D3CFE00F1C4B8 /* AppFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlow.swift; sourceTree = "<group>"; };
+		1A25DE82202FB62500F1C4B8 /* PreferencesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesService.swift; sourceTree = "<group>"; };
+		1A25DE84203129F200F1C4B8 /* OnboardingFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlow.swift; sourceTree = "<group>"; };
+		1A25DE862035185000F1C4B8 /* SettingsLoginViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsLoginViewController.storyboard; sourceTree = "<group>"; };
+		1A25DE8820351B8F00F1C4B8 /* SettingsLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLoginViewController.swift; sourceTree = "<group>"; };
+		1A25DE8A20351E1D00F1C4B8 /* DashboardFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardFlow.swift; sourceTree = "<group>"; };
+		1A350D052038F6E9002DDE02 /* SettingsApiKeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsApiKeyViewModel.swift; sourceTree = "<group>"; };
 		1A8FBE0D1FF845EE00389464 /* Reusable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reusable.framework; path = Carthage/Build/iOS/Reusable.framework; sourceTree = "<group>"; };
 		1A8FBE0E1FF845EE00389464 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		1A8FBE0F1FF845EE00389464 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		1A8FBE211FF8480B00389464 /* WishlistFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishlistFlow.swift; sourceTree = "<group>"; };
 		1A8FBE221FF8480C00389464 /* DemoStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoStep.swift; sourceTree = "<group>"; };
 		1A8FBE231FF8480C00389464 /* SettingsFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsFlow.swift; sourceTree = "<group>"; };
-		1A8FBE241FF8480C00389464 /* MainFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainFlow.swift; sourceTree = "<group>"; };
 		1A8FBE251FF8480C00389464 /* WatchedFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchedFlow.swift; sourceTree = "<group>"; };
 		1A8FBE2C1FF84B2500389464 /* ViewModelBased.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelBased.swift; sourceTree = "<group>"; };
 		1A8FBE2F1FF84B5300389464 /* CastsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastsHelper.swift; sourceTree = "<group>"; };
@@ -89,8 +99,8 @@
 		1A8FBE421FF84BB200389464 /* SettingsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsListViewController.swift; sourceTree = "<group>"; };
 		1A8FBE431FF84BB200389464 /* SettingsListViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SettingsListViewController.storyboard; sourceTree = "<group>"; };
 		1A8FBE441FF84BB200389464 /* SettingsAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsAboutViewController.swift; sourceTree = "<group>"; };
-		1A8FBE451FF84BB200389464 /* SettingsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SettingsViewController.storyboard; sourceTree = "<group>"; };
-		1A8FBE461FF84BB200389464 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		1A8FBE451FF84BB200389464 /* SettingsApiKeyViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SettingsApiKeyViewController.storyboard; sourceTree = "<group>"; };
+		1A8FBE461FF84BB200389464 /* SettingsApiKeyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsApiKeyViewController.swift; sourceTree = "<group>"; };
 		1A8FBE511FF84BF300389464 /* MovieViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieViewCell.swift; sourceTree = "<group>"; };
 		1A8FBE531FF84BFE00389464 /* WishlistViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishlistViewModel.swift; sourceTree = "<group>"; };
 		1A8FBE541FF84BFE00389464 /* CastDetailViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CastDetailViewController.storyboard; sourceTree = "<group>"; };
@@ -145,10 +155,11 @@
 			children = (
 				1A8FBE221FF8480C00389464 /* DemoStep.swift */,
 				1A25DE80202D3CFE00F1C4B8 /* AppFlow.swift */,
-				1A8FBE241FF8480C00389464 /* MainFlow.swift */,
-				1A8FBE231FF8480C00389464 /* SettingsFlow.swift */,
-				1A8FBE251FF8480C00389464 /* WatchedFlow.swift */,
+				1A25DE84203129F200F1C4B8 /* OnboardingFlow.swift */,
+				1A25DE8A20351E1D00F1C4B8 /* DashboardFlow.swift */,
 				1A8FBE211FF8480B00389464 /* WishlistFlow.swift */,
+				1A8FBE251FF8480C00389464 /* WatchedFlow.swift */,
+				1A8FBE231FF8480C00389464 /* SettingsFlow.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -161,6 +172,7 @@
 				1A8FBE301FF84B5300389464 /* MoviesHelper.swift */,
 				1A8FBE311FF84B5300389464 /* MoviesRepository.swift */,
 				1A8FBE331FF84B5300389464 /* MoviesService.swift */,
+				1A25DE82202FB62500F1C4B8 /* PreferencesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -207,8 +219,11 @@
 				1A8FBE441FF84BB200389464 /* SettingsAboutViewController.swift */,
 				1A8FBE431FF84BB200389464 /* SettingsListViewController.storyboard */,
 				1A8FBE421FF84BB200389464 /* SettingsListViewController.swift */,
-				1A8FBE451FF84BB200389464 /* SettingsViewController.storyboard */,
-				1A8FBE461FF84BB200389464 /* SettingsViewController.swift */,
+				1A8FBE451FF84BB200389464 /* SettingsApiKeyViewController.storyboard */,
+				1A8FBE461FF84BB200389464 /* SettingsApiKeyViewController.swift */,
+				1A350D052038F6E9002DDE02 /* SettingsApiKeyViewModel.swift */,
+				1A25DE862035185000F1C4B8 /* SettingsLoginViewController.storyboard */,
+				1A25DE8820351B8F00F1C4B8 /* SettingsLoginViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -359,10 +374,11 @@
 				1A8FBE491FF84BB200389464 /* SettingsListViewController.storyboard in Resources */,
 				1A8FBE651FF84BFE00389464 /* WishlistViewController.storyboard in Resources */,
 				1AF854BD1FF832AE00271B52 /* LaunchScreen.storyboard in Resources */,
-				1A8FBE4B1FF84BB200389464 /* SettingsViewController.storyboard in Resources */,
+				1A8FBE4B1FF84BB200389464 /* SettingsApiKeyViewController.storyboard in Resources */,
 				1A8FBE471FF84BB200389464 /* SettingsAboutViewController.storyboard in Resources */,
 				1A8FBE661FF84BFE00389464 /* MovieDetailViewController.storyboard in Resources */,
 				1AF854BA1FF832AE00271B52 /* Assets.xcassets in Resources */,
+				1A25DE872035185000F1C4B8 /* SettingsLoginViewController.storyboard in Resources */,
 				1A8FBE5F1FF84BFE00389464 /* CastDetailViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,7 +432,6 @@
 				1A8FBE481FF84BB200389464 /* SettingsListViewController.swift in Sources */,
 				1A8FBE5E1FF84BFE00389464 /* WishlistViewModel.swift in Sources */,
 				1A8FBE631FF84BFE00389464 /* CastDetailViewModel.swift in Sources */,
-				1A8FBE291FF8480C00389464 /* MainFlow.swift in Sources */,
 				1A8FBE611FF84BFE00389464 /* MovieDetailViewController.swift in Sources */,
 				1A8FBE3D1FF84B7E00389464 /* Cast.swift in Sources */,
 				1A8FBE621FF84BFE00389464 /* MovieDetailViewModel.swift in Sources */,
@@ -426,14 +441,19 @@
 				1A8FBE341FF84B5300389464 /* CastsHelper.swift in Sources */,
 				1A25DE81202D3CFE00F1C4B8 /* AppFlow.swift in Sources */,
 				1A8FBE351FF84B5300389464 /* MoviesHelper.swift in Sources */,
+				1A25DE8B20351E1D00F1C4B8 /* DashboardFlow.swift in Sources */,
 				1A8FBE281FF8480C00389464 /* SettingsFlow.swift in Sources */,
+				1A25DE8920351B8F00F1C4B8 /* SettingsLoginViewController.swift in Sources */,
 				1A8FBE641FF84BFE00389464 /* CastViewModel.swift in Sources */,
 				1A8FBE271FF8480C00389464 /* DemoStep.swift in Sources */,
 				1A8FBE601FF84BFE00389464 /* MovieViewModel.swift in Sources */,
 				1A8FBE361FF84B5300389464 /* MoviesRepository.swift in Sources */,
 				1A8FBE681FF84BFE00389464 /* WishlistViewController.swift in Sources */,
 				1A8FBE3C1FF84B7E00389464 /* Movie.swift in Sources */,
-				1A8FBE4C1FF84BB200389464 /* SettingsViewController.swift in Sources */,
+				1A25DE85203129F200F1C4B8 /* OnboardingFlow.swift in Sources */,
+				1A8FBE4C1FF84BB200389464 /* SettingsApiKeyViewController.swift in Sources */,
+				1A350D062038F6E9002DDE02 /* SettingsApiKeyViewModel.swift in Sources */,
+				1A25DE83202FB62500F1C4B8 /* PreferencesService.swift in Sources */,
 				1A8FBE371FF84B5300389464 /* CastsRepository.swift in Sources */,
 				1A8FBE261FF8480C00389464 /* WishlistFlow.swift in Sources */,
 				1A8FBE2D1FF84B2500389464 /* ViewModelBased.swift in Sources */,
