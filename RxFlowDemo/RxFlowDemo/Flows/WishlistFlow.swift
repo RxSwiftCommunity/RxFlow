@@ -69,7 +69,7 @@ class WishlistFlow: Flow {
     }
 
     private func navigateToCastDetailScreen (with castId: Int) -> NextFlowItems {
-        let viewController = CastDetailViewController.instantiate(withViewModel: CastDetailViewModel(withCastId: castId), andServices: self.service)
+        let viewController = CastDetailViewController().instantiate(withViewModel: CastDetailViewModel(withCastId: castId), andServices: self.service)
         viewController.title = viewController.viewModel.name
         self.rootViewController.pushViewController(viewController, animated: true)
         return NextFlowItems.none

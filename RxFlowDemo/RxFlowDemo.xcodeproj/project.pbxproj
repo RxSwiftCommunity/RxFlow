@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1881945E203430E70080731A /* CastDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1881945D203430E60080731A /* CastDetailViewController.xib */; };
 		1A25DE81202D3CFE00F1C4B8 /* AppFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A25DE80202D3CFE00F1C4B8 /* AppFlow.swift */; };
 		1A8FBE101FF845EE00389464 /* Reusable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A8FBE0D1FF845EE00389464 /* Reusable.framework */; };
 		1A8FBE111FF845EE00389464 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A8FBE0E1FF845EE00389464 /* RxSwift.framework */; };
@@ -68,6 +69,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1881945D203430E60080731A /* CastDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CastDetailViewController.xib; sourceTree = "<group>"; };
 		1A25DE80202D3CFE00F1C4B8 /* AppFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlow.swift; sourceTree = "<group>"; };
 		1A8FBE0D1FF845EE00389464 /* Reusable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reusable.framework; path = Carthage/Build/iOS/Reusable.framework; sourceTree = "<group>"; };
 		1A8FBE0E1FF845EE00389464 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				1A8FBE4F1FF84BD000389464 /* Cells */,
+				1881945D203430E60080731A /* CastDetailViewController.xib */,
 				1A8FBE541FF84BFE00389464 /* CastDetailViewController.storyboard */,
 				1A8FBE5C1FF84BFE00389464 /* CastDetailViewController.swift */,
 				1A8FBE581FF84BFE00389464 /* CastDetailViewModel.swift */,
@@ -359,6 +362,7 @@
 				1A8FBE491FF84BB200389464 /* SettingsListViewController.storyboard in Resources */,
 				1A8FBE651FF84BFE00389464 /* WishlistViewController.storyboard in Resources */,
 				1AF854BD1FF832AE00271B52 /* LaunchScreen.storyboard in Resources */,
+				1881945E203430E70080731A /* CastDetailViewController.xib in Resources */,
 				1A8FBE4B1FF84BB200389464 /* SettingsViewController.storyboard in Resources */,
 				1A8FBE471FF84BB200389464 /* SettingsAboutViewController.storyboard in Resources */,
 				1A8FBE661FF84BFE00389464 /* MovieDetailViewController.storyboard in Resources */,
