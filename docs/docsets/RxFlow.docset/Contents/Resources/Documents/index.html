@@ -137,6 +137,14 @@
 <li><a href="https://twittemb.github.io/swift/coordinator/reactive/rxflow/reactive%20programming/2017/12/09/rxflow-part-2-in-practice/">RxFlow Part 2: In Practice</a></li>
 <li><a href="https://twittemb.github.io/swift/coordinator/reactive/rxswift/reactive%20programming/rxflow/2017/12/22/rxflow-part-3-tips-and-tricks/">RxFlow Part 3: Tips and Tricks</a></li>
 </ul>
+<h1 id='migrating-from-v1-0-x-to-v1-1-0' class='heading'>Migrating from v1.0.x to v1.1.0</h1>
+
+<p>There are two major changes that must be taken care of if you want to use the v1.1 when coming from an older version:</p>
+
+<ul>
+<li><strong>Flowable</strong> has been replaced by <strong>NextFlowItem</strong>. It&rsquo;s exactly the same idea between those 2 names, but <q>Flowable</q> was too much related to a Protocol naming convention. The <strong>Flow.navigate(to:)</strong> function has to return a <strong>NextFlowItems</strong>, which is an enum that represents different possibilities of NextFlowItem (multiple, one, none, &hellip;). Take a look at the code snippets below to see some examples.</li>
+<li>In order to improve RxFlow consistency, it seemed obvious that a Flow that presents a UIViewController also <strong>HAS</strong> to dismiss it. In previous versions, a child Flow was dismissed by itself and not by the Flow that presented it. In the Demo Application you will find an example with the WishlistFlow dismissing the SettingsFlow for the <strong>settingsDone</strong> Step.</li>
+</ul>
 <h1 id='navigation-concerns' class='heading'>Navigation concerns</h1>
 
 <p>Regarding navigation within an iOS application, two choices are available:</p>
@@ -239,7 +247,7 @@
 <li>implement the <strong>navigate(to:)</strong> function to transform a <strong>Step</strong> into a navigation action</li>
 </ul>
 
-<p>The <strong>navigate(to:)</strong> function returns an array of <strong>NextFlowItems</strong>. This is how the next navigation actions will be produced (the <strong>Stepper</strong> defined in a <strong>NextFlowItem</strong> will emit the next <strong>Steps</strong>)</p>
+<p>The <strong>navigate(to:)</strong> function returns a <strong>NextFlowItems</strong>. This is how the next navigation actions will be produced (the <strong>Stepper</strong> defined in a <strong>NextFlowItem</strong> will emit the next <strong>Steps</strong>)</p>
 <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">WatchedFlow</span><span class="p">:</span> <span class="kt">Flow</span> <span class="p">{</span>
 
     <span class="k">var</span> <span class="nv">root</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
@@ -253,9 +261,9 @@
         <span class="k">self</span><span class="o">.</span><span class="n">service</span> <span class="o">=</span> <span class="n">service</span>
     <span class="p">}</span>
 
-    <span class="kd">func</span> <span class="nf">navigate</span><span class="p">(</span><span class="n">to</span> <span class="nv">step</span><span class="p">:</span> <span class="kt">Step</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">NextFlowItem</span><span class="p">]</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">navigate</span><span class="p">(</span><span class="n">to</span> <span class="nv">step</span><span class="p">:</span> <span class="kt">Step</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NextFlowItems</span> <span class="p">{</span>
 
-        <span class="k">guard</span> <span class="k">let</span> <span class="nv">step</span> <span class="o">=</span> <span class="n">step</span> <span class="k">as?</span> <span class="kt">DemoStep</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kt">NextFlowItem</span><span class="o">.</span><span class="n">noNavigation</span> <span class="p">}</span>
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">step</span> <span class="o">=</span> <span class="n">step</span> <span class="k">as?</span> <span class="kt">DemoStep</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kt">NextFlowItems</span><span class="o">.</span><span class="n">stepIsNotHandled</span> <span class="p">}</span>
 
         <span class="k">switch</span> <span class="n">step</span> <span class="p">{</span>
 
@@ -266,32 +274,32 @@
         <span class="k">case</span> <span class="o">.</span><span class="nf">castPicked</span><span class="p">(</span><span class="k">let</span> <span class="nv">castId</span><span class="p">):</span>
             <span class="k">return</span> <span class="nf">navigateToCastDetailScreen</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">castId</span><span class="p">)</span>
         <span class="k">default</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kt">NextFlowItem</span><span class="o">.</span><span class="n">noNavigation</span>
+            <span class="k">return</span> <span class="kt">NextFlowItems</span><span class="o">.</span><span class="n">stepIsNotHandled</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
-    <span class="kd">private</span> <span class="kd">func</span> <span class="nf">navigateToMovieListScreen</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">NextFlowItem</span><span class="p">]</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="kd">func</span> <span class="nf">navigateToMovieListScreen</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">NextFlowItems</span> <span class="p">{</span>
         <span class="k">let</span> <span class="nv">viewModel</span> <span class="o">=</span> <span class="kt">WatchedViewModel</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">service</span><span class="p">)</span>
         <span class="k">let</span> <span class="nv">viewController</span> <span class="o">=</span> <span class="kt">WatchedViewController</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">viewModel</span><span class="p">)</span>
         <span class="n">viewController</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s">"Watched"</span>
         <span class="k">self</span><span class="o">.</span><span class="n">rootViewController</span><span class="o">.</span><span class="nf">pushViewController</span><span class="p">(</span><span class="n">viewController</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="kt">NextFlowItem</span><span class="p">(</span><span class="nv">nextPresentable</span><span class="p">:</span> <span class="n">viewController</span><span class="p">,</span> <span class="nv">nextStepper</span><span class="p">:</span> <span class="n">viewModel</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="kt">NextFlowItems</span><span class="o">.</span><span class="nf">one</span><span class="p">(</span><span class="nv">flowItem</span><span class="p">:</span> <span class="kt">NextFlowItem</span><span class="p">(</span><span class="nv">nextPresentable</span><span class="p">:</span> <span class="n">viewController</span><span class="p">,</span> <span class="nv">nextStepper</span><span class="p">:</span> <span class="n">viewModel</span><span class="p">))</span>
     <span class="p">}</span>
 
-    <span class="kd">private</span> <span class="kd">func</span> <span class="nf">navigateToMovieDetailScreen</span> <span class="p">(</span><span class="n">with</span> <span class="nv">movieId</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">NextFlowItem</span><span class="p">]</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="kd">func</span> <span class="nf">navigateToMovieDetailScreen</span> <span class="p">(</span><span class="n">with</span> <span class="nv">movieId</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NextFlowItems</span> <span class="p">{</span>
         <span class="k">let</span> <span class="nv">viewModel</span> <span class="o">=</span> <span class="kt">MovieDetailViewModel</span><span class="p">(</span><span class="nv">withService</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">service</span><span class="p">,</span> <span class="nv">andMovieId</span><span class="p">:</span> <span class="n">movieId</span><span class="p">)</span>
         <span class="k">let</span> <span class="nv">viewController</span> <span class="o">=</span> <span class="kt">MovieDetailViewController</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">viewModel</span><span class="p">)</span>
         <span class="n">viewController</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">viewModel</span><span class="o">.</span><span class="n">title</span>
         <span class="k">self</span><span class="o">.</span><span class="n">rootViewController</span><span class="o">.</span><span class="nf">pushViewController</span><span class="p">(</span><span class="n">viewController</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="kt">NextFlowItem</span><span class="p">(</span><span class="nv">nextPresentable</span><span class="p">:</span> <span class="n">viewController</span><span class="p">,</span> <span class="nv">nextStepper</span><span class="p">:</span> <span class="n">viewModel</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="kt">NextFlowItems</span><span class="o">.</span><span class="nf">one</span><span class="p">(</span><span class="nv">flowItem</span><span class="p">:</span> <span class="kt">NextFlowItem</span><span class="p">(</span><span class="nv">nextPresentable</span><span class="p">:</span> <span class="n">viewController</span><span class="p">,</span> <span class="nv">nextStepper</span><span class="p">:</span> <span class="n">viewModel</span><span class="p">))</span>
     <span class="p">}</span>
 
-    <span class="kd">private</span> <span class="kd">func</span> <span class="nf">navigateToCastDetailScreen</span> <span class="p">(</span><span class="n">with</span> <span class="nv">castId</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">NextFlowItem</span><span class="p">]</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="kd">func</span> <span class="nf">navigateToCastDetailScreen</span> <span class="p">(</span><span class="n">with</span> <span class="nv">castId</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NextFlowItems</span> <span class="p">{</span>
         <span class="k">let</span> <span class="nv">viewModel</span> <span class="o">=</span> <span class="kt">CastDetailViewModel</span><span class="p">(</span><span class="nv">withService</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">service</span><span class="p">,</span> <span class="nv">andCastId</span><span class="p">:</span> <span class="n">castId</span><span class="p">)</span>
         <span class="k">let</span> <span class="nv">viewController</span> <span class="o">=</span> <span class="kt">CastDetailViewController</span><span class="o">.</span><span class="nf">instantiate</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">viewModel</span><span class="p">)</span>
         <span class="n">viewController</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">viewModel</span><span class="o">.</span><span class="n">name</span>
         <span class="k">self</span><span class="o">.</span><span class="n">rootViewController</span><span class="o">.</span><span class="nf">pushViewController</span><span class="p">(</span><span class="n">viewController</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kt">NextFlowItem</span><span class="o">.</span><span class="n">noNavigation</span>
+        <span class="k">return</span> <span class="kt">NextFlowItems</span><span class="o">.</span><span class="k">none</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
@@ -323,13 +331,13 @@ For simple cases (for instance when we only need to bootstrap a <strong>Flow</st
 <p>Of course, it is the aim of a Coordinator. As a Flow is a Presentable, a Flow can launch one other Flow or even several other Flows.</p>
 
 <p>For instance, from the WishlistFlow, we launch the SettingsFlow in a popup.</p>
-<pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">func</span> <span class="nf">navigateToSettings</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">NextFlowItem</span><span class="p">]</span> <span class="p">{</span>     
+<pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">func</span> <span class="nf">navigateToSettings</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">NextFlowItems</span> <span class="p">{</span>     
     <span class="k">let</span> <span class="nv">settingsStepper</span> <span class="o">=</span> <span class="kt">SettingsStepper</span><span class="p">()</span>
     <span class="k">let</span> <span class="nv">settingsFlow</span> <span class="o">=</span> <span class="kt">SettingsFlow</span><span class="p">(</span><span class="nv">withService</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">service</span><span class="p">,</span> <span class="nv">andStepper</span><span class="p">:</span> <span class="n">settingsStepper</span><span class="p">)</span>
     <span class="kt">Flows</span><span class="o">.</span><span class="nf">whenReady</span><span class="p">(</span><span class="nv">flow</span><span class="p">:</span> <span class="n">settingsFlow</span><span class="p">,</span> <span class="nv">block</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="k">unowned</span> <span class="k">self</span><span class="p">]</span> <span class="p">(</span><span class="nv">root</span><span class="p">:</span> <span class="kt">UISplitViewController</span><span class="p">)</span> <span class="k">in</span>
         <span class="k">self</span><span class="o">.</span><span class="n">rootViewController</span><span class="o">.</span><span class="nf">present</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
     <span class="p">})</span>
-    <span class="k">return</span> <span class="p">[</span><span class="kt">NextFlowItem</span><span class="p">(</span><span class="nv">nextPresentable</span><span class="p">:</span> <span class="n">settingsFlow</span><span class="p">,</span> <span class="nv">nextStepper</span><span class="p">:</span> <span class="n">settingsStepper</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="kt">NextFlowItems</span><span class="o">.</span><span class="nf">one</span><span class="p">(</span><span class="nv">flowItem</span><span class="p">:</span> <span class="kt">NextFlowItem</span><span class="p">(</span><span class="nv">nextPresentable</span><span class="p">:</span> <span class="n">settingsFlow</span><span class="p">,</span> <span class="nv">nextStepper</span><span class="p">:</span> <span class="n">settingsStepper</span><span class="p">))</span>
 <span class="p">}</span>
 </code></pre>
 
@@ -401,8 +409,8 @@ For simple cases (for instance when we only need to bootstrap a <strong>Flow</st
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-01-29)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-02-21)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

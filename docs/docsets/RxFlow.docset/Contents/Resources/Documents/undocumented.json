@@ -1,12 +1,6 @@
 {
   "warnings": [
-    {
-      "file": "/Users/thibaultwittemberg/Development/RxFlow/RxFlow/Stepper.swift",
-      "line": 35,
-      "symbol": "CompositeStepper",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    }
+
   ],
   "source_directory": "/Users/thibaultwittemberg/Development/RxFlow"
 }
