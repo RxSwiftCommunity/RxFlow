@@ -171,8 +171,8 @@ class FlowCoordinator: HasDisposeBag {
 final public class Coordinator: HasDisposeBag {
 
     private var flowCoordinators = [FlowCoordinator]()
-    internal let willNavigateSubject = PublishSubject<(String, String)>()
-    internal let didNavigateSubject = PublishSubject<(String, String)>()
+    internal let willNavigateSubject = PublishSubject<(Flow, Step)>()
+    internal let didNavigateSubject = PublishSubject<(Flow, Step)>()
 
     /// Initialize the Coordinator
     public init() {
@@ -227,13 +227,13 @@ extension Coordinator: FlowCoordinatorDelegate {
 
     func willNavigate(to flow: Flow, with step: Step) {
         if !(step is NoStep) {
-            self.willNavigateSubject.onNext(("\(flow)", "\(step)"))
+            self.willNavigateSubject.onNext((flow, step))
         }
     }
 
     func didNavigate(to flow: Flow, with step: Step) {
         if !(step is NoStep) {
-            self.didNavigateSubject.onNext(("\(flow)", "\(step)"))
+            self.didNavigateSubject.onNext((flow, step))
         }
     }
 }
@@ -251,12 +251,12 @@ extension Coordinator {
 extension Reactive where Base: Coordinator {
 
     /// Rx Observable triggered before the Coordinator navigates a Flow/Step
-    public var willNavigate: Observable<(String, String)> {
+    public var willNavigate: Observable<(Flow, Step)> {
         return self.base.willNavigateSubject.asObservable()
     }
 
     /// Rx Observable triggered after the Coordinator navigates a Flow/Step
-    public var didNavigate: Observable<(String, String)> {
+    public var didNavigate: Observable<(Flow, Step)> {
         return self.base.didNavigateSubject.asObservable()
     }
 }
