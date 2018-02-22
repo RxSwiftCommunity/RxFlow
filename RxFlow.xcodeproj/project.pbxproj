@@ -190,7 +190,6 @@
 			buildConfigurationList = 1AF854A01FF8328D00271B52 /* Build configuration list for PBXNativeTarget "RxFlow" */;
 			buildPhases = (
 				1A8FBDE31FF8332B00389464 /* ⚙ Swiftlint Code Analysis */,
-				1A8FBDE41FF8334100389464 /* ⚙Copy Carthage Frameworks */,
 				1AF854871FF8328D00271B52 /* Sources */,
 				1AF854881FF8328D00271B52 /* Frameworks */,
 				1AF854891FF8328D00271B52 /* Headers */,
@@ -275,24 +274,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
-		};
-		1A8FBDE41FF8334100389464 /* ⚙Copy Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
-			);
-			name = "⚙Copy Carthage Frameworks";
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
