@@ -17,6 +17,8 @@ You will find a very detail explanation of the whole project on my blog:
 - [RxFlow Part 2: In Practice](https://twittemb.github.io/swift/coordinator/reactive/rxflow/reactive%20programming/2017/12/09/rxflow-part-2-in-practice/)
 - [RxFlow Part 3: Tips and Tricks](https://twittemb.github.io/swift/coordinator/reactive/rxswift/reactive%20programming/rxflow/2017/12/22/rxflow-part-3-tips-and-tricks/)
 
+The Jazzy documentation can be seen here as well: [Documentation](http://community.rxswift.org/RxFlow/)
+
 # Migrating from v1.0.x to v1.1.0
 There are two major changes that must be taken care of if you want to use the v1.1 when coming from an older version:
 - **Flowable** has been replaced by **NextFlowItem**. It's exactly the same idea between those 2 names, but "Flowable" was too much related to a Protocol naming convention. The **Flow.navigate(to:)** function has to return a **NextFlowItems**, which is an enum that represents different possibilities of NextFlowItem (multiple, one, none, ...). Take a look at the code snippets below to see some examples.
