@@ -264,7 +264,8 @@ As a bonus, **Coordinator** offers a Rx extension that allows you to track the n
 
 ## Demo Application
 A demo application is provided to illustrate the core mechanisms. Pretty much every kind of navigation is addressed. The app consists of:
-- a MainFlow that represents the main navigation section (a settings screen and then a dashboard composed of two screens in a tab bar controller)
+- an AppFlow that represents the main navigation. This Flow will handle the OnboardingFlow and the DashboardFlow
+- a DashboardFlow that handles the Tabbar for the WishlistFlow and the WatchedFlow
 - a WishlistFlow that represents a navigation stack of movies that you want to watch
 - a WatchedFlow that represents a navigation stack of movies that you've already seen
 - a SettingsFlow that represents the user's preferences in a master/detail presentation
