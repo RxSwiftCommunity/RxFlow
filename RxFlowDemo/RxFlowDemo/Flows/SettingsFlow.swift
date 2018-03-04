@@ -32,8 +32,12 @@ class SettingsFlow: Flow {
             return navigateToSettingsScreen()
         case .login:
             return navigateToLoginScreen()
+        case .loginIsComplete:
+            return popToMasterViewController()
         case .apiKey:
             return navigateToApiKeyScreen()
+        case .apiKeyIsComplete:
+            return popToMasterViewController()
         case .about:
             return navigateToAboutScreen()
         case .settingsIsComplete:
@@ -41,6 +45,13 @@ class SettingsFlow: Flow {
         default:
             return NextFlowItems.none
         }
+    }
+
+    private func popToMasterViewController () -> NextFlowItems {
+        if let navigationController = self.rootViewController.viewControllers[0] as? UINavigationController {
+            navigationController.popToRootViewController(animated: true)
+        }
+        return NextFlowItems.none
     }
 
     private func navigateToSettingsScreen () -> NextFlowItems {

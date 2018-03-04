@@ -18,7 +18,10 @@ protocol FlowCoordinatorDelegate: class {
     ///   - nextFlowItem: the NextFlowItem that has triggered the navigation to a new child Flow
     func navigateToAnotherFlow (withParentFlowCoordinator parentFlowCoordinator: FlowCoordinator, withNextFlowItem nextFlowItem: NextFlowItem)
 
-    func endFlowCoordinator (witIdentifier identifier: String)
+    /// Used to tell the delegate the Flow has ended and it must free the FlowCoordinator
+    ///
+    /// - Parameter identifier: the FlowCoordinator identifier (used to reference the FlowCoordinator in the Coordinator)
+    func endFlowCoordinator (withIdentifier identifier: String)
 
     /// Used to trigger the delegate before the Flow/Step is handled
     ///
@@ -113,10 +116,10 @@ class FlowCoordinator: HasDisposeBag {
                 case .end(let stepToSendToParentFlow):
                     // if the navigation gives a "end" NextFlowItems, the FlowCoordinator
                     // triggers its parent FlowCoordinator with the specified step. It will allow the parent
-                    // to dismiss the child Flow Root for instance (because this is tha parent who had the responsability
+                    // to dismiss the child Flow Root for instance (because this is the parent who had the responsability
                     // to present the child Flow Root as well)
                     self.dismissFlow.onNext(Void())
-                    self.delegate.endFlowCoordinator(witIdentifier: self.identifier)
+                    self.delegate.endFlowCoordinator(withIdentifier: self.identifier)
                     if  let parentFlowCoordinator = self.parentFlowCoordinator {
                         let stepContextForParentFlow = StepContext(with: stepToSendToParentFlow)
                         stepContextForParentFlow.fromChildFlow = self.flow
@@ -176,7 +179,7 @@ class FlowCoordinator: HasDisposeBag {
             }).disposed(by: flow.disposeBag)
 
         self.flow.rxDismissed.subscribe(onSuccess: { [unowned self] in
-            self.delegate.endFlowCoordinator(witIdentifier: self.identifier)
+            self.delegate.endFlowCoordinator(withIdentifier: self.identifier)
         }).disposed(by: flow.disposeBag)
 
     }
@@ -240,7 +243,7 @@ extension Coordinator: FlowCoordinatorDelegate {
         }
     }
 
-    func endFlowCoordinator(witIdentifier identifier: String) {
+    func endFlowCoordinator(withIdentifier identifier: String) {
         _ = self.synchronized { [unowned self] in
             self.flowCoordinators.removeValue(forKey: identifier)
         }
