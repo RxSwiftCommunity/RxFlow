@@ -134,7 +134,7 @@ class WatchedFlow: Flow {
 
     func navigate(to step: Step) -> NextFlowItems {
 
-        guard let step = step as? DemoStep else { return NextFlowItems.stepIsNotHandled }
+        guard let step = step as? DemoStep else { return NextFlowItems.none }
 
         switch step {
 
@@ -145,7 +145,7 @@ class WatchedFlow: Flow {
         case .castPicked(let castId):
             return navigateToCastDetailScreen(with: castId)
         default:
-            return NextFlowItems.stepIsNotHandled
+            return NextFlowItems.none
     	}
     }
 
@@ -231,8 +231,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var coordinator = Coordinator()
     let movieService = MoviesService()
-    lazy var mainFlow = {
-    	return MainFlow(with: self.movieService)
+    lazy var appFlow = {
+    	return AppFlow(with: self.movieService)
     }()
 
     func application(_ application: UIApplication,
@@ -246,14 +246,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }).disposed(by: self.disposeBag)
 
         // when the MainFlow is ready to be displayed, we assign its root the the Window
-        Flows.whenReady(flow: mainFlow, block: { [unowned window] (flowRoot) in
+        Flows.whenReady(flow: appFlow, block: { [unowned window] (flowRoot) in
             window.rootViewController = flowRoot
         })
 
         // The navigation begins with the MainFlow at the apiKey Step
         // We could also have a specific Stepper that could decide if
         // the apiKey should be the fist step or not
-        coordinator.coordinate(flow: mainFlow, withStepper: OneStepper(withSingleStep: DemoStep.apiKey))
+        coordinator.coordinate(flow: appFlow, withStepper: OneStepper(withSingleStep: DemoStep.apiKey))
 
         return true
     }
