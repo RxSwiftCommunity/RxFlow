@@ -6,7 +6,7 @@
 //  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
-public final class StepContext {
+final class StepContext {
 
     public var fromChildFlow: Flow?
     weak var withinFlow: Flow?
