@@ -50,7 +50,7 @@ final public class CompositeStepper: Stepper {
 /// a Stepper that triggers NoStep.
 final class NoneStepper: OneStepper {
     convenience init() {
-        self.init(withSingleStep: NoStep())
+        self.init(withSingleStep: NoneStep())
     }
 }
 
@@ -62,7 +62,7 @@ public extension Stepper {
             if let subject = objc_getAssociatedObject(self, &subjectContext) as? BehaviorRelay<Step> {
                 return subject
             }
-            let newSubject = BehaviorRelay<Step>(value: NoStep())
+            let newSubject = BehaviorRelay<Step>(value: NoneStep())
             objc_setAssociatedObject(self, &subjectContext, newSubject, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return newSubject
         }

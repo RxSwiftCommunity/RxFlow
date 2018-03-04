@@ -23,8 +23,10 @@ class SettingsListViewController: UITableViewController, StoryboardBased, Steppe
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            self.step.accept(DemoStep.apiKey)
+            self.step.accept(DemoStep.login)
         case 1:
+            self.step.accept(DemoStep.apiKey)
+        case 2:
             self.step.accept(DemoStep.about)
         default:
             return

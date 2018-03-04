@@ -1,6 +1,19 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/thibaultwittemberg/Development/RxFlow/RxFlow/Step.swift",
+      "line": 9,
+      "symbol": "StepContext",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/thibaultwittemberg/Development/RxFlow/RxFlow/Step.swift",
+      "line": 11,
+      "symbol": "StepContext.fromChildFlow",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Users/thibaultwittemberg/Development/RxFlow"
 }

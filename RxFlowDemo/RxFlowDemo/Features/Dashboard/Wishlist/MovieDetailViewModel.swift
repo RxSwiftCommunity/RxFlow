@@ -10,11 +10,13 @@ import RxFlow
 
 class MovieDetailViewModel: ServicesViewModel {
 
-    var services: MoviesService! {
-        didSet {
-            let movie = self.services.movie(forId: movieId)
+    typealias Services = HasMoviesService
 
-            self.casts = services.casts(for: movie).map({ (cast) -> CastViewModel in
+    var services: Services! {
+        didSet {
+            let movie = self.services.moviesService.movie(forId: movieId)
+
+            self.casts = self.services.moviesService.casts(for: movie).map({ (cast) -> CastViewModel in
                 return CastViewModel (id: cast.id, name: cast.name, image: cast.image)
             })
 

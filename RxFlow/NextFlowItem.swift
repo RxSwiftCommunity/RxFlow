@@ -38,15 +38,15 @@ public struct NextFlowItem {
 ///
 /// - multiple: a Flow will trigger several NextFlowItem at the same time for the same Step
 /// - one: a Flow will trigger only one NextFlowItem for a Step
+/// - end: a Flow will trigger a special NextFlowItem that represents the dismissal of this Flow
 /// - none: no further navigation will be triggered for a Step
-/// - stepNotHandled: the Step matches no NextFlowItem at all
 public enum NextFlowItems {
     /// a Flow will trigger several NextFlowItem at the same time for the same Step
     case multiple (flowItems: [NextFlowItem])
     /// a Flow will trigger only one NextFlowItem for a Step
     case one (flowItem: NextFlowItem)
+    /// a Flow will trigger a special NextFlowItem that represents the dismissal of this Flow
+    case end (withStepForParentFlow: Step)
     /// no further navigation will be triggered for a Step
     case none
-    /// the Step matches no NextFlowItem at all
-    case stepNotHandled
 }

@@ -102,7 +102,7 @@
             <h1>NextFlowItems</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">NextFlowItems</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">NextFlowItems</span></code></pre>
 
                 </div>
               </div>
@@ -112,8 +112,8 @@ navigation actions inside a Flow</p>
 <ul>
 <li>multiple: a Flow will trigger several NextFlowItem at the same time for the same Step</li>
 <li>one: a Flow will trigger only one NextFlowItem for a Step</li>
+<li>end: a Flow will trigger a special NextFlowItem that represents the dismissal of this Flow</li>
 <li>none: no further navigation will be triggered for a Step</li>
-<li>stepNotHandled: the Step matches no NextFlowItem at all</li>
 </ul>
 
           </section>
@@ -140,7 +140,7 @@ navigation actions inside a Flow</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">multiple</span> <span class="p">(</span><span class="nv">flowItems</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/NextFlowItem.html">NextFlowItem</a></span><span class="p">])</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">multiple</span> <span class="p">(</span><span class="nv">flowItems</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/NextFlowItem.html">NextFlowItem</a></span><span class="p">])</span></code></pre>
 
                         </div>
                       </div>
@@ -171,7 +171,38 @@ navigation actions inside a Flow</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">one</span> <span class="p">(</span><span class="nv">flowItem</span><span class="p">:</span> <span class="kt"><a href="../Structs/NextFlowItem.html">NextFlowItem</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">one</span> <span class="p">(</span><span class="nv">flowItem</span><span class="p">:</span> <span class="kt"><a href="../Structs/NextFlowItem.html">NextFlowItem</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow04NextB5ItemsO3endAcA4Step_p04withf9ForParentB0_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/end" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow04NextB5ItemsO3endAcA4Step_p04withf9ForParentB0_tcACmF">end</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>a Flow will trigger a special NextFlowItem that represents the dismissal of this Flow</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">end</span> <span class="p">(</span><span class="nv">withStepForParentFlow</span><span class="p">:</span> <span class="kt"><a href="../Protocols.html#/s:6RxFlow4StepP">Step</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -202,38 +233,7 @@ navigation actions inside a Flow</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="k">none</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6RxFlow04NextB5ItemsO14stepNotHandledA2CmF"></a>
-                    <a name="//apple_ref/swift/Element/stepNotHandled" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6RxFlow04NextB5ItemsO14stepNotHandledA2CmF">stepNotHandled</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>the Step matches no NextFlowItem at all</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">stepNotHandled</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="k">none</span></code></pre>
 
                         </div>
                       </div>
@@ -245,8 +245,8 @@ navigation actions inside a Flow</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-02-21)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-03-04)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

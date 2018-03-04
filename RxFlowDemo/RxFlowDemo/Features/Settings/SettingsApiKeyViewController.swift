@@ -12,7 +12,9 @@ import RxFlow
 import RxSwift
 import RxCocoa
 
-class SettingsViewController: UIViewController, StoryboardBased, Stepper {
+class SettingsApiKeyViewController: UIViewController, StoryboardBased, ViewModelBased {
+
+    var viewModel: SettingsApiKeyViewModel!
 
     @IBOutlet private weak var proceedButton: UIButton!
 
@@ -21,7 +23,7 @@ class SettingsViewController: UIViewController, StoryboardBased, Stepper {
 
         // Do any additional setup after loading the view.
         self.proceedButton.rx.tap.subscribe(onNext: { [unowned self] _ in
-            self.step.accept(DemoStep.apiKeyIsComplete)
+            self.viewModel.setApiKey()
         }).disposed(by: self.disposeBag)
 
     }

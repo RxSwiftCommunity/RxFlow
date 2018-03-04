@@ -134,7 +134,7 @@ class WatchedFlow: Flow {
 
     func navigate(to step: Step) -> NextFlowItems {
 
-        guard let step = step as? DemoStep else { return NextFlowItems.stepIsNotHandled }
+        guard let step = step as? DemoStep else { return NextFlowItems.none }
 
         switch step {
 
@@ -145,7 +145,7 @@ class WatchedFlow: Flow {
         case .castPicked(let castId):
             return navigateToCastDetailScreen(with: castId)
         default:
-            return NextFlowItems.stepIsNotHandled
+            return NextFlowItems.none
     	}
     }
 
@@ -231,8 +231,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var coordinator = Coordinator()
     let movieService = MoviesService()
-    lazy var mainFlow = {
-    	return MainFlow(with: self.movieService)
+    lazy var appFlow = {
+    	return AppFlow(with: self.movieService)
     }()
 
     func application(_ application: UIApplication,
@@ -246,14 +246,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }).disposed(by: self.disposeBag)
 
         // when the MainFlow is ready to be displayed, we assign its root the the Window
-        Flows.whenReady(flow: mainFlow, block: { [unowned window] (flowRoot) in
+        Flows.whenReady(flow: appFlow, block: { [unowned window] (flowRoot) in
             window.rootViewController = flowRoot
         })
 
         // The navigation begins with the MainFlow at the apiKey Step
         // We could also have a specific Stepper that could decide if
         // the apiKey should be the fist step or not
-        coordinator.coordinate(flow: mainFlow, withStepper: OneStepper(withSingleStep: DemoStep.apiKey))
+        coordinator.coordinate(flow: appFlow, withStepper: OneStepper(withSingleStep: DemoStep.apiKey))
 
         return true
     }
@@ -264,7 +264,8 @@ As a bonus, **Coordinator** offers a Rx extension that allows you to track the n
 
 ## Demo Application
 A demo application is provided to illustrate the core mechanisms. Pretty much every kind of navigation is addressed. The app consists of:
-- a MainFlow that represents the main navigation section (a settings screen and then a dashboard composed of two screens in a tab bar controller)
+- an AppFlow that represents the main navigation. This Flow will handle the OnboardingFlow and the DashboardFlow
+- a DashboardFlow that handles the Tabbar for the WishlistFlow and the WatchedFlow
 - a WishlistFlow that represents a navigation stack of movies that you want to watch
 - a WatchedFlow that represents a navigation stack of movies that you've already seen
 - a SettingsFlow that represents the user's preferences in a master/detail presentation

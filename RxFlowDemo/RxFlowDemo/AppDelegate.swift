@@ -17,8 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let disposeBag = DisposeBag()
     var window: UIWindow?
     var coordinator = Coordinator()
-    let movieService = MoviesService()
+    let moviesService = MoviesService()
+    let preferencesService = PreferencesService()
     var appFlow: AppFlow!
+    lazy var appServices = {
+        return AppServices(moviesService: self.moviesService, preferencesService: self.preferencesService)
+    }()
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -29,11 +33,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print ("did navigate to flow=\(flow) and step=\(step)")
         }).disposed(by: self.disposeBag)
 
-        self.appFlow = AppFlow(withWindow: window, andService: self.movieService)
+        self.appFlow = AppFlow(withWindow: window, andServices: self.appServices)
 
-        coordinator.coordinate(flow: self.appFlow, withStepper: OneStepper(withSingleStep: DemoStep.apiKey))
+        coordinator.coordinate(flow: self.appFlow, withStepper: AppStepper(withServices: self.appServices))
 
         return true
     }
 
+}
+
+struct AppServices: HasMoviesService, HasPreferencesService {
+    let moviesService: MoviesService
+    let preferencesService: PreferencesService
 }

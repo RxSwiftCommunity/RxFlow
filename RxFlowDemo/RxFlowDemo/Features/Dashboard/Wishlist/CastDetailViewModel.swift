@@ -8,9 +8,11 @@
 
 class CastDetailViewModel: ServicesViewModel {
 
-    var services: MoviesService! {
+    typealias Services = HasMoviesService
+
+    var services: Services! {
         didSet {
-            let cast = self.services.cast(forId: castId)
+            let cast = self.services.moviesService.cast(forId: castId)
             self.name = cast.name
             self.image = cast.image
             self.bio = cast.bio
