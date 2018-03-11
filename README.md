@@ -265,6 +265,7 @@ As a bonus, **Coordinator** offers a Rx extension that allows you to track the n
 ## Demo Application
 A demo application is provided to illustrate the core mechanisms. Pretty much every kind of navigation is addressed. The app consists of:
 - an AppFlow that represents the main navigation. This Flow will handle the OnboardingFlow and the DashboardFlow
+- an OnBoardingFlow that represents a 2 steps onboarding wizard in a UINavigationController. It will only be displayed the first time the app is used
 - a DashboardFlow that handles the Tabbar for the WishlistFlow and the WatchedFlow
 - a WishlistFlow that represents a navigation stack of movies that you want to watch
 - a WatchedFlow that represents a navigation stack of movies that you've already seen
