@@ -35,7 +35,10 @@ public extension Flows {
                 block(tabbedRoots)
             })
     }
-    
+}
+
+//MARK: - Returning [NextFlowItem]
+public extension Flows {
     /// Allow to be triggered only when Flows given as parameters are ready to be displayed.
     /// Once it is the case, the block is executed
     ///
@@ -49,13 +52,11 @@ public extension Flows {
         weak target: Target,
         block: @escaping (Target, [RootType]) -> Void) -> [NextFlowItem] {
         
-        let mappedblock: TabsReady<RootType> = { [weak target] (tabbedRoots: [(RootType, UITabBarItem)]) -> Void in
-            guard let indeedTarget = target else { print("⚠️ WARNING Target was nil, this is probably unwanted."); return }
+        Flows.whenReady(tabs: tabs) { [weak target] (tabbedRoots: [(RootType, UITabBarItem)]) -> Void in
+            guard let target = target else { print("⚠️ WARNING Target was nil, this is probably unwanted."); return }
             tabbedRoots.forEach { $0.0.tabBarItem = $0.1 }
-            block(indeedTarget, tabbedRoots.map { $0.0 })
+            block(target, tabbedRoots.map { $0.0 })
         }
-        
-        Flows.whenReady(tabs: tabs, block: mappedblock)
         
         // We can safely return the array of NextFlowItems since it is not dependent on the async call above
         return tabs.map { NextFlowItem(nextPresentable: $0.flow, nextStepper: $0.stepper) }
@@ -73,16 +74,14 @@ public extension Flows {
         createTabBarWith tabs: [TabWithStepperFlowContainer],
         weak target: Target,
         block: @escaping (Target, UITabBarController) -> Void) -> [NextFlowItem] {
-        
-        let mappedblock: TabsReady<UIViewController> = { [weak target] (tabbedRoots: [(UIViewController, UITabBarItem)]) -> Void in
-            guard let indeedTarget = target else { print("⚠️ WARNING Target was nil, this is probably unwanted."); return }
+
+        Flows.whenReady(tabs: tabs){ [weak target] (tabbedRoots: [(UIViewController, UITabBarItem)]) -> Void in
+            guard let target = target else { print("⚠️ WARNING Target was nil, this is probably unwanted."); return }
             tabbedRoots.forEach { $0.0.tabBarItem = $0.1 }
             let tabBarController = UITabBarController()
             tabBarController.setViewControllers(tabbedRoots.map { $0.0 }, animated: false)
-            block(indeedTarget, tabBarController)
+            block(target, tabBarController)
         }
-        
-        Flows.whenReady(tabs: tabs, block: mappedblock)
         
         // We can safely return the array of NextFlowItems since it is not dependent on the async call above
         return tabs.map { NextFlowItem(nextPresentable: $0.flow, nextStepper: $0.stepper) }
@@ -101,12 +100,10 @@ public extension Flows {
         with tabs: [TabWithStepperFlowContainer],
         animated: Bool = false) -> [NextFlowItem] {
         
-        let block: TabsReady<UIViewController> = { (tabbedRoots: [(UIViewController, UITabBarItem)]) -> Void in
+        Flows.whenReady(tabs: tabs) { (tabbedRoots: [(UIViewController, UITabBarItem)]) -> Void in
             tabbedRoots.forEach { $0.0.tabBarItem = $0.1 }
             tabBarController.setViewControllers(tabbedRoots.map { $0.0 }, animated: animated)
         }
-        
-        Flows.whenReady(tabs: tabs, block: block)
         
         // We can safely return the array of NextFlowItems since it is not dependent on the async call above
         return tabs.map { NextFlowItem(nextPresentable: $0.flow, nextStepper: $0.stepper) }
