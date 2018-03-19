@@ -47,9 +47,6 @@ public extension Flow {
 
 }
 
-
-public typealias StepperFactory = (Step) -> Stepper
-
 /// Utility functions to synchronize Flows readyness
 public class Flows {
     
@@ -114,67 +111,6 @@ public class Flows {
     }
     // swiftlint:enable function_parameter_count
 
-    /// Allow to be triggered only when Flows given as parameters are ready to be displayed.
-    /// Once it is the case, the block is executed
-    ///
-    /// - Parameters:
-    ///   - tabs: List of Tab that contains flows that should be observed
-    ///   - closure: closure to execute whenever the Flows are ready to use
-    public static func whenReady<RootType>(
-        tabs: [Tab],
-        closure: @escaping ([(RootType, String)]) -> Void)
-        where RootType: UIViewController
-    {
-        let flows = tabs.map { $0.flow }
-        guard case let roots = flows.flatMap({ $0.root as? RootType }), roots.count == tabs.count else {
-            fatalError ("Type mismatch, Flows roots types do not match the types awaited in the block")
-        }
-        
-        let titledRoots = zip(roots, tabs.map { $0.title }).map { ($0.0, $0.1) }
-
-        _ = Observable<Void>.zip(flows.map { $0.rxFlowReady.asObservable() }) { _ in return Void() }
-            .take(1)
-            .subscribe(onNext: { _ in
-                closure(titledRoots)
-            })
-    }
-    
-    /// Allow to be triggered only when Flows given as parameters are ready to be displayed.
-    /// Once it is the case, the block is executed
-    ///
-    /// - Parameters:
-    ///   - tabs: List of Tab that contains flows that should be observed
-    ///   - closure: closure to execute whenever the Flows are ready to use
-    /// - Returns: the NextFlowItems created from the tabs
-    public static func whenReady<RootType>(
-        oneStepperTabs tabs: [OneStepperTab],
-        stepperFactory: StepperFactory = OneStepper.init(withSingleStep:),
-        closure: @escaping ([(RootType, String)]) -> Void) -> [NextFlowItem]
-        where RootType: UIViewController
-    {
-        Flows.whenReady(tabs: tabs, closure: closure)
-
-        // We can safely return the array of NextFlowItems since it is not dependent on the async call above
-        return tabs.map { NextFlowItem(nextPresentable: $0.flow, nextStepper: stepperFactory($0.step)) }
-    }
-    
-    /// Allow to be triggered only when Flows given as parameters are ready to be displayed.
-    /// Once it is the case, the block is executed
-    ///
-    /// - Parameters:
-    ///   - oneStepperTabs: List of OneStepperTab that contains flows that should be observed
-    ///   - closure: closure to execute whenever the Flows are ready to use
-    /// - Returns: the NextFlowItems created from the tabs, as a "multiple" type
-    public static func whenReady<RootType>(
-        oneStepperTabs tabs: [OneStepperTab],
-        stepperFactory: StepperFactory = OneStepper.init(withSingleStep:),
-        closure: @escaping ([(RootType, String)]) -> Void) -> NextFlowItems
-        where RootType: UIViewController
-    {
-        return NextFlowItems.multiple(flowItems: Flows.whenReady(oneStepperTabs: tabs, stepperFactory: stepperFactory, closure: closure))
-    }
-    
-    
     /// Allow to be triggered only when Flows given as parameters are ready to be displayed.
     /// Once it is the case, the block is executed
     ///

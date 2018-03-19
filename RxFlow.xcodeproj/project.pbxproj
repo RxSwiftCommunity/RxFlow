@@ -25,7 +25,9 @@
 		1A8FBE781FF9783100389464 /* RxFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE771FF9783100389464 /* RxFlowTests.swift */; };
 		1A8FBE7A1FF9783100389464 /* RxFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF8548C1FF8328D00271B52 /* RxFlow.framework */; };
 		1AF8549D1FF8328D00271B52 /* RxFlow.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AF8548F1FF8328D00271B52 /* RxFlow.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4883FBD42059929200C9D5B6 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4883FBD32059929200C9D5B6 /* Tab.swift */; };
+		4810327E205FB0E000E4582A /* TabWithStepperFlowContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4810327D205FB0E000E4582A /* TabWithStepperFlowContainer.swift */; };
+		48103296205FF69A00E4582A /* Flow+Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48103295205FF69A00E4582A /* Flow+Tabs.swift */; };
+		4883FBD42059929200C9D5B6 /* TabFlowContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4883FBD32059929200C9D5B6 /* TabFlowContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +64,9 @@
 		1AF8548C1FF8328D00271B52 /* RxFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AF8548F1FF8328D00271B52 /* RxFlow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxFlow.h; sourceTree = "<group>"; };
 		1AF854901FF8328D00271B52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4883FBD32059929200C9D5B6 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		4810327D205FB0E000E4582A /* TabWithStepperFlowContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabWithStepperFlowContainer.swift; sourceTree = "<group>"; };
+		48103295205FF69A00E4582A /* Flow+Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Flow+Tabs.swift"; sourceTree = "<group>"; };
+		4883FBD32059929200C9D5B6 /* TabFlowContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabFlowContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,11 +151,13 @@
 				1A8FBDEF1FF8337700389464 /* HasDisposeBag.swift */,
 				1A8FBDEB1FF8337700389464 /* Coordinator.swift */,
 				1A8FBDF11FF8337800389464 /* Flow.swift */,
+				48103295205FF69A00E4582A /* Flow+Tabs.swift */,
 				1A8FBDE91FF8337700389464 /* NextFlowItem.swift */,
 				1A8FBDF01FF8337800389464 /* Step.swift */,
 				1A8FBDEE1FF8337700389464 /* Presentable.swift */,
 				1A8FBDE71FF8337700389464 /* Stepper.swift */,
-				4883FBD32059929200C9D5B6 /* Tab.swift */,
+				4883FBD32059929200C9D5B6 /* TabFlowContainer.swift */,
+				4810327D205FB0E000E4582A /* TabWithStepperFlowContainer.swift */,
 			);
 			path = RxFlow;
 			sourceTree = "<group>";
@@ -300,13 +306,15 @@
 				1A8FBDFB1FF8337800389464 /* Presentable.swift in Sources */,
 				1A8FBDF21FF8337800389464 /* UIViewController+Presentable.swift in Sources */,
 				1A8FBDF71FF8337800389464 /* UIWindow+Rx.swift in Sources */,
+				48103296205FF69A00E4582A /* Flow+Tabs.swift in Sources */,
 				1A8FBDF81FF8337800389464 /* Coordinator.swift in Sources */,
+				4810327E205FB0E000E4582A /* TabWithStepperFlowContainer.swift in Sources */,
 				1A8FBDF51FF8337800389464 /* UIWindow+Presentable.swift in Sources */,
 				1A8FBDF91FF8337800389464 /* Rx+Pausable.swift in Sources */,
 				1A8FBDFE1FF8337800389464 /* Flow.swift in Sources */,
 				1A8FBDF61FF8337800389464 /* NextFlowItem.swift in Sources */,
 				1A8FBDFD1FF8337800389464 /* Step.swift in Sources */,
-				4883FBD42059929200C9D5B6 /* Tab.swift in Sources */,
+				4883FBD42059929200C9D5B6 /* TabFlowContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
