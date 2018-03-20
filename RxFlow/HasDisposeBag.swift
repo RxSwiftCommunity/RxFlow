@@ -17,20 +17,26 @@ private var disposeBagContext: UInt8 = 0
 public protocol HasDisposeBag: class, Synchronizable {
 
     /// a unique Rx DisposeBag instance
-    var disposeBag: DisposeBag { get }
+    var disposeBag: DisposeBag { get set }
 }
 
 extension HasDisposeBag {
-
     /// The concrete DisposeBag instance
     public var disposeBag: DisposeBag {
-        return self.synchronized {
-            if let disposeObject = objc_getAssociatedObject(self, &disposeBagContext) as? DisposeBag {
+        get {
+            return synchronized {
+                if let disposeObject = objc_getAssociatedObject(self, &disposeBagContext) as? DisposeBag {
+                    return disposeObject
+                }
+                let disposeObject = DisposeBag()
+                objc_setAssociatedObject(self, &disposeBagContext, disposeObject, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
                 return disposeObject
             }
-            let disposeObject = DisposeBag()
-            objc_setAssociatedObject(self, &disposeBagContext, disposeObject, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            return disposeObject
+        }
+        set {
+            synchronized {
+                objc_setAssociatedObject(self, &disposeBagContext, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            }
         }
     }
 }
