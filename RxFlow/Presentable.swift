@@ -60,7 +60,7 @@ extension Presentable where Self: Flow {
 extension Presentable where Self: UIWindow {
     /// Rx Observable (Single trait) triggered when this UIWindow is displayed for the first time
     public var rxFirstTimeVisible: Single<Void> {
-        return self.rx.windowDidAppear
+        return self.rx.windowDidAppear.asSingle()
     }
 
     /// Rx Observable that triggers a bool indicating if the current UIWindow is being displayed
