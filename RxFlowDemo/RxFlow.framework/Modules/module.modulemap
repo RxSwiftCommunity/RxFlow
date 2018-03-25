@@ -1,0 +1,11 @@
+framework module RxFlow {
+  umbrella header "RxFlow.h"
+
+  export *
+  module * { export * }
+}
+
+module RxFlow.Swift {
+    header "RxFlow-Swift.h"
+    requires objc
+}
