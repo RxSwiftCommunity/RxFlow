@@ -119,7 +119,7 @@ class FlowCoordinator: HasDisposeBag {
                     // to dismiss the child Flow Root for instance (because this is the parent who had the responsability
                     // to present the child Flow Root as well)
                     self.dismissFlow.onNext(Void())
-                    self.delegate.endFlowCoordinator(withIdentifier: self.identifier)
+                    //self.delegate.endFlowCoordinator(withIdentifier: self.identifier)
                     if  let parentFlowCoordinator = self.parentFlowCoordinator {
                         let stepContextForParentFlow = StepContext(with: stepToSendToParentFlow)
                         stepContextForParentFlow.fromChildFlow = self.flow
