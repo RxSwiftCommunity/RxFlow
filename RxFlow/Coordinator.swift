@@ -63,7 +63,7 @@ class FlowCoordinator: HasDisposeBag {
     private weak var delegate: FlowCoordinatorDelegate!
 
     /// Used from outside the FlowCoordinator to know that its associated flow is being ended
-    fileprivate let dismissFlow = PublishSubject<Void>()
+    private let dismissFlow = PublishSubject<Void>()
 
     /// the unique identifier of the FlowCoordinator, used to remove if from the FlowCoordinators array in the main Coordinator
     let identifier: String
@@ -119,12 +119,17 @@ class FlowCoordinator: HasDisposeBag {
                     // to dismiss the child Flow Root for instance (because this is the parent who had the responsability
                     // to present the child Flow Root as well)
                     self.dismissFlow.onNext(Void())
-                    self.delegate.endFlowCoordinator(withIdentifier: self.identifier)
+
                     if  let parentFlowCoordinator = self.parentFlowCoordinator {
                         let stepContextForParentFlow = StepContext(with: stepToSendToParentFlow)
                         stepContextForParentFlow.fromChildFlow = self.flow
                         parentFlowCoordinator.steps.onNext(stepContextForParentFlow)
                     }
+
+                    // we tell the delegate that the FlowCoordinator is ended. This will
+                    // unretain the FlowCoordinator reference from the main Coordinator
+                    self.delegate.endFlowCoordinator(withIdentifier: self.identifier)
+
                     return (stepContext, [NextFlowItem]())
                 case .none:
                     return (stepContext, [NextFlowItem]())
@@ -166,7 +171,7 @@ class FlowCoordinator: HasDisposeBag {
                 self?.steps.onNext(newStepContext)
             })
 
-        // we listen for the Warp dedicated Weftable
+        // we listen for the Flow dedicated Stepper to drive the internal "steps" PublishSubject<StepContext>
         self.stepper
             .steps
             .pausable(afterCount: 1, withPauser: self.flow.rxVisible)
@@ -178,8 +183,14 @@ class FlowCoordinator: HasDisposeBag {
                 self?.steps.onNext(newStepContext)
             }).disposed(by: flow.disposeBag)
 
-        self.flow.rxDismissed.subscribe(onSuccess: { [unowned self] in
-            self.delegate.endFlowCoordinator(withIdentifier: self.identifier)
+        // we listen for the Flow root dismissal state. In case of a dismiss
+        // the FlowCoordinate should be ended (its reference has to be unretain from the main Coordinator)
+        self.flow.rxDismissed.subscribe(onSuccess: { [weak self] in
+            // there is a risk that "self" is already deallocated as it could have
+            // been unretained by the main Coordinator (after the self.delegate.endFlowCoordinator(withIdentifier: self.identifier)
+            // statement in the subscription chain
+            guard let strongSelf = self else { return }
+            strongSelf.delegate.endFlowCoordinator(withIdentifier: strongSelf.identifier)
         }).disposed(by: flow.disposeBag)
 
     }
