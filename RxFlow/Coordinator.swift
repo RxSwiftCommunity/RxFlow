@@ -62,9 +62,6 @@ class FlowCoordinator: HasDisposeBag {
     /// in the case of a new Flow to coordinate or before and after a navigation action
     private weak var delegate: FlowCoordinatorDelegate!
 
-    /// Used from outside the FlowCoordinator to know that its associated flow is being ended
-    private let dismissFlow = PublishSubject<Void>()
-
     /// the unique identifier of the FlowCoordinator, used to remove if from the FlowCoordinators array in the main Coordinator
     let identifier: String
 
@@ -90,7 +87,7 @@ class FlowCoordinator: HasDisposeBag {
     /// - Parameter stepper: The Stepper that goes with the Flow. It will trigger some Steps at the Flow level
     func coordinate () {
 
-        _ = self.steps
+        self.steps
             .do(onNext: { [unowned self] (stepContext) in
                 // trigger the delegate before the navigation is done
                 self.delegate.willNavigate(to: stepContext)
@@ -118,8 +115,6 @@ class FlowCoordinator: HasDisposeBag {
                     // triggers its parent FlowCoordinator with the specified step. It will allow the parent
                     // to dismiss the child Flow Root for instance (because this is the parent who had the responsability
                     // to present the child Flow Root as well)
-                    self.dismissFlow.onNext(Void())
-
                     if  let parentFlowCoordinator = self.parentFlowCoordinator {
                         let stepContextForParentFlow = StepContext(with: stepToSendToParentFlow)
                         stepContextForParentFlow.fromChildFlow = self.flow
@@ -164,12 +159,12 @@ class FlowCoordinator: HasDisposeBag {
                     .steps
                     .pausable(withPauser: presentable.rxVisible)
             }
-            .takeUntil(Observable.merge([self.flow.rxDismissed.asObservable(), self.dismissFlow.asObservable()]))
+            .takeUntil(self.flow.rxDismissed.asObservable())
             .asDriver(onErrorJustReturn: NoneStep()).drive(onNext: { [weak self] (step) in
                 // the nextPresentable's Stepper fires a new Step
                 let newStepContext = StepContext(with: step)
                 self?.steps.onNext(newStepContext)
-            })
+            }).disposed(by: flow.disposeBag)
 
         // we listen for the Flow dedicated Stepper to drive the internal "steps" PublishSubject<StepContext>
         self.stepper
