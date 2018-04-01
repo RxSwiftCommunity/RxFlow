@@ -59,7 +59,7 @@ public class Flows {
     public static func whenReady<RootType: UIViewController>(flows: [Flow],
                                                              block: @escaping ([RootType]) -> Void) {
         let flowObservables = flows.map { $0.rxFlowReady.asObservable() }
-        let roots = flows.flatMap { $0.root as? RootType }
+        let roots = flows.compactMap { $0.root as? RootType }
         guard roots.count == flows.count else {
             fatalError ("Type mismatch, Flows roots types do not match the types awaited in the block")
         }
