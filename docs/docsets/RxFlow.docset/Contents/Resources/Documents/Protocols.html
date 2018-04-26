@@ -10,6 +10,7 @@
     
   </head>
   <body>
+    <a name="//apple_ref/swift/Section/Protocols" class="dashAnchor"></a>
     <a title="Protocols  Reference"></a>
     <header>
       <div class="content-wrapper">
@@ -108,9 +109,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6RxFlow7StepperP"></a>
-                    <a name="//apple_ref/swift/Protocol/Stepper" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6RxFlow7StepperP">Stepper</a>
+                    <a name="/s:6RxFlow0B0P"></a>
+                    <a name="//apple_ref/swift/Protocol/Flow" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow0B0P">Flow</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -118,16 +119,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>a Stepper has only one purpose is: emits Steps that correspond to specific navigation states.
-The Step changes lead to navigation actions in the context of a specific Flow</p>
+                        <p>A Flow defines a clear navigation area. Combined to a Step it leads to a navigation action</p>
 
-                        <a href="Protocols/Stepper.html" class="slightly-smaller">See more</a>
+                        <a href="Protocols/Flow.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Stepper</span><span class="p">:</span> <span class="kd">class</span><span class="p">,</span> <span class="kt"><a href="Protocols.html#/s:6RxFlow14SynchronizableP">Synchronizable</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Flow</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Presentable.html">Presentable</a></span></code></pre>
 
                         </div>
                       </div>
@@ -159,38 +159,7 @@ The Step changes lead to navigation actions in the context of a specific Flow</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">HasDisposeBag</span><span class="p">:</span> <span class="kd">class</span><span class="p">,</span> <span class="kt"><a href="Protocols.html#/s:6RxFlow14SynchronizableP">Synchronizable</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6RxFlow14SynchronizableP"></a>
-                    <a name="//apple_ref/swift/Protocol/Synchronizable" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6RxFlow14SynchronizableP">Synchronizable</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Provides a function to prevent concurrent block execution</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Synchronizable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">HasDisposeBag</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="p">,</span> <span class="kt"><a href="Protocols.html#/s:6RxFlow14SynchronizableP">Synchronizable</a></span></code></pre>
 
                         </div>
                       </div>
@@ -222,39 +191,7 @@ The Step changes lead to navigation actions in the context of a specific Flow</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Presentable</span><span class="p">:</span> <span class="kt"><a href="Protocols/HasDisposeBag.html">HasDisposeBag</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6RxFlow0B0P"></a>
-                    <a name="//apple_ref/swift/Protocol/Flow" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6RxFlow0B0P">Flow</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A Flow defines a clear navigation area. Combined to a Step it leads to a navigation action</p>
-
-                        <a href="Protocols/Flow.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Flow</span><span class="p">:</span> <span class="kt"><a href="Protocols/Presentable.html">Presentable</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Presentable</span> <span class="p">:</span> <span class="kt"><a href="Protocols/HasDisposeBag.html">HasDisposeBag</a></span></code></pre>
 
                         </div>
                       </div>
@@ -285,7 +222,71 @@ The Step changes lead to navigation actions in the context of a specific Flow</p
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Step</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Step</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow7StepperP"></a>
+                    <a name="//apple_ref/swift/Protocol/Stepper" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow7StepperP">Stepper</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>a Stepper has only one purpose is: emits Steps that correspond to specific navigation states.
+The Step changes lead to navigation actions in the context of a specific Flow</p>
+
+                        <a href="Protocols/Stepper.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Stepper</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="p">,</span> <span class="kt"><a href="Protocols.html#/s:6RxFlow14SynchronizableP">Synchronizable</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow14SynchronizableP"></a>
+                    <a name="//apple_ref/swift/Protocol/Synchronizable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow14SynchronizableP">Synchronizable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides a function to prevent concurrent block execution</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Synchronizable</span></code></pre>
 
                         </div>
                       </div>
@@ -297,8 +298,8 @@ The Step changes lead to navigation actions in the context of a specific Flow</p
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-03-04)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-04-25)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

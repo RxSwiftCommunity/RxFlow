@@ -10,6 +10,7 @@
     
   </head>
   <body>
+    <a name="//apple_ref/swift/Section/Classes" class="dashAnchor"></a>
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
@@ -108,67 +109,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6RxFlow10OneStepperC"></a>
-                    <a name="//apple_ref/swift/Class/OneStepper" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6RxFlow10OneStepperC">OneStepper</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A Simple Stepper that has one goal: emit a single Step once initialized</p>
-
-                        <a href="Classes/OneStepper.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">OneStepper</span><span class="p">:</span> <span class="kt"><a href="Protocols/Stepper.html">Stepper</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6RxFlow16CompositeStepperC"></a>
-                    <a name="//apple_ref/swift/Class/CompositeStepper" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6RxFlow16CompositeStepperC">CompositeStepper</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A Stepper that combines multiple steppers. All those Steppers will be associated
-to the Presentable that is given within the NextFlowItem</p>
-
-                        <a href="Classes/CompositeStepper.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">final</span> <span class="kd">public</span> <span class="kd">class</span> <span class="kt">CompositeStepper</span><span class="p">:</span> <span class="kt"><a href="Protocols/Stepper.html">Stepper</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:6RxFlow11CoordinatorC"></a>
                     <a name="//apple_ref/swift/Class/Coordinator" class="dashAnchor"></a>
                     <a class="token" href="#/s:6RxFlow11CoordinatorC">Coordinator</a>
@@ -188,7 +128,7 @@ declared in the Flows of the application.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">final</span> <span class="kd">public</span> <span class="kd">class</span> <span class="kt">Coordinator</span><span class="p">:</span> <span class="kt"><a href="Protocols/HasDisposeBag.html">HasDisposeBag</a></span><span class="p">,</span> <span class="kt"><a href="Protocols.html#/s:6RxFlow14SynchronizableP">Synchronizable</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">final</span> <span class="kd">public</span> <span class="kd">class</span> <span class="kt">Coordinator</span> <span class="p">:</span> <span class="kt"><a href="Protocols/HasDisposeBag.html">HasDisposeBag</a></span><span class="p">,</span> <span class="kt"><a href="Protocols.html#/s:6RxFlow14SynchronizableP">Synchronizable</a></span></code></pre>
 
                         </div>
                       </div>
@@ -220,7 +160,68 @@ declared in the Flows of the application.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Flows</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Flows</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow10OneStepperC"></a>
+                    <a name="//apple_ref/swift/Class/OneStepper" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow10OneStepperC">OneStepper</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A Simple Stepper that has one goal: emit a single Step once initialized</p>
+
+                        <a href="Classes/OneStepper.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">OneStepper</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Stepper.html">Stepper</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow16CompositeStepperC"></a>
+                    <a name="//apple_ref/swift/Class/CompositeStepper" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow16CompositeStepperC">CompositeStepper</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A Stepper that combines multiple steppers. All those Steppers will be associated
+to the Presentable that is given within the NextFlowItem</p>
+
+                        <a href="Classes/CompositeStepper.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">final</span> <span class="kd">public</span> <span class="kd">class</span> <span class="kt">CompositeStepper</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Stepper.html">Stepper</a></span></code></pre>
 
                         </div>
                       </div>
@@ -232,8 +233,8 @@ declared in the Flows of the application.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-03-04)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-04-25)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

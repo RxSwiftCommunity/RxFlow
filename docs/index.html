@@ -141,12 +141,23 @@
 <p>The Jazzy documentation can be seen here as well: <a href="http://community.rxswift.org/RxFlow/">Documentation</a></p>
 <h1 id='migrating-from-v1-0-x-to-v1-1-0' class='heading'>Migrating from v1.0.x to v1.1.0</h1>
 
-<p>There are two major changes that must be taken care of if you want to use the v1.1 when coming from an older version:</p>
+<p>There are two major changes that must be taken care of if you want to use the v1.1.0 when coming from an older version:</p>
 
 <ul>
 <li><strong>Flowable</strong> has been replaced by <strong>NextFlowItem</strong>. It&rsquo;s exactly the same idea between those 2 names, but <q>Flowable</q> was too much related to a Protocol naming convention. The <strong>Flow.navigate(to:)</strong> function has to return a <strong>NextFlowItems</strong>, which is an enum that represents different possibilities of NextFlowItem (multiple, one, none, &hellip;). Take a look at the code snippets below to see some examples.</li>
 <li>In order to improve RxFlow consistency, it seemed obvious that a Flow that presents a UIViewController also <strong>HAS</strong> to dismiss it. In previous versions, a child Flow was dismissed by itself and not by the Flow that presented it. In the Demo Application you will find an example with the WishlistFlow dismissing the SettingsFlow for the <strong>settingsDone</strong> Step.</li>
 </ul>
+<h1 id='migrating-from-v1-x-x-to-v1-3-0' class='heading'>Migrating from v1.x.x to v1.3.0</h1>
+
+<p>There are two major changes that must be taken care of if you want to use the v1.3.0 when coming from an older version:</p>
+
+<ul>
+<li><strong>NextFlowItems.stepNotHandled</strong> has been removed for the sake of simplicity. If you want a received step to have no effect at all in a <strong>navigate(to:)</strong> function, all you need to do is returning a <strong>NextFlowItems.none</strong> value. It means that no new <strong>Stepper</strong> will be registered in the Coordinator.</li>
+<li><strong>NextFlowItems.end(withStepForParentFlow: Step)</strong> allows to explicitly tell the Coordinator that you want to dismiss the current Flow. You can pass the Step you want the parent Flow to receive in its <strong>navigate(to:)</strong> function. That is where you will dismiss the child Flow root <strong>Presentable</strong>. It can be also used to pass data to the parent **
+Flow** thanks to an enum parameter (withStepForParentFlow could be something like: DemoStep.loginIsComplete(idUser: xxx))</li>
+</ul>
+
+<p>The DemoApp has been updated to implement those changes. It shows how to swap between 2 Flows attached to the root Window.</p>
 <h1 id='navigation-concerns' class='heading'>Navigation concerns</h1>
 
 <p>Regarding navigation within an iOS application, two choices are available:</p>
@@ -265,7 +276,7 @@
 
     <span class="kd">func</span> <span class="nf">navigate</span><span class="p">(</span><span class="n">to</span> <span class="nv">step</span><span class="p">:</span> <span class="kt">Step</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NextFlowItems</span> <span class="p">{</span>
 
-        <span class="k">guard</span> <span class="k">let</span> <span class="nv">step</span> <span class="o">=</span> <span class="n">step</span> <span class="k">as?</span> <span class="kt">DemoStep</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kt">NextFlowItems</span><span class="o">.</span><span class="n">stepIsNotHandled</span> <span class="p">}</span>
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">step</span> <span class="o">=</span> <span class="n">step</span> <span class="k">as?</span> <span class="kt">DemoStep</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kt">NextFlowItems</span><span class="o">.</span><span class="k">none</span> <span class="p">}</span>
 
         <span class="k">switch</span> <span class="n">step</span> <span class="p">{</span>
 
@@ -276,7 +287,7 @@
         <span class="k">case</span> <span class="o">.</span><span class="nf">castPicked</span><span class="p">(</span><span class="k">let</span> <span class="nv">castId</span><span class="p">):</span>
             <span class="k">return</span> <span class="nf">navigateToCastDetailScreen</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">castId</span><span class="p">)</span>
         <span class="k">default</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kt">NextFlowItems</span><span class="o">.</span><span class="n">stepIsNotHandled</span>
+            <span class="k">return</span> <span class="kt">NextFlowItems</span><span class="o">.</span><span class="k">none</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
@@ -353,8 +364,8 @@ For simple cases (for instance when we only need to bootstrap a <strong>Flow</st
     <span class="k">var</span> <span class="nv">window</span><span class="p">:</span> <span class="kt">UIWindow</span><span class="p">?</span>
     <span class="k">var</span> <span class="nv">coordinator</span> <span class="o">=</span> <span class="kt">Coordinator</span><span class="p">()</span>
     <span class="k">let</span> <span class="nv">movieService</span> <span class="o">=</span> <span class="kt">MoviesService</span><span class="p">()</span>
-    <span class="kd">lazy</span> <span class="k">var</span> <span class="nv">mainFlow</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="kt">MainFlow</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">movieService</span><span class="p">)</span>
+    <span class="kd">lazy</span> <span class="k">var</span> <span class="nv">appFlow</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kt">AppFlow</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">movieService</span><span class="p">)</span>
     <span class="p">}()</span>
 
     <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span>
@@ -368,14 +379,14 @@ For simple cases (for instance when we only need to bootstrap a <strong>Flow</st
         <span class="p">})</span><span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">disposeBag</span><span class="p">)</span>
 
         <span class="c1">// when the MainFlow is ready to be displayed, we assign its root the the Window</span>
-        <span class="kt">Flows</span><span class="o">.</span><span class="nf">whenReady</span><span class="p">(</span><span class="nv">flow</span><span class="p">:</span> <span class="n">mainFlow</span><span class="p">,</span> <span class="nv">block</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="k">unowned</span> <span class="n">window</span><span class="p">]</span> <span class="p">(</span><span class="n">flowRoot</span><span class="p">)</span> <span class="k">in</span>
+        <span class="kt">Flows</span><span class="o">.</span><span class="nf">whenReady</span><span class="p">(</span><span class="nv">flow</span><span class="p">:</span> <span class="n">appFlow</span><span class="p">,</span> <span class="nv">block</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="k">unowned</span> <span class="n">window</span><span class="p">]</span> <span class="p">(</span><span class="n">flowRoot</span><span class="p">)</span> <span class="k">in</span>
             <span class="n">window</span><span class="o">.</span><span class="n">rootViewController</span> <span class="o">=</span> <span class="n">flowRoot</span>
         <span class="p">})</span>
 
         <span class="c1">// The navigation begins with the MainFlow at the apiKey Step</span>
         <span class="c1">// We could also have a specific Stepper that could decide if</span>
         <span class="c1">// the apiKey should be the fist step or not</span>
-        <span class="n">coordinator</span><span class="o">.</span><span class="nf">coordinate</span><span class="p">(</span><span class="nv">flow</span><span class="p">:</span> <span class="n">mainFlow</span><span class="p">,</span> <span class="nv">withStepper</span><span class="p">:</span> <span class="kt">OneStepper</span><span class="p">(</span><span class="nv">withSingleStep</span><span class="p">:</span> <span class="kt">DemoStep</span><span class="o">.</span><span class="n">apiKey</span><span class="p">))</span>
+        <span class="n">coordinator</span><span class="o">.</span><span class="nf">coordinate</span><span class="p">(</span><span class="nv">flow</span><span class="p">:</span> <span class="n">appFlow</span><span class="p">,</span> <span class="nv">withStepper</span><span class="p">:</span> <span class="kt">OneStepper</span><span class="p">(</span><span class="nv">withSingleStep</span><span class="p">:</span> <span class="kt">DemoStep</span><span class="o">.</span><span class="n">apiKey</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="kc">true</span>
     <span class="p">}</span>
@@ -388,7 +399,9 @@ For simple cases (for instance when we only need to bootstrap a <strong>Flow</st
 <p>A demo application is provided to illustrate the core mechanisms. Pretty much every kind of navigation is addressed. The app consists of:</p>
 
 <ul>
-<li>a MainFlow that represents the main navigation section (a settings screen and then a dashboard composed of two screens in a tab bar controller)</li>
+<li>an AppFlow that represents the main navigation. This Flow will handle the OnboardingFlow and the DashboardFlow</li>
+<li>an OnBoardingFlow that represents a 2 steps onboarding wizard in a UINavigationController. It will only be displayed the first time the app is used</li>
+<li>a DashboardFlow that handles the Tabbar for the WishlistFlow and the WatchedFlow</li>
 <li>a WishlistFlow that represents a navigation stack of movies that you want to watch</li>
 <li>a WatchedFlow that represents a navigation stack of movies that you&rsquo;ve already seen</li>
 <li>a SettingsFlow that represents the user&rsquo;s preferences in a master/detail presentation</li>
@@ -411,8 +424,8 @@ For simple cases (for instance when we only need to bootstrap a <strong>Flow</st
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-03-04)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-04-25)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
