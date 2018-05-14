@@ -6,6 +6,8 @@
 //  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
+import UIKit.UIViewController
+
 import RxSwift
 
 /// An abstraction of what can present a Loom. For now, UIViewControllers, Warps are Presentable

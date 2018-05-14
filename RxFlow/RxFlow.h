@@ -6,7 +6,7 @@
 //  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for RxFlow.
 FOUNDATION_EXPORT double RxFlowVersionNumber;
