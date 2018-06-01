@@ -47,6 +47,8 @@ public enum NextFlowItems {
     case one (flowItem: NextFlowItem)
     /// a Flow will trigger a special NextFlowItem that represents the dismissal of this Flow
     case end (withStepForParentFlow: Step)
+    /// a Flow will trigger a special NextFlowItem that allows to trigger a new Step for the parent Flow (same as .end but without stopping listening for child flow steppers)
+    case triggerParentFlow (withStep: Step)
     /// no further navigation will be triggered for a Step
     case none
 }

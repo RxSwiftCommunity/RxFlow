@@ -126,6 +126,19 @@ class FlowCoordinator: HasDisposeBag {
                     self.delegate.endFlowCoordinator(withIdentifier: self.identifier)
 
                     return (stepContext, [NextFlowItem]())
+                case .triggerParentFlow(let stepToSendToParentFlow):
+                    // if the navigation gives a "triggerParentFlow" NextFlowItems, the FlowCoordinator
+                    // triggers its parent FlowCoordinator with the specified step. It will allow the parent
+                    // to perform specific actions but without stopping listening for steppers in the current FlowCoordinator
+                    // It can be useful in case of a tabbar navigation to allow a Flow that represents a tab to communicate
+                    // with the parent Flow that handles the whole tabbar
+                    if  let parentFlowCoordinator = self.parentFlowCoordinator {
+                        let stepContextForParentFlow = StepContext(with: stepToSendToParentFlow)
+                        stepContextForParentFlow.fromChildFlow = self.flow
+                        parentFlowCoordinator.steps.onNext(stepContextForParentFlow)
+                    }
+
+                    return (stepContext, [NextFlowItem]())
                 case .none:
                     return (stepContext, [NextFlowItem]())
                 }
