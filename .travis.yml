@@ -1,5 +1,5 @@
 language: swift
-osx_image: xcode9.3
+osx_image: xcode9.4
 
 cache:
   directories:
@@ -11,4 +11,4 @@ before_install:
   - brew outdated swiftlint || brew upgrade swiftlint
   - carthage bootstrap --verbose --platform iOS --cache-builds
 script:
-    - xcodebuild clean test -project RxFlow.xcodeproj -scheme RxFlow -destination "platform=iOS Simulator,name=iPhone 8,OS=11.3" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -quiet | xcpretty -c
+    - xcodebuild clean test -project RxFlow.xcodeproj -scheme RxFlow -destination "platform=iOS Simulator,name=iPhone 8,OS=11.4" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -quiet | xcpretty -c
