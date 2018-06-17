@@ -6,6 +6,7 @@
 build/
 DerivedData/
 RxFlow.framework.zip
+undocumented.json
 
 ## macos
 .DS_Store
