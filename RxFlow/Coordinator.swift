@@ -74,7 +74,7 @@ class FlowCoordinator: HasDisposeBag {
     init(for flow: Flow,
          withStepper stepper: Stepper,
          withDelegate delegate: FlowCoordinatorDelegate,
-         withParrentFlowCoordinator parentFlowCoordinator: FlowCoordinator? = nil) {
+         withParentFlowCoordinator parentFlowCoordinator: FlowCoordinator? = nil) {
         self.flow = flow
         self.stepper = stepper
         self.delegate = delegate
@@ -222,7 +222,7 @@ final public class Coordinator: HasDisposeBag, Synchronizable {
     ///   - flow: The Flow to coordinate
     ///   - stepper: The Flow's Stepper companion that will determine the first navigation Steps for instance
     public func coordinate (flow: Flow, withStepper stepper: Stepper) {
-        self.coordinate(flow: flow, withStepper: stepper, withParrentFlowCoordinator: nil)
+        self.coordinate(flow: flow, withStepper: stepper, withParentFlowCoordinator: nil)
     }
 
     /// Launch the coordination process
@@ -231,13 +231,13 @@ final public class Coordinator: HasDisposeBag, Synchronizable {
     ///   - flow: The Flow to coordinate
     ///   - stepper: The Flow's Stepper companion that will determine the first navigation Steps for instance
     ///   - parentFlowCoordinator: The parent FlowCoordinator. The parent is warned in case of a noNavigation NextFlowItem in its children
-    internal func coordinate (flow: Flow, withStepper stepper: Stepper, withParrentFlowCoordinator parentFlowCoordinator: FlowCoordinator? = nil) {
+    internal func coordinate (flow: Flow, withStepper stepper: Stepper, withParentFlowCoordinator parentFlowCoordinator: FlowCoordinator? = nil) {
 
         // a new FlowCoordinator will handle this Flow navigation
         let flowCoordinator = FlowCoordinator(for: flow,
                                               withStepper: stepper,
                                               withDelegate: self,
-                                              withParrentFlowCoordinator: parentFlowCoordinator)
+                                              withParentFlowCoordinator: parentFlowCoordinator)
 
         if let parentFlowCoordinator = parentFlowCoordinator {
             flowCoordinator.parentFlowCoordinator = parentFlowCoordinator
@@ -258,7 +258,7 @@ extension Coordinator: FlowCoordinatorDelegate {
     func navigateToAnotherFlow (withParentFlowCoordinator parentFlowCoordinator: FlowCoordinator, withNextFlowItem nextFlowItem: NextFlowItem) {
 
         if let nextFlow = nextFlowItem.nextPresentable as? Flow {
-            self.coordinate(flow: nextFlow, withStepper: nextFlowItem.nextStepper, withParrentFlowCoordinator: parentFlowCoordinator)
+            self.coordinate(flow: nextFlow, withStepper: nextFlowItem.nextStepper, withParentFlowCoordinator: parentFlowCoordinator)
         }
     }
 
