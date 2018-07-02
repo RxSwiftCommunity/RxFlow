@@ -15,12 +15,12 @@ public struct NextFlowItem {
     /// The presentable that will be handle by the Coordinator. The Coordinator is not
     /// meant to display this presentable, it will only handle its "Display" status
     /// so that the associated Stepper will be listened or not
-    let nextPresentable: Presentable
+    public let nextPresentable: Presentable
 
     /// The Stepper that will be handle by the Coordinator. It will emit the new
     /// navigation Steps. The Coordinator will listen to them only if the associated
     /// Presentable is displayed
-    let nextStepper: Stepper
+    public let nextStepper: Stepper
 
     /// Initialize a new NextFlowItem
     ///
