@@ -28,7 +28,11 @@ extension Reactive where Base: UIViewController {
             .filter { _ in self.base.isBeingDismissed }
             .map { _ in false }
 
-        return ControlEvent(events: source)
+        let source2 = self.sentMessage(#selector(Base.didMove(toParentViewController:)))
+            .filter({!($0.first is UIViewController)})
+            .map { _ in false }
+
+        return ControlEvent(events: Observable.merge(source, source2))
     }
 
     /// Rx observable, triggered when the view appearance state changes
