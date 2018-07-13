@@ -129,7 +129,7 @@ The **navigate(to:)** function returns a **NextFlowItems**. This is how the next
 ```swift
 class WatchedFlow: Flow {
 
-    var root: UIViewController {
+    var root: Presentable {
         return self.rootViewController
     }
 
