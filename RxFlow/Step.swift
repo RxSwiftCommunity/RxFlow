@@ -22,7 +22,7 @@ final class StepContext {
     }
 }
 
-/// A Step describes a possible state of navigation insie a Flow
+/// A Step describes a possible state of navigation inside a Flow
 public protocol Step {
 }
 
