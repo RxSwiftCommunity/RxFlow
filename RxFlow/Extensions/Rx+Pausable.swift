@@ -20,14 +20,9 @@ extension ObservableType {
     /// - Parameter pauser: The observable sequence used to pause the source observable sequence.
     /// - Returns: The observable sequence which is paused based upon the pauser observable sequence.
     public func pausable<P: ObservableType> (withPauser pauser: P) -> Observable<E> where P.E == Bool {
-
-        return withLatestFrom(pauser) { element, paused in
-            return (element, paused)
-            }.filter { _, paused in
-                paused
-            }.map { element, _ in
-                element
-        }
+        return withLatestFrom(pauser) { element, paused in (element, paused) }
+            .filter { _, paused in paused }
+            .map { element, _ in element }
     }
 
     /// Pauses the elements of the source observable sequence based on the latest element from the second observable sequence.
