@@ -16,10 +16,17 @@ class SettingsApiKeyViewModel: Stepper, ServicesViewModel {
 
     var services: Services!
 
-    func setApiKey () {
-        if !self.services.preferencesService.isOnboarded() {
-            self.services.preferencesService.setOnboarding()
+    func setApiKey() -> Single<DemoStep> {
+        return Single.create { [services] single in
+            guard let services = services else { fatalError("Missing services") }
+
+            if !services.preferencesService.isOnboarded() {
+                services.preferencesService.setOnboarding()
+            }
+
+            single(.success(.apiKeyIsComplete))
+
+            return Disposables.create { }
         }
-        self.step.accept(DemoStep.apiKeyIsComplete)
     }
 }
