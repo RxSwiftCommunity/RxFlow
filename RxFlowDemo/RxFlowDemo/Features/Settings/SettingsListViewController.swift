@@ -9,28 +9,33 @@
 import UIKit
 import Reusable
 import RxFlow
+import RxSwift
+import RxCocoa
 
 class SettingsListViewController: UITableViewController, StoryboardBased, Stepper {
+    struct SettingItem {
+        let step: DemoStep
+        let title: String
+    }
+
+    let settings = [
+        SettingItem(step: .login, title: "Login"),
+        SettingItem(step: .apiKey, title: "API Key"),
+        SettingItem(step: .about, title: "About")
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.selectRow(at: IndexPath(row: 0, section: 0),
-                                 animated: false,
-                                 scrollPosition: UITableViewScrollPosition.none)
-    }
+        Observable.of(settings)
+            .bind(to: tableView.rx.items(cellIdentifier: "SettingCell")) { _, element, cell in
+                cell.textLabel?.text = element.title
+            }
+            .disposed(by: disposeBag)
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
-            self.step.accept(DemoStep.login)
-        case 1:
-            self.step.accept(DemoStep.apiKey)
-        case 2:
-            self.step.accept(DemoStep.about)
-        default:
-            return
-        }
+        tableView.rx.modelSelected(SettingItem.self)
+            .map { $0.step }
+            .bind(to: self.step)
+            .disposed(by: disposeBag)
     }
-
 }

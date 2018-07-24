@@ -48,14 +48,14 @@ class SettingsFlow: Flow {
         }
     }
 
-    private func popToMasterViewController () -> NextFlowItems {
+    private func popToMasterViewController() -> NextFlowItems {
         if let navigationController = self.rootViewController.viewControllers[0] as? UINavigationController {
             navigationController.popToRootViewController(animated: true)
         }
-        return NextFlowItems.none
+        return .none
     }
 
-    private func navigateToSettingsScreen () -> NextFlowItems {
+    private func navigateToSettingsScreen() -> NextFlowItems {
         let navigationController = UINavigationController()
         let settingsListViewController = SettingsListViewController.instantiate()
         let settingsLoginViewController = SettingsLoginViewController.instantiate()
@@ -73,41 +73,46 @@ class SettingsFlow: Flow {
             navigationBarItem.setRightBarButton(settingsButton, animated: false)
         }
 
-        return NextFlowItems.multiple(flowItems: [NextFlowItem(nextPresentable: settingsListViewController, nextStepper: settingsListViewController),
-                                                  NextFlowItem(nextPresentable: settingsLoginViewController, nextStepper: settingsLoginViewController)])
+        return .multiple(flowItems: [NextFlowItem(nextPresentable: settingsListViewController,
+                                                  nextStepper: settingsListViewController),
+                                    NextFlowItem(nextPresentable: settingsLoginViewController,
+                                                 nextStepper: settingsLoginViewController)])
     }
 
-    private func navigateToLoginScreen () -> NextFlowItems {
+    private func navigateToLoginScreen() -> NextFlowItems {
         let settingsLoginViewController = SettingsLoginViewController.instantiate()
         settingsLoginViewController.title = "Login"
         self.rootViewController.showDetailViewController(settingsLoginViewController, sender: nil)
-        return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: settingsLoginViewController, nextStepper: settingsLoginViewController))
+        return .one(flowItem: NextFlowItem(nextPresentable: settingsLoginViewController,
+                                           nextStepper: settingsLoginViewController))
     }
 
-    private func navigateToApiKeyScreen () -> NextFlowItems {
+    private func navigateToApiKeyScreen() -> NextFlowItems {
         let settingsViewModel = SettingsApiKeyViewModel()
-        let settingsViewController = SettingsApiKeyViewController.instantiate(withViewModel: settingsViewModel, andServices: self.services)
-        settingsViewController.title = "Api Key"
+        let settingsViewController = SettingsApiKeyViewController.instantiate(withViewModel: settingsViewModel,
+                                                                              andServices: self.services)
+        settingsViewController.title = "API Key"
         self.rootViewController.showDetailViewController(settingsViewController, sender: nil)
-        return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: settingsViewController, nextStepper: settingsViewModel))
+        return .one(flowItem: NextFlowItem(nextPresentable: settingsViewController,
+                                           nextStepper: settingsViewModel))
     }
 
-    private func navigateToAboutScreen () -> NextFlowItems {
+    private func navigateToAboutScreen() -> NextFlowItems {
         let settingsAboutViewController = SettingsAboutViewController.instantiate()
         settingsAboutViewController.title = "About"
         self.rootViewController.showDetailViewController(settingsAboutViewController, sender: nil)
-        return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: settingsAboutViewController, nextStepper: settingsAboutViewController))
+        return .one(flowItem: NextFlowItem(nextPresentable: settingsAboutViewController,
+                                           nextStepper: settingsAboutViewController))
     }
 
 }
 
 class SettingsStepper: Stepper {
-
     init() {
         self.step.accept(DemoStep.settings)
     }
 
-    @objc func settingsDone () {
+    @objc func settingsDone() {
         self.step.accept(DemoStep.settingsIsComplete)
     }
 }

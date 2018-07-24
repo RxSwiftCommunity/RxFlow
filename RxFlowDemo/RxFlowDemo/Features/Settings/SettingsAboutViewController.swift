@@ -11,9 +11,7 @@ import Reusable
 import RxFlow
 
 class SettingsAboutViewController: UIViewController, StoryboardBased, Stepper {
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
 }
