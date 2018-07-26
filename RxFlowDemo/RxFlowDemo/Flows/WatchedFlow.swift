@@ -10,7 +10,6 @@ import RxFlow
 import UIKit
 
 class WatchedFlow: Flow {
-
     var root: Presentable {
         return self.rootViewController
     }
@@ -39,24 +38,30 @@ class WatchedFlow: Flow {
         }
     }
 
-    private func navigateToMovieListScreen () -> NextFlowItems {
-        let viewController = WatchedViewController.instantiate(withViewModel: WatchedViewModel(), andServices: self.services)
+    private func navigateToMovieListScreen() -> NextFlowItems {
+        let viewController = WatchedViewController.instantiate(withViewModel: WatchedViewModel(),
+                                                               andServices: self.services)
         viewController.title = "Watched"
+
         self.rootViewController.pushViewController(viewController, animated: true)
-        return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: viewController, nextStepper: viewController.viewModel))
+        return .one(flowItem: NextFlowItem(nextPresentable: viewController,
+                                           nextStepper: viewController.viewModel))
     }
 
     private func navigateToMovieDetailScreen (with movieId: Int) -> NextFlowItems {
-        let viewController = MovieDetailViewController.instantiate(withViewModel: MovieDetailViewModel(withMovieId: movieId), andServices: self.services)
+        let viewController = MovieDetailViewController.instantiate(withViewModel: MovieDetailViewModel(withMovieId: movieId),
+                                                                   andServices: self.services)
         viewController.title = viewController.viewModel.title
         self.rootViewController.pushViewController(viewController, animated: true)
-        return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: viewController, nextStepper: viewController.viewModel))
+        return .one(flowItem: NextFlowItem(nextPresentable: viewController,
+                                           nextStepper: viewController.viewModel))
     }
 
     private func navigateToCastDetailScreen (with castId: Int) -> NextFlowItems {
-        let viewController = CastDetailViewController.instantiate(withViewModel: CastDetailViewModel(withCastId: castId), andServices: self.services)
+        let viewController = CastDetailViewController.instantiate(withViewModel: CastDetailViewModel(withCastId: castId),
+                                                                  andServices: self.services)
         viewController.title = viewController.viewModel.name
         self.rootViewController.pushViewController(viewController, animated: true)
-        return NextFlowItems.none
+        return .none
     }
 }
