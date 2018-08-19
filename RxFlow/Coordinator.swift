@@ -79,7 +79,7 @@ class FlowCoordinator: HasDisposeBag {
         self.stepper = stepper
         self.delegate = delegate
         self.parentFlowCoordinator = parentFlowCoordinator
-        self.identifier = "\(type(of: flow))-\(Date())"
+        self.identifier = "\(type(of: flow))-\(Date().timeIntervalSince1970)"
     }
 
     /// Launch the coordination process
