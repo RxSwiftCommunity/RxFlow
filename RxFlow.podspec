@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "RxFlow"
-  s.version      = "1.4.0"
+  s.version      = "1.5.0"
   s.summary      = "RxFlow is a navigation framework for iOS applications, based on a Reactive Coordinator pattern."
 
   s.description  = <<-DESC
@@ -27,7 +27,7 @@ RxFlow aims to
   s.source_files  = "RxFlow/**/*.swift"
   s.frameworks  = 'UIKit'
   s.requires_arc     = true  
-  s.dependency 'RxSwift', '>= 4.0.0'
-  s.dependency 'RxCocoa', '>= 4.0.0'
+  s.dependency 'RxSwift', '>= 4.2.0'
+  s.dependency 'RxCocoa', '>= 4.2.0'
 
 end
