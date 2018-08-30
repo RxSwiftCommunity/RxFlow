@@ -8,6 +8,7 @@
 
 import RxFlow
 
+// swiftlint:disable identifier_name
 enum DemoStep: Step {
     // Onboarding
     case onboarding
@@ -30,3 +31,4 @@ enum DemoStep: Step {
     case about
     case settingsIsComplete
 }
+// swiftlint:enable identifier_name

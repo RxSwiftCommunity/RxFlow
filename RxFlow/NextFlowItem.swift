@@ -40,6 +40,7 @@ public struct NextFlowItem {
 /// - one: a Flow will trigger only one NextFlowItem for a Step
 /// - end: a Flow will trigger a special NextFlowItem that represents the dismissal of this Flow
 /// - none: no further navigation will be triggered for a Step
+// swiftlint:disable identifier_name
 public enum NextFlowItems {
     /// a Flow will trigger several NextFlowItem at the same time for the same Step
     case multiple (flowItems: [NextFlowItem])
@@ -52,3 +53,4 @@ public enum NextFlowItems {
     /// no further navigation will be triggered for a Step
     case none
 }
+// swiftlint:enable identifier_name
