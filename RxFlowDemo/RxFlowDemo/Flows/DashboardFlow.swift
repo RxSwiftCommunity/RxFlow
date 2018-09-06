@@ -22,6 +22,10 @@ class DashboardFlow: Flow {
         self.services = services
     }
 
+    deinit {
+        print("\(type(of: self)): \(#function)")
+    }
+
     func navigate(to step: Step) -> NextFlowItems {
         guard let step = step as? DemoStep else { return NextFlowItems.none }
 
