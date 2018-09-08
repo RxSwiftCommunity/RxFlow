@@ -55,7 +55,7 @@ class WishlistFlow: Flow {
         self.rootViewController.pushViewController(viewController, animated: true)
         if let navigationBarItem = self.rootViewController.navigationBar.items?[0] {
             navigationBarItem.setRightBarButton(UIBarButtonItem(image: UIImage(named: "settings"),
-                                                                style: UIBarButtonItemStyle.plain,
+                                                                style: UIBarButtonItem.Style.plain,
                                                                 target: self.wishlistStepper,
                                                                 action: #selector(WishlistStepper.settings)),
                                                 animated: false)

@@ -28,7 +28,7 @@ extension Reactive where Base: UIViewController {
             .filter { [base] _ in base.isBeingDismissed }
             .map { _ in false }
 
-        let movedToParentSource = self.sentMessage(#selector(Base.didMove(toParentViewController:)))
+        let movedToParentSource = self.sentMessage(#selector(Base.didMove))
             .filter({!($0.first is UIViewController)})
             .map { _ in false }
 

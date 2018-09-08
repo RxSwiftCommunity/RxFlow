@@ -71,7 +71,7 @@ class SettingsFlow: Flow {
 
         navigationController.viewControllers = [settingsListViewController]
         if let navigationBarItem = navigationController.navigationBar.items?[0] {
-            let settingsButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done,
+            let settingsButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done,
                                                  target: self.settingsStepper,
                                                  action: #selector(SettingsStepper.settingsDone))
             navigationBarItem.setRightBarButton(settingsButton, animated: false)
