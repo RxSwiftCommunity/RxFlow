@@ -219,7 +219,7 @@ For instance, from the WishlistFlow, we launch the SettingsFlow in a popup.
 private func navigateToSettings () -> NextFlowItems {     
     let settingsStepper = SettingsStepper()
     let settingsFlow = SettingsFlow(withService: self.service, andStepper: settingsStepper)
-    Flows.whenReady(flow: settingsFlow, block: { [unowned self] (root: UISplitViewController) in
+    Flows.whenReady(flow1: settingsFlow, block: { [unowned self] (root: UISplitViewController) in
         self.rootViewController.present(root, animated: true)
     })
     return NextFlowItems.one(flowItem: NextFlowItem(nextPresentable: settingsFlow, nextStepper: settingsStepper))
@@ -254,7 +254,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }).disposed(by: self.disposeBag)
 
         // when the MainFlow is ready to be displayed, we assign its root the the Window
-        Flows.whenReady(flow: appFlow, block: { [unowned window] (flowRoot) in
+        Flows.whenReady(flow1: appFlow, block: { [unowned window] (flowRoot) in
             window.rootViewController = flowRoot
         })
 
