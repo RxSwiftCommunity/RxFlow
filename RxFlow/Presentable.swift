@@ -10,7 +10,7 @@ import UIKit.UIViewController
 
 import RxSwift
 
-/// An abstraction of what can present a Loom. For now, UIViewControllers, Warps are Presentable
+/// An abstraction of what can be presented to the screen. For now, UIViewControllers and Flows are Presentable
 public protocol Presentable: HasDisposeBag {
 
     /// Rx Observable that triggers a bool indicating if the current Presentable is being displayed (applies to UIViewController, Warp or UIWindow for instance)
