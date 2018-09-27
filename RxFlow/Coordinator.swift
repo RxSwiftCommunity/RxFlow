@@ -60,7 +60,6 @@ class FlowCoordinator: HasDisposeBag {
 
     /// The delegate allows the FlowCoordinator to communicate with the Coordinator
     /// in the case of a new Flow to coordinate or before and after a navigation action
-    // swiftlint:disable:next weak_delegate
     private weak var delegate: FlowCoordinatorDelegate!
 
     /// the unique identifier of the FlowCoordinator, used to remove if from the FlowCoordinators array in the main Coordinator
