@@ -37,11 +37,11 @@ extension Reactive where Base: UIViewController {
 
     /// Rx observable, triggered when the view appearance state changes
     public var displayed: Observable<Bool> {
-        let viewWillAppearObservable = self.sentMessage(#selector(Base.viewWillAppear)).map { _ in true }
+        let viewDidAppearObservable = self.sentMessage(#selector(Base.viewDidAppear)).map { _ in true }
         let viewWillDisappearObservable = self.sentMessage(#selector(Base.viewWillDisappear)).map { _ in false }
         // a UIViewController is at first not displayed
         let initialState = Observable.just(false)
         // future calls to viewDidAppear and viewWillDisappear will chage the displayable state
-        return initialState.concat(Observable<Bool>.merge(viewWillAppearObservable, viewWillDisappearObservable))
+        return initialState.concat(Observable<Bool>.merge(viewDidAppearObservable, viewWillDisappearObservable))
     }
 }
