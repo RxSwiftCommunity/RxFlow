@@ -27,7 +27,7 @@ RxFlow aims to
   s.source_files  = "RxFlow/**/*.swift"
   s.frameworks  = 'UIKit'
   s.requires_arc     = true  
-  s.dependency 'RxSwift', '>= 4.2.0'
-  s.dependency 'RxCocoa', '>= 4.2.0'
+  s.dependency 'RxSwift', '>= 4.3.0'
+  s.dependency 'RxCocoa', '>= 4.3.0'
 
 end
