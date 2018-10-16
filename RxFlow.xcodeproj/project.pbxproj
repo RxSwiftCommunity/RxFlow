@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A4B10B221756E7C0034672F /* HasDisposeBagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4B10B121756E7C0034672F /* HasDisposeBagTests.swift */; };
 		1A8FBDF21FF8337800389464 /* UIViewController+Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDE51FF8337700389464 /* UIViewController+Presentable.swift */; };
 		1A8FBDF31FF8337800389464 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDE61FF8337700389464 /* UIViewController+Rx.swift */; };
 		1A8FBDF41FF8337800389464 /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDE71FF8337700389464 /* Stepper.swift */; };
@@ -22,7 +23,6 @@
 		1A8FBDFE1FF8337800389464 /* Flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDF11FF8337800389464 /* Flow.swift */; };
 		1A8FBE011FF8428E00389464 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A8FBDFF1FF8428E00389464 /* RxCocoa.framework */; };
 		1A8FBE021FF8428E00389464 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A8FBE001FF8428E00389464 /* RxSwift.framework */; };
-		1A8FBE781FF9783100389464 /* RxFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBE771FF9783100389464 /* RxFlowTests.swift */; };
 		1A8FBE7A1FF9783100389464 /* RxFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF8548C1FF8328D00271B52 /* RxFlow.framework */; };
 		1AF8549D1FF8328D00271B52 /* RxFlow.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AF8548F1FF8328D00271B52 /* RxFlow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -38,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A4B10B121756E7C0034672F /* HasDisposeBagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasDisposeBagTests.swift; sourceTree = "<group>"; };
 		1A8FBDDF1FF8331900389464 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = ../Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		1A8FBDE01FF8331900389464 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = ../Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		1A8FBDE51FF8337700389464 /* UIViewController+Presentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Presentable.swift"; sourceTree = "<group>"; };
@@ -56,7 +57,6 @@
 		1A8FBDFF1FF8428E00389464 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		1A8FBE001FF8428E00389464 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		1A8FBE751FF9783100389464 /* RxFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A8FBE771FF9783100389464 /* RxFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxFlowTests.swift; sourceTree = "<group>"; };
 		1A8FBE791FF9783100389464 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AF8548C1FF8328D00271B52 /* RxFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AF8548F1FF8328D00271B52 /* RxFlow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxFlow.h; sourceTree = "<group>"; };
@@ -110,8 +110,8 @@
 		1A8FBE761FF9783100389464 /* RxFlowTests */ = {
 			isa = PBXGroup;
 			children = (
-				1A8FBE771FF9783100389464 /* RxFlowTests.swift */,
 				1A8FBE791FF9783100389464 /* Info.plist */,
+				1A4B10B121756E7C0034672F /* HasDisposeBagTests.swift */,
 			);
 			path = RxFlowTests;
 			sourceTree = "<group>";
@@ -302,7 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A8FBE781FF9783100389464 /* RxFlowTests.swift in Sources */,
+				1A4B10B221756E7C0034672F /* HasDisposeBagTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
