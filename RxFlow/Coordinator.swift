@@ -294,7 +294,10 @@ final public class Coordinator: HasDisposeBag, Synchronizable {
             let childFlows = currentFlows.flatMap { currentFlow in
                 navigateTo(step: step, currentFlow: currentFlow)
             }
-            currentFlows = childFlows
+            // Navigation has generated child flows, subsequent steps should be delegated to those flows
+            if childFlows.count > 0 {
+                currentFlows = childFlows
+            }
         }
     }
     
