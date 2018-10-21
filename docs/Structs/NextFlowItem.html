@@ -118,6 +118,64 @@ If a navigation action does not have to lead to a NextFlowItem, it is possible t
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:6RxFlow04NextB4ItemV15nextPresentableAA0F0_pvp"></a>
+                    <a name="//apple_ref/swift/Property/nextPresentable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow04NextB4ItemV15nextPresentableAA0F0_pvp">nextPresentable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The presentable that will be handle by the Coordinator. The Coordinator is not
+meant to display this presentable, it will only handle its <q>Display</q> status
+so that the associated Stepper will be listened or not</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">nextPresentable</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Presentable.html">Presentable</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow04NextB4ItemV11nextStepperAA0F0_pvp"></a>
+                    <a name="//apple_ref/swift/Property/nextStepper" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow04NextB4ItemV11nextStepperAA0F0_pvp">nextStepper</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The Stepper that will be handle by the Coordinator. It will emit the new
+navigation Steps. The Coordinator will listen to them only if the associated
+Presentable is displayed</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">nextStepper</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Stepper.html">Stepper</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:6RxFlow04NextB4ItemVAcA11Presentable_p04nextE0_AA7Stepper_p0fG0tcfc"></a>
                     <a name="//apple_ref/swift/Method/init(nextPresentable:nextStepper:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:6RxFlow04NextB4ItemVAcA11Presentable_p04nextE0_AA7Stepper_p0fG0tcfc">init(nextPresentable:nextStepper:)</a>
@@ -135,7 +193,7 @@ If a navigation action does not have to lead to a NextFlowItem, it is possible t
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">nextPresentable</span> <span class="nv">presentable</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Presentable.html">Presentable</a></span><span class="p">,</span> <span class="n">nextStepper</span> <span class="nv">stepper</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Stepper.html">Stepper</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n"><a href="../Structs/NextFlowItem.html#/s:6RxFlow04NextB4ItemV15nextPresentableAA0F0_pvp">nextPresentable</a></span> <span class="nv">presentable</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Presentable.html">Presentable</a></span><span class="p">,</span> <span class="n"><a href="../Structs/NextFlowItem.html#/s:6RxFlow04NextB4ItemV11nextStepperAA0F0_pvp">nextStepper</a></span> <span class="nv">stepper</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Stepper.html">Stepper</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -178,7 +236,7 @@ If a navigation action does not have to lead to a NextFlowItem, it is possible t
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-06-04)</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-07-13)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

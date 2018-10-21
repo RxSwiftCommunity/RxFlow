@@ -88,11 +88,11 @@ RxFlow is a reactive implementation of the Coordinator pattern. It has all the g
 
 There are 6 terms you have to be familiar with to understand **RxFlow**:
 - **Flow**: each **Flow** defines a navigation area within your application. This is the place where you declare the navigation actions (such as presenting a UIViewController or another Flow)
-- **Step**: each **Step** is a navigation state in your application. Combinaisons of **Flows** and **Steps** describe all the possible navigation actions. A **Step** can even embed inner values (such as Ids, URLs, ...) that will be propagated to screens declared in the **Flows**
+- **Step**: each **Step** is a navigation state in your application. Combinations of **Flows** and **Steps** describe all the possible navigation actions. A **Step** can even embed inner values (such as Ids, URLs, ...) that will be propagated to screens declared in the **Flows**
 - **Stepper**: it can be anything that can emit **Steps**. **Steppers** will be responsible for triggering every navigation actions within the **Flows**
 - **Presentable**: it is an abstraction of something that can be presented (basically **UIViewController** and **Flow** are **Presentable**). **Presentables** offer Reactive observables that the **Coordinator** will subscribe to in order to handle **Flow Steps** in a UIKit compliant way
-- **NextFlowItem**: it is a simple data structure that combines a **Presentable** and a **stepper**. It tells the **Coordinator** what will be the next thing that will produce new **Steps** in your Reactive mechanism
-- **Coordinator**: once the developer has defined the suitable combinations of **Flows** and **Steps** representing the navigation possibilities, the job of the **Coordinator** is to mix these combinaisons in a consistent way.
+- **NextFlowItem**: it is a simple data structure that combines a **Presentable** and a **Stepper**. It tells the **Coordinator** what will be the next thing that will produce new **Steps** in your Reactive mechanism
+- **Coordinator**: once the developer has defined the suitable combinations of **Flows** and **Steps** representing the navigation possibilities, the job of the **Coordinator** is to mix these combinations in a consistent way.
 
 # How to use RxFlow
 
@@ -129,7 +129,7 @@ The **navigate(to:)** function returns a **NextFlowItems**. This is how the next
 ```swift
 class WatchedFlow: Flow {
 
-    var root: UIViewController {
+    var root: Presentable {
         return self.rootViewController
     }
 
