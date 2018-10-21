@@ -269,15 +269,13 @@ extension Coordinator: FlowCoordinatorDelegate {
     }
 
     func willNavigate(to stepContext: StepContext) {
-        if let withinFlow = stepContext.withinFlow,
-            !(stepContext.step is NoneStep) {
+        if let withinFlow = stepContext.withinFlow {
             self.willNavigateSubject.onNext((withinFlow, stepContext.step))
         }
     }
 
     func didNavigate(to stepContext: StepContext) {
-        if let withinFlow = stepContext.withinFlow,
-            !(stepContext.step is NoneStep) {
+        if let withinFlow = stepContext.withinFlow {
             self.didNavigateSubject.onNext((withinFlow, stepContext.step))
         }
     }

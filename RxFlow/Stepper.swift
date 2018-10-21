@@ -70,6 +70,6 @@ public extension Stepper {
 
     /// the Rx Obsersable that will trigger new Steps
     public var steps: Observable<Step> {
-        return self.step.asObservable()
+        return self.step.filter { !($0 is NoneStep) }
     }
 }
