@@ -159,7 +159,7 @@ class FlowCoordinator: HasDisposeBag, FlowCoordinatorDelegate {
             .pausable(afterCount: 1, withPauser: self.flow.rxVisible)
             .asDriver(onErrorJustReturn: NoneStep())
             .drive(onNext: { [weak self] (step) in
-                // the Flow's Stepper fires a new Step (the initial Step for exaI'mmple)
+                // the Flow's Stepper fires a new Step (the initial Step for example)
                 let newStepContext = StepContext(with: step)
                 newStepContext.withinFlow = self?.flow
                 self?.steps.onNext(newStepContext)
