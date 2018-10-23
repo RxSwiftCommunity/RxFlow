@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A1627C9217D517700952EFC /* Rx+PausableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1627C8217D517700952EFC /* Rx+PausableTests.swift */; };
+		1A1627CC217D597400952EFC /* SyncronizableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1627CB217D597400952EFC /* SyncronizableTests.swift */; };
 		1A4B10B221756E7C0034672F /* HasDisposeBagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4B10B121756E7C0034672F /* HasDisposeBagTests.swift */; };
 		1A4B10B42175708A0034672F /* StepperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4B10B32175708A0034672F /* StepperTests.swift */; };
 		1A8FBDF21FF8337800389464 /* UIViewController+Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDE51FF8337700389464 /* UIViewController+Presentable.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		1A1627C8217D517700952EFC /* Rx+PausableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+PausableTests.swift"; sourceTree = "<group>"; };
+		1A1627CB217D597400952EFC /* SyncronizableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncronizableTests.swift; sourceTree = "<group>"; };
 		1A4B10B121756E7C0034672F /* HasDisposeBagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasDisposeBagTests.swift; sourceTree = "<group>"; };
 		1A4B10B32175708A0034672F /* StepperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperTests.swift; sourceTree = "<group>"; };
 		1A8FBDDF1FF8331900389464 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = ../Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			children = (
 				1A8FBE791FF9783100389464 /* Info.plist */,
 				1A1627CA217D566100952EFC /* Extensions */,
+				1A1627CB217D597400952EFC /* SyncronizableTests.swift */,
 				1A4B10B121756E7C0034672F /* HasDisposeBagTests.swift */,
 				1A4B10B32175708A0034672F /* StepperTests.swift */,
 			);
@@ -319,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A4B10B221756E7C0034672F /* HasDisposeBagTests.swift in Sources */,
+				1A1627CC217D597400952EFC /* SyncronizableTests.swift in Sources */,
 				1A1627C9217D517700952EFC /* Rx+PausableTests.swift in Sources */,
 				1A4B10B42175708A0034672F /* StepperTests.swift in Sources */,
 			);
