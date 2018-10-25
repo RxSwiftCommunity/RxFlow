@@ -56,9 +56,6 @@ class FlowCoordinator: HasDisposeBag, FlowCoordinatorDelegate {
     /// in the case of a new Flow to coordinate or before and after a navigation action
     private unowned var delegate: FlowCoordinatorDelegate
 
-    /// the unique identifier of the FlowCoordinator, used to remove if from the FlowCoordinators array in the main Coordinator
-    let identifier: String
-
     /// Initialize a FlowCoordinator
     ///
     /// - Parameter flow: The Flow to coordinate
@@ -73,7 +70,6 @@ class FlowCoordinator: HasDisposeBag, FlowCoordinatorDelegate {
         self.stepper = stepper
         self.delegate = delegate
         self.parentFlowCoordinator = parentFlowCoordinator
-        self.identifier = "\(type(of: flow))-\(Date())"
     }
 
     /// Launch the coordination process
@@ -105,6 +101,10 @@ class FlowCoordinator: HasDisposeBag, FlowCoordinatorDelegate {
                 case .one(let flowItem):
                     return (stepContext, [flowItem])
                 case .end(let stepToSendToParentFlow):
+                    // we tell the delegate that the FlowCoordinator is ended. This will
+                    // unretain the FlowCoordinator reference from the main Coordinator
+                    self.delegate.end(flowCoordinator: self)
+                    
                     // if the navigation gives a "end" NextFlowItems, the FlowCoordinator
                     // triggers its parent FlowCoordinator with the specified step. It will allow the parent
                     // to dismiss the child Flow Root for instance (because this is the parent who had the responsability
@@ -114,10 +114,6 @@ class FlowCoordinator: HasDisposeBag, FlowCoordinatorDelegate {
                         stepContextForParentFlow.fromChildFlow = self.flow
                         parentFlowCoordinator.steps.onNext(stepContextForParentFlow)
                     }
-
-                    // we tell the delegate that the FlowCoordinator is ended. This will
-                    // unretain the FlowCoordinator reference from the main Coordinator
-                    self.delegate.end(flowCoordinator: self)
 
                     return (stepContext, [NextFlowItem]())
                 case .triggerParentFlow(let stepToSendToParentFlow):
