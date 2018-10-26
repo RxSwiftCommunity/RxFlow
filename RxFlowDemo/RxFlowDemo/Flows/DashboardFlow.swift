@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import RxFlow
+import RxSwift
 
 class DashboardFlow: Flow {
     var root: Presentable {
@@ -17,9 +18,11 @@ class DashboardFlow: Flow {
 
     let rootViewController = UITabBarController()
     private let services: AppServices
+    private let stepper: DashboardStepper
 
-    init(withServices services: AppServices) {
+    init(withServices services: AppServices, andStepper stepper: DashboardStepper) {
         self.services = services
+        self.stepper = stepper
     }
 
     deinit {
@@ -32,6 +35,11 @@ class DashboardFlow: Flow {
         switch step {
         case .dashboard:
             return navigateToDashboard()
+        case .settings:
+            return navigateToLogin()
+        case .loginIsComplete:
+            self.rootViewController.presentedViewController?.dismiss(animated: true)
+            return .none
         default:
             return .none
         }
@@ -51,11 +59,30 @@ class DashboardFlow: Flow {
             root2.title = "Watched"
 
             self.rootViewController.setViewControllers([root1, root2], animated: false)
+            self.stepper.checkLogin()
         }
 
         return .multiple(flowItems: [NextFlowItem(nextPresentable: wishListFlow,
                                                   nextStepper: wishlistStepper),
                                      NextFlowItem(nextPresentable: watchedFlow,
                                                   nextStepper: OneStepper(withSingleStep: DemoStep.movieList))])
+    }
+
+    private func navigateToLogin() -> NextFlowItems {
+        let viewController = SettingsLoginViewController.instantiate()
+        self.rootViewController.present(viewController, animated: true)
+        return .one(flowItem: NextFlowItem(nextPresentable: viewController,
+                                           nextStepper: viewController))
+    }
+}
+
+class DashboardStepper: Stepper, HasDisposeBag {
+    init() {
+        self.step.accept(DemoStep.dashboard)
+    }
+
+    func checkLogin () {
+        // timer is just here to allow to view how things happen
+        Observable<Int>.timer(2, scheduler: MainScheduler.instance).map { _ -> Step in return DemoStep.settings }.bind(to: self.step).disposed(by: self.disposeBag)
     }
 }

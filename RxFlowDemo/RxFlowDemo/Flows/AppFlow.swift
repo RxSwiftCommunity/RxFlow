@@ -51,14 +51,15 @@ class AppFlow: Flow {
     }
 
     private func navigationToDashboardScreen() -> NextFlowItems {
-        let dashboardFlow = DashboardFlow(withServices: self.services)
+        let dashboardStepper = DashboardStepper()
+        let dashboardFlow = DashboardFlow(withServices: self.services, andStepper: dashboardStepper)
 
         Flows.whenReady(flow1: dashboardFlow) { [unowned self] (root) in
             self.rootWindow.rootViewController = root
         }
 
         return .one(flowItem: NextFlowItem(nextPresentable: dashboardFlow,
-                                           nextStepper: OneStepper(withSingleStep: DemoStep.dashboard)))
+                                           nextStepper: dashboardStepper))
     }
 
 }
