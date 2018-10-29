@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1A1627C9217D517700952EFC /* Rx+PausableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1627C8217D517700952EFC /* Rx+PausableTests.swift */; };
 		1A1627CC217D597400952EFC /* SyncronizableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1627CB217D597400952EFC /* SyncronizableTests.swift */; };
+		1A1627CE218677C000952EFC /* UIViewController+PresentableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1627CD218677C000952EFC /* UIViewController+PresentableTests.swift */; };
+		1A1627D12186788700952EFC /* TestUIViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A1627D02186788700952EFC /* TestUIViewController.storyboard */; };
+		1A1627D3218679A500952EFC /* TestUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1627D2218679A500952EFC /* TestUIViewController.swift */; };
 		1A4B10B221756E7C0034672F /* HasDisposeBagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4B10B121756E7C0034672F /* HasDisposeBagTests.swift */; };
 		1A4B10B42175708A0034672F /* StepperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4B10B32175708A0034672F /* StepperTests.swift */; };
 		1A8FBDF21FF8337800389464 /* UIViewController+Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDE51FF8337700389464 /* UIViewController+Presentable.swift */; };
@@ -43,6 +46,9 @@
 /* Begin PBXFileReference section */
 		1A1627C8217D517700952EFC /* Rx+PausableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+PausableTests.swift"; sourceTree = "<group>"; };
 		1A1627CB217D597400952EFC /* SyncronizableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncronizableTests.swift; sourceTree = "<group>"; };
+		1A1627CD218677C000952EFC /* UIViewController+PresentableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+PresentableTests.swift"; sourceTree = "<group>"; };
+		1A1627D02186788700952EFC /* TestUIViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestUIViewController.storyboard; sourceTree = "<group>"; };
+		1A1627D2218679A500952EFC /* TestUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUIViewController.swift; sourceTree = "<group>"; };
 		1A4B10B121756E7C0034672F /* HasDisposeBagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasDisposeBagTests.swift; sourceTree = "<group>"; };
 		1A4B10B32175708A0034672F /* StepperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperTests.swift; sourceTree = "<group>"; };
 		1A8FBDDF1FF8331900389464 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = ../Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
@@ -93,9 +99,20 @@
 		1A1627CA217D566100952EFC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				1A1627CF2186786800952EFC /* TestData */,
 				1A1627C8217D517700952EFC /* Rx+PausableTests.swift */,
+				1A1627CD218677C000952EFC /* UIViewController+PresentableTests.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1A1627CF2186786800952EFC /* TestData */ = {
+			isa = PBXGroup;
+			children = (
+				1A1627D02186788700952EFC /* TestUIViewController.storyboard */,
+				1A1627D2218679A500952EFC /* TestUIViewController.swift */,
+			);
+			path = TestData;
 			sourceTree = "<group>";
 		};
 		1A8FBDDE1FF8331900389464 /* Frameworks */ = {
@@ -267,6 +284,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A1627D12186788700952EFC /* TestUIViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,12 +321,14 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Reusable.framework",
 			);
 			name = "⚙Copy Carthage Frameworks";
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxBlocking.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Reusable.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -323,7 +343,9 @@
 			files = (
 				1A4B10B221756E7C0034672F /* HasDisposeBagTests.swift in Sources */,
 				1A1627CC217D597400952EFC /* SyncronizableTests.swift in Sources */,
+				1A1627CE218677C000952EFC /* UIViewController+PresentableTests.swift in Sources */,
 				1A1627C9217D517700952EFC /* Rx+PausableTests.swift in Sources */,
+				1A1627D3218679A500952EFC /* TestUIViewController.swift in Sources */,
 				1A4B10B42175708A0034672F /* StepperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
