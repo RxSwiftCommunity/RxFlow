@@ -23,7 +23,6 @@ extension Reactive where Base: UIViewController {
 
     /// Rx observable, triggered when the view is being dismissed
     public var dismissed: ControlEvent<Bool> {
-//        let source = self.sentMessage(#selector(Base.dismiss)).map { $0.first as? Bool ?? false }
         let source = self.sentMessage(#selector(Base.viewWillDisappear))
             .filter { _ in self.base.isBeingDismissed }
             .map { _ in false }
@@ -39,5 +38,12 @@ extension Reactive where Base: UIViewController {
         let initialState = Observable.just(false)
         // futur calls to viewDidAppear and viewWillDisappear will chage the displayable state
         return initialState.concat(Observable<Bool>.merge(viewDidAppearObservable, viewWillDisappearObservable))
+    }
+    
+    public var popped: Observable<Void> {
+        return self.sentMessage(#selector(Base.viewDidDisappear))
+            .filter { _ in self.base.isMovingFromParentViewController }
+            .map { _ in return Void() }
+            .take(1)
     }
 }

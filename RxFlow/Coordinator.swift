@@ -163,7 +163,10 @@ class FlowCoordinator: HasDisposeBag, FlowCoordinatorDelegate {
 
         // we listen for the Flow root dismissal state. In case of a dismiss
         // the FlowCoordinate should be ended (its reference has to be unretain from the main Coordinator)
-        self.flow.rxDismissed.subscribe(onSuccess: { [weak self] in
+        Observable.merge(self.flow.rxDismissed.asObservable(),
+                         self.flow.rxPopped.asObservable())
+                        .take(1)
+                        .subscribe(onCompleted: { [weak self] in
             // there is a risk that "self" is already deallocated as it could have
             // been unretained by the main Coordinator (after the self.delegate.endFlowCoordinator(withIdentifier: self.identifier)
             // statement in the subscription chain
@@ -193,7 +196,7 @@ class FlowCoordinator: HasDisposeBag, FlowCoordinatorDelegate {
             stepper
                 .steps
                 .pausable(withPauser: presentable.rxVisible)
-                .takeUntil(self.flow.rxDismissed.asObservable())
+                .takeUntil(Observable.merge(self.flow.rxDismissed.asObservable(), self.flow.rxPopped.asObservable()))
                 .asDriver(onErrorJustReturn: NoneStep()).drive(onNext: { [weak self] (step) in
                     // the nextPresentable's Stepper fires a new Step
                     let newStepContext = StepContext(with: step)
@@ -321,6 +324,24 @@ final public class Coordinator: HasDisposeBag, Synchronizable {
             parent.end(flowCoordinator: flow)
         } else {
             end(flowCoordinator: flow) // Root
+        }
+    }
+    
+    /// Prints out information about the current Flow hierarchy. Useful for debugging.
+    public func printHierarchy() {
+        if let root = rootFlow {
+            print("RxFlow:")
+            printFlow(root, indent: "  ")
+        }
+    }
+    
+    private func printFlow(_ flow: FlowCoordinator, indent: String) {
+        print("\(indent) Flow: \(type(of: flow.flow))")
+        if flow.childFlowCoordinators.count > 0 {
+            print("\(indent) Children: ")
+            flow.childFlowCoordinators.forEach { child in
+                printFlow(child, indent: "\(indent)  ")
+            }
         }
     }
 }

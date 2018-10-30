@@ -21,6 +21,9 @@ public protocol Presentable: HasDisposeBag {
 
     /// Rx Observable (Single trait) triggered when this presentable is dismissed
     var rxDismissed: Single<Void> { get }
+    
+    /// Rx Observable (Single trait) triggered when the presentable is popped from the navigation stack
+    var rxPopped: Single<Void> { get }
 }
 
 extension Presentable where Self: UIViewController {
@@ -38,6 +41,11 @@ extension Presentable where Self: UIViewController {
     /// Rx Observable (Single trait) triggered when this UIViewController is dismissed
     public var rxDismissed: Single<Void> {
         return self.rx.dismissed.map { _ -> Void in return Void() }.take(1).asSingle()
+    }
+    
+    /// Rx Observable (Single trait) triggered when this UIViewController is popped from the navigation stack
+    public var rxPopped: Single<Void> {
+        return self.rx.popped.map { _ -> Void in return Void() }.take(1).asSingle()
     }
 }
 
@@ -57,6 +65,11 @@ extension Presentable where Self: Flow {
     public var rxDismissed: Single<Void> {
         return self.root.rxDismissed
     }
+    
+    /// Rx Observable (Single trait) triggered when this Flow is popped from the navigation stack
+    public var rxPopped: Single<Void> {
+        return self.root.rxPopped
+    }
 }
 
 extension Presentable where Self: UIWindow {
@@ -72,6 +85,11 @@ extension Presentable where Self: UIWindow {
 
     /// Rx Observable (Single trait) triggered when this UIWindow is dismissed
     public var rxDismissed: Single<Void> {
+        return Single.never()
+    }
+    
+    /// Rx Observable (Single trait) never triggered on window
+    public var rxPopped: Single<Void> {
         return Single.never()
     }
 }
