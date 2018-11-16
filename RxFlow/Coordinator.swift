@@ -16,7 +16,8 @@ protocol FlowCoordinatorDelegate: class {
     /// - Parameters:
     ///   - parentFlowCoordinator: the FlowCoordinator that triggers the new Flow
     ///   - nextFlowItem: the NextFlowItem that has triggered the navigation to a new child Flow
-    func navigateToAnotherFlow (withParentFlowCoordinator parentFlowCoordinator: FlowCoordinator, withNextFlowItem nextFlowItem: NextFlowItem)
+    func navigateToAnotherFlow (withParentFlowCoordinator parentFlowCoordinator: FlowCoordinator,
+                                withNextFlowItem nextFlowItem: NextFlowItem)
 
     /// Used to tell the delegate the Flow has ended and it must free the FlowCoordinator
     ///
@@ -42,7 +43,10 @@ protocol FlowCoordinatorDelegate: class {
 class FlowCoordinator: HasDisposeBag {
 
     /// The FlowCoordinator that has triggered this Flow
-    fileprivate var parentFlowCoordinator: FlowCoordinator?
+    fileprivate weak var parentFlowCoordinator: FlowCoordinator?
+
+    /// The children FlowCoordinator, created based on this Flow navigation
+    fileprivate var childFlowCoordinators = [String]()
 
     /// The Flow to be coordinated
     private let flow: Flow
@@ -60,7 +64,7 @@ class FlowCoordinator: HasDisposeBag {
 
     /// The delegate allows the FlowCoordinator to communicate with the Coordinator
     /// in the case of a new Flow to coordinate or before and after a navigation action
-    private weak var delegate: FlowCoordinatorDelegate!
+    internal weak var delegate: FlowCoordinatorDelegate!
 
     /// the unique identifier of the FlowCoordinator, used to remove if from the FlowCoordinators array in the main Coordinator
     let identifier: String
@@ -111,6 +115,10 @@ class FlowCoordinator: HasDisposeBag {
                 case .one(let flowItem):
                     return (stepContext, [flowItem])
                 case .end(let stepToSendToParentFlow):
+                    // we tell the delegate that the FlowCoordinator is ended. This will
+                    // unretain the FlowCoordinator reference from the main Coordinator
+                    self.delegate.endFlowCoordinator(withIdentifier: self.identifier)
+
                     // if the navigation gives a "end" NextFlowItems, the FlowCoordinator
                     // triggers its parent FlowCoordinator with the specified step. It will allow the parent
                     // to dismiss the child Flow Root for instance (because this is the parent who had the responsability
@@ -120,10 +128,6 @@ class FlowCoordinator: HasDisposeBag {
                         stepContextForParentFlow.fromChildFlow = self.flow
                         parentFlowCoordinator.steps.onNext(stepContextForParentFlow)
                     }
-
-                    // we tell the delegate that the FlowCoordinator is ended. This will
-                    // unretain the FlowCoordinator reference from the main Coordinator
-                    self.delegate.endFlowCoordinator(withIdentifier: self.identifier)
 
                     return (stepContext, [NextFlowItem]())
                 case .triggerParentFlow(let stepToSendToParentFlow):
@@ -241,6 +245,7 @@ final public class Coordinator: HasDisposeBag, Synchronizable {
 
         if let parentFlowCoordinator = parentFlowCoordinator {
             flowCoordinator.parentFlowCoordinator = parentFlowCoordinator
+            parentFlowCoordinator.childFlowCoordinators.append(flowCoordinator.identifier)
         }
 
         // we stack the FlowCoordinators so that we do not lose there reference (whereas it could be a leak)
@@ -255,16 +260,25 @@ final public class Coordinator: HasDisposeBag, Synchronizable {
 
 extension Coordinator: FlowCoordinatorDelegate {
 
-    func navigateToAnotherFlow (withParentFlowCoordinator parentFlowCoordinator: FlowCoordinator, withNextFlowItem nextFlowItem: NextFlowItem) {
+    func navigateToAnotherFlow (withParentFlowCoordinator parentFlowCoordinator: FlowCoordinator,
+                                withNextFlowItem nextFlowItem: NextFlowItem) {
 
         if let nextFlow = nextFlowItem.nextPresentable as? Flow {
-            self.coordinate(flow: nextFlow, withStepper: nextFlowItem.nextStepper, withParentFlowCoordinator: parentFlowCoordinator)
+            self.coordinate(flow: nextFlow,
+                            withStepper: nextFlowItem.nextStepper,
+                            withParentFlowCoordinator: parentFlowCoordinator)
         }
     }
 
     func endFlowCoordinator(withIdentifier identifier: String) {
         _ = self.synchronized { [unowned self] in
-            self.flowCoordinators.removeValue(forKey: identifier)
+            // we remove the FlowCoordinator from the list
+            if let removedFlowCoordinator = self.flowCoordinators.removeValue(forKey: identifier) {
+                // and we also remove its children from the list, in order to release memory
+                removedFlowCoordinator.childFlowCoordinators.forEach { [unowned self] in
+                    self.endFlowCoordinator(withIdentifier: $0)
+                }
+            }
         }
     }
 
