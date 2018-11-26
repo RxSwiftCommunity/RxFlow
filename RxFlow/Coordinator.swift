@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import RxCocoa
 
 /// Delegate used to communicate from a FlowCoordinator
 protocol FlowCoordinatorDelegate: class {
@@ -213,8 +214,8 @@ class FlowCoordinator: HasDisposeBag {
 final public class Coordinator: HasDisposeBag, Synchronizable {
 
     private var flowCoordinators = [String: FlowCoordinator]()
-    fileprivate let willNavigateSubject = PublishSubject<(Flow, Step)>()
-    fileprivate let didNavigateSubject = PublishSubject<(Flow, Step)>()
+    fileprivate let willNavigateSubject = PublishRelay<(Flow, Step)>()
+    fileprivate let didNavigateSubject = PublishRelay<(Flow, Step)>()
 
     /// Initialize the Coordinator
     public init() {
@@ -284,13 +285,13 @@ extension Coordinator: FlowCoordinatorDelegate {
 
     func willNavigate(to stepContext: StepContext) {
         if let withinFlow = stepContext.withinFlow {
-            self.willNavigateSubject.onNext((withinFlow, stepContext.step))
+            self.willNavigateSubject.accept((withinFlow, stepContext.step))
         }
     }
 
     func didNavigate(to stepContext: StepContext) {
         if let withinFlow = stepContext.withinFlow {
-            self.didNavigateSubject.onNext((withinFlow, stepContext.step))
+            self.didNavigateSubject.accept((withinFlow, stepContext.step))
         }
     }
 }
@@ -307,13 +308,13 @@ extension Coordinator {
 
 extension Reactive where Base: Coordinator {
 
-    /// Rx Observable triggered before the Coordinator navigates a Flow/Step
-    public var willNavigate: Observable<(Flow, Step)> {
-        return self.base.willNavigateSubject.asObservable()
+    /// Rx Signal triggered before the Coordinator navigates a Flow/Step
+    public var willNavigate: Signal<(Flow, Step)> {
+        return self.base.willNavigateSubject.asSignal()
     }
 
-    /// Rx Observable triggered after the Coordinator navigates a Flow/Step
-    public var didNavigate: Observable<(Flow, Step)> {
-        return self.base.didNavigateSubject.asObservable()
+    /// Rx Signal triggered after the Coordinator navigates a Flow/Step
+    public var didNavigate: Signal<(Flow, Step)> {
+        return self.base.didNavigateSubject.asSignal()
     }
 }
