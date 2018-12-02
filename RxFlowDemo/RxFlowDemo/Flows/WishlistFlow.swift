@@ -42,11 +42,26 @@ class WishlistFlow: Flow {
         case .settings:
             return navigateToSettings()
         case .settingsIsComplete:
-            self.rootViewController.presentedViewController?.dismiss(animated: true)
-            return .none
+            return self.dismissModal()
+        case .qrCodeReader(let completionBlock):
+            return self.navigateToQrCodeReader(with: completionBlock)
+        case .qrCodeDone:
+            return self.dismissModal()
         default:
             return .none
         }
+    }
+
+    private func dismissModal () -> NextFlowItems {
+        self.rootViewController.presentedViewController?.dismiss(animated: true)
+        return .none
+    }
+
+    private func navigateToQrCodeReader (with completionBlock: @escaping (String) -> Void) -> NextFlowItems {
+        let viewController = QRCodeReaderViewController()
+        viewController.completionBlock = completionBlock
+        self.rootViewController.present(viewController, animated: true)
+        return .one(flowItem: NextFlowItem(nextPresentable: viewController, nextStepper: viewController))
     }
 
     private func navigateToMovieListScreen() -> NextFlowItems {
@@ -61,7 +76,7 @@ class WishlistFlow: Flow {
                                                 animated: false)
         }
         return .one(flowItem: NextFlowItem(nextPresentable: viewController,
-                                           nextStepper: viewController.viewModel))
+                                           nextStepper: CompositeStepper(steppers: [viewController, viewController.viewModel])))
     }
 
     private func navigateToMovieDetailScreen (with movieId: Int) -> NextFlowItems {

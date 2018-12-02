@@ -29,4 +29,8 @@ enum DemoStep: Step {
     case settings
     case about
     case settingsIsComplete
+
+    // QrCode
+    case qrCodeReader(withCompletionBlock: (String) -> Void)
+    case qrCodeDone
 }

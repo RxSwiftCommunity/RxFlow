@@ -54,8 +54,24 @@
 		1AF854B31FF832AE00271B52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF854B21FF832AE00271B52 /* AppDelegate.swift */; };
 		1AF854BA1FF832AE00271B52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AF854B91FF832AE00271B52 /* Assets.xcassets */; };
 		1AF854BD1FF832AE00271B52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AF854BB1FF832AE00271B52 /* LaunchScreen.storyboard */; };
-		267679812165F16700FB0BB0 /* RxFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 267679802165F16700FB0BB0 /* RxFlow.framework */; };
+		74D623B521AF7E9400A09F49 /* RxFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 267679802165F16700FB0BB0 /* RxFlow.framework */; };
+		74D623B621AF7E9400A09F49 /* RxFlow.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 267679802165F16700FB0BB0 /* RxFlow.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		74E77F5821B497AD00C6B477 /* QRCodeReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E77F5721B497AD00C6B477 /* QRCodeReaderViewController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		74D623B721AF7E9400A09F49 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				74D623B621AF7E9400A09F49 /* RxFlow.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1A25DE80202D3CFE00F1C4B8 /* AppFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlow.swift; sourceTree = "<group>"; };
@@ -108,6 +124,7 @@
 		1AF854BC1FF832AE00271B52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1AF854BE1FF832AE00271B52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		267679802165F16700FB0BB0 /* RxFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		74E77F5721B497AD00C6B477 /* QRCodeReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeReaderViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,9 +132,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				267679812165F16700FB0BB0 /* RxFlow.framework in Frameworks */,
 				1A8FBE101FF845EE00389464 /* Reusable.framework in Frameworks */,
 				1A8FBE111FF845EE00389464 /* RxSwift.framework in Frameworks */,
+				74D623B521AF7E9400A09F49 /* RxFlow.framework in Frameworks */,
 				1A8FBE121FF845EE00389464 /* RxCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,6 +202,7 @@
 			children = (
 				1A8FBE3F1FF84B9600389464 /* Dashboard */,
 				1A8FBE401FF84B9E00389464 /* Settings */,
+				74E77F5621B4976000C6B477 /* Tools */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -293,6 +311,14 @@
 			path = RxFlowDemo;
 			sourceTree = "<group>";
 		};
+		74E77F5621B4976000C6B477 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				74E77F5721B497AD00C6B477 /* QRCodeReaderViewController.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -305,6 +331,7 @@
 				1AF854AB1FF832AE00271B52 /* Sources */,
 				1AF854AC1FF832AE00271B52 /* Frameworks */,
 				1AF854AD1FF832AE00271B52 /* Resources */,
+				74D623B721AF7E9400A09F49 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -443,6 +470,7 @@
 				1A8FBE261FF8480C00389464 /* WishlistFlow.swift in Sources */,
 				1A8FBE2D1FF84B2500389464 /* ViewModelBased.swift in Sources */,
 				1A8FBE671FF84BFE00389464 /* CastDetailViewController.swift in Sources */,
+				74E77F5821B497AD00C6B477 /* QRCodeReaderViewController.swift in Sources */,
 				1A8FBE6A1FF84C2400389464 /* MovieCollectionViewCell.swift in Sources */,
 				1AF854B31FF832AE00271B52 /* AppDelegate.swift in Sources */,
 				1A8FBE521FF84BF300389464 /* MovieViewCell.swift in Sources */,

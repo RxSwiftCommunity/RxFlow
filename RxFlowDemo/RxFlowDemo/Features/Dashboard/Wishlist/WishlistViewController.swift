@@ -15,6 +15,9 @@ import RxCocoa
 class WishlistViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     @IBOutlet private weak var moviesTable: UITableView!
+    @IBOutlet weak var qrCodeButton: UIButton!
+    @IBOutlet weak var textViewContraint: NSLayoutConstraint!
+    @IBOutlet weak var qrCodeResultTextView: UITextView!
 
     var viewModel: WishlistViewModel!
 
@@ -23,6 +26,8 @@ class WishlistViewController: UIViewController, StoryboardBased, ViewModelBased 
 
         self.moviesTable.delegate = self
         self.moviesTable.dataSource = self
+
+        _ = self.qrCodeButton.rx.tap.takeUntil(self.rx.deallocating).subscribe (onNext: { [weak self] _ in self?.qrCodeReader() })
     }
 }
 
@@ -50,5 +55,14 @@ extension WishlistViewController: UITableViewDataSource {
         cell.movieTitle.text = self.viewModel.movies[indexPath.item].title
         cell.movieImage.image = UIImage(named: self.viewModel.movies[indexPath.item].image)
         return cell
+    }
+}
+
+extension WishlistViewController: Stepper {
+    func qrCodeReader () {
+        self.step.accept(DemoStep.qrCodeReader(withCompletionBlock: { [weak self] qrCode in
+            self?.qrCodeResultTextView.text = "👍 QR Code scanned: \(qrCode)"
+            self?.textViewContraint.constant = 150
+        }))
     }
 }
