@@ -9,6 +9,9 @@
 import RxFlow
 
 enum DemoStep: Step {
+    // global
+    case logout
+
     // Onboarding
     case onboarding
     case apiKey

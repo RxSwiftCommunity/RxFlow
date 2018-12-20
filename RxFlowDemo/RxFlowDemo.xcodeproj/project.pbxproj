@@ -54,8 +54,23 @@
 		1AF854B31FF832AE00271B52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF854B21FF832AE00271B52 /* AppDelegate.swift */; };
 		1AF854BA1FF832AE00271B52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AF854B91FF832AE00271B52 /* Assets.xcassets */; };
 		1AF854BD1FF832AE00271B52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AF854BB1FF832AE00271B52 /* LaunchScreen.storyboard */; };
-		267679812165F16700FB0BB0 /* RxFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 267679802165F16700FB0BB0 /* RxFlow.framework */; };
+		7418F76521BDB54300FF71A4 /* RxFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 267679802165F16700FB0BB0 /* RxFlow.framework */; };
+		7418F76621BDB54300FF71A4 /* RxFlow.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 267679802165F16700FB0BB0 /* RxFlow.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7418F76721BDB54300FF71A4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7418F76621BDB54300FF71A4 /* RxFlow.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1A25DE80202D3CFE00F1C4B8 /* AppFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlow.swift; sourceTree = "<group>"; };
@@ -115,9 +130,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				267679812165F16700FB0BB0 /* RxFlow.framework in Frameworks */,
 				1A8FBE101FF845EE00389464 /* Reusable.framework in Frameworks */,
 				1A8FBE111FF845EE00389464 /* RxSwift.framework in Frameworks */,
+				7418F76521BDB54300FF71A4 /* RxFlow.framework in Frameworks */,
 				1A8FBE121FF845EE00389464 /* RxCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -305,6 +320,7 @@
 				1AF854AB1FF832AE00271B52 /* Sources */,
 				1AF854AC1FF832AE00271B52 /* Frameworks */,
 				1AF854AD1FF832AE00271B52 /* Resources */,
+				7418F76721BDB54300FF71A4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

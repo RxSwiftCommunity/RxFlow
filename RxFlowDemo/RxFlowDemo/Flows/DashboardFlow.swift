@@ -32,6 +32,8 @@ class DashboardFlow: Flow {
         switch step {
         case .dashboard:
             return navigateToDashboard()
+        case .logout:
+            return NextFlowItems.end(withStepForParentFlow: step)
         default:
             return .none
         }

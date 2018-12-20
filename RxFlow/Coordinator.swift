@@ -59,9 +59,8 @@ class FlowCoordinator: HasDisposeBag {
     /// The Rx subject that holds all the Steps trigerred either by the Flow's Stepper
     /// or by the Steppers produced by the Flow.navigate(to:) function
     /// To be more precise, it is a Stream of StepContexts.
-    /// Such a context holds some extra info about the step (for instance, a Bool associated with
-    /// the Step indicating whether the Step comes from the Flow itself or a child Flow)
-    private let steps = PublishSubject<StepContext>()
+    /// Such a context holds some extra info about the step
+    private let steps = PublishRelay<StepContext>()
 
     /// The delegate allows the FlowCoordinator to communicate with the Coordinator
     /// in the case of a new Flow to coordinate or before and after a navigation action
@@ -88,28 +87,26 @@ class FlowCoordinator: HasDisposeBag {
     }
 
     /// Launch the coordination process
-    ///
-    /// - Parameter stepper: The Stepper that goes with the Flow. It will trigger some Steps at the Flow level
     func coordinate () {
-
         self.steps
-            .do(onNext: { [unowned self] (stepContext) in
+            .takeUntil(self.flow.rxDismissed.asObservable())
+            .do(onNext: { [delegate] (stepContext) in
                 // trigger the delegate before the navigation is done
-                self.delegate.willNavigate(to: stepContext)
+                delegate?.willNavigate(to: stepContext)
             })
-            .map { [unowned self] (stepContext) -> (StepContext, NextFlowItems) in
+            .asDriver(onErrorJustReturn: StepContext.none)
+            .map { [flow] (stepContext) -> (StepContext, NextFlowItems) in
                 // do the navigation according to the Flow and the Step
                 // Retrieve the NextFlowItems
-                return (stepContext, self.flow.navigate(to: stepContext.step))
-            }.do(onNext: { [unowned self] (stepContext, _) in
+                return (stepContext, flow.navigate(to: stepContext.step))
+            }.do(onNext: { [flow, delegate] (stepContext, _) in
                 // when first presentable is discovered we can assume the Flow is ready to be used (its root can be used in other Flows)
-                self.flow.flowReadySubject.onNext(true)
+                flow.flowReadySubject.onNext(true)
 
                 // trigger the delegate after the navigation is done
                 // the step will be handle whithin the Flow that is concerned by this very FlowCoordinator
-                stepContext.withinFlow = self.flow
-                self.delegate.didNavigate(to: stepContext)
-            }).map { [unowned self] (stepContext, nextFlowItems) -> (StepContext, [NextFlowItem]) in
+                delegate?.didNavigate(to: stepContext)
+            }).map { [delegate, flow, parentFlowCoordinator] (stepContext, nextFlowItems) -> (StepContext, [NextFlowItem]) in
                 switch nextFlowItems {
                 case .multiple(let flowItems):
                     return (stepContext, flowItems)
@@ -118,7 +115,7 @@ class FlowCoordinator: HasDisposeBag {
                 case .end(let stepToSendToParentFlow):
                     // we tell the delegate that the FlowCoordinator is ended. This will
                     // unretain the FlowCoordinator reference from the main Coordinator
-                    self.delegate.endFlowCoordinator(withIdentifier: self.identifier)
+                    delegate?.endFlowCoordinator(withIdentifier: self.identifier)
 
                     // if the navigation gives a "end" NextFlowItems, the FlowCoordinator
                     // triggers its parent FlowCoordinator with the specified step. It will allow the parent
@@ -126,8 +123,8 @@ class FlowCoordinator: HasDisposeBag {
                     // to present the child Flow Root as well)
                     if  let parentFlowCoordinator = self.parentFlowCoordinator {
                         let stepContextForParentFlow = StepContext(with: stepToSendToParentFlow)
-                        stepContextForParentFlow.fromChildFlow = self.flow
-                        parentFlowCoordinator.steps.onNext(stepContextForParentFlow)
+                        stepContextForParentFlow.fromChildFlow = flow
+                        parentFlowCoordinator.steps.accept(stepContextForParentFlow)
                     }
 
                     return (stepContext, [NextFlowItem]())
@@ -137,10 +134,10 @@ class FlowCoordinator: HasDisposeBag {
                     // to perform specific actions but without stopping listening for steppers in the current FlowCoordinator
                     // It can be useful in case of a tabbar navigation to allow a Flow that represents a tab to communicate
                     // with the parent Flow that handles the whole tabbar
-                    if  let parentFlowCoordinator = self.parentFlowCoordinator {
+                    if  let parentFlowCoordinator = parentFlowCoordinator {
                         let stepContextForParentFlow = StepContext(with: stepToSendToParentFlow)
-                        stepContextForParentFlow.fromChildFlow = self.flow
-                        parentFlowCoordinator.steps.onNext(stepContextForParentFlow)
+                        stepContextForParentFlow.fromChildFlow = flow
+                        parentFlowCoordinator.steps.accept(stepContextForParentFlow)
                     }
 
                     return (stepContext, [NextFlowItem]())
@@ -148,19 +145,19 @@ class FlowCoordinator: HasDisposeBag {
                     return (stepContext, [NextFlowItem]())
                 }
             }
-            .flatMap { (arg) -> Observable<NextFlowItem> in
-                // flatten the Observable<[NextFlowItem]> into Observable<NextFlowItem>
+            .flatMap { (arg) -> Driver<NextFlowItem> in
+                // flatten the Driver<[NextFlowItem]> into Driver<NextFlowItem>
                 // we know which NextFlowItem have been produced by this navigation action
                 // each one of these NextFlowItems will lead to other navigation actions (for example, new Flows to handle and new Steppers to listen)
                 let (_, nextFlowItems) = arg
-                return Observable.from(nextFlowItems)
+                return Driver.from(nextFlowItems)
             }
-            .do(onNext: { [unowned self] (nextFlowItem) in
+            .do(onNext: { [delegate] (nextFlowItem) in
                 // if the NextFlowItem's next presentable represents a Flow, it has to be processed at a higher level because
                 // the FlowCoordinator only knowns about the Flow it's in charge of.
                 // The FlowCoordinator will expose the new Flow through its delegate
                 if nextFlowItem.nextPresentable is Flow {
-                    self.delegate.navigateToAnotherFlow(withParentFlowCoordinator: self, withNextFlowItem: nextFlowItem)
+                    delegate?.navigateToAnotherFlow(withParentFlowCoordinator: self, withNextFlowItem: nextFlowItem)
                 }
             })
             .filter { (nextFlowItem) -> Bool in
@@ -168,42 +165,38 @@ class FlowCoordinator: HasDisposeBag {
                 // should be processed
                 return !(nextFlowItem.nextPresentable is Flow)
             }
-            .flatMap { (nextFlowItem) -> Observable<Step> in
+            .flatMap { (nextFlowItem) -> Driver<Step> in
                 // Steps are ok to be listened to. The steps can only be triggerd
                 // when the presentable is displayed
                 let presentable = nextFlowItem.nextPresentable
                 let stepper = nextFlowItem.nextStepper
                 return stepper
                     .steps
-                    .pausable(withPauser: presentable.rxVisible)
+                    .pausable(withPauser: presentable.rxVisible).asDriver(onErrorJustReturn: NoneStep())
             }
-            .takeUntil(self.flow.rxDismissed.asObservable())
-            .asDriver(onErrorJustReturn: NoneStep()).drive(onNext: { [weak self] (step) in
+            .drive(onNext: { [steps, flow] (step) in
                 // the nextPresentable's Stepper fires a new Step
-                let newStepContext = StepContext(with: step)
-                self?.steps.onNext(newStepContext)
+                let newStepContext = StepContext(with: step, withinFlow: flow)
+                steps.accept(newStepContext)
             }).disposed(by: flow.disposeBag)
 
         // we listen for the Flow dedicated Stepper to drive the internal "steps" PublishSubject<StepContext>
         self.stepper
             .steps
             .pausable(afterCount: 1, withPauser: self.flow.rxVisible)
-            .asDriver(onErrorJustReturn: NoneStep())
-            .drive(onNext: { [weak self] (step) in
-                // the Flow's Stepper fires a new Step (the initial Step for exemple)
-                let newStepContext = StepContext(with: step)
-                newStepContext.withinFlow = self?.flow
-                self?.steps.onNext(newStepContext)
-            }).disposed(by: flow.disposeBag)
+            .map { [flow] step in
+                return StepContext(with: step, withinFlow: flow)
+            }
+            .bind(to: self.steps)
+            .disposed(by: flow.disposeBag)
 
         // we listen for the Flow root dismissal state. In case of a dismiss
         // the FlowCoordinate should be ended (its reference has to be unretain from the main Coordinator)
-        self.flow.rxDismissed.subscribe(onSuccess: { [weak self] in
+        self.flow.rxDismissed.subscribe(onSuccess: { [delegate, identifier] in
             // there is a risk that "self" is already deallocated as it could have
             // been unretained by the main Coordinator (after the self.delegate.endFlowCoordinator(withIdentifier: self.identifier)
             // statement in the subscription chain
-            guard let strongSelf = self else { return }
-            strongSelf.delegate.endFlowCoordinator(withIdentifier: strongSelf.identifier)
+            delegate?.endFlowCoordinator(withIdentifier: identifier)
         }).disposed(by: flow.disposeBag)
 
     }
@@ -276,8 +269,8 @@ extension Coordinator: FlowCoordinatorDelegate {
             // we remove the FlowCoordinator from the list
             if let removedFlowCoordinator = self.flowCoordinators.removeValue(forKey: identifier) {
                 // and we also remove its children from the list, in order to release memory
-                removedFlowCoordinator.childFlowCoordinators.forEach { [unowned self] in
-                    self.endFlowCoordinator(withIdentifier: $0)
+                removedFlowCoordinator.childFlowCoordinators.forEach { [weak self] in
+                    self?.endFlowCoordinator(withIdentifier: $0)
                 }
             }
         }
@@ -308,13 +301,13 @@ extension Coordinator {
 
 extension Reactive where Base: Coordinator {
 
-    /// Rx Signal triggered before the Coordinator navigates a Flow/Step
-    public var willNavigate: Signal<(Flow, Step)> {
-        return self.base.willNavigateSubject.asSignal()
+    /// Rx Observable triggered before the Coordinator navigates a Flow/Step
+    public var willNavigate: Observable<(Flow, Step)> {
+        return self.base.willNavigateSubject.asObservable()
     }
 
-    /// Rx Signal triggered after the Coordinator navigates a Flow/Step
-    public var didNavigate: Signal<(Flow, Step)> {
-        return self.base.didNavigateSubject.asSignal()
+    /// Rx Observable triggered after the Coordinator navigates a Flow/Step
+    public var didNavigate: Observable<(Flow, Step)> {
+        return self.base.didNavigateSubject.asObservable()
     }
 }

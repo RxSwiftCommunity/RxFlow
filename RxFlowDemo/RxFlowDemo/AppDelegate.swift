@@ -29,7 +29,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         guard let window = self.window else { return false }
 
-        coordinator.rx.didNavigate.emit(onNext: { (flow, step) in
+        coordinator.rx.willNavigate.subscribe(onNext: { (flow, step) in
+            print ("will navigate to flow=\(flow) and step=\(step)")
+        }).disposed(by: self.disposeBag)
+
+        coordinator.rx.didNavigate.subscribe(onNext: { (flow, step) in
             print ("did navigate to flow=\(flow) and step=\(step)")
         }).disposed(by: self.disposeBag)
 

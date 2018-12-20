@@ -31,7 +31,7 @@ class AppFlow: Flow {
         guard let step = step as? DemoStep else { return NextFlowItems.none }
 
         switch step {
-        case .onboarding:
+        case .onboarding, .logout:
             return navigationToOnboardingScreen()
         case .onboardingIsComplete, .dashboard:
             return navigationToDashboardScreen()
@@ -41,6 +41,11 @@ class AppFlow: Flow {
     }
 
     private func navigationToOnboardingScreen() -> NextFlowItems {
+
+        if let rootViewController = self.rootWindow.rootViewController {
+            rootViewController.dismiss(animated: false)
+        }
+
         let onboardingFlow = OnboardingFlow(withServices: self.services)
         Flows.whenReady(flow1: onboardingFlow) { [unowned self] (root) in
             self.rootWindow.rootViewController = root
