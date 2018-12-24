@@ -9,8 +9,9 @@
 import UIKit
 import Reusable
 import RxFlow
+import RxCocoa
 
-class SettingsAboutViewController: UIViewController, StoryboardBased, Stepper {
+class SettingsAboutViewController: UIViewController, StoryboardBased {
     override func viewDidLoad() {
         super.viewDidLoad()
     }

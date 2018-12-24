@@ -14,7 +14,7 @@
     <a title="CompositeStepper Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">RxFlow Docs</a> (100% documented)</p>
+        <p><a href="../index.html">RxFlow Docs</a> (94% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -34,7 +34,13 @@
                 <a href="../Classes/CompositeStepper.html">CompositeStepper</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/Coordinator.html">Coordinator</a>
+                <a href="../Classes/DefaultStepper.html">DefaultStepper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FlowContributor.html">FlowContributor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FlowCoordinator.html">FlowCoordinator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/Flows.html">Flows</a>
@@ -48,7 +54,10 @@
             <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Enums/NextFlowItems.html">NextFlowItems</a>
+                <a href="../Enums/FlowContributors.html">FlowContributors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RxFlowStep.html">RxFlowStep</a>
               </li>
             </ul>
           </li>
@@ -70,9 +79,6 @@
                 <a href="../Protocols/Flow.html">Flow</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/HasDisposeBag.html">HasDisposeBag</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Protocols/Presentable.html">Presentable</a>
               </li>
               <li class="nav-group-task">
@@ -87,10 +93,16 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Structs.html">Structures</a>
+            <a href="../Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Structs/NextFlowItem.html">NextFlowItem</a>
+                <a href="../Typealiases.html#/s:6RxFlow11Coordinatora">Coordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6RxFlow04NextB4Itema">NextFlowItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6RxFlow04NextB5Itemsa">NextFlowItems</a>
               </li>
             </ul>
           </li>
@@ -102,7 +114,7 @@
             <h1>CompositeStepper</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">final</span> <span class="kd">public</span> <span class="kd">class</span> <span class="kt">CompositeStepper</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Stepper.html">Stepper</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">CompositeStepper</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Stepper.html">Stepper</a></span></code></pre>
 
                 </div>
               </div>
@@ -116,9 +128,9 @@ to the Presentable that is given within the NextFlowItem</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6RxFlow16CompositeStepperC5stepsXevp"></a>
+                    <a name="/s:6RxFlow7StepperP5steps0A5Cocoa12PublishRelayCyAA4Step_pGvp"></a>
                     <a name="//apple_ref/swift/Property/steps" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6RxFlow16CompositeStepperC5stepsXevp">steps</a>
+                    <a class="token" href="#/s:6RxFlow7StepperP5steps0A5Cocoa12PublishRelayCyAA4Step_pGvp">steps</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -126,14 +138,13 @@ to the Presentable that is given within the NextFlowItem</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>the Rx Obsersable that will emits new Steps</p>
-
+                        
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">steps</span><span class="p">:</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols.html#/s:6RxFlow4StepP">Step</a></span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">steps</span><span class="p">:</span> <span class="kt">PublishRelay</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols.html#/s:6RxFlow4StepP">Step</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -143,9 +154,9 @@ to the Presentable that is given within the NextFlowItem</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6RxFlow16CompositeStepperCACSayAA0D0_pG8steppers_tcfc"></a>
+                    <a name="/s:6RxFlow16CompositeStepperC8steppersACSayAA0D0_pG_tcfc"></a>
                     <a name="//apple_ref/swift/Method/init(steppers:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6RxFlow16CompositeStepperCACSayAA0D0_pG8steppers_tcfc">init(steppers:)</a>
+                    <a class="token" href="#/s:6RxFlow16CompositeStepperC8steppersACSayAA0D0_pG_tcfc">init(steppers:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -191,8 +202,8 @@ to the Presentable that is given within the NextFlowItem</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-07-13)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-12-29)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

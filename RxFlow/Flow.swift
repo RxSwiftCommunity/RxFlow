@@ -7,33 +7,34 @@
 //
 
 import RxSwift
+import RxCocoa
 import UIKit
 
 private var subjectContext: UInt8 = 0
 
 /// A Flow defines a clear navigation area. Combined to a Step it leads to a navigation action
-public protocol Flow: Presentable {
-
-    /// Resolves NextFlowItems according to the Step, in the context of this very Flow
-    ///
-    /// - Parameters:
-    ///   - step: the Step emitted by one of the Steppers declared in the Flow
-    /// - Returns: the NextFlowItems matching the Step. These NextFlowItems determines the next navigation steps (Presentables to display / Steppers to listen)
-    func navigate (to step: Step) -> NextFlowItems
+public protocol Flow: class, Presentable, Synchronizable {
 
     /// the Presentable on which rely the navigation inside this Flow. This method must always give the same instance
     var root: Presentable { get }
+
+    /// Resolves FlowContributors according to the Step, in the context of this very Flow
+    ///
+    /// - Parameters:
+    ///   - step: the Step emitted by one of the Steppers declared in the Flow
+    /// - Returns: the FlowContributors matching the Step. These FlowContributors determines the next navigation steps (Presentables to display / Steppers to listen)
+    func navigate (to step: Step) -> FlowContributors
 }
 
 extension Flow {
 
     /// Inner/hidden Rx Subject in which we push the "Ready" event
-    var flowReadySubject: PublishSubject<Bool> {
+    internal var flowReadySubject: PublishRelay<Bool> {
         return self.synchronized {
-            if let subject = objc_getAssociatedObject(self, &subjectContext) as? PublishSubject<Bool> {
+            if let subject = objc_getAssociatedObject(self, &subjectContext) as? PublishRelay<Bool> {
                 return subject
             }
-            let newSubject = PublishSubject<Bool>()
+            let newSubject = PublishRelay<Bool>()
             objc_setAssociatedObject(self, &subjectContext, newSubject, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return newSubject
         }
@@ -41,7 +42,7 @@ extension Flow {
     }
 
     /// the Rx Obsersable that will be triggered when the first presentable of the Flow is ready to be used
-    var rxFlowReady: Single<Bool> {
+    internal var rxFlowReady: Single<Bool> {
         return self.flowReadySubject.take(1).asSingle()
     }
 
@@ -208,7 +209,7 @@ public class Flows {
             fatalError ("Type mismatch, Flow root type does not match the type awaited in the block")
         }
 
-        _ = flow1.rxFlowReady.subscribe(onSuccess: { (_) in
+        _ = flow1.rxFlowReady.subscribe(onSuccess: { _ in
             block(root)
         })
     }

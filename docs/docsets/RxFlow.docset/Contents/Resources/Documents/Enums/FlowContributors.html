@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>FlowContributors Enumeration Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Enum/FlowContributors" class="dashAnchor"></a>
+    <a title="FlowContributors Enumeration Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">RxFlow Docs</a> (94% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">RxFlow Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        FlowContributors Enumeration Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/CompositeStepper.html">CompositeStepper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DefaultStepper.html">DefaultStepper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FlowContributor.html">FlowContributor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FlowCoordinator.html">FlowCoordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Flows.html">Flows</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/OneStepper.html">OneStepper</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/FlowContributors.html">FlowContributors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RxFlowStep.html">RxFlowStep</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/ObservableType.html">ObservableType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Reactive.html">Reactive</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Flow.html">Flow</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Presentable.html">Presentable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:6RxFlow4StepP">Step</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Stepper.html">Stepper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:6RxFlow14SynchronizableP">Synchronizable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6RxFlow11Coordinatora">Coordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6RxFlow04NextB4Itema">NextFlowItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6RxFlow04NextB5Itemsa">NextFlowItems</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>FlowContributors</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">FlowContributors</span></code></pre>
+
+                </div>
+              </div>
+            <p>FlowContributors reprent the next things that will trigger
+navigation actions inside a Flow</p>
+
+<ul>
+<li>multiple: a Flow will trigger several FlowContributors at the same time for the same Step</li>
+<li>one: a Flow will trigger only one FlowContributor for a Step</li>
+<li>end: a Flow will trigger a special FlowContributor that represents the dismissal of this Flow</li>
+<li>triggerParentFlow: the parent Flow (if exists) will be triggered with the given Step</li>
+<li>none: no further navigation will be triggered for a Step</li>
+</ul>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow0B12ContributorsO8multipleyACSayAA0B11ContributorCG_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/multiple(flowItems:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow0B12ContributorsO8multipleyACSayAA0B11ContributorCG_tcACmF">multiple(flowItems:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>a Flow will trigger several FlowContributor at the same time for the same Step</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">multiple</span><span class="p">(</span><span class="nv">flowItems</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/FlowContributor.html">FlowContributor</a></span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow0B12ContributorsO3oneyAcA0B11ContributorC_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/one(flowItem:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow0B12ContributorsO3oneyAcA0B11ContributorC_tcACmF">one(flowItem:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>a Flow will trigger only one FlowContributor for a Step</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">one</span><span class="p">(</span><span class="nv">flowItem</span><span class="p">:</span> <span class="kt"><a href="../Classes/FlowContributor.html">FlowContributor</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow0B12ContributorsO3endyAcA4Step_p_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/end(withStepForParentFlow:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow0B12ContributorsO3endyAcA4Step_p_tcACmF">end(withStepForParentFlow:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>a Flow will trigger a special FlowContributor that represents the dismissal of this Flow</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">end</span><span class="p">(</span><span class="nv">withStepForParentFlow</span><span class="p">:</span> <span class="kt"><a href="../Protocols.html#/s:6RxFlow4StepP">Step</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow0B12ContributorsO013triggerParentB0yAcA4Step_p_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/triggerParentFlow(withStep:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow0B12ContributorsO013triggerParentB0yAcA4Step_p_tcACmF">triggerParentFlow(withStep:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>a Flow will trigger a special FlowContributor that allows to trigger a new Step for the parent Flow
+(same as .end but without stopping listening for child flow steppers)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">triggerParentFlow</span><span class="p">(</span><span class="nv">withStep</span><span class="p">:</span> <span class="kt"><a href="../Protocols.html#/s:6RxFlow4StepP">Step</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow0B12ContributorsO4noneyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/none" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow0B12ContributorsO4noneyA2CmF">none</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>no further navigation will be triggered for a Step</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="k">none</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-12-29)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

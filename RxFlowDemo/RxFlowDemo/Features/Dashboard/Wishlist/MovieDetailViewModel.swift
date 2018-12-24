@@ -6,10 +6,12 @@
 //  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
+import RxCocoa
 import RxFlow
 
-class MovieDetailViewModel: ServicesViewModel {
+class MovieDetailViewModel: ServicesViewModel, Stepper {
 
+    let steps = PublishRelay<Step>()
     typealias Services = HasMoviesService
 
     var services: Services! {
@@ -49,10 +51,8 @@ class MovieDetailViewModel: ServicesViewModel {
     init(withMovieId id: Int) {
         self.movieId = id
     }
-}
 
-extension MovieDetailViewModel: Stepper {
     func pick (castId: Int) {
-        self.step.accept(DemoStep.castPicked(withCastId: castId))
+        self.steps.accept(DemoStep.castPicked(withCastId: castId))
     }
 }

@@ -22,10 +22,10 @@ class SettingsApiKeyViewController: UIViewController, StoryboardBased, ViewModel
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        proceedButton.rx.tap
+        _ = proceedButton.rx.tap
+            .takeUntil(self.rx.deallocating)
             .flatMap { [unowned self] in self.viewModel.setApiKey() }
             .map { $0 as Step }
-            .bind(to: viewModel.step)
-            .disposed(by: disposeBag)
+            .bind(to: viewModel.steps)
     }
 }

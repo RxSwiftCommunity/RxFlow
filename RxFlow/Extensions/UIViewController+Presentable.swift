@@ -7,8 +7,6 @@
 //
 
 import UIKit.UIViewController
-
 import RxSwift
 
-extension UIViewController: Presentable {
-}
+extension UIViewController: Presentable {}

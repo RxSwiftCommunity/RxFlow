@@ -13,7 +13,7 @@
     <a title="RxFlow  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">RxFlow Docs</a> (100% documented)</p>
+        <p><a href="index.html">RxFlow Docs</a> (94% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -33,7 +33,13 @@
                 <a href="Classes/CompositeStepper.html">CompositeStepper</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/Coordinator.html">Coordinator</a>
+                <a href="Classes/DefaultStepper.html">DefaultStepper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/FlowContributor.html">FlowContributor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/FlowCoordinator.html">FlowCoordinator</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/Flows.html">Flows</a>
@@ -47,7 +53,10 @@
             <a href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Enums/NextFlowItems.html">NextFlowItems</a>
+                <a href="Enums/FlowContributors.html">FlowContributors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/RxFlowStep.html">RxFlowStep</a>
               </li>
             </ul>
           </li>
@@ -69,9 +78,6 @@
                 <a href="Protocols/Flow.html">Flow</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/HasDisposeBag.html">HasDisposeBag</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Protocols/Presentable.html">Presentable</a>
               </li>
               <li class="nav-group-task">
@@ -86,10 +92,16 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Structs.html">Structures</a>
+            <a href="Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/NextFlowItem.html">NextFlowItem</a>
+                <a href="Typealiases.html#/s:6RxFlow11Coordinatora">Coordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:6RxFlow04NextB4Itema">NextFlowItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:6RxFlow04NextB5Itemsa">NextFlowItems</a>
               </li>
             </ul>
           </li>
@@ -347,7 +359,7 @@ For simple cases (for instance when we only need to bootstrap a <strong>Flow</st
 <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">func</span> <span class="nf">navigateToSettings</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">NextFlowItems</span> <span class="p">{</span>     
     <span class="k">let</span> <span class="nv">settingsStepper</span> <span class="o">=</span> <span class="kt">SettingsStepper</span><span class="p">()</span>
     <span class="k">let</span> <span class="nv">settingsFlow</span> <span class="o">=</span> <span class="kt">SettingsFlow</span><span class="p">(</span><span class="nv">withService</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">service</span><span class="p">,</span> <span class="nv">andStepper</span><span class="p">:</span> <span class="n">settingsStepper</span><span class="p">)</span>
-    <span class="kt">Flows</span><span class="o">.</span><span class="nf">whenReady</span><span class="p">(</span><span class="nv">flow</span><span class="p">:</span> <span class="n">settingsFlow</span><span class="p">,</span> <span class="nv">block</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="k">unowned</span> <span class="k">self</span><span class="p">]</span> <span class="p">(</span><span class="nv">root</span><span class="p">:</span> <span class="kt">UISplitViewController</span><span class="p">)</span> <span class="k">in</span>
+    <span class="kt">Flows</span><span class="o">.</span><span class="nf">whenReady</span><span class="p">(</span><span class="nv">flow1</span><span class="p">:</span> <span class="n">settingsFlow</span><span class="p">,</span> <span class="nv">block</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="k">unowned</span> <span class="k">self</span><span class="p">]</span> <span class="p">(</span><span class="nv">root</span><span class="p">:</span> <span class="kt">UISplitViewController</span><span class="p">)</span> <span class="k">in</span>
         <span class="k">self</span><span class="o">.</span><span class="n">rootViewController</span><span class="o">.</span><span class="nf">present</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
     <span class="p">})</span>
     <span class="k">return</span> <span class="kt">NextFlowItems</span><span class="o">.</span><span class="nf">one</span><span class="p">(</span><span class="nv">flowItem</span><span class="p">:</span> <span class="kt">NextFlowItem</span><span class="p">(</span><span class="nv">nextPresentable</span><span class="p">:</span> <span class="n">settingsFlow</span><span class="p">,</span> <span class="nv">nextStepper</span><span class="p">:</span> <span class="n">settingsStepper</span><span class="p">))</span>
@@ -379,7 +391,7 @@ For simple cases (for instance when we only need to bootstrap a <strong>Flow</st
         <span class="p">})</span><span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">disposeBag</span><span class="p">)</span>
 
         <span class="c1">// when the MainFlow is ready to be displayed, we assign its root the the Window</span>
-        <span class="kt">Flows</span><span class="o">.</span><span class="nf">whenReady</span><span class="p">(</span><span class="nv">flow</span><span class="p">:</span> <span class="n">appFlow</span><span class="p">,</span> <span class="nv">block</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="k">unowned</span> <span class="n">window</span><span class="p">]</span> <span class="p">(</span><span class="n">flowRoot</span><span class="p">)</span> <span class="k">in</span>
+        <span class="kt">Flows</span><span class="o">.</span><span class="nf">whenReady</span><span class="p">(</span><span class="nv">flow1</span><span class="p">:</span> <span class="n">appFlow</span><span class="p">,</span> <span class="nv">block</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="k">unowned</span> <span class="n">window</span><span class="p">]</span> <span class="p">(</span><span class="n">flowRoot</span><span class="p">)</span> <span class="k">in</span>
             <span class="n">window</span><span class="o">.</span><span class="n">rootViewController</span> <span class="o">=</span> <span class="n">flowRoot</span>
         <span class="p">})</span>
 
@@ -424,8 +436,8 @@ For simple cases (for instance when we only need to bootstrap a <strong>Flow</st
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-07-13)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-12-29)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

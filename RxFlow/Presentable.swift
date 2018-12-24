@@ -11,7 +11,7 @@ import UIKit.UIViewController
 import RxSwift
 
 /// An abstraction of what can be presented to the screen. For now, UIViewControllers and Flows are Presentable
-public protocol Presentable: HasDisposeBag {
+public protocol Presentable {
 
     /// Rx Observable that triggers a bool indicating if the current Presentable is being displayed (applies to UIViewController, Warp or UIWindow for instance)
     var rxVisible: Observable<Bool> { get }

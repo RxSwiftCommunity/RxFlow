@@ -16,10 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let disposeBag = DisposeBag()
     var window: UIWindow?
-    var coordinator = Coordinator()
+    var coordinator = FlowCoordinator()
     let moviesService = MoviesService()
     let preferencesService = PreferencesService()
-    var appFlow: AppFlow!
     lazy var appServices = {
         return AppServices(moviesService: self.moviesService, preferencesService: self.preferencesService)
     }()
@@ -29,17 +28,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         guard let window = self.window else { return false }
 
-        coordinator.rx.willNavigate.subscribe(onNext: { (flow, step) in
+        self.coordinator.rx.willNavigate.subscribe(onNext: { (flow, step) in
             print ("will navigate to flow=\(flow) and step=\(step)")
         }).disposed(by: self.disposeBag)
 
-        coordinator.rx.didNavigate.subscribe(onNext: { (flow, step) in
+        self.coordinator.rx.didNavigate.subscribe(onNext: { (flow, step) in
             print ("did navigate to flow=\(flow) and step=\(step)")
         }).disposed(by: self.disposeBag)
 
-        self.appFlow = AppFlow(withWindow: window, andServices: self.appServices)
+        let appFlow = AppFlow(withWindow: window, andServices: self.appServices)
 
-        coordinator.coordinate(flow: self.appFlow, withStepper: AppStepper(withServices: self.appServices))
+        self.coordinator.coordinate(flow: appFlow, with: AppStepper(withServices: self.appServices))
 
         return true
     }

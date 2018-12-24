@@ -25,9 +25,9 @@ class WatchedFlow: Flow {
         print("\(type(of: self)): \(#function)")
     }
 
-    func navigate(to step: Step) -> NextFlowItems {
+    func navigate(to step: Step) -> FlowContributors {
 
-        guard let step = step as? DemoStep else { return NextFlowItems.none }
+        guard let step = step as? DemoStep else { return FlowContributors.none }
 
         switch step {
 
@@ -38,30 +38,30 @@ class WatchedFlow: Flow {
         case .castPicked(let castId):
             return navigateToCastDetailScreen(with: castId)
         default:
-            return NextFlowItems.none
+            return FlowContributors.none
         }
     }
 
-    private func navigateToMovieListScreen() -> NextFlowItems {
+    private func navigateToMovieListScreen() -> FlowContributors {
         let viewController = WatchedViewController.instantiate(withViewModel: WatchedViewModel(),
                                                                andServices: self.services)
         viewController.title = "Watched"
 
         self.rootViewController.pushViewController(viewController, animated: true)
-        return .one(flowItem: NextFlowItem(nextPresentable: viewController,
-                                           nextStepper: viewController.viewModel))
+        return .one(flowItem: FlowContributor(nextPresentable: viewController,
+                                              nextStepper: viewController.viewModel))
     }
 
-    private func navigateToMovieDetailScreen (with movieId: Int) -> NextFlowItems {
+    private func navigateToMovieDetailScreen (with movieId: Int) -> FlowContributors {
         let viewController = MovieDetailViewController.instantiate(withViewModel: MovieDetailViewModel(withMovieId: movieId),
                                                                    andServices: self.services)
         viewController.title = viewController.viewModel.title
         self.rootViewController.pushViewController(viewController, animated: true)
-        return .one(flowItem: NextFlowItem(nextPresentable: viewController,
-                                           nextStepper: viewController.viewModel))
+        return .one(flowItem: FlowContributor(nextPresentable: viewController,
+                                              nextStepper: viewController.viewModel))
     }
 
-    private func navigateToCastDetailScreen (with castId: Int) -> NextFlowItems {
+    private func navigateToCastDetailScreen (with castId: Int) -> FlowContributors {
         let viewController = CastDetailViewController.instantiate(withViewModel: CastDetailViewModel(withCastId: castId),
                                                                   andServices: self.services)
         viewController.title = viewController.viewModel.name

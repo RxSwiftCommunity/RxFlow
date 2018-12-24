@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import RxFlow
+import RxCocoa
 
 class AppFlow: Flow {
     var root: Presentable {
@@ -27,8 +28,8 @@ class AppFlow: Flow {
         print("\(type(of: self)): \(#function)")
     }
 
-    func navigate(to step: Step) -> NextFlowItems {
-        guard let step = step as? DemoStep else { return NextFlowItems.none }
+    func navigate(to step: Step) -> FlowContributors {
+        guard let step = step as? DemoStep else { return FlowContributors.none }
 
         switch step {
         case .onboarding, .logout:
@@ -36,11 +37,11 @@ class AppFlow: Flow {
         case .onboardingIsComplete, .dashboard:
             return navigationToDashboardScreen()
         default:
-            return NextFlowItems.none
+            return FlowContributors.none
         }
     }
 
-    private func navigationToOnboardingScreen() -> NextFlowItems {
+    private func navigationToOnboardingScreen() -> FlowContributors {
 
         if let rootViewController = self.rootWindow.rootViewController {
             rootViewController.dismiss(animated: false)
@@ -51,29 +52,37 @@ class AppFlow: Flow {
             self.rootWindow.rootViewController = root
         }
 
-        return .one(flowItem: NextFlowItem(nextPresentable: onboardingFlow,
-                                           nextStepper: OneStepper(withSingleStep: DemoStep.login)))
+        return .one(flowItem: FlowContributor(nextPresentable: onboardingFlow,
+                                              nextStepper: OneStepper(withSingleStep: DemoStep.login)))
     }
 
-    private func navigationToDashboardScreen() -> NextFlowItems {
+    private func navigationToDashboardScreen() -> FlowContributors {
         let dashboardFlow = DashboardFlow(withServices: self.services)
 
         Flows.whenReady(flow1: dashboardFlow) { [unowned self] (root) in
             self.rootWindow.rootViewController = root
         }
 
-        return .one(flowItem: NextFlowItem(nextPresentable: dashboardFlow,
-                                           nextStepper: OneStepper(withSingleStep: DemoStep.dashboard)))
+        return .one(flowItem: FlowContributor(nextPresentable: dashboardFlow,
+                                              nextStepper: OneStepper(withSingleStep: DemoStep.dashboard)))
     }
 
 }
 
 class AppStepper: Stepper {
+
+    let steps = PublishRelay<Step>()
+    let appServices: AppServices
+
     init(withServices services: AppServices) {
-        if services.preferencesService.isOnboarded() {
-            self.step.accept(DemoStep.dashboard)
-        } else {
-            self.step.accept(DemoStep.onboarding)
+        self.appServices = services
+    }
+
+    var initialStep: Step {
+        if self.appServices.preferencesService.isOnboarded() {
+            return DemoStep.dashboard
         }
+
+        return DemoStep.onboarding
     }
 }

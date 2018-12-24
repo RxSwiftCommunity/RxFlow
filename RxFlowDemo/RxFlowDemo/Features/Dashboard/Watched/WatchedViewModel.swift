@@ -8,12 +8,14 @@
 
 import RxFlow
 import RxSwift
+import RxCocoa
 
-class WatchedViewModel: ServicesViewModel {
+class WatchedViewModel: ServicesViewModel, Stepper {
 
     typealias Services = HasMoviesService
 
     private(set) var movies = [MovieViewModel]()
+    let steps = PublishRelay<Step>()
 
     var services: Services! {
         didSet {
@@ -23,10 +25,8 @@ class WatchedViewModel: ServicesViewModel {
             })
         }
     }
-}
 
-extension WatchedViewModel: Stepper {
     public func pick (movieId: Int) {
-        self.step.accept(DemoStep.moviePicked(withMovieId: movieId))
+        self.steps.accept(DemoStep.moviePicked(withMovieId: movieId))
     }
 }

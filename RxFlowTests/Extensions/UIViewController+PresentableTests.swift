@@ -20,7 +20,7 @@ final class UIViewController_PresentableTests: XCTestCase {
         let viewController = TestUIViewController.instantiate()
 
         // Then: rxFirstTimeVisible is emitted only one time
-        _ = viewController.rxFirstTimeVisible.subscribe(onSuccess: { (_) in
+        _ = viewController.rxFirstTimeVisible.subscribe(onSuccess: {
             exp.fulfill()
         })
 
@@ -70,7 +70,7 @@ final class UIViewController_PresentableTests: XCTestCase {
         let viewController = TestUIViewController.instantiate()
 
         // Then: rxDismissed is emitted
-        _ = viewController.rxDismissed.subscribe(onSuccess: { (_) in
+        _ = viewController.rxDismissed.subscribe(onSuccess: {
             exp.fulfill()
         })
 

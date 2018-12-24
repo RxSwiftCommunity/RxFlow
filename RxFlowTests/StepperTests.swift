@@ -10,6 +10,7 @@ import XCTest
 @testable import RxFlow
 import RxBlocking
 import RxSwift
+import RxCocoa
 
 enum StepperTestsStep: Step {
     case stepOne
@@ -18,8 +19,11 @@ enum StepperTestsStep: Step {
 }
 
 final class StepperClass: Stepper {
+
+    let steps = PublishRelay<Step>()
+
     func emitStepOne () {
-        self.step.accept(StepperTestsStep.stepOne)
+        self.steps.accept(StepperTestsStep.stepOne)
     }
 }
 
@@ -34,7 +38,7 @@ final class StepperTests: XCTestCase {
         stepperClass.emitStepOne()
 
         // Then: the right step is emitted
-        let step = try stepperClass.steps.toBlocking().first()!
+        let step = try stepperClass.steps.filter { !($0 is NoneStep) }.toBlocking().first()!
 
         if case StepperTestsStep.stepOne = step {
             XCTAssert(true)
@@ -47,7 +51,7 @@ final class StepperTests: XCTestCase {
 
         // When: listening to the emitted step
         // Then: the right step is emitted
-        let step = try stepperClass.steps.toBlocking().first()!
+        let step = try stepperClass.steps.filter { !($0 is NoneStep) }.toBlocking().first()!
 
         if case StepperTestsStep.stepOne = step {
             XCTAssert(true)
@@ -62,7 +66,7 @@ final class StepperTests: XCTestCase {
         // When: listening to the emitted step
         // Then: the right step is emitted
         do {
-            _ = try stepperClass.steps.toBlocking(timeout: 0.1).first()!
+            _ = try stepperClass.steps.filter { !($0 is NoneStep) }.toBlocking(timeout: 0.1).first()!
             XCTFail()
             return
         } catch {
@@ -87,7 +91,7 @@ final class StepperTests: XCTestCase {
         var stepIndex = 0
 
         // When: listening to the emitted step
-        _ = stepperClass.steps.takeUntil(self.rx.deallocated).subscribe(onNext: { (step) in
+        _ = stepperClass.steps.filter { !($0 is NoneStep) }.takeUntil(self.rx.deallocated).subscribe(onNext: { (step) in
             guard let step = step as? StepperTestsStep else {
                 XCTFail()
                 return

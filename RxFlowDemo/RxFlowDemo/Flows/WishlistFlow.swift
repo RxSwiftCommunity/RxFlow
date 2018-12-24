@@ -8,6 +8,7 @@
 
 import RxFlow
 import RxSwift
+import RxCocoa
 import UIKit
 
 class WishlistFlow: Flow {
@@ -29,7 +30,7 @@ class WishlistFlow: Flow {
         print("\(type(of: self)): \(#function)")
     }
 
-    func navigate(to step: Step) -> NextFlowItems {
+    func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? DemoStep else { return .none }
 
         switch step {
@@ -45,13 +46,13 @@ class WishlistFlow: Flow {
             self.rootViewController.presentedViewController?.dismiss(animated: true)
             return .none
         case .logout:
-            return NextFlowItems.end(withStepForParentFlow: step)
+            return .end(withStepForParentFlow: step)
         default:
             return .none
         }
     }
 
-    private func navigateToMovieListScreen() -> NextFlowItems {
+    private func navigateToMovieListScreen() -> FlowContributors {
         let viewController = WishlistViewController.instantiate(withViewModel: WishlistViewModel(), andServices: self.services)
         viewController.title = "Wishlist"
         self.rootViewController.pushViewController(viewController, animated: true)
@@ -67,21 +68,21 @@ class WishlistFlow: Flow {
                                                                action: #selector(WishlistStepper.logout)),
                                                animated: false)
         }
-        return .one(flowItem: NextFlowItem(nextPresentable: viewController,
-                                           nextStepper: viewController.viewModel))
+        return .one(flowItem: FlowContributor(nextPresentable: viewController,
+                                              nextStepper: viewController.viewModel))
     }
 
-    private func navigateToMovieDetailScreen (with movieId: Int) -> NextFlowItems {
+    private func navigateToMovieDetailScreen (with movieId: Int) -> FlowContributors {
         let viewController = MovieDetailViewController.instantiate(withViewModel: MovieDetailViewModel(withMovieId: movieId),
                                                                    andServices: self.services)
         viewController.title = viewController.viewModel.title
 
         self.rootViewController.pushViewController(viewController, animated: true)
-        return .one(flowItem: NextFlowItem(nextPresentable: viewController,
-                                           nextStepper: viewController.viewModel))
+        return .one(flowItem: FlowContributor(nextPresentable: viewController,
+                                              nextStepper: viewController.viewModel))
     }
 
-    private func navigateToCastDetailScreen (with castId: Int) -> NextFlowItems {
+    private func navigateToCastDetailScreen (with castId: Int) -> FlowContributors {
         let viewController = CastDetailViewController.instantiate(withViewModel: CastDetailViewModel(withCastId: castId),
                                                                   andServices: self.services)
         viewController.title = viewController.viewModel.name
@@ -89,7 +90,7 @@ class WishlistFlow: Flow {
         return .none
     }
 
-    private func navigateToSettings() -> NextFlowItems {
+    private func navigateToSettings() -> FlowContributors {
         let settingsStepper = SettingsStepper()
         let settingsFlow = SettingsFlow(withServices: self.services, andStepper: settingsStepper)
 
@@ -97,22 +98,24 @@ class WishlistFlow: Flow {
             self.rootViewController.present(root, animated: true)
         }
 
-        return .one(flowItem: NextFlowItem(nextPresentable: settingsFlow,
-                                           nextStepper: settingsStepper))
+        return .one(flowItem: FlowContributor(nextPresentable: settingsFlow,
+                                              nextStepper: settingsStepper))
     }
 }
 
-class WishlistStepper: Stepper, HasDisposeBag {
+class WishlistStepper: Stepper {
 
-    init() {
-        self.step.accept(DemoStep.movieList)
+    let steps = PublishRelay<Step>()
+
+    var initialStep: Step {
+        return DemoStep.movieList
     }
 
     @objc func settings() {
-        self.step.accept(DemoStep.settings)
+        self.steps.accept(DemoStep.settings)
     }
 
     @objc func logout() {
-        self.step.accept(DemoStep.logout)
+        self.steps.accept(DemoStep.logout)
     }
 }
