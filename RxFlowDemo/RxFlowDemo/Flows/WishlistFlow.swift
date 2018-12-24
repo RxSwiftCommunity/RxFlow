@@ -8,6 +8,7 @@
 
 import RxFlow
 import RxSwift
+import RxCocoa
 import UIKit
 
 class WishlistFlow: Flow {
@@ -29,7 +30,7 @@ class WishlistFlow: Flow {
         print("\(type(of: self)): \(#function)")
     }
 
-    func navigate(to step: Step) -> NextFlowItems {
+    func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? DemoStep else { return .none }
 
         switch step {
@@ -44,14 +45,17 @@ class WishlistFlow: Flow {
         case .settingsIsComplete:
             self.rootViewController.presentedViewController?.dismiss(animated: true)
             return .none
-        case .logout:
-            return NextFlowItems.end(withStepForParentFlow: step)
+        case .about:
+            return self.navigateToAbout()
+        case .aboutIsComplete:
+            self.rootViewController.presentedViewController?.dismiss(animated: true)
+            return .none
         default:
             return .none
         }
     }
 
-    private func navigateToMovieListScreen() -> NextFlowItems {
+    private func navigateToMovieListScreen() -> FlowContributors {
         let viewController = WishlistViewController.instantiate(withViewModel: WishlistViewModel(), andServices: self.services)
         viewController.title = "Wishlist"
         self.rootViewController.pushViewController(viewController, animated: true)
@@ -63,25 +67,24 @@ class WishlistFlow: Flow {
                                                 animated: false)
             navigationBarItem.setLeftBarButton(UIBarButtonItem(title: "Logout",
                                                                style: UIBarButtonItem.Style.plain,
-                                                               target: self.wishlistStepper,
-                                                               action: #selector(WishlistStepper.logout)),
+                                                               target: self,
+                                                               action: #selector(WishlistFlow.logout)),
                                                animated: false)
         }
-        return .one(flowItem: NextFlowItem(nextPresentable: viewController,
-                                           nextStepper: viewController.viewModel))
+        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: CompositeStepper(steppers: [viewController.viewModel,
+                                                                                                                                   viewController])))
     }
 
-    private func navigateToMovieDetailScreen (with movieId: Int) -> NextFlowItems {
+    private func navigateToMovieDetailScreen (with movieId: Int) -> FlowContributors {
         let viewController = MovieDetailViewController.instantiate(withViewModel: MovieDetailViewModel(withMovieId: movieId),
                                                                    andServices: self.services)
         viewController.title = viewController.viewModel.title
 
         self.rootViewController.pushViewController(viewController, animated: true)
-        return .one(flowItem: NextFlowItem(nextPresentable: viewController,
-                                           nextStepper: viewController.viewModel))
+        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
     }
 
-    private func navigateToCastDetailScreen (with castId: Int) -> NextFlowItems {
+    private func navigateToCastDetailScreen (with castId: Int) -> FlowContributors {
         let viewController = CastDetailViewController.instantiate(withViewModel: CastDetailViewModel(withCastId: castId),
                                                                   andServices: self.services)
         viewController.title = viewController.viewModel.name
@@ -89,30 +92,32 @@ class WishlistFlow: Flow {
         return .none
     }
 
-    private func navigateToSettings() -> NextFlowItems {
+    private func navigateToSettings() -> FlowContributors {
         let settingsStepper = SettingsStepper()
         let settingsFlow = SettingsFlow(withServices: self.services, andStepper: settingsStepper)
 
         Flows.whenReady(flow1: settingsFlow) { [unowned self] (root: UISplitViewController) in
             self.rootViewController.present(root, animated: true)
         }
-
-        return .one(flowItem: NextFlowItem(nextPresentable: settingsFlow,
-                                           nextStepper: settingsStepper))
-    }
-}
-
-class WishlistStepper: Stepper, HasDisposeBag {
-
-    init() {
-        self.step.accept(DemoStep.movieList)
+        return .one(flowContributor: .contribute(withNextPresentable: settingsFlow, withNextStepper: settingsStepper))
     }
 
-    @objc func settings() {
-        self.step.accept(DemoStep.settings)
+    private func navigateToAbout() -> FlowContributors {
+        let viewController = SettingsAboutViewController.instantiate()
+        self.rootViewController.present(viewController, animated: true)
+        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController))
     }
 
     @objc func logout() {
-        self.step.accept(DemoStep.logout)
+        self.services.preferencesService.setNotOnboarded()
+    }
+}
+
+class WishlistStepper: Stepper {
+
+    let steps = PublishRelay<Step>()
+
+    @objc func settings() {
+        self.steps.accept(DemoStep.settings)
     }
 }

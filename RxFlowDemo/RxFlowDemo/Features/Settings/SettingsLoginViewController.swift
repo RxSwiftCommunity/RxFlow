@@ -9,20 +9,23 @@
 import UIKit
 import Reusable
 import RxSwift
+import RxCocoa
 import RxFlow
 
 class SettingsLoginViewController: UIViewController, StoryboardBased, Stepper {
 
     @IBOutlet weak var proceedButton: UIButton!
 
+    let steps = PublishRelay<Step>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        proceedButton.rx.tap
+        _ = proceedButton.rx.tap
+            .takeUntil(self.rx.deallocating)
             .map { DemoStep.loginIsComplete }
-            .bind(to: self.step)
-            .disposed(by: disposeBag)
+            .bind(to: self.steps)
     }
 
 }

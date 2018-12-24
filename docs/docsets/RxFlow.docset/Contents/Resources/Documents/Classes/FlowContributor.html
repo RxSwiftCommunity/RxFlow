@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>FlowContributor Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/FlowContributor" class="dashAnchor"></a>
+    <a title="FlowContributor Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">RxFlow Docs</a> (94% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">RxFlow Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        FlowContributor Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/CompositeStepper.html">CompositeStepper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DefaultStepper.html">DefaultStepper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FlowContributor.html">FlowContributor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FlowCoordinator.html">FlowCoordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Flows.html">Flows</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/OneStepper.html">OneStepper</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/FlowContributors.html">FlowContributors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RxFlowStep.html">RxFlowStep</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/ObservableType.html">ObservableType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Reactive.html">Reactive</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Flow.html">Flow</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Presentable.html">Presentable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:6RxFlow4StepP">Step</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Stepper.html">Stepper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:6RxFlow14SynchronizableP">Synchronizable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6RxFlow11Coordinatora">Coordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6RxFlow04NextB4Itema">NextFlowItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6RxFlow04NextB5Itemsa">NextFlowItems</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>FlowContributor</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">FlowContributor</span></code></pre>
+
+                </div>
+              </div>
+            <p>A FlowContributor is the result of the coordination action between a Flow and a Step (See Flow.navigate(to:) function)
+It describes the next thing that will be presented (a Presentable) and
+the next thing the FlowCoordinator will listen to, to have the next navigation Steps (a Stepper).
+If a navigation action does not have to lead to a FlowContributor, it is possible to have an empty FlowContributor array</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow0B11ContributorC15nextPresentableAA0E0_pvp"></a>
+                    <a name="//apple_ref/swift/Property/nextPresentable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow0B11ContributorC15nextPresentableAA0E0_pvp">nextPresentable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The presentable that will be handle by the FlowCoordinator. The FlowCoordinator is not
+meant to display this presentable, it will only handle its <q>Display</q> status
+so that the associated Stepper will be listened to or not</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">nextPresentable</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Presentable.html">Presentable</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow0B11ContributorC11nextStepperAA0E0_pvp"></a>
+                    <a name="//apple_ref/swift/Property/nextStepper" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow0B11ContributorC11nextStepperAA0E0_pvp">nextStepper</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The Stepper that will be handle by the FlowCoordinator. It will emit the new
+navigation Steps. The FlowCoordinator will listen to them only if the associated
+Presentable is displayed</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">nextStepper</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Stepper.html">Stepper</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow0B11ContributorC15nextPresentable0D7StepperAcA0E0_p_AA0F0_ptcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(nextPresentable:nextStepper:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow0B11ContributorC15nextPresentable0D7StepperAcA0E0_p_AA0F0_ptcfc">init(nextPresentable:nextStepper:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize a new FlowContributor</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n"><a href="../Classes/FlowContributor.html#/s:6RxFlow0B11ContributorC15nextPresentableAA0E0_pvp">nextPresentable</a></span> <span class="nv">presentable</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Presentable.html">Presentable</a></span><span class="p">,</span> <span class="n"><a href="../Classes/FlowContributor.html#/s:6RxFlow0B11ContributorC11nextStepperAA0E0_pvp">nextStepper</a></span> <span class="nv">stepper</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Stepper.html">Stepper</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>nextPresentable</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the next presentable to be handled by the FlowCoordinator</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>nextStepper</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the next Steper to be handled by the FlowCoordinator</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-12-29)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

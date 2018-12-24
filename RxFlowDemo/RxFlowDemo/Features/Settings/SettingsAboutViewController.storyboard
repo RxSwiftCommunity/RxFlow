@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZpY-pk-hEw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZpY-pk-hEw">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Q8Z-zM-AHU">
-                                <rect key="frame" x="16" y="269" width="343" height="150"/>
+                                <rect key="frame" x="16" y="268.5" width="343" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="7mD-uN-5hf"/>
@@ -33,22 +33,22 @@ https://github.com/RxSwiftCommunity/RxFlow</string>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RxFlow_logo_small" translatesAutoresizingMaskIntoConstraints="NO" id="Jz3-1y-fjv">
-                                <rect key="frame" x="0.0" y="161" width="375" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="M9o-I8-9Au"/>
-                                </constraints>
-                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eld-8O-g72">
+                                <rect key="frame" x="169" y="617" width="37" height="30"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="done:" destination="ZpY-pk-hEw" eventType="touchUpInside" id="8Rv-97-YzH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="PsQ-6u-iLj" firstAttribute="bottom" secondItem="Eld-8O-g72" secondAttribute="bottom" constant="20" id="Mzs-S9-CZn"/>
                             <constraint firstItem="Q8Z-zM-AHU" firstAttribute="leading" secondItem="PsQ-6u-iLj" secondAttribute="leading" constant="16" id="Q6E-gy-tP5"/>
                             <constraint firstItem="Q8Z-zM-AHU" firstAttribute="centerX" secondItem="PsQ-6u-iLj" secondAttribute="centerX" id="SOh-Tx-HCv"/>
-                            <constraint firstItem="Jz3-1y-fjv" firstAttribute="leading" secondItem="ed2-hv-zBh" secondAttribute="leading" id="mVa-Dt-q38"/>
+                            <constraint firstItem="Eld-8O-g72" firstAttribute="centerX" secondItem="PsQ-6u-iLj" secondAttribute="centerX" id="m0A-YF-GCP"/>
                             <constraint firstItem="PsQ-6u-iLj" firstAttribute="trailing" secondItem="Q8Z-zM-AHU" secondAttribute="trailing" constant="16" id="nQO-Of-03f"/>
-                            <constraint firstItem="Jz3-1y-fjv" firstAttribute="centerX" secondItem="Q8Z-zM-AHU" secondAttribute="centerX" id="oil-du-Ami"/>
                             <constraint firstItem="Q8Z-zM-AHU" firstAttribute="centerY" secondItem="PsQ-6u-iLj" secondAttribute="centerY" id="x03-3a-rkj"/>
-                            <constraint firstItem="Q8Z-zM-AHU" firstAttribute="top" secondItem="Jz3-1y-fjv" secondAttribute="bottom" constant="8" symbolic="YES" id="yTG-Om-KzE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PsQ-6u-iLj"/>
                     </view>
@@ -58,7 +58,4 @@ https://github.com/RxSwiftCommunity/RxFlow</string>
             <point key="canvasLocation" x="176.80000000000001" y="150.67466266866569"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="RxFlow_logo_small" width="512" height="226"/>
-    </resources>
 </document>

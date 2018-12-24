@@ -10,8 +10,7 @@
 // Its License can be found here: ../DependenciesLicenses/RxSwiftCommunity-NSObject-Rx-License
 
 /// Provides a function to prevent concurrent block execution
-public protocol Synchronizable {
-}
+public protocol Synchronizable {}
 
 extension Synchronizable {
     func synchronized<T>( _ action: () -> T) -> T {

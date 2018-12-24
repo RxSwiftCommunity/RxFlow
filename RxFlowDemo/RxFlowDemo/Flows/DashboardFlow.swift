@@ -26,21 +26,20 @@ class DashboardFlow: Flow {
         print("\(type(of: self)): \(#function)")
     }
 
-    func navigate(to step: Step) -> NextFlowItems {
-        guard let step = step as? DemoStep else { return NextFlowItems.none }
+    func navigate(to step: Step) -> FlowContributors {
+        guard let step = step as? DemoStep else { return .none }
 
         switch step {
         case .dashboard:
             return navigateToDashboard()
-        case .logout:
-            return NextFlowItems.end(withStepForParentFlow: step)
         default:
             return .none
         }
     }
 
-    private func navigateToDashboard() -> NextFlowItems {
+    private func navigateToDashboard() -> FlowContributors {
         let wishlistStepper = WishlistStepper()
+
         let wishListFlow = WishlistFlow(withServices: self.services, andStepper: wishlistStepper)
         let watchedFlow = WatchedFlow(withServices: self.services)
 
@@ -55,9 +54,9 @@ class DashboardFlow: Flow {
             self.rootViewController.setViewControllers([root1, root2], animated: false)
         }
 
-        return .multiple(flowItems: [NextFlowItem(nextPresentable: wishListFlow,
-                                                  nextStepper: wishlistStepper),
-                                     NextFlowItem(nextPresentable: watchedFlow,
-                                                  nextStepper: OneStepper(withSingleStep: DemoStep.movieList))])
+        return .multiple(flowContributors: [.contribute(withNextPresentable: wishListFlow,
+                                                        withNextStepper: CompositeStepper(steppers: [OneStepper(withSingleStep: DemoStep.movieList), wishlistStepper])),
+                                            .contribute(withNextPresentable: watchedFlow,
+                                                        withNextStepper: OneStepper(withSingleStep: DemoStep.movieList))])
     }
 }

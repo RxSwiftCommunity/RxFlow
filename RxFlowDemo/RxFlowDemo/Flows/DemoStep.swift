@@ -14,22 +14,23 @@ enum DemoStep: Step {
 
     // Onboarding
     case onboarding
+    case onboardingIsDone
     case apiKey
     case apiKeyIsComplete
     case login
     case loginIsComplete
-    case onboardingIsComplete
 
     // Dashboard
     case dashboard
-    case movieList
 
     // Movies
+    case movieList
     case moviePicked (withMovieId: Int)
     case castPicked (withCastId: Int)
 
     // Settings
     case settings
     case about
+    case aboutIsComplete
     case settingsIsComplete
 }

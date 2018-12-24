@@ -13,6 +13,9 @@ import RxSwift
 import RxCocoa
 
 class SettingsListViewController: UITableViewController, StoryboardBased, Stepper {
+
+    let steps = PublishRelay<Step>()
+
     struct SettingItem {
         let step: DemoStep
         let title: String
@@ -27,15 +30,15 @@ class SettingsListViewController: UITableViewController, StoryboardBased, Steppe
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        Observable.of(settings)
+        _ = Observable.of(settings)
+            .takeUntil(self.rx.deallocating)
             .bind(to: tableView.rx.items(cellIdentifier: "SettingCell")) { _, element, cell in
                 cell.textLabel?.text = element.title
-            }
-            .disposed(by: disposeBag)
+        }
 
-        tableView.rx.modelSelected(SettingItem.self)
+        _ = tableView.rx.modelSelected(SettingItem.self)
+            .takeUntil(self.rx.deallocating)
             .map { $0.step }
-            .bind(to: self.step)
-            .disposed(by: disposeBag)
+            .bind(to: self.steps)
     }
 }

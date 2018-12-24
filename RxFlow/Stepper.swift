@@ -9,41 +9,80 @@
 import RxSwift
 import RxCocoa
 
-private var subjectContext: UInt8 = 0
-
 /// a Stepper has only one purpose is: emits Steps that correspond to specific navigation states.
 /// The Step changes lead to navigation actions in the context of a specific Flow
-public protocol Stepper: class, Synchronizable {
+public protocol Stepper {
 
-    /// The Observable corresponding to the Steps triggered by the Stepper
-    var steps: Observable<Step> { get }
+    /// the relay used to emit steps inside this Stepper
+    var steps: PublishRelay<Step> { get }
 
+    /// the initial step that will be emitted when listening to this Stepper
+    var initialStep: Step { get }
+
+    /// function called when stepper is listened by the FlowCoordinator
+    func readyToEmitSteps ()
+}
+
+// MARK: - default implementation
+public extension Stepper {
+    var initialStep: Step {
+        return NoneStep()
+    }
+
+    func readyToEmitSteps () {}
 }
 
 /// A Simple Stepper that has one goal: emit a single Step once initialized
 public class OneStepper: Stepper {
 
+    public let steps = PublishRelay<Step>()
+    private let singleStep: Step
+
     /// Initialize the OneStepper
     ///
     /// - Parameter singleStep: the step to be emitted once initialized
     public init(withSingleStep singleStep: Step) {
-        self.step.accept(singleStep)
+        self.singleStep = singleStep
+    }
+
+    public var initialStep: Step {
+        return self.singleStep
+    }
+}
+
+/// A Simple Stepper that has one goal: emit a first default step equal to RxFlowStep.home
+public class DefaultStepper: OneStepper {
+
+    /// Initialize the DefaultStepper
+    public init () {
+        super.init(withSingleStep: RxFlowStep.home)
     }
 }
 
 /// A Stepper that combines multiple steppers. All those Steppers will be associated
 /// to the Presentable that is given within the NextFlowItem
-final public class CompositeStepper: Stepper {
+public class CompositeStepper: Stepper {
 
-    /// the Rx Obsersable that will emits new Steps
-    public private(set) var steps: Observable<Step>
+    private let disposeBag = DisposeBag()
+    private let innerSteppers: [Stepper]
+    public let steps = PublishRelay<Step>()
 
     /// Initialize
     ///
-    /// - Parameter steppers: all these Steppers will be observered by the Coordinator
+    /// - Parameter steppers: all these Steppers will be observed by the Coordinator
     public init(steppers: [Stepper]) {
-        let allSteps = steppers.map { $0.steps }
-        self.steps = Observable.merge(allSteps)
+        self.innerSteppers = steppers
+    }
+
+    public func readyToEmitSteps() {
+        Observable<Step>
+            .merge(self.innerSteppers.map { $0.steps.asObservable() })
+            .bind(to: self.steps)
+            .disposed(by: self.disposeBag)
+    }
+
+    public var initialStep: Step {
+        return self.innerSteppers.map { $0.initialStep }.filter { !($0 is NoneStep) }.first ?? NoneStep()
     }
 }
 
@@ -51,25 +90,5 @@ final public class CompositeStepper: Stepper {
 final class NoneStepper: OneStepper {
     convenience init() {
         self.init(withSingleStep: NoneStep())
-    }
-}
-
-public extension Stepper {
-
-    /// The step Subject in which to publish new Steps
-    public var step: BehaviorRelay<Step> {
-        return self.synchronized {
-            if let subject = objc_getAssociatedObject(self, &subjectContext) as? BehaviorRelay<Step> {
-                return subject
-            }
-            let newSubject = BehaviorRelay<Step>(value: NoneStep())
-            objc_setAssociatedObject(self, &subjectContext, newSubject, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            return newSubject
-        }
-    }
-
-    /// the Rx Obsersable that will trigger new Steps
-    public var steps: Observable<Step> {
-        return self.step.filter { !($0 is NoneStep) }
     }
 }

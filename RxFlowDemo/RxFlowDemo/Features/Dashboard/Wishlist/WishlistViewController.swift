@@ -17,12 +17,23 @@ class WishlistViewController: UIViewController, StoryboardBased, ViewModelBased 
     @IBOutlet private weak var moviesTable: UITableView!
 
     var viewModel: WishlistViewModel!
+    let steps = PublishRelay<Step>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.moviesTable.delegate = self
         self.moviesTable.dataSource = self
+    }
+
+    @IBAction func about(_ sender: UIButton) {
+        self.about()
+    }
+}
+
+extension WishlistViewController: Stepper {
+    private func about () {
+        self.steps.accept(DemoStep.about)
     }
 }
 

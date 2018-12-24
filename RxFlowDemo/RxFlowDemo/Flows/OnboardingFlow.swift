@@ -32,7 +32,7 @@ class OnboardingFlow: Flow {
         print("\(type(of: self)): \(#function)")
     }
 
-    func navigate(to step: Step) -> NextFlowItems {
+    func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? DemoStep else { return .none }
 
         switch step {
@@ -41,30 +41,28 @@ class OnboardingFlow: Flow {
         case .loginIsComplete:
             return navigationToApiScreen()
         case .apiKeyIsComplete:
-            return .end(withStepForParentFlow: DemoStep.onboardingIsComplete)
+            return .end(forwardToParentFlowWithStep: DemoStep.onboardingIsDone)
         default:
             return .none
         }
     }
 
-    private func navigationToLoginScreen() -> NextFlowItems {
+    private func navigationToLoginScreen() -> FlowContributors {
         let settingsLoginViewController = SettingsLoginViewController.instantiate()
         settingsLoginViewController.title = "Login"
         self.rootViewController.pushViewController(settingsLoginViewController, animated: false)
-
-        return .one(flowItem: NextFlowItem(nextPresentable: settingsLoginViewController,
-                                           nextStepper: settingsLoginViewController))
+        return .one(flowContributor: .contribute(withNextPresentable: settingsLoginViewController,
+                                                 withNextStepper: settingsLoginViewController))
     }
 
-    private func navigationToApiScreen() -> NextFlowItems {
+    private func navigationToApiScreen() -> FlowContributors {
         let settingsViewModel = SettingsApiKeyViewModel()
         let settingsViewController = SettingsApiKeyViewController.instantiate(withViewModel: settingsViewModel,
                                                                               andServices: self.services)
         settingsViewController.title = "API Key"
         self.rootViewController.pushViewController(settingsViewController, animated: true)
-
-        return .one(flowItem: NextFlowItem(nextPresentable: settingsViewController,
-                                           nextStepper: settingsViewModel))
+        return .one(flowContributor: .contribute(withNextPresentable: settingsViewController,
+                                                 withNextStepper: settingsViewModel))
     }
 
 }

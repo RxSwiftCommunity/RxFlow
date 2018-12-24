@@ -7,10 +7,12 @@
 //
 
 import RxSwift
+import RxCocoa
 import RxFlow
 
-class WishlistViewModel: ServicesViewModel {
+class WishlistViewModel: ServicesViewModel, Stepper {
 
+    let steps = PublishRelay<Step>()
     typealias Services = HasMoviesService
 
     private(set) var movies: [MovieViewModel]
@@ -27,10 +29,8 @@ class WishlistViewModel: ServicesViewModel {
     init() {
         self.movies = [MovieViewModel]()
     }
-}
 
-extension WishlistViewModel: Stepper {
     public func pick (movieId: Int) {
-        self.step.accept(DemoStep.moviePicked(withMovieId: movieId))
+        self.steps.accept(DemoStep.moviePicked(withMovieId: movieId))
     }
 }

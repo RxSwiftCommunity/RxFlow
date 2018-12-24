@@ -10,7 +10,6 @@
 // Its License can be found here: ../DependenciesLicenses/devxoul-RxViewController-License
 
 import UIKit.UIViewController
-
 import RxSwift
 import RxCocoa
 
@@ -38,10 +37,10 @@ extension Reactive where Base: UIViewController {
     /// Rx observable, triggered when the view appearance state changes
     public var displayed: Observable<Bool> {
         let viewDidAppearObservable = self.sentMessage(#selector(Base.viewDidAppear)).map { _ in true }
-        let viewWillDisappearObservable = self.sentMessage(#selector(Base.viewWillDisappear)).map { _ in false }
+        let viewDidDisappearObservable = self.sentMessage(#selector(Base.viewDidDisappear)).map { _ in false }
         // a UIViewController is at first not displayed
         let initialState = Observable.just(false)
-        // future calls to viewDidAppear and viewWillDisappear will chage the displayable state
-        return initialState.concat(Observable<Bool>.merge(viewDidAppearObservable, viewWillDisappearObservable))
+        // future calls to viewDidAppear and viewDidDisappear will change the displayable state
+        return initialState.concat(Observable<Bool>.merge(viewDidAppearObservable, viewDidDisappearObservable))
     }
 }

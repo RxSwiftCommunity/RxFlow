@@ -54,18 +54,18 @@
 		1AF854B31FF832AE00271B52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF854B21FF832AE00271B52 /* AppDelegate.swift */; };
 		1AF854BA1FF832AE00271B52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AF854B91FF832AE00271B52 /* Assets.xcassets */; };
 		1AF854BD1FF832AE00271B52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AF854BB1FF832AE00271B52 /* LaunchScreen.storyboard */; };
-		7418F76521BDB54300FF71A4 /* RxFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 267679802165F16700FB0BB0 /* RxFlow.framework */; };
-		7418F76621BDB54300FF71A4 /* RxFlow.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 267679802165F16700FB0BB0 /* RxFlow.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		741F456A21D7BE3900E5FADA /* RxFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 741F456921D7BE3900E5FADA /* RxFlow.framework */; };
+		741F456B21D7BE3900E5FADA /* RxFlow.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 741F456921D7BE3900E5FADA /* RxFlow.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		7418F76721BDB54300FF71A4 /* Embed Frameworks */ = {
+		74ED6C1D21D6D56600731736 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7418F76621BDB54300FF71A4 /* RxFlow.framework in Embed Frameworks */,
+				741F456B21D7BE3900E5FADA /* RxFlow.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -122,7 +122,7 @@
 		1AF854B91FF832AE00271B52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1AF854BC1FF832AE00271B52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1AF854BE1FF832AE00271B52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		267679802165F16700FB0BB0 /* RxFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		741F456921D7BE3900E5FADA /* RxFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,7 +132,7 @@
 			files = (
 				1A8FBE101FF845EE00389464 /* Reusable.framework in Frameworks */,
 				1A8FBE111FF845EE00389464 /* RxSwift.framework in Frameworks */,
-				7418F76521BDB54300FF71A4 /* RxFlow.framework in Frameworks */,
+				741F456A21D7BE3900E5FADA /* RxFlow.framework in Frameworks */,
 				1A8FBE121FF845EE00389464 /* RxCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,7 +143,6 @@
 		1A8FBE0C1FF845EE00389464 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				267679802165F16700FB0BB0 /* RxFlow.framework */,
 				1A8FBE0D1FF845EE00389464 /* Reusable.framework */,
 				1A8FBE0F1FF845EE00389464 /* RxCocoa.framework */,
 				1A8FBE0E1FF845EE00389464 /* RxSwift.framework */,
@@ -278,6 +277,7 @@
 		1AF854A61FF832AE00271B52 = {
 			isa = PBXGroup;
 			children = (
+				741F456921D7BE3900E5FADA /* RxFlow.framework */,
 				1AF854B11FF832AE00271B52 /* RxFlowDemo */,
 				1AF854B01FF832AE00271B52 /* Products */,
 				1A8FBE0C1FF845EE00389464 /* Frameworks */,
@@ -320,7 +320,7 @@
 				1AF854AB1FF832AE00271B52 /* Sources */,
 				1AF854AC1FF832AE00271B52 /* Frameworks */,
 				1AF854AD1FF832AE00271B52 /* Resources */,
-				7418F76721BDB54300FF71A4 /* Embed Frameworks */,
+				74ED6C1D21D6D56600731736 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -399,7 +399,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint 'autocorrect'\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		1A8FBE141FF8465700389464 /* ⚙Copy Carthage Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -596,17 +596,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3V5265LQM9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = RxFlowDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxFlowDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -616,17 +619,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3V5265LQM9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = RxFlowDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxFlowDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

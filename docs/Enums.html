@@ -34,7 +34,10 @@
                 <a href="Classes/CompositeStepper.html">CompositeStepper</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/Coordinator.html">Coordinator</a>
+                <a href="Classes/DefaultStepper.html">DefaultStepper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/FlowCoordinator.html">FlowCoordinator</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/Flows.html">Flows</a>
@@ -48,7 +51,13 @@
             <a href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Enums/NextFlowItems.html">NextFlowItems</a>
+                <a href="Enums/FlowContributor.html">FlowContributor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/FlowContributors.html">FlowContributors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/RxFlowStep.html">RxFlowStep</a>
               </li>
             </ul>
           </li>
@@ -70,9 +79,6 @@
                 <a href="Protocols/Flow.html">Flow</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/HasDisposeBag.html">HasDisposeBag</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Protocols/Presentable.html">Presentable</a>
               </li>
               <li class="nav-group-task">
@@ -87,10 +93,13 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Structs.html">Structures</a>
+            <a href="Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/NextFlowItem.html">NextFlowItem</a>
+                <a href="Typealiases.html#/s:6RxFlow11Coordinatora">Coordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:6RxFlow04NextB5Itemsa">NextFlowItems</a>
               </li>
             </ul>
           </li>
@@ -109,9 +118,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6RxFlow04NextB5ItemsO"></a>
-                    <a name="//apple_ref/swift/Enum/NextFlowItems" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6RxFlow04NextB5ItemsO">NextFlowItems</a>
+                    <a name="/s:6RxFlow0B11ContributorO"></a>
+                    <a name="//apple_ref/swift/Enum/FlowContributor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow0B11ContributorO">FlowContributor</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -119,23 +128,94 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>NextFlowItems reprent the next things that will trigger
-navigation actions inside a Flow</p>
+                        <p>A FlowContributor describes the next thing that will contribute to a Flow.</p>
 
 <ul>
-<li>multiple: a Flow will trigger several NextFlowItem at the same time for the same Step</li>
-<li>one: a Flow will trigger only one NextFlowItem for a Step</li>
-<li>end: a Flow will trigger a special NextFlowItem that represents the dismissal of this Flow</li>
-<li>none: no further navigation will be triggered for a Step</li>
+<li>contribute: the given stepper will emit steps (according to lifecycle of the given presentable) that will contribute to the current Flow</li>
+<li>forwardToCurrentFlow: the given step will be forwarded to the current flow</li>
+<li>forwardToParentFlow: the given step will be forwarded to the parent flow</li>
 </ul>
 
-                        <a href="Enums/NextFlowItems.html" class="slightly-smaller">See more</a>
+                        <a href="Enums/FlowContributor.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">NextFlowItems</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">FlowContributor</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow0B12ContributorsO"></a>
+                    <a name="//apple_ref/swift/Enum/FlowContributors" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow0B12ContributorsO">FlowContributors</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>FlowContributors reprent the next things that will trigger
+navigation actions inside a Flow</p>
+
+<ul>
+<li>multiple: several FlowContributors will contribute to the Flow</li>
+<li>one: only one FlowContributor will contribute to the Flow (see the FlowContributor enum)</li>
+<li>end: represents the dismissal of this Flow, forwarding the given step to the parent Flow</li>
+<li>none: no further navigation will be triggered</li>
+<li>triggerParentFlow: same as .one(flowContributor: .forwardToParentFlow(withStep: Step)). It is deprecated.</li>
+</ul>
+
+                        <a href="Enums/FlowContributors.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">FlowContributors</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow0aB4StepO"></a>
+                    <a name="//apple_ref/swift/Enum/RxFlowStep" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow0aB4StepO">RxFlowStep</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Standard RxFlow Steps</p>
+
+<ul>
+<li>home: can be used to express a Flow first step</li>
+</ul>
+
+                        <a href="Enums/RxFlowStep.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">RxFlowStep</span> <span class="p">:</span> <span class="kt"><a href="Protocols.html#/s:6RxFlow4StepP">Step</a></span></code></pre>
 
                         </div>
                       </div>
@@ -147,8 +227,8 @@ navigation actions inside a Flow</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-07-13)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2019-01-05)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

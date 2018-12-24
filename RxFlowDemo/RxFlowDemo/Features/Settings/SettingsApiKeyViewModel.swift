@@ -9,24 +9,16 @@
 import Foundation
 import RxFlow
 import RxSwift
+import RxCocoa
 
 class SettingsApiKeyViewModel: Stepper, ServicesViewModel {
 
+    let steps = PublishRelay<Step>()
     typealias Services = HasPreferencesService
 
     var services: Services!
 
-    func setApiKey() -> Single<DemoStep> {
-        return Single.create { [services] single in
-            guard let services = services else { fatalError("Missing services") }
-
-            if !services.preferencesService.isOnboarded() {
-                services.preferencesService.setOnboarding()
-            }
-
-            single(.success(.apiKeyIsComplete))
-
-            return Disposables.create { }
-        }
+    func setApiKey() {
+        self.services.preferencesService.setOnboarded()
     }
 }

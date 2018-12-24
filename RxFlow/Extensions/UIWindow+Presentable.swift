@@ -7,8 +7,6 @@
 //
 
 import UIKit.UIWindow
-
 import RxSwift
 
-extension UIWindow: Presentable {
-}
+extension UIWindow: Presentable {}

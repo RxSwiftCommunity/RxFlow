@@ -34,7 +34,10 @@
                 <a href="../Classes/CompositeStepper.html">CompositeStepper</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/Coordinator.html">Coordinator</a>
+                <a href="../Classes/DefaultStepper.html">DefaultStepper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FlowCoordinator.html">FlowCoordinator</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/Flows.html">Flows</a>
@@ -48,7 +51,13 @@
             <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Enums/NextFlowItems.html">NextFlowItems</a>
+                <a href="../Enums/FlowContributor.html">FlowContributor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FlowContributors.html">FlowContributors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RxFlowStep.html">RxFlowStep</a>
               </li>
             </ul>
           </li>
@@ -70,9 +79,6 @@
                 <a href="../Protocols/Flow.html">Flow</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/HasDisposeBag.html">HasDisposeBag</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Protocols/Presentable.html">Presentable</a>
               </li>
               <li class="nav-group-task">
@@ -87,10 +93,13 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Structs.html">Structures</a>
+            <a href="../Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Structs/NextFlowItem.html">NextFlowItem</a>
+                <a href="../Typealiases.html#/s:6RxFlow11Coordinatora">Coordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6RxFlow04NextB5Itemsa">NextFlowItems</a>
               </li>
             </ul>
           </li>
@@ -100,6 +109,12 @@
         <section>
           <section class="section">
             <h1>Reactive</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Reactive</span><span class="o">&lt;</span><span class="kt">Base</span><span class="o">&gt;</span></code></pre>
+
+                </div>
+              </div>
             
           </section>
           <section class="section task-group-section">
@@ -108,67 +123,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6RxFlow12willNavigateXevp"></a>
-                    <a name="//apple_ref/swift/Property/willNavigate" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6RxFlow12willNavigateXevp">willNavigate</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Rx Observable triggered before the Coordinator navigates a Flow/Step</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">willNavigate</span><span class="p">:</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="p">(</span><span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols.html#/s:6RxFlow4StepP">Step</a></span><span class="p">)</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6RxFlow11didNavigateXevp"></a>
-                    <a name="//apple_ref/swift/Property/didNavigate" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6RxFlow11didNavigateXevp">didNavigate</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Rx Observable triggered after the Coordinator navigates a Flow/Step</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">didNavigate</span><span class="p">:</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="p">(</span><span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols.html#/s:6RxFlow4StepP">Step</a></span><span class="p">)</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:6RxFlow22firstTimeViewDidAppearXevp"></a>
+                    <a name="/s:7RxSwift8ReactiveV0A4FlowSo16UIViewControllerCRbzlE22firstTimeViewDidAppearAA17PrimitiveSequenceVyAA11SingleTraitOytGvp"></a>
                     <a name="//apple_ref/swift/Property/firstTimeViewDidAppear" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6RxFlow22firstTimeViewDidAppearXevp">firstTimeViewDidAppear</a>
+                    <a class="token" href="#/s:7RxSwift8ReactiveV0A4FlowSo16UIViewControllerCRbzlE22firstTimeViewDidAppearAA17PrimitiveSequenceVyAA11SingleTraitOytGvp">firstTimeViewDidAppear</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -193,9 +150,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6RxFlow9dismissedXevp"></a>
+                    <a name="/s:7RxSwift8ReactiveV0A4FlowSo16UIViewControllerCRbzlE9dismissed0A5Cocoa12ControlEventVySbGvp"></a>
                     <a name="//apple_ref/swift/Property/dismissed" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6RxFlow9dismissedXevp">dismissed</a>
+                    <a class="token" href="#/s:7RxSwift8ReactiveV0A4FlowSo16UIViewControllerCRbzlE9dismissed0A5Cocoa12ControlEventVySbGvp">dismissed</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -220,9 +177,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6RxFlow9displayedXevp"></a>
+                    <a name="/s:7RxSwift8ReactiveV0A4FlowSo16UIViewControllerCRbzlE9displayedAA10ObservableCySbGvp"></a>
                     <a name="//apple_ref/swift/Property/displayed" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6RxFlow9displayedXevp">displayed</a>
+                    <a class="token" href="#/s:7RxSwift8ReactiveV0A4FlowSo16UIViewControllerCRbzlE9displayedAA10ObservableCySbGvp">displayed</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -251,9 +208,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6RxFlow15windowDidAppearXevp"></a>
+                    <a name="/s:7RxSwift8ReactiveV0A4FlowSo8UIWindowCRbzlE15windowDidAppearAA10ObservableCyytGvp"></a>
                     <a name="//apple_ref/swift/Property/windowDidAppear" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6RxFlow15windowDidAppearXevp">windowDidAppear</a>
+                    <a class="token" href="#/s:7RxSwift8ReactiveV0A4FlowSo8UIWindowCRbzlE15windowDidAppearAA10ObservableCyytGvp">windowDidAppear</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -277,11 +234,69 @@
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7RxSwift8ReactiveV0A4FlowAD0D11CoordinatorCRbzlE12willNavigateAA10ObservableCyAD0D0_p_AD4Step_ptGvp"></a>
+                    <a name="//apple_ref/swift/Property/willNavigate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7RxSwift8ReactiveV0A4FlowAD0D11CoordinatorCRbzlE12willNavigateAA10ObservableCyAD0D0_p_AD4Step_ptGvp">willNavigate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Rx Observable emitted before the navigation to a Step within a Flow</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">willNavigate</span><span class="p">:</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="p">(</span><span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols.html#/s:6RxFlow4StepP">Step</a></span><span class="p">)</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7RxSwift8ReactiveV0A4FlowAD0D11CoordinatorCRbzlE11didNavigateAA10ObservableCyAD0D0_p_AD4Step_ptGvp"></a>
+                    <a name="//apple_ref/swift/Property/didNavigate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7RxSwift8ReactiveV0A4FlowAD0D11CoordinatorCRbzlE11didNavigateAA10ObservableCyAD0D0_p_AD4Step_ptGvp">didNavigate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Rx Observable emitted after the navigation to a Step within a Flow</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">didNavigate</span><span class="p">:</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="p">(</span><span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols.html#/s:6RxFlow4StepP">Step</a></span><span class="p">)</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-07-13)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2019-01-05)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

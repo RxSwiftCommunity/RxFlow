@@ -42,8 +42,8 @@ extension ObservableType {
             var paused = true
             var elementIndex = 0
 
-            let pauserDisposable = pauser.subscribe { event in
-                lock.lock(); defer { lock.unlock() }
+            let pauserDisposable = pauser.subscribe { [weak lock] event in
+                lock?.lock(); defer { lock?.unlock() }
                 switch event {
                 case .next(let resume):
                     paused = !resume
@@ -54,8 +54,8 @@ extension ObservableType {
                 }
             }
 
-            let disposable = self.subscribe { event in
-                lock.lock(); defer { lock.unlock() }
+            let disposable = self.subscribe { [weak lock] event in
+                lock?.lock(); defer { lock?.unlock() }
                 switch event {
                 case .next(let element):
 

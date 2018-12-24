@@ -9,17 +9,23 @@
 import Foundation
 import UIKit
 import RxFlow
+import RxCocoa
+import RxSwift
 
 class AppFlow: Flow {
     var root: Presentable {
-        return self.rootWindow
+        return self.rootViewController
     }
 
-    private let rootWindow: UIWindow
+    private lazy var rootViewController: UINavigationController = {
+        let viewController = UINavigationController()
+        viewController.setNavigationBarHidden(true, animated: false)
+        return viewController
+    }()
+
     private let services: AppServices
 
-    init(withWindow window: UIWindow, andServices services: AppServices) {
-        self.rootWindow = window
+    init(services: AppServices) {
         self.services = services
     }
 
@@ -27,53 +33,76 @@ class AppFlow: Flow {
         print("\(type(of: self)): \(#function)")
     }
 
-    func navigate(to step: Step) -> NextFlowItems {
-        guard let step = step as? DemoStep else { return NextFlowItems.none }
+    func navigate(to step: Step) -> FlowContributors {
+        guard let step = step as? DemoStep else { return .none }
 
         switch step {
-        case .onboarding, .logout:
-            return navigationToOnboardingScreen()
-        case .onboardingIsComplete, .dashboard:
+        case .dashboard:
             return navigationToDashboardScreen()
+        case .onboarding:
+            return navigationToOnboardingScreen()
+        case .onboardingIsDone:
+            return self.dismissOnboarding()
         default:
-            return NextFlowItems.none
+            return .none
         }
     }
 
-    private func navigationToOnboardingScreen() -> NextFlowItems {
+    private func navigationToDashboardScreen() -> FlowContributors {
 
-        if let rootViewController = self.rootWindow.rootViewController {
-            rootViewController.dismiss(animated: false)
-        }
-
-        let onboardingFlow = OnboardingFlow(withServices: self.services)
-        Flows.whenReady(flow1: onboardingFlow) { [unowned self] (root) in
-            self.rootWindow.rootViewController = root
-        }
-
-        return .one(flowItem: NextFlowItem(nextPresentable: onboardingFlow,
-                                           nextStepper: OneStepper(withSingleStep: DemoStep.login)))
-    }
-
-    private func navigationToDashboardScreen() -> NextFlowItems {
         let dashboardFlow = DashboardFlow(withServices: self.services)
 
-        Flows.whenReady(flow1: dashboardFlow) { [unowned self] (root) in
-            self.rootWindow.rootViewController = root
+        Flows.whenReady(flow1: dashboardFlow) { [unowned self] root in
+            self.rootViewController.pushViewController(root, animated: false)
         }
 
-        return .one(flowItem: NextFlowItem(nextPresentable: dashboardFlow,
-                                           nextStepper: OneStepper(withSingleStep: DemoStep.dashboard)))
+        return .one(flowContributor: .contribute(withNextPresentable: dashboardFlow,
+                                                 withNextStepper: OneStepper(withSingleStep: DemoStep.dashboard)))
     }
 
+    private func navigationToOnboardingScreen() -> FlowContributors {
+
+        let onboardingFlow = OnboardingFlow(withServices: self.services)
+
+        Flows.whenReady(flow1: onboardingFlow) { [unowned self] root in
+            DispatchQueue.main.async {
+                self.rootViewController.present(root, animated: false)
+            }
+        }
+
+        return .one(flowContributor: .contribute(withNextPresentable: onboardingFlow,
+                                                 withNextStepper: OneStepper(withSingleStep: DemoStep.login)))
+    }
+
+    private func dismissOnboarding() -> FlowContributors {
+        if let onboardingViewController = self.rootViewController.presentedViewController {
+            onboardingViewController.dismiss(animated: true)
+        }
+        return .none
+    }
 }
 
 class AppStepper: Stepper {
+
+    let steps = PublishRelay<Step>()
+    private let appServices: AppServices
+    private let disposeBag = DisposeBag()
+
     init(withServices services: AppServices) {
-        if services.preferencesService.isOnboarded() {
-            self.step.accept(DemoStep.dashboard)
-        } else {
-            self.step.accept(DemoStep.onboarding)
-        }
+        self.appServices = services
+    }
+
+    var initialStep: Step {
+        return DemoStep.dashboard
+    }
+
+    /// callback used to emit steps once the FlowCoordinator is ready to listen to them to contribute to the Flow
+    func readyToEmitSteps() {
+        self.appServices
+            .preferencesService.rx
+            .isOnboarded
+            .map { $0 ? DemoStep.onboardingIsDone : DemoStep.onboarding }
+            .bind(to: self.steps)
+            .disposed(by: self.disposeBag)
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol HasPreferencesService {
     var preferencesService: PreferencesService { get }
@@ -24,9 +25,15 @@ struct UserPreferences {
 class PreferencesService {
 
     /// sets the onBoarded preference to true
-    func setOnboarding () {
+    func setOnboarded () {
         let defaults = UserDefaults.standard
         defaults.set(true, forKey: UserPreferences.onBoarded)
+    }
+
+    /// removes the onBoarded preference
+    func setNotOnboarded () {
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: UserPreferences.onBoarded)
     }
 
     /// Returns true if the user has already onboarded, false otherwise
@@ -35,5 +42,16 @@ class PreferencesService {
     func isOnboarded () -> Bool {
         let defaults = UserDefaults.standard
         return defaults.bool(forKey: UserPreferences.onBoarded)
+    }
+}
+
+extension PreferencesService: ReactiveCompatible {}
+
+extension Reactive where Base: PreferencesService {
+    var isOnboarded: Observable<Bool> {
+        return UserDefaults.standard
+            .rx
+            .observe(Bool.self, UserPreferences.onBoarded)
+            .map { $0 ?? false }
     }
 }
