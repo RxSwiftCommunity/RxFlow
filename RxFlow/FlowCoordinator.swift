@@ -54,7 +54,6 @@ public final class FlowCoordinator: NSObject {
             .do(onNext: { [weak self] in self?.willNavigateRelay.accept((flow, $0))})
             .map { return (flowContributors: flow.navigate(to: $0), step: $0) }
             .do(onNext: { [weak self] in self?.didNavigateRelay.accept((flow, $0.step))})
-            .do(onNext: { _ in flow.flowReadySubject.accept(true) })
             .map { $0.flowContributors }
             // performs side effects if the FlowContributors is not about registering a new Stepper or coordinating a new Flow
             .do(onNext: { [weak self] flowContributors in
@@ -71,8 +70,11 @@ public final class FlowCoordinator: NSObject {
                     break
                 }
             })
+            .map { [weak self] in self?.nextPresentablesAndSteppers(from: $0) ?? [] }
+            // the readiness of the flow depends either on the readiness of subflows, or is set to true
+            .do(onNext: { [weak self] presentableAndSteppers in self?.setReadiness(for: flow, basedOn: presentableAndSteppers.map {$0.presentable})})
             // transforms a FlowContributors in a sequence of individual FlowContributor
-            .flatMap { [weak self] in Signal.from(self?.nextPresentablesAndSteppers(from: $0) ?? []) }
+            .flatMap { Signal.from($0) }
             // the FlowContributor is related to a new Flow, we coordinate this new Flow
             .do(onNext: { [weak self] presentableAndStepper in
                 if let childFlow = presentableAndStepper.presentable as? Flow {
@@ -138,6 +140,29 @@ public final class FlowCoordinator: NSObject {
             .takeUntil(nextPresentableAndStepper.presentable.rxDismissed.asObservable())
             .pausable(withPauser: nextPresentableAndStepper.presentable.rxVisible)
             .asSignal(onErrorJustReturn: NoneStep())
+    }
+
+    /// sets the readiness of the flow based on either its subflows's readiness or directly to true if no subflows
+    ///
+    /// - Parameters:
+    ///   - flow: the flow we're setting the readiness
+    ///   - presentableAndSteppers: the presentables
+    // swiftlint:disable next force_cast
+    private func setReadiness (for flow: Flow, basedOn presentables: [Presentable]) {
+        let flowReadySingles = presentables
+            .filter { $0 is Flow }
+            .map { $0 as! Flow }
+            .map { $0.rxFlowReady }
+
+        if flowReadySingles.isEmpty {
+            flow.flowReadySubject.accept(true)
+        } else {
+            _ = Single<Bool>.zip(flowReadySingles)
+                .map { _ in return true }
+                .asObservable()
+                .take(1)
+                .bind(to: flow.flowReadySubject)
+        }
     }
 }
 

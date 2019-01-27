@@ -66,7 +66,7 @@ class AppFlow: Flow {
 
         Flows.whenReady(flow1: onboardingFlow) { [unowned self] root in
             DispatchQueue.main.async {
-                self.rootViewController.present(root, animated: false)
+                self.rootViewController.present(root, animated: true)
             }
         }
 
