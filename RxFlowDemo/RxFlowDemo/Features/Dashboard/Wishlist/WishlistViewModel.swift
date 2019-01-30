@@ -31,6 +31,6 @@ class WishlistViewModel: ServicesViewModel {
 
 extension WishlistViewModel: Stepper {
     public func pick (movieId: Int) {
-        self.step.accept(DemoStep.moviePicked(withMovieId: movieId))
+        self.step.accept(DemoStep.movieIsPicked(withId: movieId))
     }
 }

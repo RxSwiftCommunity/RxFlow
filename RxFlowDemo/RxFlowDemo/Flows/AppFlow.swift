@@ -31,9 +31,9 @@ class AppFlow: Flow {
         guard let step = step as? DemoStep else { return NextFlowItems.none }
 
         switch step {
-        case .onboarding:
+        case .onboardingIsRequired:
             return navigationToOnboardingScreen()
-        case .onboardingIsComplete, .dashboard:
+        case .onboardingIsComplete, .dashboardIsRequired:
             return navigationToDashboardScreen()
         default:
             return NextFlowItems.none
@@ -47,7 +47,7 @@ class AppFlow: Flow {
         }
 
         return .one(flowItem: NextFlowItem(nextPresentable: onboardingFlow,
-                                           nextStepper: OneStepper(withSingleStep: DemoStep.login)))
+                                           nextStepper: OneStepper(withSingleStep: DemoStep.loginIsRequired)))
     }
 
     private func navigationToDashboardScreen() -> NextFlowItems {
@@ -58,7 +58,7 @@ class AppFlow: Flow {
         }
 
         return .one(flowItem: NextFlowItem(nextPresentable: dashboardFlow,
-                                           nextStepper: OneStepper(withSingleStep: DemoStep.dashboard)))
+                                           nextStepper: OneStepper(withSingleStep: DemoStep.dashboardIsRequired)))
     }
 
 }
@@ -66,9 +66,9 @@ class AppFlow: Flow {
 class AppStepper: Stepper {
     init(withServices services: AppServices) {
         if services.preferencesService.isOnboarded() {
-            self.step.accept(DemoStep.dashboard)
+            self.step.accept(DemoStep.dashboardIsRequired)
         } else {
-            self.step.accept(DemoStep.onboarding)
+            self.step.accept(DemoStep.onboardingIsRequired)
         }
     }
 }

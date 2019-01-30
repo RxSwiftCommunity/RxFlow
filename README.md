@@ -88,7 +88,7 @@ RxFlow is a reactive implementation of the Coordinator pattern. It has all the g
 
 There are 6 terms you have to be familiar with to understand **RxFlow**:
 - **Flow**: each **Flow** defines a navigation area within your application. This is the place where you declare the navigation actions (such as presenting a UIViewController or another Flow)
-- **Step**: each **Step** is a navigation state in your application. Combinations of **Flows** and **Steps** describe all the possible navigation actions. A **Step** can even embed inner values (such as Ids, URLs, ...) that will be propagated to screens declared in the **Flows**
+- **Step**: a **Step** is a way to express a state that can lead to a navigation. Combinations of **Flows** and **Steps** describe all the possible navigation actions. A **Step** can even embed inner values (such as Ids, URLs, ...) that will be propagated to screens declared in the **Flows**
 - **Stepper**: it can be anything that can emit **Steps**. **Steppers** will be responsible for triggering every navigation actions within the **Flows**
 - **Presentable**: it is an abstraction of something that can be presented (basically **UIViewController** and **Flow** are **Presentable**). **Presentables** offer Reactive observables that the **Coordinator** will subscribe to in order to handle **Flow Steps** in a UIKit compliant way
 - **NextFlowItem**: it is a simple data structure that combines a **Presentable** and a **Stepper**. It tells the **Coordinator** what will be the next thing that will produce new **Steps** in your Reactive mechanism
@@ -100,23 +100,33 @@ There are 6 terms you have to be familiar with to understand **RxFlow**:
 
 ### How to declare **Steps**
 
-As **Steps** are seen like some navigation states spread across the application, it seems pretty obvious to use an enum to declare them
+**Steps** are little pieces of states eventually expressing the intent to navigate, it is pretty convenient to declare them in a enum:
 
 ```swift
 enum DemoStep: Step {
-    case apiKey
-    case apiKeyIsComplete
+    // Login
+    case loginIsRequired
+    case userIsLoggedIn
 
-    case movieList
+    // Onboarding
+    case onboardingIsRequired
+    case onboardingIsComplete
 
-    case moviePicked (withMovieId: Int)
-    case castPicked (withCastId: Int)
+    // Home
+    case dashboardIsRequired
 
-    case settings
-    case settingsDone
-    case about
+    // Movies
+    case moviesAreRequired
+    case movieIsPicked (withId: Int)
+    case castIsPicked (withId: Int)
+
+    // Settings
+    case settingsAreRequired
+    case settingsAreComplete
 }
 ```
+
+The idea is to keep the **Steps** `navigation independent` as much as possible. For instance, calling a **Step** `showMovieDetail(withId: Int)` might be a bad idea since it tighlty couples the fact of selecting a movie with the consequence of showing the movie detail screen. It is not up to the emitter of the **Step** to decide where to navigate, this decision belongs to the **Flow**. 
 
 ### How to declare a **Flow**
 
@@ -146,11 +156,11 @@ class WatchedFlow: Flow {
 
         switch step {
 
-        case .movieList:
+        case .needMovies:
             return navigateToMovieListScreen()
-        case .moviePicked(let movieId):
+        case .movieIsPicked(let movieId):
             return navigateToMovieDetailScreen(with: movieId)
-        case .castPicked(let castId):
+        case .castIsPicked(let castId):
             return navigateToCastDetailScreen(with: castId)
         default:
             return NextFlowItems.none
@@ -203,7 +213,7 @@ class WatchedViewModel: Stepper {
     // when a movie is picked, a new Step is emitted.
     // That will trigger a navigation action within the WatchedFlow
     public func pick (movieId: Int) {
-        self.step.accept(DemoStep.moviePicked(withMovieId: movieId))
+        self.step.accept(DemoStep.movieIsPicked(withId: movieId))
     }
 
 }

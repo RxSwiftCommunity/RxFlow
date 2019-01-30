@@ -24,7 +24,7 @@ class SettingsApiKeyViewModel: Stepper, ServicesViewModel {
                 services.preferencesService.setOnboarding()
             }
 
-            single(.success(.apiKeyIsComplete))
+            single(.success(.apiKeyIsFilledIn))
 
             return Disposables.create { }
         }

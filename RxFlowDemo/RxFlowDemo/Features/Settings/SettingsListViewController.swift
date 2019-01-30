@@ -19,9 +19,9 @@ class SettingsListViewController: UITableViewController, StoryboardBased, Steppe
     }
 
     let settings = [
-        SettingItem(step: .login, title: "Login"),
-        SettingItem(step: .apiKey, title: "API Key"),
-        SettingItem(step: .about, title: "About")
+        SettingItem(step: .loginIsRequired, title: "Login"),
+        SettingItem(step: .apiKeyIsRequired, title: "API Key"),
+        SettingItem(step: .aboutIsRequired, title: "About")
     ]
 
     override func viewDidLoad() {

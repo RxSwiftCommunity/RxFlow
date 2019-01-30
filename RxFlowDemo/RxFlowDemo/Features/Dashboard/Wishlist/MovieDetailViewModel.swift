@@ -53,6 +53,6 @@ class MovieDetailViewModel: ServicesViewModel {
 
 extension MovieDetailViewModel: Stepper {
     func pick (castId: Int) {
-        self.step.accept(DemoStep.castPicked(withCastId: castId))
+        self.step.accept(DemoStep.castIsPicked(withId: castId))
     }
 }

@@ -33,15 +33,15 @@ class WishlistFlow: Flow {
         guard let step = step as? DemoStep else { return .none }
 
         switch step {
-        case .movieList:
+        case .moviesAreRequired:
             return navigateToMovieListScreen()
-        case .moviePicked(let movieId):
+        case .movieIsPicked(let movieId):
             return navigateToMovieDetailScreen(with: movieId)
-        case .castPicked(let castId):
+        case .castIsPicked(let castId):
             return navigateToCastDetailScreen(with: castId)
-        case .settings:
+        case .settingsAreRequired:
             return navigateToSettings()
-        case .settingsIsComplete:
+        case .settingsAreComplete:
             self.rootViewController.presentedViewController?.dismiss(animated: true)
             return .none
         default:
@@ -57,7 +57,7 @@ class WishlistFlow: Flow {
             navigationBarItem.setRightBarButton(UIBarButtonItem(image: UIImage(named: "settings"),
                                                                 style: UIBarButtonItem.Style.plain,
                                                                 target: self.wishlistStepper,
-                                                                action: #selector(WishlistStepper.settings)),
+                                                                action: #selector(WishlistStepper.settingsAreRequired)),
                                                 animated: false)
         }
         return .one(flowItem: NextFlowItem(nextPresentable: viewController,
@@ -98,10 +98,10 @@ class WishlistFlow: Flow {
 class WishlistStepper: Stepper, HasDisposeBag {
 
     init() {
-        self.step.accept(DemoStep.movieList)
+        self.step.accept(DemoStep.moviesAreRequired)
     }
 
-    @objc func settings() {
-        self.step.accept(DemoStep.settings)
+    @objc func settingsAreRequired() {
+        self.step.accept(DemoStep.settingsAreRequired)
     }
 }
