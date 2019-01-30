@@ -31,11 +31,11 @@ class WatchedFlow: Flow {
 
         switch step {
 
-        case .movieList:
+        case .moviesAreRequired:
             return navigateToMovieListScreen()
-        case .moviePicked(let movieId):
+        case .movieIsPicked(let movieId):
             return navigateToMovieDetailScreen(with: movieId)
-        case .castPicked(let castId):
+        case .castIsPicked(let castId):
             return navigateToCastDetailScreen(with: castId)
         default:
             return .none

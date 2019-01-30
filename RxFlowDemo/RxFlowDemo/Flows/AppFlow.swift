@@ -37,11 +37,11 @@ class AppFlow: Flow {
         guard let step = step as? DemoStep else { return .none }
 
         switch step {
-        case .dashboard:
+        case .dashboardIsRequired:
             return navigationToDashboardScreen()
-        case .onboarding:
+        case .onboardingIsRequired:
             return navigationToOnboardingScreen()
-        case .onboardingIsDone:
+        case .onboardingIsComplete:
             return self.dismissOnboarding()
         default:
             return .none
@@ -57,7 +57,7 @@ class AppFlow: Flow {
         }
 
         return .one(flowContributor: .contribute(withNextPresentable: dashboardFlow,
-                                                 withNextStepper: OneStepper(withSingleStep: DemoStep.dashboard)))
+                                                 withNextStepper: OneStepper(withSingleStep: DemoStep.dashboardIsRequired)))
     }
 
     private func navigationToOnboardingScreen() -> FlowContributors {
@@ -71,7 +71,7 @@ class AppFlow: Flow {
         }
 
         return .one(flowContributor: .contribute(withNextPresentable: onboardingFlow,
-                                                 withNextStepper: OneStepper(withSingleStep: DemoStep.login)))
+                                                 withNextStepper: OneStepper(withSingleStep: DemoStep.loginIsRequired)))
     }
 
     private func dismissOnboarding() -> FlowContributors {
@@ -93,7 +93,7 @@ class AppStepper: Stepper {
     }
 
     var initialStep: Step {
-        return DemoStep.dashboard
+        return DemoStep.dashboardIsRequired
     }
 
     /// callback used to emit steps once the FlowCoordinator is ready to listen to them to contribute to the Flow
@@ -101,7 +101,7 @@ class AppStepper: Stepper {
         self.appServices
             .preferencesService.rx
             .isOnboarded
-            .map { $0 ? DemoStep.onboardingIsDone : DemoStep.onboarding }
+            .map { $0 ? DemoStep.onboardingIsComplete : DemoStep.onboardingIsRequired }
             .bind(to: self.steps)
             .disposed(by: self.disposeBag)
     }

@@ -30,7 +30,7 @@ class DashboardFlow: Flow {
         guard let step = step as? DemoStep else { return .none }
 
         switch step {
-        case .dashboard:
+        case .dashboardIsRequired:
             return navigateToDashboard()
         default:
             return .none
@@ -55,8 +55,8 @@ class DashboardFlow: Flow {
         }
 
         return .multiple(flowContributors: [.contribute(withNextPresentable: wishListFlow,
-                                                        withNextStepper: CompositeStepper(steppers: [OneStepper(withSingleStep: DemoStep.movieList), wishlistStepper])),
+                                                        withNextStepper: CompositeStepper(steppers: [OneStepper(withSingleStep: DemoStep.moviesAreRequired), wishlistStepper])),
                                             .contribute(withNextPresentable: watchedFlow,
-                                                        withNextStepper: OneStepper(withSingleStep: DemoStep.movieList))])
+                                                        withNextStepper: OneStepper(withSingleStep: DemoStep.moviesAreRequired))])
     }
 }

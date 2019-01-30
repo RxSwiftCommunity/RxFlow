@@ -36,12 +36,12 @@ class OnboardingFlow: Flow {
         guard let step = step as? DemoStep else { return .none }
 
         switch step {
-        case .login:
+        case .loginIsRequired:
             return navigationToLoginScreen()
-        case .loginIsComplete:
+        case .userIsLoggedIn:
             return navigationToApiScreen()
-        case .apiKeyIsComplete:
-            return .end(forwardToParentFlowWithStep: DemoStep.onboardingIsDone)
+        case .apiKeyIsFilledIn:
+            return .end(forwardToParentFlowWithStep: DemoStep.onboardingIsComplete)
         default:
             return .none
         }

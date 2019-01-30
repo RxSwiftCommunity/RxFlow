@@ -34,20 +34,20 @@ class SettingsFlow: Flow {
         guard let step = step as? DemoStep else { return .none }
 
         switch step {
-        case .settings:
+        case .settingsAreRequired:
             return navigateToSettingsScreen()
-        case .login:
+        case .loginIsRequired:
             return navigateToLoginScreen()
-        case .loginIsComplete:
+        case .userIsLoggedIn:
             return popToMasterViewController()
-        case .apiKey:
+        case .apiKeyIsRequired:
             return navigateToApiKeyScreen()
-        case .apiKeyIsComplete:
+        case .apiKeyIsFilledIn:
             return popToMasterViewController()
-        case .about:
+        case .aboutIsRequired:
             return navigateToAboutScreen()
-        case .settingsIsComplete:
-            return .end(forwardToParentFlowWithStep: DemoStep.settingsIsComplete)
+        case .settingsAreComplete:
+            return .end(forwardToParentFlowWithStep: DemoStep.settingsAreComplete)
         default:
             return .none
         }
@@ -112,10 +112,10 @@ class SettingsStepper: Stepper {
     let steps = PublishRelay<Step>()
 
     var initialStep: Step {
-        return DemoStep.settings
+        return DemoStep.settingsAreRequired
     }
 
     @objc func settingsDone() {
-        self.steps.accept(DemoStep.settingsIsComplete)
+        self.steps.accept(DemoStep.settingsAreComplete)
     }
 }

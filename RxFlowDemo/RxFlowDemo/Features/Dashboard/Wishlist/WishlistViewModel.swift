@@ -31,6 +31,6 @@ class WishlistViewModel: ServicesViewModel, Stepper {
     }
 
     public func pick (movieId: Int) {
-        self.steps.accept(DemoStep.moviePicked(withMovieId: movieId))
+        self.steps.accept(DemoStep.movieIsPicked(withId: movieId))
     }
 }

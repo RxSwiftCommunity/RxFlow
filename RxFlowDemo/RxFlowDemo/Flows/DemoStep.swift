@@ -9,28 +9,33 @@
 import RxFlow
 
 enum DemoStep: Step {
-    // global
-    case logout
+    // Global
+    case logoutIsRequired
+    case dashboardIsRequired
+
+    // Login
+    case loginIsRequired
+    case userIsLoggedIn
+
+    // Api Key
+    case apiKeyIsRequired
+    case apiKeyIsFilledIn
 
     // Onboarding
-    case onboarding
-    case onboardingIsDone
-    case apiKey
-    case apiKeyIsComplete
-    case login
-    case loginIsComplete
-
-    // Dashboard
-    case dashboard
+    case onboardingIsRequired
+    case onboardingIsComplete
 
     // Movies
-    case movieList
-    case moviePicked (withMovieId: Int)
-    case castPicked (withCastId: Int)
+    case moviesAreRequired
+    case movieIsPicked (withId: Int)
+    case castIsPicked (withId: Int)
 
     // Settings
-    case settings
-    case about
+    case settingsAreRequired
+    case settingsAreComplete
+
+    // About
+    case aboutIsRequired
     case aboutIsComplete
-    case settingsIsComplete
+
 }

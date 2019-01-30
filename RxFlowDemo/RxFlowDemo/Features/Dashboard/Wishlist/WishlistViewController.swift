@@ -33,7 +33,7 @@ class WishlistViewController: UIViewController, StoryboardBased, ViewModelBased 
 
 extension WishlistViewController: Stepper {
     private func about () {
-        self.steps.accept(DemoStep.about)
+        self.steps.accept(DemoStep.aboutIsRequired)
     }
 }
 

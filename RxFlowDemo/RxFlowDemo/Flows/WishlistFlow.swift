@@ -34,18 +34,18 @@ class WishlistFlow: Flow {
         guard let step = step as? DemoStep else { return .none }
 
         switch step {
-        case .movieList:
+        case .moviesAreRequired:
             return navigateToMovieListScreen()
-        case .moviePicked(let movieId):
+        case .movieIsPicked(let movieId):
             return navigateToMovieDetailScreen(with: movieId)
-        case .castPicked(let castId):
+        case .castIsPicked(let castId):
             return navigateToCastDetailScreen(with: castId)
-        case .settings:
+        case .settingsAreRequired:
             return navigateToSettings()
-        case .settingsIsComplete:
+        case .settingsAreComplete:
             self.rootViewController.presentedViewController?.dismiss(animated: true)
             return .none
-        case .about:
+        case .aboutIsRequired:
             return self.navigateToAbout()
         case .aboutIsComplete:
             self.rootViewController.presentedViewController?.dismiss(animated: true)
@@ -63,12 +63,12 @@ class WishlistFlow: Flow {
             navigationBarItem.setRightBarButton(UIBarButtonItem(image: UIImage(named: "settings"),
                                                                 style: UIBarButtonItem.Style.plain,
                                                                 target: self.wishlistStepper,
-                                                                action: #selector(WishlistStepper.settings)),
+                                                                action: #selector(WishlistStepper.settingsAreRequired)),
                                                 animated: false)
             navigationBarItem.setLeftBarButton(UIBarButtonItem(title: "Logout",
                                                                style: UIBarButtonItem.Style.plain,
                                                                target: self,
-                                                               action: #selector(WishlistFlow.logout)),
+                                                               action: #selector(WishlistFlow.logoutIsRequired)),
                                                animated: false)
         }
         return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: CompositeStepper(steppers: [viewController.viewModel,
@@ -108,7 +108,7 @@ class WishlistFlow: Flow {
         return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController))
     }
 
-    @objc func logout() {
+    @objc func logoutIsRequired() {
         self.services.preferencesService.setNotOnboarded()
     }
 }
@@ -117,7 +117,7 @@ class WishlistStepper: Stepper {
 
     let steps = PublishRelay<Step>()
 
-    @objc func settings() {
-        self.steps.accept(DemoStep.settings)
+    @objc func settingsAreRequired() {
+        self.steps.accept(DemoStep.settingsAreRequired)
     }
 }
