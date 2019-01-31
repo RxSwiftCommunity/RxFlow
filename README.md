@@ -1,4 +1,4 @@
-| <img alt="RxFlow Logo" src="https://raw.githubusercontent.com/RxSwiftCommunity/RxFlow/develop/Resources/RxFlow_logo.png" width="250"/> | <ul align="left"><li><a href="#about">About</a><li><a href="#navigation-concerns">Navigation concerns</a><li><a href="#rxflow-aims-to">RxFlow aims to</a><li><a href="#installation">Installation</a><li><a href="#the-core-principles">The core principles</a><li><a href="#how-to-use-rxflow">How to use RxFlow</a><li><a href="#tools-and-dependencies">Tools and dependencies</a></ul> |
+| <img alt="RxFlow Logo" src="https://raw.githubusercontent.com/RxSwiftCommunity/RxFlow/develop/Resources/RxFlow_logo.png" width="250"/> | <ul align="left"><li><a href="#about">About</a><li><a href="#navigation-concerns">Navigation concerns</a><li><a href="#rxflow-aims-to">RxFlow aims to</a><li><a href="#installation">Installation</a><li><a href="#the-key-principles">The key principles</a><li><a href="#how-to-use-rxflow">How to use RxFlow</a><li><a href="#tools-and-dependencies">Tools and dependencies</a></ul> |
 | -------------- | -------------- |
 | Travis CI | [![Build Status](https://travis-ci.org/RxSwiftCommunity/RxFlow.svg?branch=develop)](https://travis-ci.org/RxSwiftCommunity/RxFlow) |
 | Frameworks | [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/RxFlow.svg?style=flat)](http://cocoapods.org/pods/RxFlow) |
@@ -23,17 +23,20 @@ The Jazzy documentation can be seen here as well: [Documentation](http://communi
 ⚠ RxFlow v2.0.0 brings some breaking changes.
 
 Here are the changes you should be aware of to use RxFlow 2.0.0 when coming from a previous version:
-- **Coordinator** has been renamed in **FlowCoordinator**.
-- **NextFlowItem** and **NextFlowItems** have been renamed in **FlowContributor** and **FlowContributors**.
-- The FlowContributors enum entry **.end (withStepForParentFlow: Step)** has been renamed in **.end (forwardToParentFlowWithStep: Step)**.
-- The FlowContributor class has been converted to an enum with the following entries: **.contribute(withNextPresentable: Presentable, withNextStepper: Stepper)**, **.forwardToCurrentFlow(withStep: Step)** and **.forwardToParentFlow(withStep: Step)**. It allows to unify the way we can contribute to a Flow.
-- In an effort to minimize the usage of **objc_get/setAssociatedObject**, each custom **Stepper** must declare a stored property **steps as a PublishSubject<Step>**.
-- To trigger an initial **Step** inside a **Stepper**, an **initialStep** property has to be implemented. A default implementation is provided by RxFlow if it makes no sense to emit a first Step for your specific use case. This default implementation emits a "void step" that will be ignored by the **Flow**.
-- The callback function **readyToEmitSteps** has been added to a **Stepper**. It is called once the Stepper can emit Steps (see the **AppStepper** in the Demo App for a valid use case).
-- The reactive **step** property of a **Stepper** has been renamed in **steps** to reflect the plurality of the sequence of steps it can emit.
-- **FlowCoordinator** has been totally rewritten to improve memory management.
-- **HasDisposeBag** has been removed from the project as it was not mandatory in the implementation and is not really related to RxFlow. A similar implementation can be found in [NSObject-Rx](https://github.com/RxSwiftCommunity/NSObject-Rx).
-- The **RxFlowStep** enum is now provided to offer some common steps that can be used in lots of applications. This enum will grow in size over time.
+- `Coordinator` has been renamed in `FlowCoordinator`.
+- `NextFlowItem` and `NextFlowItems` have been renamed in `FlowContributor` and `FlowContributors`.
+- The FlowContributors enum entry `.end (withStepForParentFlow: Step)` has been renamed in `.end (forwardToParentFlowWithStep: Step)`.
+- The `FlowContributor` class has been converted to an enum with the following entries. It allows to unify the way we can contribute to a Flow:
+	- `.contribute(withNextPresentable: Presentable, withNextStepper: Stepper)`,
+	- `.forwardToCurrentFlow(withStep: Step)`,
+	- `.forwardToParentFlow(withStep: Step)`.
+- In an effort to minimize the usage of `objc_get/setAssociatedObject`, each custom `Stepper` must declare a stored property `steps` as a `PublishRelay<Step>`.
+- To trigger an initial `Step` inside a `Stepper`, an `initialStep` property has to be implemented. A default implementation is provided by **RxFlow** if it makes no sense to emit a first Step for your specific use case. This default implementation emits a "void step" that will be ignored by the `Flow`.
+- The callback function `readyToEmitSteps()` has been added to a `Stepper`. It is called once the Stepper can emit Steps (see the `AppStepper` in the Demo App for a valid use case).
+- The reactive `step` property of a `Stepper` has been renamed in `steps` to reflect the plurality of the sequence of steps it can emit.
+- `FlowCoordinator` has been totally rewritten to improve memory management.
+- `HasDisposeBag` has been removed from the project as it was not mandatory in the implementation and is not really related to RxFlow. A similar implementation can be found in [NSObject-Rx](https://github.com/RxSwiftCommunity/NSObject-Rx).
+- The `RxFlowStep` enum is now provided to offer some common steps that can be used in lots of applications. This enum will grow in size over time.
 - Some of the old data structure names are still usable but have been explicitly deprecated.
 
 The Demo app has been updated to implement those changes.
