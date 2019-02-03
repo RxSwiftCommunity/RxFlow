@@ -6,131 +6,174 @@
 //  Copyright © 2018 RxSwiftCommunity. All rights reserved.
 //
 
-import XCTest
 @testable import RxFlow
+import XCTest
 import RxBlocking
 import RxSwift
 import RxCocoa
+import RxTest
 
 enum StepperTestsStep: Step {
     case stepOne
     case stepTwo
     case stepThree
+    case stepFour
+    case stepFive
+    case stepSix
+    case stepReference
 }
 
 final class StepperClass: Stepper {
 
     let steps = PublishRelay<Step>()
+    let initialStep: Step
+    let nextStep: Step
 
-    func emitStepOne () {
-        self.steps.accept(StepperTestsStep.stepOne)
+    init(with initialStep: Step, andNextStep nextStep: Step) {
+        self.initialStep = initialStep
+        self.nextStep = nextStep
+    }
+
+    func emitNextStep () {
+        self.steps.accept(self.nextStep)
+    }
+}
+
+final class CustomCompositeStepper: CompositeStepper {
+    let initialStep: Step
+
+    init(with initialStep: Step, andSteppers steppers: [Stepper]) {
+        self.initialStep = initialStep
+        super.init(steppers: steppers)
     }
 }
 
 final class StepperTests: XCTestCase {
 
-    func testStepperEmitStep() throws {
-        let exp = expectation(description: "exp")
-
+    func testStepperEmitStep() {
         // Given: a stepper
-        let stepperClass = StepperClass()
-
-        _ = stepperClass
-            .steps
-            .takeUntil(self.rx.deallocating)
-            .filter { !($0 is NoneStep) }
-            .subscribe(onNext: { step in
-                XCTAssertEqual(step as! StepperTestsStep, StepperTestsStep.stepOne)
-                exp.fulfill()
-            })
+        let stepperClass = StepperClass(with: StepperTestsStep.stepOne, andNextStep: StepperTestsStep.stepTwo)
+        let testScheduler = TestScheduler(initialClock: 0)
+        let observer = testScheduler.createObserver(Step.self)
+        _ = stepperClass.steps.takeUntil(self.rx.deallocating).bind(to: observer)
+        testScheduler.start()
 
         // When: emitting a new step
-        stepperClass.emitStepOne()
+        stepperClass.steps.accept(stepperClass.initialStep)
+        stepperClass.emitNextStep()
 
         // Then: the right step is emitted
-        waitForExpectations(timeout: 10)
+        XCTAssertEqual(observer.events.count, 2)
+        XCTAssertEqual(observer.events[0].value.element as? StepperTestsStep, StepperTestsStep.stepOne)
+        XCTAssertEqual(observer.events[1].value.element as? StepperTestsStep, StepperTestsStep.stepTwo)
     }
 
-    func testOneStepper() throws {
+    func testOneStepper() {
         // Given: a OneStepper
         let stepperClass = OneStepper(withSingleStep: StepperTestsStep.stepOne)
+        let testScheduler = TestScheduler(initialClock: 0)
+        let observer = testScheduler.createObserver(Step.self)
+        _ = stepperClass.steps.takeUntil(self.rx.deallocating).bind(to: observer)
+        testScheduler.start()
 
-        // When: listening to the emitted step
+        // When: emitting the initial step
+        stepperClass.steps.accept(stepperClass.initialStep)
+
         // Then: the right step is emitted
-        let step = try stepperClass.steps
-            .startWith(elements: stepperClass.initialSteps)
-            .filter { !($0 is NoneStep) }
-            .toBlocking()
-            .first()!
-
-        if case StepperTestsStep.stepOne = step {
-            XCTAssert(true)
-        }
+        XCTAssertEqual(observer.events.count, 1)
+        XCTAssertEqual(observer.events[0].value.element as? StepperTestsStep, StepperTestsStep.stepOne)
     }
 
     func testNoneStepper() {
-
         // Given: a NoneStepper
         let stepperClass = NoneStepper()
+        let testScheduler = TestScheduler(initialClock: 0)
+        let observer = testScheduler.createObserver(Step.self)
+        _ = stepperClass.steps.takeUntil(self.rx.deallocating).bind(to: observer)
+        testScheduler.start()
 
-        // When: listening to the emitted step
+        // When: emitting the initial step
+        stepperClass.steps.accept(stepperClass.initialStep)
+
         // Then: the right step is emitted
-        do {
-            _ = try stepperClass.steps.filter { !($0 is NoneStep) }.toBlocking(timeout: 0.1).first()!
-            XCTFail()
-            return
-        } catch {
-            if case RxError.timeout = error {
-                XCTAssert(true)
-                return
-            }
-
-            XCTFail()
-        }
+        XCTAssertEqual(observer.events.count, 1)
+        XCTAssertEqual(observer.events[0].value.element as? NoneStep, NoneStep())
     }
 
-    func testCompositeStepperInitialSteps() throws {
+    func testCompositeStepperInitialSteps() {
 
         let stepsToEmit = [StepperTestsStep.stepOne, StepperTestsStep.stepTwo, StepperTestsStep.stepThree]
 
         // Given: a CompositeStepper, composed of OneSteppers
-        let stepperClass = CompositeStepper(steppers: stepsToEmit.map { OneStepper(withSingleStep: $0) })
+        let compositeStepper = CompositeStepper(steppers: stepsToEmit.map { OneStepper(withSingleStep: $0) })
+        let testScheduler = TestScheduler(initialClock: 0)
+        let observer = testScheduler.createObserver(Step.self)
+        _ = compositeStepper.steps.takeUntil(self.rx.deallocating).bind(to: observer)
+        testScheduler.start()
+        
+        // When: launching the steps sequence
+        compositeStepper.readyToEmitSteps()
 
-        // When: getting the computed initial steps
-        // Then: there are equal to the concatenation of the initial steps of the OneSteppers
-        XCTAssertEqual(stepperClass.initialSteps.filter { !($0 is NoneStep) } as! [StepperTestsStep], stepsToEmit)
+        // Then: The initial steps are emitted
+        XCTAssertEqual(observer.events.count, 3)
+        XCTAssertEqual(observer.events[0].value.element as? StepperTestsStep, StepperTestsStep.stepOne)
+        XCTAssertEqual(observer.events[1].value.element as? StepperTestsStep, StepperTestsStep.stepTwo)
+        XCTAssertEqual(observer.events[2].value.element as? StepperTestsStep, StepperTestsStep.stepThree)
     }
 
-    func testCompositeStepper() throws {
+    func testCompositeStepper() {
 
-        let stepsToEmit = [StepperTestsStep.stepOne, StepperTestsStep.stepTwo, StepperTestsStep.stepThree]
-        let exp = expectation(description: "exp")
-        exp.expectedFulfillmentCount = stepsToEmit.count
+        let initialStepsToEmit = [StepperTestsStep.stepOne, StepperTestsStep.stepTwo, StepperTestsStep.stepThree]
+        let nextStepsToEmit = [StepperTestsStep.stepFour, StepperTestsStep.stepFive, StepperTestsStep.stepSix]
 
         // Given: a CompositeStepper, composed of OneSteppers
-        let stepperClass = CompositeStepper(steppers: stepsToEmit.map { OneStepper(withSingleStep: $0) })
+        let stepperClasses = zip(initialStepsToEmit, nextStepsToEmit).map { StepperClass(with: $0, andNextStep: $1) }
+        let compositeStepper = CompositeStepper(steppers: stepperClasses)
+        let testScheduler = TestScheduler(initialClock: 0)
+        let observer = testScheduler.createObserver(Step.self)
+        _ = compositeStepper.steps.takeUntil(self.rx.deallocating).bind(to: observer)
+        testScheduler.start()
 
-        var stepIndex = 0
+        // When: launching the steps sequence
+        compositeStepper.readyToEmitSteps()
+        stepperClasses.forEach { $0.emitNextStep() }
 
-        // When: listening to the emitted step
-        _ = stepperClass.steps
-            .startWith(elements: stepperClass.initialSteps)
-            .filter { !($0 is NoneStep) }
-            .takeUntil(self.rx.deallocating)
-            .subscribe(onNext: { (step) in
-                guard let step = step as? StepperTestsStep else {
-                    XCTFail()
-                    return
-                }
-                
-                // Then: the right step is emitted
-                if step == stepsToEmit[stepIndex] {
-                    exp.fulfill()
-                }
+        // Then: The initial and next steps are emitted
+        XCTAssertEqual(observer.events.count, 6)
+        XCTAssertEqual(observer.events[0].value.element as? StepperTestsStep, StepperTestsStep.stepOne)
+        XCTAssertEqual(observer.events[1].value.element as? StepperTestsStep, StepperTestsStep.stepTwo)
+        XCTAssertEqual(observer.events[2].value.element as? StepperTestsStep, StepperTestsStep.stepThree)
+        XCTAssertEqual(observer.events[3].value.element as? StepperTestsStep, StepperTestsStep.stepFour)
+        XCTAssertEqual(observer.events[4].value.element as? StepperTestsStep, StepperTestsStep.stepFive)
+        XCTAssertEqual(observer.events[5].value.element as? StepperTestsStep, StepperTestsStep.stepSix)
+    }
 
-                stepIndex += 1
-            })
+    func testCompositeStepperWithInitialStep() {
 
-        waitForExpectations(timeout: 10)
+        let initialStepsToEmit = [StepperTestsStep.stepOne, StepperTestsStep.stepTwo, StepperTestsStep.stepThree]
+        let nextStepsToEmit = [StepperTestsStep.stepFour, StepperTestsStep.stepFive, StepperTestsStep.stepSix]
+
+        // Given: a CompositeStepper, composed of OneSteppers
+        let stepperClasses = zip(initialStepsToEmit, nextStepsToEmit).map { StepperClass(with: $0, andNextStep: $1) }
+        let compositeStepper = CustomCompositeStepper(with: StepperTestsStep.stepReference, andSteppers: stepperClasses)
+        let testScheduler = TestScheduler(initialClock: 0)
+        let observer = testScheduler.createObserver(Step.self)
+        _ = compositeStepper.steps.takeUntil(self.rx.deallocating).bind(to: observer)
+        testScheduler.start()
+
+        // When: launching the steps sequence
+        compositeStepper.steps.accept(compositeStepper.initialStep)
+        compositeStepper.readyToEmitSteps()
+        stepperClasses.forEach { $0.emitNextStep() }
+
+        // Then: The initial and next steps are emitted
+        XCTAssertEqual(observer.events.count, 7)
+        XCTAssertEqual(observer.events[0].value.element as? StepperTestsStep, StepperTestsStep.stepReference)
+        XCTAssertEqual(observer.events[1].value.element as? StepperTestsStep, StepperTestsStep.stepOne)
+        XCTAssertEqual(observer.events[2].value.element as? StepperTestsStep, StepperTestsStep.stepTwo)
+        XCTAssertEqual(observer.events[3].value.element as? StepperTestsStep, StepperTestsStep.stepThree)
+        XCTAssertEqual(observer.events[4].value.element as? StepperTestsStep, StepperTestsStep.stepFour)
+        XCTAssertEqual(observer.events[5].value.element as? StepperTestsStep, StepperTestsStep.stepFive)
+        XCTAssertEqual(observer.events[6].value.element as? StepperTestsStep, StepperTestsStep.stepSix)
     }
 }

@@ -75,14 +75,16 @@ public class CompositeStepper: Stepper {
     }
 
     public func readyToEmitSteps() {
-        Observable<Step>
+
+        let initialSteps = Observable<Step>.from(self.innerSteppers.map { $0.initialStep })
+
+        let nextSteps = Observable<Step>
             .merge(self.innerSteppers.map { $0.steps.asObservable() })
+
+        initialSteps
+            .concat(nextSteps)
             .bind(to: self.steps)
             .disposed(by: self.disposeBag)
-    }
-
-    public var initialStep: Step {
-        return self.innerSteppers.map { $0.initialStep }.filter { !($0 is NoneStep) }.first ?? NoneStep()
     }
 }
 

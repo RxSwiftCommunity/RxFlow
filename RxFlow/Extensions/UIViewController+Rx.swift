@@ -15,11 +15,6 @@ import RxCocoa
 
 extension Reactive where Base: UIViewController {
 
-    /// Rx observable, triggered when the view has appeared for the first time
-    public var firstTimeViewDidAppear: Single<Void> {
-        return self.sentMessage(#selector(Base.viewDidAppear)).map { _ in return Void() }.take(1).asSingle()
-    }
-
     /// Rx observable, triggered when the view is being dismissed
     public var dismissed: ControlEvent<Bool> {
 

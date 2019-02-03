@@ -26,8 +26,17 @@
 		1A8FBDFE1FF8337800389464 /* Flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDF11FF8337800389464 /* Flow.swift */; };
 		1AF8549D1FF8328D00271B52 /* RxFlow.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AF8548F1FF8328D00271B52 /* RxFlow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		741801AC21CB31C200D25B4B /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741801AB21CB31C200D25B4B /* FlowCoordinator.swift */; };
-		74ED6C3021D7B46A00731736 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74ED6C2E21D7B46A00731736 /* RxCocoa.framework */; };
-		74ED6C3121D7B46A00731736 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74ED6C2F21D7B46A00731736 /* RxSwift.framework */; };
+		749B02E822066518001BEBBB /* RxBlocking.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 749B02E722066518001BEBBB /* RxBlocking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		749B02EB22066538001BEBBB /* Reusable.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 749B02E922066537001BEBBB /* Reusable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		749B02EC22066538001BEBBB /* RxTest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 749B02EA22066538001BEBBB /* RxTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		749B02EF22066618001BEBBB /* RxCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 749B02ED22066618001BEBBB /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		749B02F022066618001BEBBB /* RxSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 749B02EE22066618001BEBBB /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		749B02F12206665A001BEBBB /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749B02ED22066618001BEBBB /* RxCocoa.framework */; };
+		749B02F22206665A001BEBBB /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749B02EE22066618001BEBBB /* RxSwift.framework */; };
+		749B02F322066675001BEBBB /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749B02ED22066618001BEBBB /* RxCocoa.framework */; };
+		749B02F422066675001BEBBB /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749B02EE22066618001BEBBB /* RxSwift.framework */; };
+		749B02F82206852D001BEBBB /* Flow+PresentableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749B02F72206852D001BEBBB /* Flow+PresentableTests.swift */; };
+		749B02FC220688EC001BEBBB /* FlowCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749B02FB220688EC001BEBBB /* FlowCoordinatorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +48,23 @@
 			remoteInfo = RxFlow;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		749B02E622066500001BEBBB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				749B02EF22066618001BEBBB /* RxCocoa.framework in CopyFiles */,
+				749B02F022066618001BEBBB /* RxSwift.framework in CopyFiles */,
+				749B02EB22066538001BEBBB /* Reusable.framework in CopyFiles */,
+				749B02EC22066538001BEBBB /* RxTest.framework in CopyFiles */,
+				749B02E822066518001BEBBB /* RxBlocking.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1A1627C8217D517700952EFC /* Rx+PausableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+PausableTests.swift"; sourceTree = "<group>"; };
@@ -64,8 +90,13 @@
 		1AF8548F1FF8328D00271B52 /* RxFlow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxFlow.h; sourceTree = "<group>"; };
 		1AF854901FF8328D00271B52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		741801AB21CB31C200D25B4B /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
-		74ED6C2E21D7B46A00731736 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
-		74ED6C2F21D7B46A00731736 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		749B02E722066518001BEBBB /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
+		749B02E922066537001BEBBB /* Reusable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reusable.framework; path = Carthage/Build/iOS/Reusable.framework; sourceTree = "<group>"; };
+		749B02EA22066538001BEBBB /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
+		749B02ED22066618001BEBBB /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		749B02EE22066618001BEBBB /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		749B02F72206852D001BEBBB /* Flow+PresentableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Flow+PresentableTests.swift"; sourceTree = "<group>"; };
+		749B02FB220688EC001BEBBB /* FlowCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinatorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +104,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				749B02F322066675001BEBBB /* RxCocoa.framework in Frameworks */,
+				749B02F422066675001BEBBB /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,24 +113,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74ED6C3021D7B46A00731736 /* RxCocoa.framework in Frameworks */,
-				74ED6C3121D7B46A00731736 /* RxSwift.framework in Frameworks */,
+				749B02F12206665A001BEBBB /* RxCocoa.framework in Frameworks */,
+				749B02F22206665A001BEBBB /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1A1627CA217D566100952EFC /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				1A1627CF2186786800952EFC /* TestData */,
-				1A1627C8217D517700952EFC /* Rx+PausableTests.swift */,
-				1A1627CD218677C000952EFC /* UIViewController+PresentableTests.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		1A1627CF2186786800952EFC /* TestData */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,8 +133,11 @@
 		1A8FBDDE1FF8331900389464 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				74ED6C2E21D7B46A00731736 /* RxCocoa.framework */,
-				74ED6C2F21D7B46A00731736 /* RxSwift.framework */,
+				749B02ED22066618001BEBBB /* RxCocoa.framework */,
+				749B02EE22066618001BEBBB /* RxSwift.framework */,
+				749B02E922066537001BEBBB /* Reusable.framework */,
+				749B02EA22066538001BEBBB /* RxTest.framework */,
+				749B02E722066518001BEBBB /* RxBlocking.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -121,8 +147,8 @@
 			children = (
 				1A8FBDEC1FF8337700389464 /* Rx+Pausable.swift */,
 				1A8FBDE51FF8337700389464 /* UIViewController+Presentable.swift */,
-				1A8FBDE81FF8337700389464 /* UIWindow+Presentable.swift */,
 				1A8FBDE61FF8337700389464 /* UIViewController+Rx.swift */,
+				1A8FBDE81FF8337700389464 /* UIWindow+Presentable.swift */,
 				1A8FBDEA1FF8337700389464 /* UIWindow+Rx.swift */,
 			);
 			path = Extensions;
@@ -132,9 +158,13 @@
 			isa = PBXGroup;
 			children = (
 				1A8FBE791FF9783100389464 /* Info.plist */,
-				1A1627CA217D566100952EFC /* Extensions */,
-				1A1627CB217D597400952EFC /* SyncronizableTests.swift */,
+				1A1627CF2186786800952EFC /* TestData */,
+				749B02FB220688EC001BEBBB /* FlowCoordinatorTests.swift */,
+				749B02F72206852D001BEBBB /* Flow+PresentableTests.swift */,
+				1A1627C8217D517700952EFC /* Rx+PausableTests.swift */,
 				1A4B10B32175708A0034672F /* StepperTests.swift */,
+				1A1627CB217D597400952EFC /* SyncronizableTests.swift */,
+				1A1627CD218677C000952EFC /* UIViewController+PresentableTests.swift */,
 			);
 			path = RxFlowTests;
 			sourceTree = "<group>";
@@ -164,13 +194,13 @@
 				1AF8548F1FF8328D00271B52 /* RxFlow.h */,
 				1AF854901FF8328D00271B52 /* Info.plist */,
 				1A8FBE031FF8430F00389464 /* Extensions */,
-				1A8FBDEE1FF8337700389464 /* Presentable.swift */,
-				1A8FBDED1FF8337700389464 /* Synchronizable.swift */,
 				1A8FBDF11FF8337800389464 /* Flow.swift */,
 				1A8FBDE91FF8337700389464 /* FlowContributor.swift */,
 				741801AB21CB31C200D25B4B /* FlowCoordinator.swift */,
+				1A8FBDEE1FF8337700389464 /* Presentable.swift */,
 				1A8FBDF01FF8337800389464 /* Step.swift */,
 				1A8FBDE71FF8337700389464 /* Stepper.swift */,
+				1A8FBDED1FF8337700389464 /* Synchronizable.swift */,
 			);
 			path = RxFlow;
 			sourceTree = "<group>";
@@ -193,10 +223,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1A8FBE7D1FF9783100389464 /* Build configuration list for PBXNativeTarget "RxFlowTests" */;
 			buildPhases = (
-				1ADAD0C820A929A6003049A9 /* ⚙Copy Carthage Frameworks */,
 				1A8FBE711FF9783100389464 /* Sources */,
 				1A8FBE721FF9783100389464 /* Frameworks */,
 				1A8FBE731FF9783100389464 /* Resources */,
+				749B02E622066500001BEBBB /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -300,28 +330,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		1ADAD0C820A929A6003049A9 /* ⚙Copy Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Reusable.framework",
-			);
-			name = "⚙Copy Carthage Frameworks";
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxBlocking.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Reusable.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -330,8 +338,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A1627CC217D597400952EFC /* SyncronizableTests.swift in Sources */,
+				749B02FC220688EC001BEBBB /* FlowCoordinatorTests.swift in Sources */,
 				1A1627CE218677C000952EFC /* UIViewController+PresentableTests.swift in Sources */,
 				1A1627C9217D517700952EFC /* Rx+PausableTests.swift in Sources */,
+				749B02F82206852D001BEBBB /* Flow+PresentableTests.swift in Sources */,
 				1A1627D3218679A500952EFC /* TestUIViewController.swift in Sources */,
 				1A4B10B42175708A0034672F /* StepperTests.swift in Sources */,
 			);
