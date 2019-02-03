@@ -111,7 +111,7 @@
             <table><thead>
 <tr>
 <th><img alt="RxFlow Logo" src="https://raw.githubusercontent.com/RxSwiftCommunity/RxFlow/develop/Resources/RxFlow_logo.png" width="250"/></th>
-<th><ul align="left"><li><a href="#about">About</a><li><a href="#navigation-concerns">Navigation concerns</a><li><a href="#rxflow-aims-to">RxFlow aims to</a><li><a href="#installation">Installation</a><li><a href="#the-core-principles">The core principles</a><li><a href="#how-to-use-rxflow">How to use RxFlow</a><li><a href="#tools-and-dependencies">Tools and dependencies</a></ul></th>
+<th><ul align="left"><li><a href="#about">About</a><li><a href="#navigation-concerns">Navigation concerns</a><li><a href="#rxflow-aims-to">RxFlow aims to</a><li><a href="#installation">Installation</a><li><a href="#the-key-principles">The key principles</a><li><a href="#how-to-use-rxflow">How to use RxFlow</a><li><a href="#tools-and-dependencies">Tools and dependencies</a></ul></th>
 </tr>
 </thead><tbody>
 <tr>
@@ -155,16 +155,23 @@
 <p>Here are the changes you should be aware of to use RxFlow 2.0.0 when coming from a previous version:</p>
 
 <ul>
-<li><strong>Coordinator</strong> has been renamed in <strong>FlowCoordinator</strong>.</li>
-<li><strong>NextFlowItem</strong> and <strong>NextFlowItems</strong> have been renamed in <strong>FlowContributor</strong> and <strong>FlowContributors</strong>.</li>
-<li>The FlowContributors enum entry <strong>.end (withStepForParentFlow: Step)</strong> has been renamed in <strong>.end (forwardToParentFlowWithStep: Step)</strong>.</li>
-<li>The FlowContributor class has been converted to an enum with the following entries: <strong>.contribute(withNextPresentable: Presentable, withNextStepper: Stepper)</strong>, <strong>.forwardToCurrentFlow(withStep: Step)</strong> and <strong>.forwardToParentFlow(withStep: Step)</strong>. It allows to unify the way we can contribute to a Flow.</li>
-<li>In an effort to minimize the usage of <strong>objc_get/setAssociatedObject</strong>, each custom <strong>Stepper</strong> must declare a stored property <strong>steps as a PublishSubject<Step></strong>.</li>
-<li>To trigger an initial <strong>Step</strong> inside a <strong>Stepper</strong>, an <strong>initialStep</strong> property has to be implemented. A default implementation is provided by RxFlow if it makes no sense to emit a first Step for your specific use case. This default implementation emits a <q>void step</q> that will be ignored by the <strong>Flow</strong>.</li>
-<li>The reactive <strong>step</strong> property of a <strong>Stepper</strong> has been renamed in <strong>steps</strong> to reflect the plurality of the sequence of steps it can emit.</li>
-<li><strong>FlowCoordinator</strong> has been totally rewritten to improve memory management.</li>
-<li><strong>HasDisposeBag</strong> has been removed from the project as it was not mandatory in the implementation and is not really related to RxFlow. A similar implementation can be found in <a href="https://github.com/RxSwiftCommunity/NSObject-Rx">NSObject-Rx</a>.</li>
-<li>The <strong>RxFlowStep</strong> enum is now provided to offer some common steps that can be used in lots of applications. This enum will grow in size over time.</li>
+<li><code><a href="Typealiases.html#/s:6RxFlow11Coordinatora">Coordinator</a></code> has been renamed in <code><a href="Classes/FlowCoordinator.html">FlowCoordinator</a></code>.</li>
+<li><code>NextFlowItem</code> and <code><a href="Typealiases.html#/s:6RxFlow04NextB5Itemsa">NextFlowItems</a></code> have been renamed in <code><a href="Enums/FlowContributor.html">FlowContributor</a></code> and <code><a href="Enums/FlowContributors.html">FlowContributors</a></code>.</li>
+<li>The FlowContributors enum entry <code>.end (withStepForParentFlow: Step)</code> has been renamed in <code>.end (forwardToParentFlowWithStep: Step)</code>.</li>
+<li>The <code><a href="Enums/FlowContributor.html">FlowContributor</a></code> class has been converted to an enum with the following entries. It allows to unify the way we can contribute to a Flow:
+
+<ul>
+<li><code>.contribute(withNextPresentable: Presentable, withNextStepper: Stepper)</code>,</li>
+<li><code>.forwardToCurrentFlow(withStep: Step)</code>,</li>
+<li><code>.forwardToParentFlow(withStep: Step)</code>.</li>
+</ul></li>
+<li>In an effort to minimize the usage of <code>objc_get/setAssociatedObject</code>, each custom <code><a href="Protocols/Stepper.html">Stepper</a></code> must declare a stored property <code>steps</code> as a <code>PublishRelay&lt;Step&gt;</code>.</li>
+<li>To trigger an initial <code><a href="Protocols.html#/s:6RxFlow4StepP">Step</a></code> inside a <code><a href="Protocols/Stepper.html">Stepper</a></code>, an <code>initialStep</code> property has to be implemented. A default implementation is provided by <strong>RxFlow</strong> if it makes no sense to emit a first Step for your specific use case. This default implementation emits a <q>void step</q> that will be ignored by the <code><a href="Protocols/Flow.html">Flow</a></code>.</li>
+<li>The callback function <code>readyToEmitSteps()</code> has been added to a <code><a href="Protocols/Stepper.html">Stepper</a></code>. It is called once the Stepper can emit Steps (see the <code>AppStepper</code> in the Demo App for a valid use case).</li>
+<li>The reactive <code>step</code> property of a <code><a href="Protocols/Stepper.html">Stepper</a></code> has been renamed in <code>steps</code> to reflect the plurality of the sequence of steps it can emit.</li>
+<li><code><a href="Classes/FlowCoordinator.html">FlowCoordinator</a></code> has been totally rewritten to improve memory management.</li>
+<li><code>HasDisposeBag</code> has been removed from the project as it was not mandatory in the implementation and is not really related to RxFlow. A similar implementation can be found in <a href="https://github.com/RxSwiftCommunity/NSObject-Rx">NSObject-Rx</a>.</li>
+<li>The <code><a href="Enums/RxFlowStep.html">RxFlowStep</a></code> enum is now provided to offer some common steps that can be used in lots of applications. This enum will grow in size over time.</li>
 <li>Some of the old data structure names are still usable but have been explicitly deprecated.</li>
 </ul>
 
@@ -237,7 +244,7 @@
 
 <ul>
 <li><strong>Flow</strong>: each <strong>Flow</strong> defines a navigation area in your application. This is the place where you declare the navigation actions (such as presenting a UIViewController or another <strong>Flow</strong>).</li>
-<li><strong>Step</strong>: each <strong>Step</strong> is a navigation state inside a <strong>Flow</strong>. Combinations of <strong>Flows</strong> and <strong>Steps</strong> describe all the possible navigation actions of your application. A <strong>Step</strong> can even embed inner values (such as Ids, URLs, &hellip;) that will be propagated to screens declared in the <strong>Flows</strong>.</li>
+<li><strong>Step</strong>: a <strong>Step</strong> is a way to express a state that can lead to a navigation. Combinations of <strong>Flows</strong> and <strong>Steps</strong> describe all the possible navigation actions. A <strong>Step</strong> can even embed inner values (such as Ids, URLs, &hellip;) that will be propagated to screens declared in the <strong>Flows</strong></li>
 <li><strong>Stepper</strong>: a <strong>Stepper</strong> can be anything that can emit <strong>Steps</strong> inside <strong>Flows</strong>.</li>
 <li><strong>Presentable</strong>: it is an abstraction of something that can be presented (basically <strong>UIViewController</strong> and <strong>Flow</strong> are <strong>Presentable</strong>).</li>
 <li><strong>FlowContributor</strong>: it is a simple data structure that tells the <strong>FlowCoordinator</strong> what will be the next things that can emit new <strong>Steps</strong> in a <strong>Flow</strong>.</li>
@@ -247,17 +254,31 @@
 <h2 id='code-samples' class='heading'>Code samples</h2>
 <h3 id='how-to-declare-strong-steps-strong' class='heading'>How to declare <strong>Steps</strong></h3>
 
-<p><strong>Steps</strong> are seen like some navigation states spread across the application. Is is pretty convenient to use enums to declare them:</p>
+<p><strong>Steps</strong> are little pieces of states eventually expressing the intent to navigate, it is pretty convenient to declare them in a enum:</p>
 <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">DemoStep</span><span class="p">:</span> <span class="kt">Step</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="n">movieList</span>
-    <span class="k">case</span> <span class="nf">moviePicked</span> <span class="p">(</span><span class="nv">withMovieId</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
-    <span class="k">case</span> <span class="nf">castPicked</span> <span class="p">(</span><span class="nv">withCastId</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+    <span class="c1">// Login</span>
+    <span class="k">case</span> <span class="n">loginIsRequired</span>
+    <span class="k">case</span> <span class="n">userIsLoggedIn</span>
 
-    <span class="k">case</span> <span class="n">settings</span>
-    <span class="k">case</span> <span class="n">settingsDone</span>
-    <span class="k">case</span> <span class="n">about</span>
+    <span class="c1">// Onboarding</span>
+    <span class="k">case</span> <span class="n">onboardingIsRequired</span>
+    <span class="k">case</span> <span class="n">onboardingIsComplete</span>
+
+    <span class="c1">// Home</span>
+    <span class="k">case</span> <span class="n">dashboardIsRequired</span>
+
+    <span class="c1">// Movies</span>
+    <span class="k">case</span> <span class="n">moviesAreRequired</span>
+    <span class="k">case</span> <span class="nf">movieIsPicked</span> <span class="p">(</span><span class="nv">withId</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nf">castIsPicked</span> <span class="p">(</span><span class="nv">withId</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+
+    <span class="c1">// Settings</span>
+    <span class="k">case</span> <span class="n">settingsAreRequired</span>
+    <span class="k">case</span> <span class="n">settingsAreComplete</span>
 <span class="p">}</span>
 </code></pre>
+
+<p>The idea is to keep the <strong>Steps</strong> <code>navigation independent</code> as much as possible. For instance, calling a <strong>Step</strong> <code>showMovieDetail(withId: Int)</code> might be a bad idea since it tighlty couples the fact of selecting a movie with the consequence of showing the movie detail screen. It is not up to the emitter of the <strong>Step</strong> to decide where to navigate, this decision belongs to the <strong>Flow</strong>. </p>
 <h3 id='how-to-declare-a-strong-flow-strong' class='heading'>How to declare a <strong>Flow</strong></h3>
 
 <p>The following <strong>Flow</strong> is used as a Navigation stack. All you have to do is:</p>
@@ -295,11 +316,11 @@
 
         <span class="k">switch</span> <span class="n">step</span> <span class="p">{</span>
 
-        <span class="k">case</span> <span class="o">.</span><span class="nv">movieList</span><span class="p">:</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">moviesAreRequired</span><span class="p">:</span>
             <span class="k">return</span> <span class="nf">navigateToMovieListScreen</span><span class="p">()</span>
-        <span class="k">case</span> <span class="o">.</span><span class="nf">moviePicked</span><span class="p">(</span><span class="k">let</span> <span class="nv">movieId</span><span class="p">):</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nf">movieIsPicked</span><span class="p">(</span><span class="k">let</span> <span class="nv">movieId</span><span class="p">):</span>
             <span class="k">return</span> <span class="nf">navigateToMovieDetailScreen</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">movieId</span><span class="p">)</span>
-        <span class="k">case</span> <span class="o">.</span><span class="nf">castPicked</span><span class="p">(</span><span class="k">let</span> <span class="nv">castId</span><span class="p">):</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nf">castIsPicked</span><span class="p">(</span><span class="k">let</span> <span class="nv">castId</span><span class="p">):</span>
             <span class="k">return</span> <span class="nf">navigateToCastDetailScreen</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">castId</span><span class="p">)</span>
         <span class="k">default</span><span class="p">:</span>
             <span class="k">return</span> <span class="o">.</span><span class="k">none</span>
@@ -354,7 +375,7 @@
     <span class="c1">// when a movie is picked, a new Step is emitted.</span>
     <span class="c1">// That will trigger a navigation action within the WatchedFlow</span>
     <span class="kd">public</span> <span class="kd">func</span> <span class="nf">pick</span> <span class="p">(</span><span class="nv">movieId</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">self</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="nf">accept</span><span class="p">(</span><span class="kt">DemoStep</span><span class="o">.</span><span class="nf">moviePicked</span><span class="p">(</span><span class="nv">withMovieId</span><span class="p">:</span> <span class="n">movieId</span><span class="p">))</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="nf">accept</span><span class="p">(</span><span class="kt">DemoStep</span><span class="o">.</span><span class="nf">movieIsPicked</span><span class="p">(</span><span class="nv">withId</span><span class="p">:</span> <span class="n">movieId</span><span class="p">))</span>
     <span class="p">}</span>
 
 <span class="p">}</span>
@@ -435,8 +456,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2019-01-05)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2019-02-02)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
