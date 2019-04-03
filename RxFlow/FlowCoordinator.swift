@@ -170,12 +170,12 @@ public final class FlowCoordinator: NSObject {
 public extension Reactive where Base: FlowCoordinator {
 
     /// Rx Observable emitted before the navigation to a Step within a Flow
-    public var willNavigate: Observable<(Flow, Step)> {
+    var willNavigate: Observable<(Flow, Step)> {
         return self.base.willNavigateRelay.asObservable()
     }
 
     /// Rx Observable emitted after the navigation to a Step within a Flow
-    public var didNavigate: Observable<(Flow, Step)> {
+    var didNavigate: Observable<(Flow, Step)> {
         return self.base.didNavigateRelay.asObservable()
     }
 }
