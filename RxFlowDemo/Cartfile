@@ -1,2 +1,2 @@
-github "ReactiveX/RxSwift" ~> 4.5
+github "ReactiveX/RxSwift" ~> 5.0
 github "AliSoftware/Reusable" ~> 4.0.5

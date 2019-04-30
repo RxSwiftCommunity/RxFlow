@@ -147,7 +147,7 @@ public final class FlowCoordinator: NSObject {
     /// - Parameters:
     ///   - flow: the flow we're setting the readiness
     ///   - presentableAndSteppers: the presentables
-    // swiftlint:disable next force_cast
+    // swiftlint:disable force_cast
     private func setReadiness (for flow: Flow, basedOn presentables: [Presentable]) {
         let flowReadySingles = presentables
             .filter { $0 is Flow }
