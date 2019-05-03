@@ -19,7 +19,7 @@ extension ObservableType {
     ///
     /// - Parameter pauser: The observable sequence used to pause the source observable sequence.
     /// - Returns: The observable sequence which is paused based upon the pauser observable sequence.
-    public func pausable<P: ObservableType> (withPauser pauser: P) -> Observable<E> where P.E == Bool {
+    public func pausable<P: ObservableType> (withPauser pauser: P) -> Observable<Element> where P.Element == Bool {
         return withLatestFrom(pauser) { element, paused in (element, paused) }
             .filter { _, paused in paused }
             .map { element, _ in element }
@@ -34,9 +34,9 @@ extension ObservableType {
     /// - Parameter count: the number of events before considering the pauser parameter
     /// - Parameter pauser: The observable sequence used to pause the source observable sequence.
     /// - Returns: The observable sequence which is paused based upon the pauser observable sequence.
-    public func pausable<P: ObservableType> (afterCount count: Int, withPauser pauser: P) -> Observable<E> where P.E == Bool {
+    public func pausable<P: ObservableType> (afterCount count: Int, withPauser pauser: P) -> Observable<Element> where P.Element == Bool {
 
-        return Observable<E>.create { observer in
+        return Observable<Element>.create { observer in
 
             let lock = NSRecursiveLock()
             var paused = true

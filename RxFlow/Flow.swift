@@ -64,9 +64,10 @@ public class Flows {
         guard roots.count == flows.count else {
             fatalError ("Type mismatch, Flows roots types do not match the types awaited in the block")
         }
-        _ = Observable<Void>.zip(flowObservables, { (_) in
-            return Void()
-        })
+
+        _ = Observable<Void>.zip(flowObservables) { (_) in
+                return Void()
+            }
             .take(1)
             .asDriver(onErrorJustReturn: Void())
             .drive(onNext: { (_) in

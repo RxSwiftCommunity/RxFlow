@@ -1,10 +1,9 @@
 Pod::Spec.new do |s|
+  s.name = "RxFlow"
+  s.version = "2.3.0"
+  s.summary = "RxFlow is a navigation framework for iOS applications, based on a Reactive Coordinator pattern."
 
-  s.name         = "RxFlow"
-  s.version      = "2.2.0"
-  s.summary      = "RxFlow is a navigation framework for iOS applications, based on a Reactive Coordinator pattern."
-
-  s.description  = <<-DESC
+  s.description = <<-DESC
 RxFlow aims to
 
 * Promote the cutting of storyboards into atomic units to enable collaboration and reusability of UIViewControllers
@@ -16,18 +15,17 @@ RxFlow aims to
 * Facilitate the cutting of an application into logical blocks of navigation
                    DESC
 
-  s.homepage     = "https://github.com/RxSwiftCommunity/RxFlow"
-  s.screenshots  = "https://raw.githubusercontent.com/RxSwiftCommunity/RxFlow/develop/Resources/RxFlow_logo.png"
-  s.license      = { :type => "MIT", :file => "LICENSE" }
-  s.authors      = { "Thibault Wittemberg" => "thibault.wittemberg@gmail.com", "RxSwiftCommunity" => "https://github.com/RxSwiftCommunity" }
-  s.social_media_url   = "http://twitter.com/thwittem"
-  s.platform     = :ios
+  s.homepage = "https://github.com/RxSwiftCommunity/RxFlow"
+  s.screenshots = "https://raw.githubusercontent.com/RxSwiftCommunity/RxFlow/develop/Resources/RxFlow_logo.png"
+  s.license = { :type => "MIT", :file => "LICENSE" }
+  s.authors = { "Thibault Wittemberg" => "thibault.wittemberg@gmail.com", "RxSwiftCommunity" => "https://github.com/RxSwiftCommunity" }
+  s.social_media_url = "http://twitter.com/thwittem"
+  s.platform = :ios
   s.ios.deployment_target = "9.0"
-  s.source       = { :git => "https://github.com/RxSwiftCommunity/RxFlow.git", :tag => s.version.to_s }
-  s.source_files  = "RxFlow/**/*.swift"
-  s.frameworks  = 'UIKit'
-  s.requires_arc     = true  
-  s.dependency 'RxSwift', '>= 4.5.0'
-  s.dependency 'RxCocoa', '>= 4.5.0'
-
+  s.source = { :git => "https://github.com/RxSwiftCommunity/RxFlow.git", :tag => s.version.to_s }
+  s.source_files = "RxFlow/**/*.swift"
+  s.frameworks = "UIKit"
+  s.requires_arc = true
+  s.dependency "RxSwift", ">= 5.0.0"
+  s.dependency "RxCocoa", ">= 5.0.0"
 end
