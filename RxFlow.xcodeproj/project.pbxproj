@@ -37,6 +37,8 @@
 		749B02F422066675001BEBBB /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749B02EE22066618001BEBBB /* RxSwift.framework */; };
 		749B02F82206852D001BEBBB /* Flow+PresentableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749B02F72206852D001BEBBB /* Flow+PresentableTests.swift */; };
 		749B02FC220688EC001BEBBB /* FlowCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749B02FB220688EC001BEBBB /* FlowCoordinatorTests.swift */; };
+		74C6AD32227BAE6900B16A95 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74C6AD31227BAE6900B16A95 /* RxRelay.framework */; };
+		74C6AD33227BAE7800B16A95 /* RxRelay.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 74C6AD31227BAE6900B16A95 /* RxRelay.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				74C6AD33227BAE7800B16A95 /* RxRelay.framework in CopyFiles */,
 				749B02EF22066618001BEBBB /* RxCocoa.framework in CopyFiles */,
 				749B02F022066618001BEBBB /* RxSwift.framework in CopyFiles */,
 				749B02EB22066538001BEBBB /* Reusable.framework in CopyFiles */,
@@ -97,6 +100,7 @@
 		749B02EE22066618001BEBBB /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		749B02F72206852D001BEBBB /* Flow+PresentableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Flow+PresentableTests.swift"; sourceTree = "<group>"; };
 		749B02FB220688EC001BEBBB /* FlowCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinatorTests.swift; sourceTree = "<group>"; };
+		74C6AD31227BAE6900B16A95 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74C6AD32227BAE6900B16A95 /* RxRelay.framework in Frameworks */,
 				749B02F12206665A001BEBBB /* RxCocoa.framework in Frameworks */,
 				749B02F22206665A001BEBBB /* RxSwift.framework in Frameworks */,
 			);
@@ -133,6 +138,7 @@
 		1A8FBDDE1FF8331900389464 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				74C6AD31227BAE6900B16A95 /* RxRelay.framework */,
 				749B02ED22066618001BEBBB /* RxCocoa.framework */,
 				749B02EE22066618001BEBBB /* RxSwift.framework */,
 				749B02E922066537001BEBBB /* Reusable.framework */,
