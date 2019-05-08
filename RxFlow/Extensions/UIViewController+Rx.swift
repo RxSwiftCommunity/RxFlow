@@ -42,7 +42,7 @@ extension Reactive where Base: UIViewController {
     
     public var popped: Observable<Void> {
         return self.sentMessage(#selector(Base.viewDidDisappear))
-            .filter { _ in self.base.isMovingFromParentViewController }
+            .filter { _ in self.base.isMovingFromParent }
             .map { _ in return Void() }
             .take(1)
     }

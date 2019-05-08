@@ -63,11 +63,10 @@ public class Flows {
         guard roots.count == flows.count else {
             fatalError ("Type mismatch, Flows roots types do not match the types awaited in the block")
         }
-        _ = Observable<Void>.zip(flowObservables, { (_) in
-            return Void()
-        }).take(1).subscribe(onNext: { (_) in
-            block(roots)
-        })
+        _ = Observable<Void>.zip(flowObservables, resultSelector: { _ in () })
+            .take(1).subscribe(onNext: { (_) in
+                block(roots)
+            })
     }
 
     // swiftlint:disable function_parameter_count
