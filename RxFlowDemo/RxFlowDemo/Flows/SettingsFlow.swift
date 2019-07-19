@@ -48,9 +48,18 @@ class SettingsFlow: Flow {
             return navigateToAboutScreen()
         case .settingsAreComplete:
             return .end(forwardToParentFlowWithStep: DemoStep.settingsAreComplete)
+        case let .alert(message):
+            return navigateToAlertScreen(message: message)
         default:
             return .none
         }
+    }
+
+    private func navigateToAlertScreen(message: String) -> FlowContributors {
+        let alert = UIAlertController(title: "Demo", message: message, preferredStyle: .alert)
+        alert.addAction(.init(title: "Cancel", style: .cancel))
+        rootViewController.present(alert, animated: true)
+        return .none
     }
 
     private func popToMasterViewController() -> FlowContributors {
@@ -78,8 +87,11 @@ class SettingsFlow: Flow {
             navigationBarItem.setRightBarButton(settingsButton, animated: false)
         }
 
-        return .multiple(flowContributors: [.contribute(withNextPresentable: settingsListViewController, withNextStepper: settingsListViewController),
-                                            .contribute(withNextPresentable: settingsLoginViewController, withNextStepper: settingsLoginViewController)])
+        return .multiple(flowContributors: [
+            .contribute(withNextPresentable: settingsListViewController, withNextStepper: settingsListViewController),
+            .contribute(withNextPresentable: settingsLoginViewController, withNextStepper: settingsLoginViewController),
+            .forwardToCurrentFlow(withStep: DemoStep.alert("Demo of multiple Flow Contributor"))
+        ])
     }
 
     private func navigateToLoginScreen() -> FlowContributors {
