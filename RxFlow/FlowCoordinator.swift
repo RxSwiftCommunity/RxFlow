@@ -58,15 +58,17 @@ public final class FlowCoordinator: NSObject {
             // performs side effects if the FlowContributors is not about registering a new Stepper or coordinating a new Flow
             .do(onNext: { [weak self] flowContributors in
                 switch flowContributors {
-                case .one(.forwardToCurrentFlow(let withStep)):
-                    self?.stepsRelay.accept(withStep)
-                case .one(.forwardToParentFlow(let withStep)), .triggerParentFlow(let withStep):
+                case let .one(flowContributor):
+                    self?.performSideEffects(with: flowContributor)
+                case .triggerParentFlow(let withStep):
                     self?.parentFlowCoordinator?.stepsRelay.accept(withStep)
                 case .end(let forwardToParentFlowWithStep):
                     self?.parentFlowCoordinator?.stepsRelay.accept(forwardToParentFlowWithStep)
                     self?.childFlowCoordinators.removeAll()
                     self?.parentFlowCoordinator?.childFlowCoordinators.removeValue(forKey: self?.identifier ?? "")
-                case .multiple, .one(.contribute), .none:
+                case let .multiple(childFlowContributors):
+                    childFlowContributors.forEach { self?.performSideEffects(with: $0) }
+                case .none:
                     break
                 }
             })
@@ -102,6 +104,17 @@ public final class FlowCoordinator: NSObject {
             // .pausable(afterCount: 1, withPauser: flow.rxVisible)
             .bind(to: self.stepsRelay)
             .disposed(by: self.disposeBag)
+    }
+
+    private func performSideEffects(with flowContributor: FlowContributor) {
+        switch flowContributor {
+        case let .forwardToCurrentFlow(step):
+            stepsRelay.accept(step)
+        case let .forwardToParentFlow(step):
+            parentFlowCoordinator?.stepsRelay.accept(step)
+        case .contribute:
+            break
+        }
     }
 
     /// transforms a FlowContributors in the sequence of individual FlowContributor
