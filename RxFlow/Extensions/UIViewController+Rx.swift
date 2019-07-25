@@ -14,6 +14,13 @@ import UIKit.UIViewController
 import RxSwift
 import RxCocoa
 
+extension UIViewController {
+    /// If VC is embedded in a parent ViewController then we need to check whether parent is being dismissed.
+    fileprivate var isParentBeingDismissed: Bool {
+        return self.parent?.isBeingDismissed ?? false
+    }
+}
+
 extension Reactive where Base: UIViewController {
 
     /// Rx observable, triggered when the view has appeared for the first time
@@ -24,7 +31,7 @@ extension Reactive where Base: UIViewController {
     /// Rx observable, triggered when the view is being dismissed
     public var dismissed: ControlEvent<Bool> {
         let source = self.sentMessage(#selector(Base.viewWillDisappear))
-            .filter { _ in self.base.isBeingDismissed }
+            .filter { _ in self.base.isBeingDismissed || self.base.isParentBeingDismissed }
             .map { _ in false }
 
         return ControlEvent(events: source)
