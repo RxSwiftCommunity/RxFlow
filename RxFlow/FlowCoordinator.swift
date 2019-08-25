@@ -5,6 +5,9 @@
 //  Created by Thibault Wittemberg on 2018-12-19.
 //  Copyright © 2018 RxSwiftCommunity. All rights reserved.
 //
+
+#if canImport(UIKit)
+import Foundation
 import RxSwift
 import RxCocoa
 
@@ -203,3 +206,5 @@ private class PresentableAndStepper {
         self.stepper = stepper
     }
 }
+
+#endif

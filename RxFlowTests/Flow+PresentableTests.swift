@@ -6,6 +6,8 @@
 //  Copyright © 2019 RxSwiftCommunity. All rights reserved.
 //
 
+#if canImport(UIKit)
+
 @testable import RxFlow
 import XCTest
 import RxBlocking
@@ -67,3 +69,5 @@ final class Flow_PresentableTests: XCTestCase {
         XCTAssertEqual(observer.events.count, 2)
     }
 }
+
+#endif

@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import Foundation
 
 // this code had been inspired by the project: https://github.com/RxSwiftCommunity/RxSwiftExt
 // Its License can be found here: ../DependenciesLicenses/RxSwiftCommunity-RxSwiftExt-License
