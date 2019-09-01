@@ -51,8 +51,7 @@ class OnboardingFlow: Flow {
         let settingsLoginViewController = SettingsLoginViewController.instantiate()
         settingsLoginViewController.title = "Login"
         self.rootViewController.pushViewController(settingsLoginViewController, animated: false)
-        return .one(flowContributor: .contribute(withNextPresentable: settingsLoginViewController,
-                                                 withNextStepper: settingsLoginViewController))
+        return .one(flowContributor: .contribute(withNext: settingsLoginViewController))
     }
 
     private func navigationToApiScreen() -> FlowContributors {
