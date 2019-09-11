@@ -19,6 +19,9 @@ You will find a very detail explanation of the whole project on my blog:
 
 The Jazzy documentation can be seen here as well: [Documentation](http://community.rxswift.org/RxFlow/)
 
+Also here is a [Reactive coordinators tech talk](https://youtu.be/b0aCv7rlKx4) which explain the goals and motivation of that framework. Available only in Russian.
+
+
 # Migrating from v1.x.x to v2.0.0
 ⚠ RxFlow v2.0.0 brings some breaking changes.
 
