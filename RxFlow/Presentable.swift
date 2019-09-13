@@ -6,8 +6,9 @@
 //  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
-import UIKit.UIViewController
+#if canImport(UIKit)
 
+import UIKit.UIViewController
 import RxSwift
 
 /// An abstraction of what can be presented to the screen. For now, UIViewControllers and Flows are Presentable
@@ -59,3 +60,5 @@ extension Presentable where Self: UIWindow {
         return Single.never()
     }
 }
+
+#endif

@@ -6,6 +6,8 @@
 //  Copyright © 2018 RxSwiftCommunity. All rights reserved.
 //
 
+#if canImport(UIKit)
+
 import UIKit
 import Reusable
 
@@ -14,3 +16,5 @@ final class TestUIViewController: UIViewController, StoryboardBased {
         super.viewDidLoad()
     }
 }
+
+#endif

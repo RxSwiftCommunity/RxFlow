@@ -6,6 +6,8 @@
 //  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
+#if canImport(UIKit)
+
 import RxSwift
 import RxCocoa
 import UIKit
@@ -233,3 +235,5 @@ public class Flows {
             })
     }
 }
+
+#endif

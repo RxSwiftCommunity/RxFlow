@@ -28,6 +28,9 @@ jobs:
       - run:
           name: Run Tests (Swift 5)
           command: set -o pipefail && xcodebuild test SWIFT_VERSION=5.0 -scheme 'RxFlow' -project 'RxFlow.xcodeproj' -sdk iphonesimulator -destination "name=iPhone X" | xcpretty -c -r html --output $XCODE_TEST_REPORTS/iOS_Swift5.html
+      - run:
+          name: Run Tests SPM
+          command: swift test
       - store_artifacts:
           path: /tmp/xcode-test-results
 workflows:
