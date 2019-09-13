@@ -14,7 +14,7 @@ import RxSwift
 public protocol Presentable {
 
     /// Rx Observable that triggers a bool indicating if the current Presentable is being displayed
-    /// (applies to UIViewController, Warp or UIWindow for instance)
+    /// (applies to UIViewController, Flow or UIWindow for instance)
     var rxVisible: Observable<Bool> { get }
 
     /// Rx Observable (Single trait) triggered when this presentable is dismissed
