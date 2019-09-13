@@ -6,6 +6,7 @@
 //  Copyright © 2019 RxSwiftCommunity. All rights reserved.
 //
 
+#if canImport(UIKit)
 @testable import RxFlow
 import RxRelay
 import RxSwift
@@ -35,3 +36,4 @@ final class FlowContributorTests: XCTestCase {
         }
     }
 }
+#endif
