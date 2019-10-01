@@ -33,7 +33,7 @@ public enum FlowContributor {
 @available(*, deprecated, message: "You should use FlowContributors")
 public typealias NextFlowItems = FlowContributors
 
-/// FlowContributors reprent the next things that will trigger
+/// FlowContributors represent the next things that will trigger
 /// navigation actions inside a Flow
 ///
 /// - multiple: several FlowContributors will contribute to the Flow
