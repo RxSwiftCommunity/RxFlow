@@ -8,7 +8,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        destination: ['platform=iOS Simulator,OS=12.2,name=iPhone X']
+        destination: ['platform=iOS Simulator,OS=12.4,name=iPhone X']
     steps:
     - uses: actions/checkout@master
     - name: Compile and Test
