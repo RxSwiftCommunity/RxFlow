@@ -6,7 +6,10 @@
 //  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit.UIWindow
 import RxSwift
 
 extension UIWindow: Presentable {}
+
+#endif

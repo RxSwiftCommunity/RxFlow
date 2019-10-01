@@ -88,8 +88,8 @@ class SettingsFlow: Flow {
         }
 
         return .multiple(flowContributors: [
-            .contribute(withNextPresentable: settingsListViewController, withNextStepper: settingsListViewController),
-            .contribute(withNextPresentable: settingsLoginViewController, withNextStepper: settingsLoginViewController),
+            .contribute(withNext: settingsListViewController),
+            .contribute(withNext: settingsLoginViewController),
             .forwardToCurrentFlow(withStep: DemoStep.alert("Demo of multiple Flow Contributor"))
         ])
     }
@@ -98,7 +98,7 @@ class SettingsFlow: Flow {
         let settingsLoginViewController = SettingsLoginViewController.instantiate()
         settingsLoginViewController.title = "Login"
         self.rootViewController.showDetailViewController(settingsLoginViewController, sender: nil)
-        return .one(flowContributor: .contribute(withNextPresentable: settingsLoginViewController, withNextStepper: settingsLoginViewController))
+        return .one(flowContributor: .contribute(withNext: settingsLoginViewController))
     }
 
     private func navigateToApiKeyScreen() -> FlowContributors {

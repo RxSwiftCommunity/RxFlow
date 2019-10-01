@@ -8,7 +8,7 @@
 
 // this code had been inspired by the project: https://github.com/devxoul/RxViewController
 // Its License can be found here: ../DependenciesLicenses/devxoul-RxViewController-License
-
+#if canImport(UIKit)
 import UIKit.UIViewController
 import RxSwift
 import RxCocoa
@@ -39,3 +39,5 @@ extension Reactive where Base: UIViewController {
         return initialState.concat(Observable<Bool>.merge(viewDidAppearObservable, viewDidDisappearObservable))
     }
 }
+
+#endif

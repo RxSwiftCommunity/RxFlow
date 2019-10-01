@@ -9,6 +9,9 @@
 // this code had been inspired by the project: https://github.com/RxSwiftCommunity/NSObject-Rx
 // Its License can be found here: ../DependenciesLicenses/RxSwiftCommunity-NSObject-Rx-License
 
+#if canImport(ObjectiveC)
+import ObjectiveC
+
 /// Provides a function to prevent concurrent block execution
 public protocol Synchronizable {}
 
@@ -20,3 +23,5 @@ extension Synchronizable {
         return result
     }
 }
+
+#endif

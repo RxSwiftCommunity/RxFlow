@@ -1,0 +1,19 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  test:
+
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        destination: ['platform=iOS Simulator,OS=12.2,name=iPhone X']
+    steps:
+    - uses: actions/checkout@master
+    - name: Compile and Test
+      run: |
+          carthage bootstrap --platform iOS --cache-builds && xcodebuild clean test -project RxFlow.xcodeproj -scheme RxFlow -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+      env: 
+         destination: ${{ matrix.destination }}
+          

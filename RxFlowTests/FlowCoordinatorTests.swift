@@ -6,6 +6,8 @@
 //  Copyright © 2019 RxSwiftCommunity. All rights reserved.
 //
 
+#if canImport(UIKit)
+
 @testable import RxFlow
 import XCTest
 import RxBlocking
@@ -80,3 +82,5 @@ final class FlowCoordinatorTests: XCTestCase {
         XCTAssertEqual(actualSteps, [.multiple, .one, .two])
     }
 }
+
+#endif

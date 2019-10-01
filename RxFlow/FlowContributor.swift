@@ -6,6 +6,8 @@
 //  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
+#if canImport(UIKit)
+
 /// A FlowContributor describes the next thing that will contribute to a Flow.
 ///
 /// - contribute: the given stepper will emit steps (according to lifecycle of the given presentable) that will contribute to the current Flow
@@ -18,6 +20,15 @@ public enum FlowContributor {
     case forwardToCurrentFlow(withStep: Step)
     /// the "withStep" step will be forwarded to the parent flow
     case forwardToParentFlow(withStep: Step)
+
+    /// Shortcut static func that returns a .contribute(withNextPresentable: _, withNextStepper: _)
+    /// in case we have a single actor that is a Presentable and also a Stepper
+    ///
+    /// - Parameter nextPresentableAndStepper
+    /// - Returns: .contribute(withNextPresentable: withNext, withNextStepper: withNext)
+    public static func contribute(withNext nextPresentableAndStepper: Presentable & Stepper) -> FlowContributor {
+        return .contribute(withNextPresentable: nextPresentableAndStepper, withNextStepper: nextPresentableAndStepper)
+    }
 }
 
 /// typealias to allow compliance with older versions of RxFlow. NextFlowItems should be replaced by FlowContributors
@@ -45,3 +56,5 @@ public enum FlowContributors {
     @available(*, deprecated, message: "You should use .one(flowContributor: .forwardToParentFlow(withStep: Step))")
     case triggerParentFlow (withStep: Step)
 }
+
+#endif
