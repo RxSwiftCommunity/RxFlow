@@ -5,6 +5,9 @@
 //  Created by Thibault Wittemberg on 2018-12-19.
 //  Copyright © 2018 RxSwiftCommunity. All rights reserved.
 //
+
+#if canImport(UIKit)
+import Foundation
 import RxSwift
 import RxCocoa
 
@@ -139,10 +142,10 @@ public final class FlowCoordinator: NSObject {
         }
     }
 
-    /// retrieve Steps from the combinaison presentable/stepper
+    /// retrieve Steps from the combination presentable/stepper
     ///
-    /// - Parameter nextPresentableAndStepper: the combinaison presentable/stepper that will generate new Steps
-    /// - Returns: the reactive sequence of Steps from the combinaison presentable/stepper
+    /// - Parameter nextPresentableAndStepper: the combination presentable/stepper that will generate new Steps
+    /// - Returns: the reactive sequence of Steps from the combination presentable/stepper
     private func steps (from nextPresentableAndStepper: PresentableAndStepper) -> Signal<Step> {
         return nextPresentableAndStepper
             .stepper
@@ -203,3 +206,5 @@ private class PresentableAndStepper {
         self.stepper = stepper
     }
 }
+
+#endif

@@ -6,6 +6,8 @@
 //  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
+#if canImport(UIKit)
+
 /// A FlowContributor describes the next thing that will contribute to a Flow.
 ///
 /// - contribute: the given stepper will emit steps (according to lifecycle of the given presentable) that will contribute to the current Flow
@@ -33,7 +35,7 @@ public enum FlowContributor {
 @available(*, deprecated, message: "You should use FlowContributors")
 public typealias NextFlowItems = FlowContributors
 
-/// FlowContributors reprent the next things that will trigger
+/// FlowContributors represent the next things that will trigger
 /// navigation actions inside a Flow
 ///
 /// - multiple: several FlowContributors will contribute to the Flow
@@ -54,3 +56,5 @@ public enum FlowContributors {
     @available(*, deprecated, message: "You should use .one(flowContributor: .forwardToParentFlow(withStep: Step))")
     case triggerParentFlow (withStep: Step)
 }
+
+#endif

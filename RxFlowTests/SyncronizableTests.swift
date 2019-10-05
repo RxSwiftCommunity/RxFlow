@@ -6,6 +6,8 @@
 //  Copyright © 2018 RxSwiftCommunity. All rights reserved.
 //
 
+#if os(iOS) || os(macOS)
+
 import XCTest
 @testable import RxFlow
 
@@ -71,3 +73,5 @@ final class SyncronizableTests: XCTestCase {
 
     }
 }
+
+#endif
