@@ -19,7 +19,7 @@ class MovieDetailViewModel: ServicesViewModel, Stepper {
             let movie = self.services.moviesService.movie(forId: movieId)
 
             self.casts = self.services.moviesService.casts(for: movie).map({ (cast) -> CastViewModel in
-                return CastViewModel (id: cast.id, name: cast.name, image: cast.image)
+                return CastViewModel(id: cast.id, name: cast.name, image: cast.image)
             })
 
             self.title = movie.title

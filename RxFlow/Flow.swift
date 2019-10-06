@@ -64,7 +64,7 @@ public class Flows {
         let flowObservables = flows.map { $0.rxFlowReady.asObservable() }
         let roots = flows.compactMap { $0.root as? RootType }
         guard roots.count == flows.count else {
-            fatalError ("Type mismatch, Flows roots types do not match the types awaited in the block")
+            fatalError("Type mismatch, Flows roots types do not match the types awaited in the block")
         }
 
         _ = Observable<Void>.zip(flowObservables) { (_) in
@@ -103,7 +103,7 @@ public class Flows {
             let root3 = flow3.root as? RootType3,
             let root4 = flow4.root as? RootType4,
             let root5 = flow5.root as? RootType5 else {
-                fatalError ("Type mismatch, Flows roots types do not match the types awaited in the block")
+                fatalError("Type mismatch, Flows roots types do not match the types awaited in the block")
         }
 
         _ = Observable<Void>.zip(flow1.rxFlowReady.asObservable(),
@@ -142,7 +142,7 @@ public class Flows {
             let root2 = flow2.root as? RootType2,
             let root3 = flow3.root as? RootType3,
             let root4 = flow4.root as? RootType4 else {
-                fatalError ("Type mismatch, Flows roots types do not match the types awaited in the block")
+                fatalError("Type mismatch, Flows roots types do not match the types awaited in the block")
         }
 
         _ = Observable<Void>.zip(flow1.rxFlowReady.asObservable(),
@@ -175,7 +175,7 @@ public class Flows {
         guard   let root1 = flow1.root as? RootType1,
             let root2 = flow2.root as? RootType2,
             let root3 = flow3.root as? RootType3 else {
-                fatalError ("Type mismatch, Flows roots types do not match the types awaited in the block")
+                fatalError("Type mismatch, Flows roots types do not match the types awaited in the block")
         }
 
         _ = Observable<Void>.zip(flow1.rxFlowReady.asObservable(),
@@ -202,7 +202,7 @@ public class Flows {
                                                                                             block: @escaping (_ flow1Root: RootType1, _ flow2Root: RootType2) -> Void) {
         guard   let root1 = flow1.root as? RootType1,
             let root2 = flow2.root as? RootType2 else {
-                fatalError ("Type mismatch, Flows root types do not match the types awaited in the block")
+                fatalError("Type mismatch, Flows root types do not match the types awaited in the block")
         }
 
         _ = Observable<Void>.zip(flow1.rxFlowReady.asObservable(),
@@ -224,7 +224,7 @@ public class Flows {
     ///   - block: block to execute whenever the Flow is ready to use
     public static func whenReady<RootType: UIViewController> (flow1: Flow, block: @escaping (_ flowRoot1: RootType) -> Void) {
         guard let root = flow1.root as? RootType else {
-            fatalError ("Type mismatch, Flow root type does not match the type awaited in the block")
+            fatalError("Type mismatch, Flow root type does not match the type awaited in the block")
         }
 
         _ = flow1

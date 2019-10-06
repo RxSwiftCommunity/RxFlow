@@ -29,11 +29,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let window = self.window else { return false }
 
         self.coordinator.rx.willNavigate.subscribe(onNext: { (flow, step) in
-            print ("will navigate to flow=\(flow) and step=\(step)")
+            print("will navigate to flow=\(flow) and step=\(step)")
         }).disposed(by: self.disposeBag)
 
         self.coordinator.rx.didNavigate.subscribe(onNext: { (flow, step) in
-            print ("did navigate to flow=\(flow) and step=\(step)")
+            print("did navigate to flow=\(flow) and step=\(step)")
         }).disposed(by: self.disposeBag)
 
         let appFlow = AppFlow(services: self.appServices)
