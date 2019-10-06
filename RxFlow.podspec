@@ -21,6 +21,7 @@ RxFlow aims to
   s.authors = { "Thibault Wittemberg" => "thibault.wittemberg@gmail.com", "RxSwiftCommunity" => "https://github.com/RxSwiftCommunity" }
   s.social_media_url = "http://twitter.com/thwittem"
   s.platform = :ios
+  s.swift_versions = "5.1"
   s.ios.deployment_target = "9.0"
   s.source = { :git => "https://github.com/RxSwiftCommunity/RxFlow.git", :tag => s.version.to_s }
   s.source_files = "RxFlow/**/*.swift"
