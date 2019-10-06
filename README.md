@@ -22,28 +22,6 @@ The Jazzy documentation can be seen here as well: [Documentation](http://communi
 Also here is a [Reactive coordinators tech talk](https://youtu.be/b0aCv7rlKx4) which explain the goals and motivation of that framework. 
 Available only in Russian. To get English subtitles you should press the *subtitles* button to see original (Russian) subtitles and then select Settings->Subtitles->Translate->*choose_your_language*
 
-# Migrating from v1.x.x to v2.0.0
-⚠ RxFlow v2.0.0 brings some breaking changes.
-
-Here are the changes you should be aware of to use RxFlow 2.0.0 when coming from a previous version:
-- `Coordinator` has been renamed in `FlowCoordinator`.
-- `NextFlowItem` and `NextFlowItems` have been renamed in `FlowContributor` and `FlowContributors`.
-- The FlowContributors enum entry `.end (withStepForParentFlow: Step)` has been renamed in `.end (forwardToParentFlowWithStep: Step)`.
-- The `FlowContributor` class has been converted to an enum with the following entries. It allows to unify the way we can contribute to a Flow:
-	- `.contribute(withNextPresentable: Presentable, withNextStepper: Stepper)`,
-	- `.forwardToCurrentFlow(withStep: Step)`,
-	- `.forwardToParentFlow(withStep: Step)`.
-- In an effort to minimize the usage of `objc_get/setAssociatedObject`, each custom `Stepper` must declare a stored property `steps` as a `PublishRelay<Step>`.
-- To trigger an initial `Step` inside a `Stepper`, an `initialStep` property has to be implemented. A default implementation is provided by **RxFlow** if it makes no sense to emit a first Step for your specific use case. This default implementation emits a "void step" that will be ignored by the `Flow`.
-- The callback function `readyToEmitSteps()` has been added to a `Stepper`. It is called once the Stepper can emit Steps (see the `AppStepper` in the Demo App for a valid use case).
-- The reactive `step` property of a `Stepper` has been renamed in `steps` to reflect the plurality of the sequence of steps it can emit.
-- `FlowCoordinator` has been totally rewritten to improve memory management.
-- `HasDisposeBag` has been removed from the project as it was not mandatory in the implementation and is not really related to RxFlow. A similar implementation can be found in [NSObject-Rx](https://github.com/RxSwiftCommunity/NSObject-Rx).
-- The `RxFlowStep` enum is now provided to offer some common steps that can be used in lots of applications. This enum will grow in size over time.
-- Some of the old data structure names are still usable but have been explicitly deprecated.
-
-The Demo app has been updated to implement those changes.
-
 # Navigation concerns
 Regarding navigation within an iOS application, two choices are available:
 - Use the builtin mechanism provided by Apple and Xcode: storyboards and segues
