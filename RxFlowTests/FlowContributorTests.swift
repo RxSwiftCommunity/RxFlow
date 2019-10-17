@@ -28,7 +28,7 @@ final class FlowContributorTests: XCTestCase {
         let contributor = FlowContributor.contribute(withNext: nextPresentableAndStepper)
 
         // Then: FlowContributor.contribute(withNext:) is a shortcut to FlowContributor.contribute(nextPresentable:, nextStepper)
-        if case let FlowContributor.contribute(nextPresentable, nextStepper) = contributor {
+        if case let FlowContributor.contribute(nextPresentable, nextStepper, _) = contributor {
             XCTAssert((nextPresentable as! MockPresentableAndStepper) === nextPresentableAndStepper)
             XCTAssert((nextStepper as! MockPresentableAndStepper) === nextPresentableAndStepper)
         } else {
