@@ -10,12 +10,15 @@
 
 /// A FlowContributor describes the next thing that will contribute to a Flow.
 ///
-/// - contribute: the given stepper will emit steps (according to lifecycle of the given presentable) that will contribute to the current Flow
+/// - contribute: the given stepper will emit steps
+/// (according to lifecycle of the given presentable and the allowStepWhenNotPresented parameter) that will contribute to the current Flow
 /// - forwardToCurrentFlow: the given step will be forwarded to the current flow
 /// - forwardToParentFlow: the given step will be forwarded to the parent flow
 public enum FlowContributor {
     /// the given stepper will emit steps, according to lifecycle of the given presentable, that will contribute to the current Flow
-    case contribute(withNextPresentable: Presentable, withNextStepper: Stepper)
+    /// an extra parameter `allowStepWhenNotPresented` can be passed to make the coordinator accept the steps from the stepper even id
+    /// the presentable is not visible
+    case contribute(withNextPresentable: Presentable, withNextStepper: Stepper, allowStepWhenNotPresented: Bool = false)
     /// the "withStep" step will be forwarded to the current flow
     case forwardToCurrentFlow(withStep: Step)
     /// the "withStep" step will be forwarded to the parent flow

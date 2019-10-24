@@ -8,8 +8,13 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        destination: ['platform=iOS Simulator,OS=12.4,name=iPhone X']
+        destination: ['platform=iOS Simulator,OS=13.1,name=iPhone 11 Pro']
+        swift-version: ['5.1']
     steps:
+    - name: Install Swift
+      uses: YOCKOW/Action-setup-swift@master
+      with:
+        swift-version: ${{ matrix.swift-version }}
     - uses: actions/checkout@master
     - name: Compile and Test
       run: |
