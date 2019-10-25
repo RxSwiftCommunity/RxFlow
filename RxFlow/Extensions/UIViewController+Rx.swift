@@ -17,7 +17,16 @@ import RxCocoa
 extension UIViewController {
     /// If VC is embedded in a parent ViewController then we need to check whether parent is being dismissed.
     fileprivate var isParentBeingDismissed: Bool {
-        return self.parent?.isBeingDismissed ?? false
+        return checkParent(self)
+    }
+    
+    /// Recursively check the hierarchy for a VC that is being dismissed
+    private func checkParent(_ vc: UIViewController) -> Bool {
+        if let parent = vc.parent {
+            return parent.isBeingDismissed || checkParent(parent)
+        } else {
+            return false
+        }
     }
 }
 
