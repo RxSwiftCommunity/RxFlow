@@ -97,7 +97,7 @@ public final class FlowCoordinator: NSObject {
         stepper.steps
             .do(onSubscribed: { stepper.readyToEmitSteps() })
             .startWith(stepper.initialStep)
-            .flatMapLatest { flow.filter(step: $0) }
+            .flatMapLatest { flow.adapt(step: $0) }
             .filter { !($0 is NoneStep) }
             .takeUntil(flow.rxDismissed.asObservable())
             // for now commenting this line to allow a Stepper trigger "dismissing" steps
@@ -151,7 +151,7 @@ public final class FlowCoordinator: NSObject {
             .steps
             .do(onSubscribed: { nextPresentableAndStepper.stepper.readyToEmitSteps() })
             .startWith(nextPresentableAndStepper.stepper.initialStep)
-            .flatMapLatest { flow.filter(step: $0) }
+            .flatMapLatest { flow.adapt(step: $0) }
             .filter { !($0 is NoneStep) }
             .takeUntil(nextPresentableAndStepper.presentable.rxDismissed.asObservable())
 

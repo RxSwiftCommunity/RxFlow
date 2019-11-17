@@ -208,18 +208,18 @@ class WatchedFlow: Flow {
 }
 ```
 
-### How to filter and adapt a Step before it triggers a navigation ?
+### How to adapt a Step before it triggers a navigation ?
 
-A Flow has a `filter(step:) -> Single<Step>` function that by default returns the step it has been given
+A Flow has a `adapt(step:) -> Single<Step>` function that by default returns the step it has been given
 as a parameter.
 
 This function is called by the FlowCoordinator before the `navigate(to:)` function. This is a perfect place
-to implement some logic that could forbid a step to trigger a navigation for instance. A common usecase would be to handle the navigation permissions within an application.
+to implement some logic that could for instance forbid a step to trigger a navigation. A common usecase would be to handle the navigation permissions within an application.
 
 Let's say we have a PermissionManager:
 
 ```swift
-func filter(step: Step) -> Single<Step> {
+func adapt(step: Step) -> Single<Step> {
     switch step {
     case DemoStep.aboutIsRequired:
         return PermissionManager.isAuthorized() ? .just(step) : .just(DemoStep.unauthorized)     
@@ -234,6 +234,8 @@ later in the navigate(to:) function, the .unauthorized step could trigger an Ale
 ```
 
 Why return a Single<Step> and not directly a Step ? Because some filtering processes could be asynchronous and need a user action to be performed (for instance a filtering based on the authentication layer of the device with TouchID or FaceID)
+
+In order to improve the separation of concerns, a Flow could be injected with a delegate which purpose would be to handle the adaptions in the `adapt(step:)` function. The delegate could eventuelly be reused across multiple flows to ensure a consistency in the adaptations.
 
 ### How to declare a **Stepper**
 
