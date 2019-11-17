@@ -207,22 +207,19 @@ class WatchedFlow: Flow {
 
 ### How to filter and adapt a Step before it triggers a navigation ?
 
-A Flow has a `filter(step:) -> Single<Step>` function that by default return the step it has been given
+A Flow has a `filter(step:) -> Single<Step>` function that by default returns the step it has been given
 as a parameter.
 
 This function is called by the FlowCoordinator before the `navigate(to:)` function. This is a perfect place
 to implement some logic that could forbid a step to trigger a navigation for instance. A common usecase would be to handle the navigation permissions within an application.
 
-Let's say we have a PermissionManager 
+Let's say we have a PermissionManager:
 
 ```
 func filter(step: Step) -> Single<Step> {
     switch step {
     case DemoStep.aboutIsRequired:
-        if PermissionManager.isAuthorized() {
-            return .just(step)
-        }
-        return .just(DemoStep.unauthorized)     
+        return PermissionManager.isAuthorized() ? .just(step) : .just(DemoStep.unauthorized)     
     default:
         return .just(step)         
     }
@@ -233,7 +230,7 @@ func filter(step: Step) -> Single<Step> {
 later in the navigate(to:) function, the .unauthorized step could trigger an AlertViewController
 ```
 
-Why return a Single<Step> and not directly a Step ? Because some filtering process could be asynchronous and need a user action to be performed (for instance a filtering based on the authentication layer of the device with TouchID or FaceID)
+Why return a Single<Step> and not directly a Step ? Because some filtering processes could be asynchronous and need a user action to be performed (for instance a filtering based on the authentication layer of the device with TouchID or FaceID)
 
 ### How to declare a **Stepper**
 
