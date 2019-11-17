@@ -108,7 +108,7 @@ final class TestFilterStepFlow: Flow {
         self.replacementStepInFilter = replacementStepInFilter
     }
 
-    func filter(step: Step) -> Single<Step> {
+    func adapt(step: Step) -> Single<Step> {
         switch step {
         case TestSteps.one:
             return .just(self.replacementStepInFilter)
