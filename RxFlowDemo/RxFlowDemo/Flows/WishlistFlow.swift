@@ -31,7 +31,7 @@ class WishlistFlow: Flow {
         print("\(type(of: self)): \(#function)")
     }
 
-    func filter(step: Step) -> Single<Step> {
+    func adapt(step: Step) -> Single<Step> {
 
         switch step {
         case DemoStep.aboutIsRequired:
