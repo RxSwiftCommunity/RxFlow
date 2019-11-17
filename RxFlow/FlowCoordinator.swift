@@ -8,8 +8,8 @@
 
 #if canImport(UIKit)
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 
 /// typealias to allow compliance with older versions of RxFlow. Coordinator should be replaced by FlowCoordinator
 @available(*, deprecated, message: "You should use FlowCoordinator")
@@ -92,7 +92,7 @@ public final class FlowCoordinator: NSObject {
             .filter { !($0.presentable is Flow) }
             // the FlowContributor is not related to a new Flow but to a Presentable/Stepper
             // this new Stepper will contribute to the current Flow.
-            .flatMap { [weak self] in self?.steps(from: $0) ?? Signal.empty() }
+            .flatMap { [weak self] in self?.steps(from: $0, within: flow) ?? Signal.empty() }
             .emit(to: self.stepsRelay)
             .disposed(by: self.disposeBag)
 
@@ -100,6 +100,7 @@ public final class FlowCoordinator: NSObject {
         stepper.steps
             .do(onSubscribed: { stepper.readyToEmitSteps() })
             .startWith(stepper.initialStep)
+            .flatMapLatest { flow.filter(step: $0) }
             .filter { !($0 is NoneStep) }
             .takeUntil(flow.rxDismissed.asObservable())
             // for now commenting this line to allow a Stepper trigger "dismissing" steps
@@ -145,13 +146,15 @@ public final class FlowCoordinator: NSObject {
     /// retrieve Steps from the combination presentable/stepper
     ///
     /// - Parameter nextPresentableAndStepper: the combination presentable/stepper that will generate new Steps
+    /// - Parameter flow: the Flow in which the stepper emits new steps
     /// - Returns: the reactive sequence of Steps from the combination presentable/stepper
-    private func steps (from nextPresentableAndStepper: PresentableAndStepper) -> Signal<Step> {
+    private func steps (from nextPresentableAndStepper: PresentableAndStepper, within flow: Flow) -> Signal<Step> {
         var stepStream = nextPresentableAndStepper
             .stepper
             .steps
             .do(onSubscribed: { nextPresentableAndStepper.stepper.readyToEmitSteps() })
             .startWith(nextPresentableAndStepper.stepper.initialStep)
+            .flatMapLatest { flow.filter(step: $0) }
             .filter { !($0 is NoneStep) }
             .takeUntil(nextPresentableAndStepper.presentable.rxDismissed.asObservable())
 

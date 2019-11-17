@@ -11,7 +11,6 @@ import UIKit.UINavigationController
 import RxFlow
 
 class OnboardingFlow: Flow {
-
     var root: Presentable {
         return self.rootViewController
     }
