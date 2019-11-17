@@ -18,10 +18,10 @@ public protocol Flow: class, Presentable, Synchronizable {
     /// the Presentable on which rely the navigation inside this Flow. This method must always give the same instance
     var root: Presentable { get }
 
-    /// Filters and adapts an incoming step before the navigate(to:) function
+    /// Adapts an incoming step before the navigate(to:) function
     /// - Parameter step: the step emitted by a Stepper within the Flow
     /// - Returns: the step (possibly in the future) that should really by interpreted by the navigate(to:) function
-    func filter(step: Step) -> Single<Step>
+    func adapt(step: Step) -> Single<Step>
 
     /// Resolves FlowContributors according to the Step, in the context of this very Flow
     ///
@@ -32,7 +32,7 @@ public protocol Flow: class, Presentable, Synchronizable {
 }
 
 public extension Flow {
-    func filter(step: Step) -> Single<Step> {
+    func adapt(step: Step) -> Single<Step> {
         return .just(step)
     }
 }
