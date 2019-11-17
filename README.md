@@ -215,7 +215,7 @@ to implement some logic that could forbid a step to trigger a navigation for ins
 
 Let's say we have a PermissionManager:
 
-```
+```swift
 func filter(step: Step) -> Single<Step> {
     switch step {
     case DemoStep.aboutIsRequired:
