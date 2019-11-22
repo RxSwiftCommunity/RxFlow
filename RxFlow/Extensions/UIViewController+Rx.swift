@@ -39,8 +39,13 @@ extension Reactive where Base: UIViewController {
 
     /// Rx observable, triggered when the view is being dismissed
     public var dismissed: ControlEvent<Bool> {
-        let source = self.sentMessage(#selector(Base.viewDidDisappear))
-            .filter { _ in self.base.isBeingDismissed || self.base.isParentBeingDismissed }
+        let source = Observable.merge(
+                self.sentMessage(#selector(Base.viewDidDisappear))
+                    .filter { _ in self.base.isBeingDismissed || self.base.isParentBeingDismissed },
+                // Called when removing childVC
+                self.sentMessage(#selector(Base.removeFromParent))
+            )
+            .take(1)
             .map { _ in false }
 
         return ControlEvent(events: source)
