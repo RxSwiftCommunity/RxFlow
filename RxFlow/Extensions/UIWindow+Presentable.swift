@@ -8,7 +8,6 @@
 
 #if canImport(UIKit)
 import UIKit.UIWindow
-import RxSwift
 
 extension UIWindow: Presentable {}
 
