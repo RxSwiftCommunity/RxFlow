@@ -69,6 +69,12 @@
               <li class="nav-group-task">
                 <a href="Extensions/Reactive.html">Reactive</a>
               </li>
+              <li class="nav-group-task">
+                <a href="Extensions.html#/c:objc(cs)UIViewController">UIViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions.html#/c:objc(cs)UIWindow">UIWindow</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -115,12 +121,12 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>Travis CI</td>
-<td><a href="https://travis-ci.org/RxSwiftCommunity/RxFlow"><img src="https://travis-ci.org/RxSwiftCommunity/RxFlow.svg?branch=develop" alt="Build Status"></a></td>
+<td>GitHub Actions</td>
+<td><img src="https://github.com/RxSwiftCommunity/RxFlow/workflows/Tests/badge.svg" alt=""></td>
 </tr>
 <tr>
 <td>Frameworks</td>
-<td><a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"></a> <a href="http://cocoapods.org/pods/RxFlow"><img src="https://img.shields.io/cocoapods/v/RxFlow.svg?style=flat" alt="CocoaPods Compatible"></a></td>
+<td><a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"></a> <a href="http://cocoapods.org/pods/RxFlow"><img src="https://img.shields.io/cocoapods/v/RxFlow.svg?style=flat" alt="CocoaPods Compatible"></a> <a href="https://github.com/apple/swift-package-manager"><img src="https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg" alt="Swift Package Manager compatible"></a></td>
 </tr>
 <tr>
 <td>Platform</td>
@@ -148,34 +154,9 @@
 </ul>
 
 <p>The Jazzy documentation can be seen here as well: <a href="http://community.rxswift.org/RxFlow/">Documentation</a></p>
-<h1 id='migrating-from-v1-x-x-to-v2-0-0' class='heading'>Migrating from v1.x.x to v2.0.0</h1>
 
-<p>⚠ RxFlow v2.0.0 brings some breaking changes.</p>
-
-<p>Here are the changes you should be aware of to use RxFlow 2.0.0 when coming from a previous version:</p>
-
-<ul>
-<li><code><a href="Typealiases.html#/s:6RxFlow11Coordinatora">Coordinator</a></code> has been renamed in <code><a href="Classes/FlowCoordinator.html">FlowCoordinator</a></code>.</li>
-<li><code>NextFlowItem</code> and <code><a href="Typealiases.html#/s:6RxFlow04NextB5Itemsa">NextFlowItems</a></code> have been renamed in <code><a href="Enums/FlowContributor.html">FlowContributor</a></code> and <code><a href="Enums/FlowContributors.html">FlowContributors</a></code>.</li>
-<li>The FlowContributors enum entry <code>.end (withStepForParentFlow: Step)</code> has been renamed in <code>.end (forwardToParentFlowWithStep: Step)</code>.</li>
-<li>The <code><a href="Enums/FlowContributor.html">FlowContributor</a></code> class has been converted to an enum with the following entries. It allows to unify the way we can contribute to a Flow:
-
-<ul>
-<li><code>.contribute(withNextPresentable: Presentable, withNextStepper: Stepper)</code>,</li>
-<li><code>.forwardToCurrentFlow(withStep: Step)</code>,</li>
-<li><code>.forwardToParentFlow(withStep: Step)</code>.</li>
-</ul></li>
-<li>In an effort to minimize the usage of <code>objc_get/setAssociatedObject</code>, each custom <code><a href="Protocols/Stepper.html">Stepper</a></code> must declare a stored property <code>steps</code> as a <code>PublishRelay&lt;Step&gt;</code>.</li>
-<li>To trigger an initial <code><a href="Protocols.html#/s:6RxFlow4StepP">Step</a></code> inside a <code><a href="Protocols/Stepper.html">Stepper</a></code>, an <code>initialStep</code> property has to be implemented. A default implementation is provided by <strong>RxFlow</strong> if it makes no sense to emit a first Step for your specific use case. This default implementation emits a <q>void step</q> that will be ignored by the <code><a href="Protocols/Flow.html">Flow</a></code>.</li>
-<li>The callback function <code>readyToEmitSteps()</code> has been added to a <code><a href="Protocols/Stepper.html">Stepper</a></code>. It is called once the Stepper can emit Steps (see the <code>AppStepper</code> in the Demo App for a valid use case).</li>
-<li>The reactive <code>step</code> property of a <code><a href="Protocols/Stepper.html">Stepper</a></code> has been renamed in <code>steps</code> to reflect the plurality of the sequence of steps it can emit.</li>
-<li><code><a href="Classes/FlowCoordinator.html">FlowCoordinator</a></code> has been totally rewritten to improve memory management.</li>
-<li><code>HasDisposeBag</code> has been removed from the project as it was not mandatory in the implementation and is not really related to RxFlow. A similar implementation can be found in <a href="https://github.com/RxSwiftCommunity/NSObject-Rx">NSObject-Rx</a>.</li>
-<li>The <code><a href="Enums/RxFlowStep.html">RxFlowStep</a></code> enum is now provided to offer some common steps that can be used in lots of applications. This enum will grow in size over time.</li>
-<li>Some of the old data structure names are still usable but have been explicitly deprecated.</li>
-</ul>
-
-<p>The Demo app has been updated to implement those changes.</p>
+<p>Also here is a <a href="https://youtu.be/b0aCv7rlKx4">Reactive coordinators tech talk</a> which explain the goals and motivation of that framework. 
+Available only in Russian. To get English subtitles you should press the <em>subtitles</em> button to see original (Russian) subtitles and then select Settings-&gt;Subtitles-&gt;Translate-&gt;<em>choose_your_language</em></p>
 <h1 id='navigation-concerns' class='heading'>Navigation concerns</h1>
 
 <p>Regarding navigation within an iOS application, two choices are available:</p>
@@ -212,6 +193,19 @@
 
 <p>In your Podfile:</p>
 <pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'RxFlow'</span>
+</code></pre>
+<h2 id='swift-package-manager' class='heading'>Swift Package Manager</h2>
+
+<p>In your Package.swift:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">package</span> <span class="o">=</span> <span class="kt">Package</span><span class="p">(</span>
+  <span class="nv">name</span><span class="p">:</span> <span class="s">"Example"</span><span class="p">,</span>
+  <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/RxSwiftCommunity/RxFlow.git"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"2.5.0"</span><span class="p">)</span>
+  <span class="p">],</span>
+  <span class="nv">targets</span><span class="p">:</span> <span class="p">[</span>
+    <span class="o">.</span><span class="nf">target</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Example"</span><span class="p">,</span> <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="s">"RxFlow"</span><span class="p">])</span>
+  <span class="p">]</span>
+<span class="p">)</span>
 </code></pre>
 <h1 id='the-key-principles' class='heading'>The key principles</h1>
 
@@ -353,6 +347,32 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
+<h3 id='how-to-adapt-a-step-before-it-triggers-a-navigation' class='heading'>How to adapt a Step before it triggers a navigation ?</h3>
+
+<p>A Flow has a <code>adapt(step:) -&gt; Single&lt;Step&gt;</code> function that by default returns the step it has been given
+as a parameter.</p>
+
+<p>This function is called by the FlowCoordinator before the <code>navigate(to:)</code> function. This is a perfect place
+to implement some logic that could for instance forbid a step to trigger a navigation. A common usecase would be to handle the navigation permissions within an application.</p>
+
+<p>Let&rsquo;s say we have a PermissionManager:</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">adapt</span><span class="p">(</span><span class="nv">step</span><span class="p">:</span> <span class="kt">Step</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Single</span><span class="o">&lt;</span><span class="kt">Step</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="n">step</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="kt">DemoStep</span><span class="o">.</span><span class="nv">aboutIsRequired</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kt">PermissionManager</span><span class="o">.</span><span class="nf">isAuthorized</span><span class="p">()</span> <span class="p">?</span> <span class="o">.</span><span class="nf">just</span><span class="p">(</span><span class="n">step</span><span class="p">)</span> <span class="p">:</span> <span class="o">.</span><span class="nf">just</span><span class="p">(</span><span class="kt">DemoStep</span><span class="o">.</span><span class="n">unauthorized</span><span class="p">)</span>     
+    <span class="k">default</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">.</span><span class="nf">just</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>         
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="o">...</span>
+
+<span class="n">later</span> <span class="k">in</span> <span class="n">the</span> <span class="nf">navigate</span><span class="p">(</span><span class="nv">to</span><span class="p">:)</span> <span class="n">function</span><span class="p">,</span> <span class="n">the</span> <span class="o">.</span><span class="n">unauthorized</span> <span class="n">step</span> <span class="n">could</span> <span class="n">trigger</span> <span class="n">an</span> <span class="kt">AlertViewController</span>
+</code></pre>
+
+<p>Why return a Single<Step> and not directly a Step ? Because some filtering processes could be asynchronous and need a user action to be performed (for instance a filtering based on the authentication layer of the device with TouchID or FaceID)</p>
+
+<p>In order to improve the separation of concerns, a Flow could be injected with a delegate which purpose would be to handle the adaptions in the <code>adapt(step:)</code> function. The delegate could eventuelly be reused across multiple flows to ensure a consistency in the adaptations.</p>
 <h3 id='how-to-declare-a-strong-stepper-strong' class='heading'>How to declare a <strong>Stepper</strong></h3>
 
 <p>In theory a <strong>Stepper</strong>, as it is a protocol, can be anything (a UIViewController for instance) but a good practice is to isolate that behavior in a ViewModel or something similar.</p>
@@ -431,7 +451,7 @@
 <p>A demo application is provided to illustrate the core mechanisms. Pretty much every kind of navigation is addressed. The app consists of:</p>
 
 <ul>
-<li>An AppFlow that represents the main navigation. This Flow will handle the OnboardingFlow and the DashboardFlow depending on the <q>onboarding state</q> of the user.</li>
+<li>An AppFlow that represents the main navigation. This Flow will handle the OnboardingFlow and the DashboardFlow depending on the &ldquo;onboarding state&rdquo; of the user.</li>
 <li>An OnBoardingFlow that represents a 2 steps onboarding wizard in a UINavigationController. It will only be displayed the first time the app is used.</li>
 <li>A DashboardFlow that handles the Tabbar for the WishlistFlow and the WatchedFlow.</li>
 <li>A WishlistFlow that represents a navigation stack of movies that you want to watch.</li>
@@ -456,8 +476,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2019-04-30)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2020-01-04)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
