@@ -84,7 +84,7 @@ header {
   background-color: #414141;
   position: fixed;
   width: 100%;
-  z-index: 1; }
+  z-index: 2; }
   header img {
     padding-right: 6px;
     vertical-align: -4px;
@@ -104,7 +104,7 @@ header {
   padding-top: 17px;
   position: fixed;
   width: 100%;
-  z-index: 1;
+  z-index: 2;
   margin-top: 26px; }
   #breadcrumbs #carat {
     height: 10px;
@@ -169,6 +169,13 @@ header {
     display: block;
     padding-top: 70px;
     margin: -70px 0 0; }
+  .main-content .section-name p {
+    margin-bottom: inherit;
+    line-height: inherit; }
+  .main-content .section-name code {
+    background-color: inherit;
+    padding: inherit;
+    color: inherit; }
 
 .section {
   padding: 0 25px; }
@@ -204,6 +211,23 @@ header {
   padding-top: 70px;
   margin: -70px 0 0; }
 
+.section-name-container {
+  position: relative;
+  display: inline-block; }
+  .section-name-container .section-name-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 0; }
+  .section-name-container .section-name {
+    position: relative;
+    pointer-events: none;
+    z-index: 1; }
+    .section-name-container .section-name a {
+      pointer-events: auto; }
+
 .item {
   padding-top: 8px;
   width: 100%;
@@ -219,7 +243,10 @@ header {
   .item .token, .item .direct-link {
     padding-left: 3px;
     margin-left: 15px;
-    font-size: 11.9px; }
+    font-size: 11.9px;
+    transition: all 300ms; }
+  .item .token-open {
+    margin-left: 0px; }
   .item .discouraged {
     text-decoration: line-through; }
   .item .declaration-note {
@@ -323,6 +350,7 @@ header {
 
 html.dash header, html.dash #breadcrumbs, html.dash .sidebar {
   display: none; }
+
 html.dash .main-content {
   width: 980px;
   margin-left: 0;
@@ -330,11 +358,15 @@ html.dash .main-content {
   width: 100%;
   top: 0;
   padding-bottom: 0; }
+
 html.dash .height-container {
   display: block; }
+
 html.dash .item .token {
   margin-left: 0; }
+
 html.dash .content-wrapper {
   width: auto; }
+
 html.dash #footer {
   position: static; }

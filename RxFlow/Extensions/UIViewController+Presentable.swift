@@ -8,7 +8,6 @@
 
 #if canImport(UIKit)
 import UIKit.UIViewController
-import RxSwift
 
 extension UIViewController: Presentable {}
 
