@@ -6,21 +6,20 @@
 //  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
-import RxSwift
 import Foundation
+import RxSwift
 
 // this code had been inspired by the project: https://github.com/RxSwiftCommunity/RxSwiftExt
 // Its License can be found here: ../DependenciesLicenses/RxSwiftCommunity-RxSwiftExt-License
 
-extension ObservableType {
-
+public extension ObservableType {
     /// Pauses the elements of the source observable sequence based on the latest element from the second observable sequence.
     /// Elements are ignored unless the second sequence has most recently emitted `true`.
     /// seealso: [pausable operator on reactivex.io](http://reactivex.io/documentation/operators/backpressure.html)
     ///
     /// - Parameter pauser: The observable sequence used to pause the source observable sequence.
     /// - Returns: The observable sequence which is paused based upon the pauser observable sequence.
-    public func pausable<P: ObservableType> (withPauser pauser: P) -> Observable<Element> where P.Element == Bool {
+    func pausable<P: ObservableType> (withPauser pauser: P) -> Observable<Element> where P.Element == Bool {
         return withLatestFrom(pauser) { element, paused in (element, paused) }
             .filter { _, paused in paused }
             .map { element, _ in element }
@@ -35,10 +34,11 @@ extension ObservableType {
     /// - Parameter count: the number of events before considering the pauser parameter
     /// - Parameter pauser: The observable sequence used to pause the source observable sequence.
     /// - Returns: The observable sequence which is paused based upon the pauser observable sequence.
-    public func pausable<P: ObservableType> (afterCount count: Int, withPauser pauser: P) -> Observable<Element> where P.Element == Bool {
-
+    func pausable<P> (afterCount count: Int, withPauser pauser: P) -> Observable<Element>
+        where
+        P: ObservableType,
+        P.Element == Bool {
         return Observable<Element>.create { observer in
-
             let lock = NSRecursiveLock()
             var paused = true
             var elementIndex = 0
