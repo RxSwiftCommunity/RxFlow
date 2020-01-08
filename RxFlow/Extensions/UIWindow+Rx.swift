@@ -7,16 +7,14 @@
 //
 
 #if canImport(UIKit)
-import UIKit.UIWindow
 import RxSwift
+import UIKit.UIWindow
 
-extension Reactive where Base: UIWindow {
-
+public extension Reactive where Base: UIWindow {
     /// Rx Observable that is triggered once the UIWindow is displayed
-    public var windowDidAppear: Observable<Void> {
-        return self.sentMessage(#selector(Base.makeKeyAndVisible)).map {_ in Void()}
+    var windowDidAppear: Observable<Void> {
+        return self.sentMessage(#selector(Base.makeKeyAndVisible)).map { _ in Void() }
     }
-
 }
 
 #endif

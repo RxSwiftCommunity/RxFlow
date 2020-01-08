@@ -3,7 +3,7 @@
 //  RxFlow
 //
 //  Created by Thibault Wittemberg on 2018-12-19.
-//  Copyright © 2018 RxSwiftCommunity. All rights reserved.
+//  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
 #if canImport(UIKit)
@@ -43,8 +43,8 @@ public final class FlowCoordinator: NSObject {
     /// - Parameters:
     ///   - flow: the Flow that describes the navigation we want to coordinate
     ///   - stepper: the Stepper that drives the global navigation of the Flow
+    // swiftlint:disable function_body_length
     public func coordinate (flow: Flow, with stepper: Stepper = DefaultStepper()) {
-
         // listen for the internal steps relay that aggregates the flow's Stepper's steps and
         // the FlowContributors's Stepper's steps
         self.stepsRelay
@@ -54,9 +54,9 @@ public final class FlowCoordinator: NSObject {
                 self?.parentFlowCoordinator?.childFlowCoordinators.removeValue(forKey: self?.identifier ?? "")
             })
             .asSignal(onErrorJustReturn: NoneStep())
-            .do(onNext: { [weak self] in self?.willNavigateRelay.accept((flow, $0))})
+            .do(onNext: { [weak self] in self?.willNavigateRelay.accept((flow, $0)) })
             .map { return (flowContributors: flow.navigate(to: $0), step: $0) }
-            .do(onNext: { [weak self] in self?.didNavigateRelay.accept((flow, $0.step))})
+            .do(onNext: { [weak self] in self?.didNavigateRelay.accept((flow, $0.step)) })
             .map { $0.flowContributors }
             // performs side effects if the FlowContributors is not about registering a new Stepper or coordinating a new Flow
             .do(onNext: { [weak self] flowContributors in
@@ -77,7 +77,9 @@ public final class FlowCoordinator: NSObject {
             })
             .map { [weak self] in self?.nextPresentablesAndSteppers(from: $0) ?? [] }
             // the readiness of the flow depends either on the readiness of subflows, or is set to true
-            .do(onNext: { [weak self] presentableAndSteppers in self?.setReadiness(for: flow, basedOn: presentableAndSteppers.map {$0.presentable})})
+            .do(onNext: { [weak self] presentableAndSteppers in
+                self?.setReadiness(for: flow, basedOn: presentableAndSteppers.map { $0.presentable })
+            })
             // transforms a FlowContributors in a sequence of individual FlowContributor
             .flatMap { Signal.from($0) }
             // the FlowContributor is related to a new Flow, we coordinate this new Flow
@@ -130,12 +132,16 @@ public final class FlowCoordinator: NSObject {
         switch flowContributors {
         case .none, .triggerParentFlow, .one(.forwardToCurrentFlow), .one(.forwardToParentFlow), .end:
             return []
-        case .one(.contribute(let nextPresentable, let nextStepper, let allowStepWhenNotPresented)):
-            return [PresentableAndStepper(presentable: nextPresentable, stepper: nextStepper, allowStepWhenNotPresented: allowStepWhenNotPresented)]
+        case let .one(.contribute(nextPresentable, nextStepper, allowStepWhenNotPresented)):
+            return [PresentableAndStepper(presentable: nextPresentable,
+                                          stepper: nextStepper,
+                                          allowStepWhenNotPresented: allowStepWhenNotPresented)]
         case .multiple(let flowContributors):
             return flowContributors.compactMap { flowContributor -> PresentableAndStepper? in
                 if case let .contribute(nextPresentable, nextStepper, allowStepWhenNotPresented) = flowContributor {
-                    return PresentableAndStepper(presentable: nextPresentable, stepper: nextStepper, allowStepWhenNotPresented: allowStepWhenNotPresented)
+                    return PresentableAndStepper(presentable: nextPresentable,
+                                                 stepper: nextStepper,
+                                                 allowStepWhenNotPresented: allowStepWhenNotPresented)
                 }
 
                 return nil
@@ -192,7 +198,6 @@ public final class FlowCoordinator: NSObject {
 
 // MARK: - FlowCoordinator Reactive extensions
 public extension Reactive where Base: FlowCoordinator {
-
     /// Rx Observable emitted before the navigation to a Step within a Flow
     var willNavigate: Observable<(Flow, Step)> {
         return self.base.willNavigateRelay.asObservable()
