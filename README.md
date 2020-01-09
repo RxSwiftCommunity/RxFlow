@@ -1,6 +1,6 @@
 | <img alt="RxFlow Logo" src="https://raw.githubusercontent.com/RxSwiftCommunity/RxFlow/develop/Resources/RxFlow_logo.png" width="250"/> | <ul align="left"><li><a href="#about">About</a><li><a href="#navigation-concerns">Navigation concerns</a><li><a href="#rxflow-aims-to">RxFlow aims to</a><li><a href="#installation">Installation</a><li><a href="#the-key-principles">The key principles</a><li><a href="#how-to-use-rxflow">How to use RxFlow</a><li><a href="#tools-and-dependencies">Tools and dependencies</a></ul> |
 | -------------- | -------------- |
-| GitHub Actions | ![](https://github.com/Spinners/Spin.iOS/workflows/Tests/badge.svg) |
+| GitHub Actions | ![](https://github.com/RxSwiftCommunity/RxFlow/workflows/Tests/badge.svg) |
 | Frameworks | [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/RxFlow.svg?style=flat)](http://cocoapods.org/pods/RxFlow) [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager) |
 | Platform | [![Platform](https://img.shields.io/cocoapods/p/RxFlow.svg?style=flat)](http://cocoapods.org/pods/RxFlow) |
 | Licence | [![License](https://img.shields.io/cocoapods/l/RxFlow.svg?style=flat)](http://cocoapods.org/pods/RxFlow) |
@@ -204,6 +204,35 @@ class WatchedFlow: Flow {
     }
 }
 ```
+
+### How to adapt a Step before it triggers a navigation ?
+
+A Flow has a `adapt(step:) -> Single<Step>` function that by default returns the step it has been given
+as a parameter.
+
+This function is called by the FlowCoordinator before the `navigate(to:)` function. This is a perfect place
+to implement some logic that could for instance forbid a step to trigger a navigation. A common usecase would be to handle the navigation permissions within an application.
+
+Let's say we have a PermissionManager:
+
+```swift
+func adapt(step: Step) -> Single<Step> {
+    switch step {
+    case DemoStep.aboutIsRequired:
+        return PermissionManager.isAuthorized() ? .just(step) : .just(DemoStep.unauthorized)     
+    default:
+        return .just(step)         
+    }
+}
+
+...
+
+later in the navigate(to:) function, the .unauthorized step could trigger an AlertViewController
+```
+
+Why return a Single<Step> and not directly a Step ? Because some filtering processes could be asynchronous and need a user action to be performed (for instance a filtering based on the authentication layer of the device with TouchID or FaceID)
+
+In order to improve the separation of concerns, a Flow could be injected with a delegate which purpose would be to handle the adaptions in the `adapt(step:)` function. The delegate could eventuelly be reused across multiple flows to ensure a consistency in the adaptations.
 
 ### How to declare a **Stepper**
 

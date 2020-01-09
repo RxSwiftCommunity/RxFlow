@@ -70,6 +70,12 @@
               <li class="nav-group-task">
                 <a href="../Extensions/Reactive.html">Reactive</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Extensions.html#/c:objc(cs)UIViewController">UIViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions.html#/c:objc(cs)UIWindow">UIWindow</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -118,7 +124,8 @@
             <p>A FlowContributor describes the next thing that will contribute to a Flow.</p>
 
 <ul>
-<li>contribute: the given stepper will emit steps (according to lifecycle of the given presentable) that will contribute to the current Flow</li>
+<li>contribute: the given stepper will emit steps
+(according to lifecycle of the given presentable and the allowStepWhenNotPresented parameter) that will contribute to the current Flow</li>
 <li>forwardToCurrentFlow: the given step will be forwarded to the current flow</li>
 <li>forwardToParentFlow: the given step will be forwarded to the parent flow</li>
 </ul>
@@ -130,9 +137,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6RxFlow0B11ContributorO10contributeyAcA11Presentable_p_AA7Stepper_ptcACmF"></a>
-                    <a name="//apple_ref/swift/Element/contribute(withNextPresentable:withNextStepper:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6RxFlow0B11ContributorO10contributeyAcA11Presentable_p_AA7Stepper_ptcACmF">contribute(withNextPresentable:withNextStepper:)</a>
+                    <a name="/s:6RxFlow0B11ContributorO10contributeyAcA11Presentable_p_AA7Stepper_pSbtcACmF"></a>
+                    <a name="//apple_ref/swift/Element/contribute(withNextPresentable:withNextStepper:allowStepWhenNotPresented:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow0B11ContributorO10contributeyAcA11Presentable_p_AA7Stepper_pSbtcACmF">contribute(withNextPresentable:withNextStepper:allowStepWhenNotPresented:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -140,14 +147,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>the given stepper will emit steps, according to lifecycle of the given presentable, that will contribute to the current Flow</p>
+                        <p>the given stepper will emit steps, according to lifecycle of the given presentable, that will contribute to the current Flow
+an extra parameter <code>allowStepWhenNotPresented</code> can be passed to make the coordinator accept the steps from the stepper even id
+the presentable is not visible</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">contribute</span><span class="p">(</span><span class="nv">withNextPresentable</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Presentable.html">Presentable</a></span><span class="p">,</span> <span class="nv">withNextStepper</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Stepper.html">Stepper</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">contribute</span><span class="p">(</span><span class="nv">withNextPresentable</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Presentable.html">Presentable</a></span><span class="p">,</span> <span class="nv">withNextStepper</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Stepper.html">Stepper</a></span><span class="p">,</span> <span class="nv">allowStepWhenNotPresented</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -167,7 +176,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>the <q>withStep</q> step will be forwarded to the current flow</p>
+                        <p>the &ldquo;withStep&rdquo; step will be forwarded to the current flow</p>
 
                       </div>
                       <div class="declaration">
@@ -194,7 +203,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>the <q>withStep</q> step will be forwarded to the parent flow</p>
+                        <p>the &ldquo;withStep&rdquo; step will be forwarded to the parent flow</p>
 
                       </div>
                       <div class="declaration">
@@ -208,13 +217,45 @@
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow0B11ContributorO10contribute8withNextAcA11Presentable_AA7Stepperp_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/contribute(withNext:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow0B11ContributorO10contribute8withNextAcA11Presentable_AA7Stepperp_tFZ">contribute(withNext:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Shortcut static func that returns a .contribute(withNextPresentable: _, withNextStepper: _)
+in case we have a single actor that is a Presentable and also a Stepper</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">contribute</span><span class="p">(</span><span class="n">withNext</span> <span class="nv">nextPresentableAndStepper</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Presentable.html">Presentable</a></span> <span class="o">&amp;</span> <span class="kt"><a href="../Protocols/Stepper.html">Stepper</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">FlowContributor</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>.contribute(withNextPresentable: withNext, withNextStepper: withNext)</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2019-04-30)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2020-01-04)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

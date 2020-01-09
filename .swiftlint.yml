@@ -1,49 +1,94 @@
-disabled_rules: # rule identifiers to exclude from running
-  - todo
-
-opt_in_rules: # some rules are only opt-in
-  - empty_count
-
 included:
   - RxFlow
-
-excluded: # paths to ignore during linting. Takes precedence over `included`.
+excluded:
   - Carthage
   - Pods
+analyzer_rules:
+disabled_rules:
+  - large_tuple
+  - unused_declaration
+  - file_name
+  - file_header
+opt_in_rules:
+  - anyobject_protocol
+  - array_init
+  - attributes
+  - closure_end_indentation
+  - closure_spacing
+  - collection_alignment
+  - contains_over_filter_count
+  - contains_over_filter_is_empty
+  - contains_over_first_not_nil
+  - discouraged_object_literal
+  - empty_count
+  - empty_string
+  - empty_xctest_method
+  - explicit_init
+  - extension_access_modifier
+  - fallthrough
+  - file_header
+  - file_name
+  - first_where
+  - flatmap_over_map_reduce
+  - identical_operands
+  - joined_default_parameter
+  - legacy_random
+  - let_var_whitespace
+  - last_where
+  - literal_expression_end_indentation
+  - lower_acl_than_parent
+  - modifier_order
+  - nimble_operator
+  - nslocalizedstring_key
+  - number_separator
+  - object_literal
+  - operator_usage_whitespace
+  - overridden_super_call
+  - override_in_extension
+  - pattern_matching_keywords
+  - private_action
+  - private_outlet
+  - prohibited_interface_builder
+  - prohibited_super_call
+  - quick_discouraged_call
+  - quick_discouraged_focused_test
+  - quick_discouraged_pending_test
+  - reduce_into
+  - redundant_nil_coalescing
+  - redundant_type_annotation
+  - single_test_class
+  - sorted_first_last
+  - sorted_imports
+  - static_operator
+  - strong_iboutlet
+  - toggle_bool
+  - unavailable_function
+  - unneeded_parentheses_in_closure_argument
+  - unowned_variable_capture
+  - untyped_error_in_catch
+  - vertical_parameter_alignment_on_call
+  - vertical_whitespace_closing_braces
+  - vertical_whitespace_opening_braces
+  - xct_specific_matcher
+  - yoda_condition
 
+line_length: 135
+
+# configurable rules can be customized from this configuration file
+# binary rules can set their severity level
 force_cast: warning # implicitly
 force_try:
   severity: warning # explicitly
 
-type_body_length:
-  - 300 # warning
-  - 400 # error
-
-type_name:
-  min_length: 4 # only warning
-  max_length: # warning and error
-    warning: 40
-    error: 50
-  excluded: iPhone # excluded via string
-
 identifier_name:
-  min_length: # only min_length
-    error: 3 # only error
-  excluded: # excluded via string array
+  excluded:
     - id
-    - URL
-    - GlobalAPIKey
-
-reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji)
-
-function_body_length:
-  - 75
-  - 100
-
-file_length:
-  warning: 600
-  error: 1200
-
-line_length:
-  warning: 200
-  error: 250
+number_separator:
+  minimum_length: 5
+file_name:
+  excluded:
+    - main.swift
+    - LinuxMain.swift
+    - TestHelpers.swift
+    - shim.swift
+    - AutomaticRuleTests.generated.swift

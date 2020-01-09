@@ -70,6 +70,12 @@
               <li class="nav-group-task">
                 <a href="../Extensions/Reactive.html">Reactive</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Extensions.html#/c:objc(cs)UIViewController">UIViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions.html#/c:objc(cs)UIWindow">UIWindow</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -128,9 +134,6 @@
                     <a name="//apple_ref/swift/Property/rxVisible" class="dashAnchor"></a>
                     <a class="token" href="#/s:6RxFlow11PresentableP9rxVisible0A5Swift10ObservableCySbGvp">rxVisible</a>
                     </code>
-                      <span class="declaration-note">
-                        Default implementation
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -138,12 +141,7 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Rx Observable that triggers a bool indicating if the current Presentable is being displayed
-(applies to UIViewController, Warp or UIWindow for instance)</p>
-
-                      </div>
-                      <h4>Default Implementation</h4>
-                      <div class="default_impl abstract">
-                        <p>Rx Observable that triggers a bool indicating if the current UIWindow is being displayed</p>
+(applies to UIViewController, Flow or UIWindow for instance)</p>
 
                       </div>
                       <div class="declaration">
@@ -164,9 +162,6 @@
                     <a name="//apple_ref/swift/Property/rxDismissed" class="dashAnchor"></a>
                     <a class="token" href="#/s:6RxFlow11PresentableP11rxDismissed0A5Swift17PrimitiveSequenceVyAE11SingleTraitOytGvp">rxDismissed</a>
                     </code>
-                      <span class="declaration-note">
-                        Default implementation
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -174,11 +169,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Rx Observable (Single trait) triggered when this presentable is dismissed</p>
-
-                      </div>
-                      <h4>Default Implementation</h4>
-                      <div class="default_impl abstract">
-                        <p>Rx Observable (Single trait) triggered when this UIWindow is dismissed</p>
 
                       </div>
                       <div class="declaration">
@@ -194,11 +184,254 @@
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Available%20where%20%60Self%60:%20%60UIViewController%60"></a>
+                <a name="//apple_ref/swift/Section/Available where `Self`: `UIViewController`" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Available%20where%20%60Self%60:%20%60UIViewController%60"></a>
+                  <h3 class="section-name"><p>Available where <code>Self</code>: <code>UIViewController</code></p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow11PresentablePAASo16UIViewControllerCRbzrlE9rxVisible0A5Swift10ObservableCySbGvp"></a>
+                    <a name="//apple_ref/swift/Property/rxVisible" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow11PresentablePAASo16UIViewControllerCRbzrlE9rxVisible0A5Swift10ObservableCySbGvp">rxVisible</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Rx Observable that triggers a bool indicating if the current UIViewController is being displayed</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">rxVisible</span><span class="p">:</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow11PresentablePAASo16UIViewControllerCRbzrlE11rxDismissed0A5Swift17PrimitiveSequenceVyAG11SingleTraitOytGvp"></a>
+                    <a name="//apple_ref/swift/Property/rxDismissed" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow11PresentablePAASo16UIViewControllerCRbzrlE11rxDismissed0A5Swift17PrimitiveSequenceVyAG11SingleTraitOytGvp">rxDismissed</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Rx Observable (Single trait) triggered when this UIViewController is dismissed</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">rxDismissed</span><span class="p">:</span> <span class="kt">Single</span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Available%20where%20%60Self%60:%20%60Flow%60"></a>
+                <a name="//apple_ref/swift/Section/Available where `Self`: `Flow`" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Available%20where%20%60Self%60:%20%60Flow%60"></a>
+                  <h3 class="section-name"><p>Available where <code>Self</code>: <code><a href="../Protocols/Flow.html">Flow</a></code></p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow11PresentablePA2A0B0RzrlE9rxVisible0A5Swift10ObservableCySbGvp"></a>
+                    <a name="//apple_ref/swift/Property/rxVisible" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow11PresentablePA2A0B0RzrlE9rxVisible0A5Swift10ObservableCySbGvp">rxVisible</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Rx Observable that triggers a bool indicating if the current Flow is being displayed</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">rxVisible</span><span class="p">:</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow11PresentablePA2A0B0RzrlE11rxDismissed0A5Swift17PrimitiveSequenceVyAF11SingleTraitOytGvp"></a>
+                    <a name="//apple_ref/swift/Property/rxDismissed" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow11PresentablePA2A0B0RzrlE11rxDismissed0A5Swift17PrimitiveSequenceVyAF11SingleTraitOytGvp">rxDismissed</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Rx Observable (Single trait) triggered when this Flow is dismissed</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">rxDismissed</span><span class="p">:</span> <span class="kt">Single</span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Available%20where%20%60Self%60:%20%60UIWindow%60"></a>
+                <a name="//apple_ref/swift/Section/Available where `Self`: `UIWindow`" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Available%20where%20%60Self%60:%20%60UIWindow%60"></a>
+                  <h3 class="section-name"><p>Available where <code>Self</code>: <code>UIWindow</code></p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow11PresentablePAASo8UIWindowCRbzrlE9rxVisible0A5Swift10ObservableCySbGvp"></a>
+                    <a name="//apple_ref/swift/Property/rxVisible" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow11PresentablePAASo8UIWindowCRbzrlE9rxVisible0A5Swift10ObservableCySbGvp">rxVisible</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Rx Observable that triggers a bool indicating if the current UIWindow is being displayed</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">rxVisible</span><span class="p">:</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow11PresentablePAASo8UIWindowCRbzrlE11rxDismissed0A5Swift17PrimitiveSequenceVyAG11SingleTraitOytGvp"></a>
+                    <a name="//apple_ref/swift/Property/rxDismissed" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow11PresentablePAASo8UIWindowCRbzrlE11rxDismissed0A5Swift17PrimitiveSequenceVyAG11SingleTraitOytGvp">rxDismissed</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Rx Observable (Single trait) triggered when this UIWindow is dismissed</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">rxDismissed</span><span class="p">:</span> <span class="kt">Single</span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2019-04-30)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2020-01-04)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

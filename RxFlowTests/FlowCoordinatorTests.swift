@@ -18,6 +18,7 @@ enum TestSteps: Step {
     case one
     case two
     case multiple
+    case unauthorized
 }
 
 final class TestOneAndMultipleFlowCoordinatorFlow: Flow {
@@ -51,6 +52,8 @@ final class TestOneAndMultipleFlowCoordinatorFlow: Flow {
                     .forwardToCurrentFlow(withStep: TestSteps.one)
                 ]
             )
+        case .unauthorized:
+            return .none
         }
     }
 }
@@ -80,6 +83,49 @@ final class TestAllowStepWhenPresentableNotPresentedFlow: Flow {
                                                      allowStepWhenNotPresented: true))
         case .two:
             return .none
+        default:
+            return .none
+        }
+    }
+}
+
+final class TestFilterStepFlow: Flow {
+    final private class PresentableNotDisplayed: Presentable {
+        let rxVisible = Observable.just(false)
+
+        let rxDismissed = Single<Void>.never()
+    }
+
+    private let rootViewController = TestUIViewController.instantiate()
+    private let replacementStepInFilter: TestSteps
+    let recordedSteps = ReplaySubject<TestSteps>.create(bufferSize: 10)
+
+    var root: Presentable {
+        return self.rootViewController
+    }
+
+    init(replacementStepInFilter: TestSteps) {
+        self.replacementStepInFilter = replacementStepInFilter
+    }
+
+    func adapt(step: Step) -> Single<Step> {
+        switch step {
+        case TestSteps.one:
+            return .just(self.replacementStepInFilter)
+        default:
+            return .just(step)
+        }
+    }
+
+    func navigate(to step: Step) -> FlowContributors {
+        guard let step = step as? TestSteps else { return .none }
+        recordedSteps.onNext(step)
+
+        switch step {
+        case .two:
+            return .one(flowContributor: .contribute(withNextPresentable: PresentableNotDisplayed(),
+                                                     withNextStepper: OneStepper(withSingleStep: TestSteps.one),
+                                                     allowStepWhenNotPresented: true))
         default:
             return .none
         }
@@ -125,6 +171,33 @@ final class FlowCoordinatorTests: XCTestCase {
         // Then: Steps from .multiple FlowContributors are triggered.toArray()
         let actualSteps = try? testFlow.recordedSteps.take(3).toBlocking().toArray()
         XCTAssertEqual(actualSteps, [.multiple, .one, .two])
+    }
+
+    func testStepHasBeenFilteredBeforeNavigateForAFlowStepper() {
+        // Given: a FlowCoordinator and a Flow that replaces a One step by a replacement step
+        let flowCoordinator = FlowCoordinator()
+        let testFlow = TestFilterStepFlow(replacementStepInFilter: .unauthorized)
+
+        // When: Coordinating the Flow with a OneStepper emitting a One step
+        flowCoordinator.coordinate(flow: testFlow, with: OneStepper(withSingleStep: TestSteps.one))
+
+        // Then: The emitted One step is replaced by the replacement step
+        let actualStep = try? testFlow.recordedSteps.take(1).toBlocking().toArray()
+        XCTAssertEqual(actualStep, [.unauthorized])
+    }
+
+    func testStepHasBeenFilteredBeforeNavigateForAPresentableStepper() {
+        // Given: a FlowCoordinator and a Flow that replaces a One step by a replacement step
+        let flowCoordinator = FlowCoordinator()
+        let testFlow = TestFilterStepFlow(replacementStepInFilter: .unauthorized)
+
+        // When: Coordinating the Flow with a OneStepper emitting a Two step, and then
+        // a presentable emitting a One step
+        flowCoordinator.coordinate(flow: testFlow, with: OneStepper(withSingleStep: TestSteps.two))
+
+        // Then: The emitted One step is replaced by the replacement step
+        let actualStep = try? testFlow.recordedSteps.take(2).toBlocking().toArray()
+        XCTAssertEqual(actualStep, [.two, .unauthorized])
     }
 }
 
