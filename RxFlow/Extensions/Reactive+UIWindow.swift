@@ -1,5 +1,5 @@
 //
-//  UIWindow+Rx.swift
+//  Reactive+UIWindow.swift
 //  RxFlow
 //
 //  Created by Thibault Wittemberg on 17-10-01.

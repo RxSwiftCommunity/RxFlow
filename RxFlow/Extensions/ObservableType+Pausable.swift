@@ -1,5 +1,5 @@
 //
-//  Rx+Pausable.swift
+//  ObservableType+Pausable.swift
 //  RxFlow
 //
 //  Created by Thibault Wittemberg on 17-10-01.
