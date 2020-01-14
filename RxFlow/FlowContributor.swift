@@ -9,7 +9,8 @@
 /// A FlowContributor describes the next thing that will contribute to a Flow.
 ///
 /// - contribute: the given stepper will emit steps
-/// (according to lifecycle of the given presentable and the allowStepWhenNotPresented parameter) that will contribute to the current Flow
+/// (according to lifecycle of the given presentable and the allowStepWhenNotPresented parameter) that will contribute
+/// to the current Flow
 /// - forwardToCurrentFlow: the given step will be forwarded to the current flow
 /// - forwardToParentFlow: the given step will be forwarded to the parent flow
 public enum FlowContributor {

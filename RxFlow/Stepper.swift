@@ -6,13 +6,12 @@
 //  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
-import RxSwift
 import RxCocoa
+import RxSwift
 
 /// a Stepper has only one purpose is: emits Steps that correspond to specific navigation states.
 /// The Step changes lead to navigation actions in the context of a specific Flow
 public protocol Stepper {
-
     /// the relay used to emit steps inside this Stepper
     var steps: PublishRelay<Step> { get }
 
@@ -34,7 +33,6 @@ public extension Stepper {
 
 /// A Simple Stepper that has one goal: emit a single Step once initialized
 public class OneStepper: Stepper {
-
     public let steps = PublishRelay<Step>()
     private let singleStep: Step
 
@@ -52,7 +50,6 @@ public class OneStepper: Stepper {
 
 /// A Simple Stepper that has one goal: emit a first default step equal to RxFlowStep.home
 public class DefaultStepper: OneStepper {
-
     /// Initialize the DefaultStepper
     public init () {
         super.init(withSingleStep: RxFlowStep.home)
@@ -62,7 +59,6 @@ public class DefaultStepper: OneStepper {
 /// A Stepper that combines multiple steppers. All those Steppers will be associated
 /// to the Presentable that is given within the NextFlowItem
 public class CompositeStepper: Stepper {
-
     private let disposeBag = DisposeBag()
     private let innerSteppers: [Stepper]
     public let steps = PublishRelay<Step>()
@@ -75,7 +71,6 @@ public class CompositeStepper: Stepper {
     }
 
     public func readyToEmitSteps() {
-
         let initialSteps = Observable<Step>.from(self.innerSteppers.map { $0.initialStep })
 
         let nextSteps = Observable<Step>
