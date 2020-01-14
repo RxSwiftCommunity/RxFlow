@@ -20,6 +20,7 @@ class WishlistFlow: Flow {
     private let rootViewController = UINavigationController()
     private let wishlistStepper: WishlistStepper
     private let services: AppServices
+    private var internalCounterForAuthorizationDemo = 0
 
     init(withServices services: AppServices, andStepper stepper: WishlistStepper) {
         self.services = services
@@ -28,6 +29,20 @@ class WishlistFlow: Flow {
 
     deinit {
         print("\(type(of: self)): \(#function)")
+    }
+
+    func filter(step: Step) -> Single<Step> {
+
+        switch step {
+        case DemoStep.aboutIsRequired:
+            self.internalCounterForAuthorizationDemo += 1
+            if (self.internalCounterForAuthorizationDemo % 2) == 0 {
+                return .just(step)
+            }
+            return .just(DemoStep.unauthorized)
+        default:
+            return .just(step)
+        }
     }
 
     func navigate(to step: Step) -> FlowContributors {
@@ -53,6 +68,8 @@ class WishlistFlow: Flow {
         case .fakeStep:
             print("fakeStep has been received")
             return .none
+        case .unauthorized:
+            return navigateToUnauthorized()
         default:
             return .none
         }
@@ -111,6 +128,13 @@ class WishlistFlow: Flow {
         viewController.modalPresentationStyle = .fullScreen
         self.rootViewController.present(viewController, animated: true)
         return .one(flowContributor: .contribute(withNext: viewController))
+    }
+
+    private func navigateToUnauthorized() -> FlowContributors {
+        let alert = UIAlertController(title: "Warning", message: "This action is not authorized", preferredStyle: .alert)
+        alert.addAction(.init(title: "Cancel", style: .cancel))
+        self.rootViewController.present(alert, animated: true)
+        return .none
     }
 
     @objc func logoutIsRequired() {
