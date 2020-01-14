@@ -7,6 +7,5 @@
 //
 
 import UIKit.UIViewController
-import RxSwift
 
 extension UIViewController: Presentable {}
