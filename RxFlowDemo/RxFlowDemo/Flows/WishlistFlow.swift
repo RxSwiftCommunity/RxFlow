@@ -105,7 +105,7 @@ class WishlistFlow: Flow {
     private func navigateToAbout() -> FlowContributors {
         let viewController = SettingsAboutViewController.instantiate()
         self.rootViewController.present(viewController, animated: true)
-        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController))
+        return .one(flowContributor: .contribute(withNext: viewController))
     }
 
     @objc func logoutIsRequired() {
