@@ -13,6 +13,7 @@ enum DemoStep: Step {
     case logoutIsRequired
     case dashboardIsRequired
     case alert(String)
+    case fakeStep
 
     // Login
     case loginIsRequired

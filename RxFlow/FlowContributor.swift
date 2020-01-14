@@ -8,16 +8,30 @@
 
 /// A FlowContributor describes the next thing that will contribute to a Flow.
 ///
-/// - contribute: the given stepper will emit steps (according to lifecycle of the given presentable) that will contribute to the current Flow
+/// - contribute: the given stepper will emit steps
+/// (according to lifecycle of the given presentable and the allowStepWhenNotPresented parameter) that will contribute to the current Flow
 /// - forwardToCurrentFlow: the given step will be forwarded to the current flow
 /// - forwardToParentFlow: the given step will be forwarded to the parent flow
 public enum FlowContributor {
     /// the given stepper will emit steps, according to lifecycle of the given presentable, that will contribute to the current Flow
-    case contribute(withNextPresentable: Presentable, withNextStepper: Stepper)
+    /// an extra parameter `allowStepWhenNotPresented` can be passed to make the coordinator accept the steps from the stepper even id
+    /// the presentable is not visible
+    case contribute(withNextPresentable: Presentable, withNextStepper: Stepper, allowStepWhenNotPresented: Bool)
     /// the "withStep" step will be forwarded to the current flow
     case forwardToCurrentFlow(withStep: Step)
     /// the "withStep" step will be forwarded to the parent flow
     case forwardToParentFlow(withStep: Step)
+
+    /// Shortcut static func that returns a
+    /// .contribute(withNextPresentable: _, withNextStepper: _, allowStepWhenNotPresented: _)
+    /// where the default value for allowStepWhenNotPresented is false
+    ///
+    /// Returns .contribute(withNextPresentable: withNextPresentable,
+    ///                     withNextStepper: withNextStepper,
+    ///                     allowStepWhenNotPresented: false)
+    public static func contribute(withNextPresentable: Presentable, withNextStepper: Stepper) -> FlowContributor {
+        return .contribute(withNextPresentable: withNextPresentable, withNextStepper: withNextStepper, allowStepWhenNotPresented: false)
+    }
 
     /// Shortcut static func that returns a .contribute(withNextPresentable: _, withNextStepper: _)
     /// in case we have a single actor that is a Presentable and also a Stepper

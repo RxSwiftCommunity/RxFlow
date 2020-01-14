@@ -24,6 +24,12 @@ class WishlistViewController: UIViewController, StoryboardBased, ViewModelBased 
 
         self.moviesTable.delegate = self
         self.moviesTable.dataSource = self
+
+        _ = Observable<Int>
+            .interval(.seconds(5), scheduler: MainScheduler.instance)
+            .takeUntil(self.rx.deallocating)
+            .map { _ in return DemoStep.fakeStep }
+            .bind(to: self.steps)
     }
 
     @IBAction func about(_ sender: UIButton) {
