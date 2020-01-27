@@ -9,7 +9,7 @@
 /// A Step describes a possible state of navigation inside a Flow
 public protocol Step {}
 
-struct NoneStep: Step, Equatable {}
+public struct NoneStep: Step, Equatable {}
 
 /// Standard RxFlow Steps
 ///
