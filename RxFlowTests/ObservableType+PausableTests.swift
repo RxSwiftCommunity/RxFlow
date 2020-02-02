@@ -1,5 +1,5 @@
 //
-//  Rx+PausableTests.swift
+//  ObservableType+PausableTests.swift
 //  RxFlowTests
 //
 //  Created by Thibault Wittemberg on 2018-10-21.
@@ -10,7 +10,7 @@ import XCTest
 import RxSwift
 import RxBlocking
 
-final class Rx_PausableTests: XCTestCase {
+final class ObservableType_PausableTests: XCTestCase {
 
     func testPausable() throws {
         // Given: a sequence emitting 10 integers and a pauser that pauses this sequence each time the value is odd

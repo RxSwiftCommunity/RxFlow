@@ -7,7 +7,6 @@ analyzer_rules:
 disabled_rules:
   - large_tuple
   - unused_declaration
-  - file_name
   - file_header
 opt_in_rules:
   - anyobject_protocol
