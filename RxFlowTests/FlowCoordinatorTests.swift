@@ -18,7 +18,7 @@ enum TestSteps: Step {
     case multiple
 }
 
-final class TestFlow: Flow {
+final class TestOneAndMultipleFlowCoordinatorFlow: Flow {
     final private class PresentableNeverDismissed: Presentable {
         let rxVisible = Observable.just(true)
 
@@ -53,12 +53,43 @@ final class TestFlow: Flow {
     }
 }
 
+final class TestAllowStepWhenPresentableNotPresentedFlow: Flow {
+    final private class PresentableNotDisplayed: Presentable {
+        let rxVisible = Observable.just(false)
+
+        let rxDismissed = Single<Void>.never()
+    }
+
+    private let rootViewController = TestUIViewController.instantiate()
+    let recordedSteps = ReplaySubject<TestSteps>.create(bufferSize: 10)
+
+    var root: Presentable {
+        return self.rootViewController
+    }
+
+    func navigate(to step: Step) -> FlowContributors {
+        guard let step = step as? TestSteps else { return .none }
+        recordedSteps.onNext(step)
+
+        switch step {
+        case .one:
+            return .one(flowContributor: .contribute(withNextPresentable: PresentableNotDisplayed(),
+                                                     withNextStepper: OneStepper(withSingleStep: TestSteps.two),
+                                                     allowStepWhenNotPresented: true))
+        case .two:
+            return .none
+        default:
+            return .none
+        }
+    }
+}
+
 final class FlowCoordinatorTests: XCTestCase {
 
     func testCoordinateWithOneStepper() {
         // Given: a FlowCoordinator and a Flow
         let flowCoordinator = FlowCoordinator()
-        let testFlow = TestFlow()
+        let testFlow = TestOneAndMultipleFlowCoordinatorFlow()
 
         // When: Coordinating the Flow
         flowCoordinator.coordinate(flow: testFlow, with: OneStepper(withSingleStep: TestSteps.one))
@@ -67,10 +98,24 @@ final class FlowCoordinatorTests: XCTestCase {
         XCTAssertEqual(testFlow.stepOneCalled, true)
     }
 
+    func testCoordinateWhenAllowStepWhenNotPresented_doEmitAStep() {
+        // Given: a FlowCoordinator and a Flow
+        let flowCoordinator = FlowCoordinator()
+        let testFlow = TestAllowStepWhenPresentableNotPresentedFlow()
+
+        // When: Coordinating the Flow and returning a FlowContributor that will be listened even
+        // if its related presentable is not displayed
+        flowCoordinator.coordinate(flow: testFlow, with: OneStepper(withSingleStep: TestSteps.one))
+
+        // Then: The steps are received
+        let actualSteps = try? testFlow.recordedSteps.take(2).toBlocking().toArray()
+        XCTAssertEqual(actualSteps, [.one, .two])
+    }
+
     func testMultipleSideEffectsPerformed() {
         // Given: a FlowCoordinator and a Flow
         let flowCoordinator = FlowCoordinator()
-        let testFlow = TestFlow()
+        let testFlow = TestOneAndMultipleFlowCoordinatorFlow()
 
         // When: Coordinating the Flow with step triggering multiple FlowContributors
         flowCoordinator.coordinate(flow: testFlow, with: OneStepper(withSingleStep: TestSteps.multiple))

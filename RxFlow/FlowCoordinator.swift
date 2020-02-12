@@ -126,12 +126,12 @@ public final class FlowCoordinator: NSObject {
         switch flowContributors {
         case .none, .triggerParentFlow, .one(.forwardToCurrentFlow), .one(.forwardToParentFlow), .end:
             return []
-        case .one(.contribute(let nextPresentable, let nextStepper)):
-            return [PresentableAndStepper(presentable: nextPresentable, stepper: nextStepper)]
+        case .one(.contribute(let nextPresentable, let nextStepper, let allowStepWhenNotPresented)):
+            return [PresentableAndStepper(presentable: nextPresentable, stepper: nextStepper, allowStepWhenNotPresented: allowStepWhenNotPresented)]
         case .multiple(let flowContributors):
             return flowContributors.compactMap { flowContributor -> PresentableAndStepper? in
-                if case let .contribute(nextPresentable, nextStepper) = flowContributor {
-                    return PresentableAndStepper(presentable: nextPresentable, stepper: nextStepper)
+                if case let .contribute(nextPresentable, nextStepper, allowStepWhenNotPresented) = flowContributor {
+                    return PresentableAndStepper(presentable: nextPresentable, stepper: nextStepper, allowStepWhenNotPresented: allowStepWhenNotPresented)
                 }
 
                 return nil
@@ -144,15 +144,20 @@ public final class FlowCoordinator: NSObject {
     /// - Parameter nextPresentableAndStepper: the combination presentable/stepper that will generate new Steps
     /// - Returns: the reactive sequence of Steps from the combination presentable/stepper
     private func steps (from nextPresentableAndStepper: PresentableAndStepper) -> Signal<Step> {
-        return nextPresentableAndStepper
+        var stepStream = nextPresentableAndStepper
             .stepper
             .steps
             .do(onSubscribed: { nextPresentableAndStepper.stepper.readyToEmitSteps() })
             .startWith(nextPresentableAndStepper.stepper.initialStep)
             .filter { !($0 is NoneStep) }
             .takeUntil(nextPresentableAndStepper.presentable.rxDismissed.asObservable())
-            .pausable(withPauser: nextPresentableAndStepper.presentable.rxVisible)
-            .asSignal(onErrorJustReturn: NoneStep())
+
+        // by default we cannot accept steps from a presentable that is not visible
+        if nextPresentableAndStepper.allowStepWhenNotPresented == false {
+            stepStream = stepStream.pausable(withPauser: nextPresentableAndStepper.presentable.rxVisible)
+        }
+
+        return stepStream.asSignal(onErrorJustReturn: NoneStep())
     }
 
     /// sets the readiness of the flow based on either its subflows's readiness or directly to true if no subflows
@@ -197,9 +202,11 @@ public extension Reactive where Base: FlowCoordinator {
 private class PresentableAndStepper {
     fileprivate let presentable: Presentable
     fileprivate let stepper: Stepper
+    fileprivate let allowStepWhenNotPresented: Bool
 
-    init(presentable: Presentable, stepper: Stepper) {
+    init(presentable: Presentable, stepper: Stepper, allowStepWhenNotPresented: Bool) {
         self.presentable = presentable
         self.stepper = stepper
+        self.allowStepWhenNotPresented = allowStepWhenNotPresented
     }
 }

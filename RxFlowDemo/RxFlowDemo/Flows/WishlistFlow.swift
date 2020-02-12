@@ -50,6 +50,9 @@ class WishlistFlow: Flow {
         case .aboutIsComplete:
             self.rootViewController.presentedViewController?.dismiss(animated: true)
             return .none
+        case .fakeStep:
+            print("fakeStep has been received")
+            return .none
         default:
             return .none
         }
@@ -71,8 +74,9 @@ class WishlistFlow: Flow {
                                                                action: #selector(WishlistFlow.logoutIsRequired)),
                                                animated: false)
         }
-        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: CompositeStepper(steppers: [viewController.viewModel,
-                                                                                                                                   viewController])))
+        return .one(flowContributor: .contribute(withNextPresentable: viewController,
+                                                 withNextStepper: CompositeStepper(steppers: [viewController.viewModel, viewController]),
+                                                 allowStepWhenNotPresented: true))
     }
 
     private func navigateToMovieDetailScreen (with movieId: Int) -> FlowContributors {
@@ -104,6 +108,7 @@ class WishlistFlow: Flow {
 
     private func navigateToAbout() -> FlowContributors {
         let viewController = SettingsAboutViewController.instantiate()
+        viewController.modalPresentationStyle = .fullScreen
         self.rootViewController.present(viewController, animated: true)
         return .one(flowContributor: .contribute(withNext: viewController))
     }
