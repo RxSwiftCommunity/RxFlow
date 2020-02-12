@@ -13,6 +13,7 @@ import RxCocoa
 import RxSwift
 
 class AppFlow: Flow {
+
     var root: Presentable {
         return self.rootViewController
     }

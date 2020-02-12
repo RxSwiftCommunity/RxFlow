@@ -14,6 +14,7 @@ enum DemoStep: Step {
     case dashboardIsRequired
     case alert(String)
     case fakeStep
+    case unauthorized
 
     // Login
     case loginIsRequired
@@ -39,5 +40,4 @@ enum DemoStep: Step {
     // About
     case aboutIsRequired
     case aboutIsComplete
-
 }

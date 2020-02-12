@@ -6,8 +6,8 @@
 //  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
+import RxRelay
 import RxSwift
-import RxCocoa
 import UIKit
 
 private var subjectContext: UInt8 = 0
@@ -18,12 +18,23 @@ public protocol Flow: class, Presentable, Synchronizable {
     /// the Presentable on which rely the navigation inside this Flow. This method must always give the same instance
     var root: Presentable { get }
 
+    /// Filters and adapts an incoming step before the navigate(to:) function
+    /// - Parameter step: the step emitted by a Stepper within the Flow
+    /// - Returns: the step (possibly in the future) that should really by interpreted by the navigate(to:) function
+    func filter(step: Step) -> Single<Step>
+
     /// Resolves FlowContributors according to the Step, in the context of this very Flow
     ///
     /// - Parameters:
     ///   - step: the Step emitted by one of the Steppers declared in the Flow
     /// - Returns: the FlowContributors matching the Step. These FlowContributors determines the next navigation steps (Presentables to display / Steppers to listen)
-    func navigate (to step: Step) -> FlowContributors
+    func navigate(to step: Step) -> FlowContributors
+}
+
+public extension Flow {
+    func filter(step: Step) -> Single<Step> {
+        return .just(step)
+    }
 }
 
 extension Flow {
