@@ -9,7 +9,7 @@ let package = Package(
         .library(name: "RxFlow", targets: ["RxFlow"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "5.0.0")),
+        .package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "5.1.1")),
     ],
     targets: [
         .target(name: "RxFlow", dependencies: ["RxSwift", "RxCocoa"], path: "RxFlow"),
