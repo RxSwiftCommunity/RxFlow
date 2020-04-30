@@ -1,5 +1,5 @@
 //
-//  UIViewController+Rx.swift
+//  Reactive+UIViewController.swift
 //  RxFlow
 //
 //  Created by Thibault Wittemberg on 17-10-09.

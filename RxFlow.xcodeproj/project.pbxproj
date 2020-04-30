@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A1627C9217D517700952EFC /* Rx+PausableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1627C8217D517700952EFC /* Rx+PausableTests.swift */; };
+		1A1627C9217D517700952EFC /* ObservableType+PausableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1627C8217D517700952EFC /* ObservableType+PausableTests.swift */; };
 		1A1627CC217D597400952EFC /* SyncronizableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1627CB217D597400952EFC /* SyncronizableTests.swift */; };
 		1A1627CE218677C000952EFC /* UIViewController+PresentableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1627CD218677C000952EFC /* UIViewController+PresentableTests.swift */; };
 		1A1627D12186788700952EFC /* TestUIViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A1627D02186788700952EFC /* TestUIViewController.storyboard */; };
 		1A1627D3218679A500952EFC /* TestUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1627D2218679A500952EFC /* TestUIViewController.swift */; };
 		1A4B10B42175708A0034672F /* StepperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4B10B32175708A0034672F /* StepperTests.swift */; };
 		1A8FBDF21FF8337800389464 /* UIViewController+Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDE51FF8337700389464 /* UIViewController+Presentable.swift */; };
-		1A8FBDF31FF8337800389464 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDE61FF8337700389464 /* UIViewController+Rx.swift */; };
+		1A8FBDF31FF8337800389464 /* Reactive+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDE61FF8337700389464 /* Reactive+UIViewController.swift */; };
 		1A8FBDF41FF8337800389464 /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDE71FF8337700389464 /* Stepper.swift */; };
 		1A8FBDF51FF8337800389464 /* UIWindow+Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDE81FF8337700389464 /* UIWindow+Presentable.swift */; };
 		1A8FBDF61FF8337800389464 /* FlowContributor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDE91FF8337700389464 /* FlowContributor.swift */; };
-		1A8FBDF71FF8337800389464 /* UIWindow+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDEA1FF8337700389464 /* UIWindow+Rx.swift */; };
-		1A8FBDF91FF8337800389464 /* Rx+Pausable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDEC1FF8337700389464 /* Rx+Pausable.swift */; };
+		1A8FBDF71FF8337800389464 /* Reactive+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDEA1FF8337700389464 /* Reactive+UIWindow.swift */; };
+		1A8FBDF91FF8337800389464 /* ObservableType+Pausable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDEC1FF8337700389464 /* ObservableType+Pausable.swift */; };
 		1A8FBDFA1FF8337800389464 /* Synchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDED1FF8337700389464 /* Synchronizable.swift */; };
 		1A8FBDFB1FF8337800389464 /* Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDEE1FF8337700389464 /* Presentable.swift */; };
 		1A8FBDFD1FF8337800389464 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8FBDF01FF8337800389464 /* Step.swift */; };
@@ -72,19 +72,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1A1627C8217D517700952EFC /* Rx+PausableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+PausableTests.swift"; sourceTree = "<group>"; };
+		1A1627C8217D517700952EFC /* ObservableType+PausableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+PausableTests.swift"; sourceTree = "<group>"; };
 		1A1627CB217D597400952EFC /* SyncronizableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncronizableTests.swift; sourceTree = "<group>"; };
 		1A1627CD218677C000952EFC /* UIViewController+PresentableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+PresentableTests.swift"; sourceTree = "<group>"; };
 		1A1627D02186788700952EFC /* TestUIViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestUIViewController.storyboard; sourceTree = "<group>"; };
 		1A1627D2218679A500952EFC /* TestUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUIViewController.swift; sourceTree = "<group>"; };
 		1A4B10B32175708A0034672F /* StepperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperTests.swift; sourceTree = "<group>"; };
 		1A8FBDE51FF8337700389464 /* UIViewController+Presentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Presentable.swift"; sourceTree = "<group>"; };
-		1A8FBDE61FF8337700389464 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
+		1A8FBDE61FF8337700389464 /* Reactive+UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reactive+UIViewController.swift"; sourceTree = "<group>"; };
 		1A8FBDE71FF8337700389464 /* Stepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stepper.swift; sourceTree = "<group>"; };
 		1A8FBDE81FF8337700389464 /* UIWindow+Presentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Presentable.swift"; sourceTree = "<group>"; };
 		1A8FBDE91FF8337700389464 /* FlowContributor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowContributor.swift; sourceTree = "<group>"; };
-		1A8FBDEA1FF8337700389464 /* UIWindow+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Rx.swift"; sourceTree = "<group>"; };
-		1A8FBDEC1FF8337700389464 /* Rx+Pausable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rx+Pausable.swift"; sourceTree = "<group>"; };
+		1A8FBDEA1FF8337700389464 /* Reactive+UIWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reactive+UIWindow.swift"; sourceTree = "<group>"; };
+		1A8FBDEC1FF8337700389464 /* ObservableType+Pausable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObservableType+Pausable.swift"; sourceTree = "<group>"; };
 		1A8FBDED1FF8337700389464 /* Synchronizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Synchronizable.swift; sourceTree = "<group>"; };
 		1A8FBDEE1FF8337700389464 /* Presentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presentable.swift; sourceTree = "<group>"; };
 		1A8FBDF01FF8337800389464 /* Step.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
@@ -155,11 +155,11 @@
 		1A8FBE031FF8430F00389464 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				1A8FBDEC1FF8337700389464 /* Rx+Pausable.swift */,
+				1A8FBDEC1FF8337700389464 /* ObservableType+Pausable.swift */,
+				1A8FBDE61FF8337700389464 /* Reactive+UIViewController.swift */,
+				1A8FBDEA1FF8337700389464 /* Reactive+UIWindow.swift */,
 				1A8FBDE51FF8337700389464 /* UIViewController+Presentable.swift */,
-				1A8FBDE61FF8337700389464 /* UIViewController+Rx.swift */,
 				1A8FBDE81FF8337700389464 /* UIWindow+Presentable.swift */,
-				1A8FBDEA1FF8337700389464 /* UIWindow+Rx.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -173,7 +173,7 @@
 				749B02FB220688EC001BEBBB /* FlowCoordinatorTests.swift */,
 				749B02F72206852D001BEBBB /* Flow+PresentableTests.swift */,
 				74370EAF23C65E20006CB8A6 /* FlowsTests.swift */,
-				1A1627C8217D517700952EFC /* Rx+PausableTests.swift */,
+				1A1627C8217D517700952EFC /* ObservableType+PausableTests.swift */,
 				1A4B10B32175708A0034672F /* StepperTests.swift */,
 				1A1627CB217D597400952EFC /* SyncronizableTests.swift */,
 				1A1627CD218677C000952EFC /* UIViewController+PresentableTests.swift */,
@@ -354,7 +354,7 @@
 				749B02FC220688EC001BEBBB /* FlowCoordinatorTests.swift in Sources */,
 				1A1627CE218677C000952EFC /* UIViewController+PresentableTests.swift in Sources */,
 				74319EE8231C300A002294F3 /* FlowContributorTests.swift in Sources */,
-				1A1627C9217D517700952EFC /* Rx+PausableTests.swift in Sources */,
+				1A1627C9217D517700952EFC /* ObservableType+PausableTests.swift in Sources */,
 				749B02F82206852D001BEBBB /* Flow+PresentableTests.swift in Sources */,
 				1A1627D3218679A500952EFC /* TestUIViewController.swift in Sources */,
 				74370EB023C65E20006CB8A6 /* FlowsTests.swift in Sources */,
@@ -367,14 +367,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A8FBDF41FF8337800389464 /* Stepper.swift in Sources */,
-				1A8FBDF31FF8337800389464 /* UIViewController+Rx.swift in Sources */,
+				1A8FBDF31FF8337800389464 /* Reactive+UIViewController.swift in Sources */,
 				1A8FBDFA1FF8337800389464 /* Synchronizable.swift in Sources */,
 				1A8FBDFB1FF8337800389464 /* Presentable.swift in Sources */,
 				1A8FBDF21FF8337800389464 /* UIViewController+Presentable.swift in Sources */,
-				1A8FBDF71FF8337800389464 /* UIWindow+Rx.swift in Sources */,
+				1A8FBDF71FF8337800389464 /* Reactive+UIWindow.swift in Sources */,
 				741801AC21CB31C200D25B4B /* FlowCoordinator.swift in Sources */,
 				1A8FBDF51FF8337800389464 /* UIWindow+Presentable.swift in Sources */,
-				1A8FBDF91FF8337800389464 /* Rx+Pausable.swift in Sources */,
+				1A8FBDF91FF8337800389464 /* ObservableType+Pausable.swift in Sources */,
 				1A8FBDFE1FF8337800389464 /* Flow.swift in Sources */,
 				1A8FBDF61FF8337800389464 /* FlowContributor.swift in Sources */,
 				1A8FBDFD1FF8337800389464 /* Step.swift in Sources */,
@@ -571,7 +571,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2.7.0;
+				MARKETING_VERSION = 2.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxFlow;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -602,7 +602,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2.7.0;
+				MARKETING_VERSION = 2.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxFlow;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
