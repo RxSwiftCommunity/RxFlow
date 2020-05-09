@@ -38,12 +38,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let appFlow = AppFlow(services: self.appServices)
 
+        self.coordinator.coordinate(flow: appFlow, with: AppStepper(withServices: self.appServices))
+
         Flows.whenReady(flow1: appFlow) { root in
             window.rootViewController = root
             window.makeKeyAndVisible()
         }
-
-        self.coordinator.coordinate(flow: appFlow, with: AppStepper(withServices: self.appServices))
 
         return true
     }
