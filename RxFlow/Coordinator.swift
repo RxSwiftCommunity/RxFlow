@@ -101,10 +101,6 @@ class FlowCoordinator: HasDisposeBag, FlowCoordinatorDelegate {
                 case .one(let flowItem):
                     return (stepContext, [flowItem])
                 case .end(let stepToSendToParentFlow):
-                    // we tell the delegate that the FlowCoordinator is ended. This will
-                    // unretain the FlowCoordinator reference from the main Coordinator
-                    self.delegate.end(flowCoordinator: self)
-                    
                     // if the navigation gives a "end" NextFlowItems, the FlowCoordinator
                     // triggers its parent FlowCoordinator with the specified step. It will allow the parent
                     // to dismiss the child Flow Root for instance (because this is the parent who had the responsability
@@ -113,6 +109,10 @@ class FlowCoordinator: HasDisposeBag, FlowCoordinatorDelegate {
                         let stepContextForParentFlow = StepContext(with: stepToSendToParentFlow)
                         stepContextForParentFlow.fromChildFlow = self.flow
                         parentFlowCoordinator.steps.onNext(stepContextForParentFlow)
+
+                        // we tell the delegate that the FlowCoordinator is ended. This will
+                        // unretain the FlowCoordinator reference from the main Coordinator
+                        self.delegate.end(flowCoordinator: self)
                     }
 
                     return (stepContext, [NextFlowItem]())
