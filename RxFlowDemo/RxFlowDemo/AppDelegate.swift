@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     let disposeBag = DisposeBag()
     var window: UIWindow?
@@ -45,14 +45,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window.makeKeyAndVisible()
         }
 
+        UNUserNotificationCenter.current().delegate = self
+
         return true
     }
 
-    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        // example of deep link
-        // self.coordinator.navigate(to: DemoStep.aboutIsRequired)
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler(UNNotificationPresentationOptions.init(arrayLiteral: [.alert, .badge]))
     }
 
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        // example of how DeepLink can be handled
+        self.coordinator.navigate(to: DemoStep.movieIsPicked(withId: 23452))
+    }
 }
 
 struct AppServices: HasMoviesService, HasPreferencesService {
