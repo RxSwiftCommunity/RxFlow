@@ -17,6 +17,7 @@ import RxTest
 enum TestSteps: Step {
     case one
     case two
+    case three
     case multiple
     case unauthorized
 }
@@ -44,6 +45,8 @@ final class TestOneAndMultipleFlowCoordinatorFlow: Flow {
             stepOneCalled = true
             return .none
         case .two:
+            return .none
+        case .three:
             return .none
         case .multiple:
             return .multiple(
@@ -132,6 +135,40 @@ final class TestFilterStepFlow: Flow {
     }
 }
 
+final class TestDeepLinkFlow: Flow {
+    private let rootViewController = TestUIViewController.instantiate()
+
+    var root: Presentable {
+        return self.rootViewController
+    }
+
+    private let recordedSteps: ReplaySubject<TestSteps>
+
+    init(recordedSteps: ReplaySubject<TestSteps>) {
+        self.recordedSteps = recordedSteps
+    }
+
+    func navigate(to step: Step) -> FlowContributors {
+
+        guard let step = step as? TestSteps else { return .none }
+
+        switch step {
+        case .one:
+            return .multiple(flowContributors: [
+                .contribute(withNextPresentable: TestDeepLinkFlow(recordedSteps: self.recordedSteps),
+                            withNextStepper: OneStepper(withSingleStep: TestSteps.two)),
+                .contribute(withNextPresentable: TestDeepLinkFlow(recordedSteps: self.recordedSteps),
+                            withNextStepper: OneStepper(withSingleStep: TestSteps.two))
+            ])
+        case .three:
+            recordedSteps.onNext(step)
+            return .none
+        default:
+            return .none
+        }
+    }
+}
+
 final class FlowCoordinatorTests: XCTestCase {
 
     func testCoordinateWithOneStepper() {
@@ -198,6 +235,28 @@ final class FlowCoordinatorTests: XCTestCase {
         // Then: The emitted One step is replaced by the replacement step
         let actualStep = try? testFlow.recordedSteps.take(2).toBlocking().toArray()
         XCTAssertEqual(actualStep, [.two, .unauthorized])
+    }
+
+    func testStepIsReceivedInEveryFlowsWhenNavigateToIsCalled() {
+        // Given: A Flow with 2 subFlows
+        let exp = expectation(description: "Flow when ready")
+        let flowCoordinator = FlowCoordinator()
+        let recordedSteps = ReplaySubject<TestSteps>.create(bufferSize: 10)
+        let deepLinkFlow = TestDeepLinkFlow(recordedSteps: recordedSteps)
+
+        flowCoordinator.coordinate(flow: deepLinkFlow, with: OneStepper(withSingleStep: TestSteps.one))
+
+        // When: the main Flow is ready and we force a navigation
+        Flows.whenReady(flow1: deepLinkFlow) { (_) in
+            flowCoordinator.navigate(to: TestSteps.three)
+            exp.fulfill()
+        }
+
+        waitForExpectations(timeout: 1)
+
+        // Then: All the 3 Flows receive the step
+        let deepLinkSteps = try? recordedSteps.take(3).toBlocking().toArray()
+        XCTAssertEqual(deepLinkSteps, [.three, .three, .three])
     }
 }
 
