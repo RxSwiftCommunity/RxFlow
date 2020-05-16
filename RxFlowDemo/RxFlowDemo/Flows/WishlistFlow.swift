@@ -117,7 +117,7 @@ class WishlistFlow: Flow {
         let settingsStepper = SettingsStepper()
         let settingsFlow = SettingsFlow(withServices: self.services, andStepper: settingsStepper)
 
-        Flows.use(settingsFlow, when: .ready) { [unowned self] (root: UISplitViewController) in
+        Flows.use(settingsFlow, when: .created) { [unowned self] (root: UISplitViewController) in
             self.rootViewController.present(root, animated: true)
         }
 
