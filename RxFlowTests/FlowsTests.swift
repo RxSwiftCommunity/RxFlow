@@ -32,7 +32,7 @@ final class FlowsTests: XCTestCase {
         // Given: a flow which we are waiting for its readiness to trigger a block execution
         let flow = MockFlow()
 
-        Flows.whenReady(flow1: flow) { _ in
+        Flows.use(flow, when: .ready) { _ in
             isBlockCalled = true
             exp.fulfill()
         }
@@ -54,7 +54,7 @@ final class FlowsTests: XCTestCase {
         let flow1 = MockFlow()
         let flow2 = MockFlow()
 
-        Flows.whenReady(flow1: flow1, flow2: flow2) { (_, _) in
+        Flows.use(flow1, flow2, when: .ready) { (_, _) in
             isBlockCalled = true
             exp.fulfill()
         }
@@ -78,7 +78,7 @@ final class FlowsTests: XCTestCase {
         let flow2 = MockFlow()
         let flow3 = MockFlow()
 
-        Flows.whenReady(flow1: flow1, flow2: flow2, flow3: flow3) { (_, _, _) in
+        Flows.use(flow1, flow2, flow3, when: .ready) { (_, _, _) in
             isBlockCalled = true
             exp.fulfill()
         }
@@ -104,7 +104,7 @@ final class FlowsTests: XCTestCase {
         let flow3 = MockFlow()
         let flow4 = MockFlow()
 
-        Flows.whenReady(flow1: flow1, flow2: flow2, flow3: flow3, flow4: flow4) { (_, _, _, _) in
+        Flows.use(flow1, flow2, flow3, flow4, when: .ready) { (_, _, _, _) in
             isBlockCalled = true
             exp.fulfill()
         }
@@ -132,7 +132,7 @@ final class FlowsTests: XCTestCase {
         let flow4 = MockFlow()
         let flow5 = MockFlow()
 
-        Flows.whenReady(flow1: flow1, flow2: flow2, flow3: flow3, flow4: flow4, flow5: flow5) { (_, _, _, _, _) in
+        Flows.use(flow1, flow2, flow3, flow4, flow5, when: .ready) { (_, _, _, _, _) in
             isBlockCalled = true
             exp.fulfill()
         }
@@ -162,7 +162,7 @@ final class FlowsTests: XCTestCase {
         let flow5 = MockFlow()
         let flows = [flow1, flow2, flow3, flow4, flow5]
 
-        Flows.whenReady(flows: flows) { _ in
+        Flows.use(flows, when: .ready) { _ in
             isBlockCalled = true
             exp.fulfill()
         }

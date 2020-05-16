@@ -43,7 +43,7 @@ class DashboardFlow: Flow {
         let wishListFlow = WishlistFlow(withServices: self.services, andStepper: wishlistStepper)
         let watchedFlow = WatchedFlow(withServices: self.services)
 
-        Flows.whenReady(flow1: wishListFlow, flow2: watchedFlow) { [unowned self] (root1: UINavigationController, root2: UINavigationController) in
+        Flows.use(wishListFlow, watchedFlow, when: .ready) { [unowned self] (root1: UINavigationController, root2: UINavigationController) in
             let tabBarItem1 = UITabBarItem(title: "Wishlist", image: UIImage(named: "wishlist"), selectedImage: nil)
             let tabBarItem2 = UITabBarItem(title: "Watched", image: UIImage(named: "watched"), selectedImage: nil)
             root1.tabBarItem = tabBarItem1
