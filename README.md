@@ -205,6 +205,21 @@ class WatchedFlow: Flow {
 }
 ```
 
+### How to handle Deeplinks
+
+From the AppDelegate you can reach the FlowCoordinator and call the `navigate(to:)` function when receiving a notification for instance.
+
+The step passed to the function will then be passed to all the existing Flows so you can adapt the navigation.
+
+```swift
+func userNotificationCenter(_ center: UNUserNotificationCenter,
+                            didReceive response: UNNotificationResponse,
+                            withCompletionHandler completionHandler: @escaping () -> Void) {
+    // example of how DeepLink can be handled
+    self.coordinator.navigate(to: DemoStep.movieIsPicked(withId: 23452))
+}
+```
+
 ### How to adapt a Step before it triggers a navigation ?
 
 A Flow has a `adapt(step:) -> Single<Step>` function that by default returns the step it has been given
