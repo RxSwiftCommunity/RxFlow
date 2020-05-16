@@ -32,6 +32,23 @@ class WishlistViewController: UIViewController, StoryboardBased, ViewModelBased 
             .bind(to: self.steps)
     }
 
+    @IBAction func sendNotification(_ sender: UIButton) {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) { (granted, _) in
+
+            guard granted else { return }
+
+            let content = UNMutableNotificationContent()
+            content.title = "Notification from RxFlow"
+            content.subtitle = "Deeplink use case"
+            content.body = "Click to navigate to Avatar"
+
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+            let request = UNNotificationRequest(identifier: "\(UUID())", content: content, trigger: trigger)
+
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        }
+    }
+
     @IBAction func about(_ sender: UIButton) {
         self.about()
     }

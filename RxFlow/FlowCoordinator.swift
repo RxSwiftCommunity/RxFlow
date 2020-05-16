@@ -112,6 +112,13 @@ public final class FlowCoordinator: NSObject {
             .disposed(by: self.disposeBag)
     }
 
+    /// allow to drive the navigation from the outside of a flow
+    /// - Parameter step: the step to navigate to. (it will be passed to all sub flows)
+    public func navigate(to step: Step) {
+        self.stepsRelay.accept(step)
+        self.childFlowCoordinators.values.forEach { $0.navigate(to: step) }
+    }
+
     private func performSideEffects(with flowContributor: FlowContributor) {
         switch flowContributor {
         case let .forwardToCurrentFlow(step):
