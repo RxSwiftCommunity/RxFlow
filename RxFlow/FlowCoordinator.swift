@@ -54,6 +54,7 @@ public final class FlowCoordinator: NSObject {
                 self?.parentFlowCoordinator?.childFlowCoordinators.removeValue(forKey: self?.identifier ?? "")
             })
             .asSignal(onErrorJustReturn: NoneStep())
+            .flatMapLatest { flow.adapt(step: $0).asSignal(onErrorJustReturn: NoneStep()) }
             .do(onNext: { [weak self] in self?.willNavigateRelay.accept((flow, $0)) })
             .map { return (flowContributors: flow.navigate(to: $0), step: $0) }
             .do(onNext: { [weak self] in self?.didNavigateRelay.accept((flow, $0.step)) })
@@ -102,7 +103,6 @@ public final class FlowCoordinator: NSObject {
         stepper.steps
             .do(onSubscribed: { stepper.readyToEmitSteps() })
             .startWith(stepper.initialStep)
-            .flatMapLatest { flow.adapt(step: $0) }
             .filter { !($0 is NoneStep) }
             .takeUntil(flow.rxDismissed.asObservable())
             // for now commenting this line to allow a Stepper trigger "dismissing" steps
@@ -167,7 +167,6 @@ public final class FlowCoordinator: NSObject {
             .steps
             .do(onSubscribed: { nextPresentableAndStepper.stepper.readyToEmitSteps() })
             .startWith(nextPresentableAndStepper.stepper.initialStep)
-            .flatMapLatest { flow.adapt(step: $0) }
             .filter { !($0 is NoneStep) }
             .takeUntil(nextPresentableAndStepper.presentable.rxDismissed.asObservable())
 
