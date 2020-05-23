@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         self.coordinator.coordinate(flow: appFlow, with: AppStepper(withServices: self.appServices))
 
-        Flows.whenReady(flow1: appFlow) { root in
+        Flows.use(appFlow, when: .created) { root in
             window.rootViewController = root
             window.makeKeyAndVisible()
         }

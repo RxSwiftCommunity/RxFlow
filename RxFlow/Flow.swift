@@ -59,30 +59,35 @@ extension Flow {
 }
 
 /// Utility functions to synchronize Flows readyness
-public class Flows {
-    /// Allow to be triggered only when Flows given as parameters are ready to be displayed.
-    /// Once it is the case, the block is executed
-    ///
-    /// - Parameters:
-    ///   - flows: Flow(s) to be observed
-    ///   - block: block to execute whenever the Flows are ready to use
-    public static func whenReady<RootType: UIViewController>(flows: [Flow],
-                                                             block: @escaping ([RootType]) -> Void) {
-        let flowsReadinesses = flows.map { $0.rxFlowReady }
-        let roots = flows.compactMap { $0.root as? RootType }
+public enum Flows {
+    public enum ExecuteStrategy {
+        case ready
+        case created
+    }
+
+    public static func use<Root: UIViewController>(_ flows: [Flow],
+                                                   when strategy: ExecuteStrategy,
+                                                   block: @escaping ([Root]) -> Void) {
+        let roots = flows.compactMap { $0.root as? Root }
         guard roots.count == flows.count else {
             fatalError("Type mismatch, Flows roots types do not match the types awaited in the block")
         }
 
-        _ = Single.zip(flowsReadinesses) { _ in Void() }
-            .asDriver(onErrorJustReturn: Void())
-            .drive(onNext: { _ in
-                block(roots)
-            })
+        switch strategy {
+        case .created:
+            block(roots)
+        case .ready:
+            let flowsReadinesses = flows.map { $0.rxFlowReady }
+            _ = Single.zip(flowsReadinesses) { _ in Void() }
+                .asDriver(onErrorJustReturn: Void())
+                .drive(onNext: { _ in
+                    block(roots)
+                })
+        }
     }
 
     // swiftlint:disable function_parameter_count
-    /// Allow to be triggered only when Flows given as parameters are ready to be displayed.
+    /// Allow to be triggered etiher when Flows given as parameters are ready to be displayed or right after their instantiation
     /// Once it is the case, the block is executed
     ///
     /// - Parameters:
@@ -92,44 +97,51 @@ public class Flows {
     ///   - flow4: fourth Flow to be observed
     ///   - flow5: fifth Flow to be observed
     ///   - block: block to execute whenever the Flows are ready to use
-    public static func whenReady<RootType1, RootType2, RootType3, RootType4, RootType5> (flow1: Flow,
-                                                                                         flow2: Flow,
-                                                                                         flow3: Flow,
-                                                                                         flow4: Flow,
-                                                                                         flow5: Flow,
-                                                                                         block: @escaping (_ flow1Root: RootType1,
-        _ flow2Root: RootType2,
-        _ flow3Root: RootType3,
-        _ flow4Root: RootType4,
-        _ flow5Root: RootType5) -> Void)
+    public static func use<Root1, Root2, Root3, Root4, Root5>(_ flow1: Flow,
+                                                              _ flow2: Flow,
+                                                              _ flow3: Flow,
+                                                              _ flow4: Flow,
+                                                              _ flow5: Flow,
+                                                              when strategy: ExecuteStrategy,
+                                                              block: @escaping (
+        _ flow1Root: Root1,
+        _ flow2Root: Root2,
+        _ flow3Root: Root3,
+        _ flow4Root: Root4,
+        _ flow5Root: Root5) -> Void)
         where
-        RootType1: UIViewController,
-        RootType2: UIViewController,
-        RootType3: UIViewController,
-        RootType4: UIViewController,
-        RootType5: UIViewController {
+        Root1: UIViewController,
+        Root2: UIViewController,
+        Root3: UIViewController,
+        Root4: UIViewController,
+        Root5: UIViewController {
             guard
-                let root1 = flow1.root as? RootType1,
-                let root2 = flow2.root as? RootType2,
-                let root3 = flow3.root as? RootType3,
-                let root4 = flow4.root as? RootType4,
-                let root5 = flow5.root as? RootType5 else {
+                let root1 = flow1.root as? Root1,
+                let root2 = flow2.root as? Root2,
+                let root3 = flow3.root as? Root3,
+                let root4 = flow4.root as? Root4,
+                let root5 = flow5.root as? Root5 else {
                     fatalError("Type mismatch, Flows roots types do not match the types awaited in the block")
             }
 
-            _ = Single.zip(flow1.rxFlowReady,
-                           flow2.rxFlowReady,
-                           flow3.rxFlowReady,
-                           flow4.rxFlowReady,
-                           flow5.rxFlowReady) { _, _, _, _, _ in Void() }
-                .asDriver(onErrorJustReturn: Void())
-                .drive(onNext: { _ in
-                    block(root1, root2, root3, root4, root5)
-                })
+            switch strategy {
+            case .created:
+                block(root1, root2, root3, root4, root5)
+            case .ready:
+                _ = Single.zip(flow1.rxFlowReady,
+                               flow2.rxFlowReady,
+                               flow3.rxFlowReady,
+                               flow4.rxFlowReady,
+                               flow5.rxFlowReady) { _, _, _, _, _ in Void() }
+                    .asDriver(onErrorJustReturn: Void())
+                    .drive(onNext: { _ in
+                        block(root1, root2, root3, root4, root5)
+                    })
+            }
     }
-    // swiftlint:enable function_parameter_count
 
-    /// Allow to be triggered only when Flows given as parameters are ready to be displayed.
+    // swiftlint:disable function_parameter_count
+    /// Allow to be triggered etiher when Flows given as parameters are ready to be displayed or right after their instantiation
     /// Once it is the case, the block is executed
     ///
     /// - Parameters:
@@ -138,39 +150,44 @@ public class Flows {
     ///   - flow3: third Flow to be observed
     ///   - flow4: fourth Flow to be observed
     ///   - block: block to execute whenever the Flows are ready to use
-    public static func whenReady<RootType1, RootType2, RootType3, RootType4> (flow1: Flow,
-                                                                              flow2: Flow,
-                                                                              flow3: Flow,
-                                                                              flow4: Flow,
-                                                                              block: @escaping (_ flow1Root: RootType1,
-        _ flow2Root: RootType2,
-        _ flow3Root: RootType3,
-        _ flow4Root: RootType4) -> Void)
-        where
-        RootType1: UIViewController,
-        RootType2: UIViewController,
-        RootType3: UIViewController,
-        RootType4: UIViewController {
+    public static func use<Root1, Root2, Root3, Root4>(_ flow1: Flow,
+                                                       _ flow2: Flow,
+                                                       _ flow3: Flow,
+                                                       _ flow4: Flow,
+                                                       when strategy: ExecuteStrategy,
+                                                       block: @escaping (
+        _ flow1Root: Root1,
+        _ flow2Root: Root2,
+        _ flow3Root: Root3,
+        _ flow4Root: Root4) -> Void) where
+        Root1: UIViewController,
+        Root2: UIViewController,
+        Root3: UIViewController,
+        Root4: UIViewController {
             guard
-                let root1 = flow1.root as? RootType1,
-                let root2 = flow2.root as? RootType2,
-                let root3 = flow3.root as? RootType3,
-                let root4 = flow4.root as? RootType4 else {
+                let root1 = flow1.root as? Root1,
+                let root2 = flow2.root as? Root2,
+                let root3 = flow3.root as? Root3,
+                let root4 = flow4.root as? Root4 else {
                     fatalError("Type mismatch, Flows roots types do not match the types awaited in the block")
             }
 
-            _ = Single.zip(flow1.rxFlowReady,
-                           flow2.rxFlowReady,
-                           flow3.rxFlowReady,
-                           flow4.rxFlowReady) { _, _, _, _ in Void()
-            }
-            .asDriver(onErrorJustReturn: Void())
-            .drive(onNext: { _ in
+            switch strategy {
+            case .created:
                 block(root1, root2, root3, root4)
-            })
+            case .ready:
+                _ = Single.zip(flow1.rxFlowReady,
+                               flow2.rxFlowReady,
+                               flow3.rxFlowReady,
+                               flow4.rxFlowReady) { _, _, _, _ in Void() }
+                    .asDriver(onErrorJustReturn: Void())
+                    .drive(onNext: { _ in
+                        block(root1, root2, root3, root4)
+                    })
+            }
     }
 
-    /// Allow to be triggered only when Flows given as parameters are ready to be displayed.
+    /// Allow to be triggered etiher when Flows given as parameters are ready to be displayed or right after their instantiation
     /// Once it is the case, the block is executed
     ///
     /// - Parameters:
@@ -178,73 +195,99 @@ public class Flows {
     ///   - flow2: second Flow to be observed
     ///   - flow3: third Flow to be observed
     ///   - block: block to execute whenever the Flows are ready to use
-    public static func whenReady<RootType1, RootType2, RootType3> (flow1: Flow,
-                                                                   flow2: Flow,
-                                                                   flow3: Flow,
-                                                                   block: @escaping (_ flow1Root: RootType1,
-        _ flow2Root: RootType2,
-        _ flow3Root: RootType3) -> Void)
-        where
-        RootType1: UIViewController,
-        RootType2: UIViewController,
-        RootType3: UIViewController {
+    public static func use<Root1, Root2, Root3>(_ flow1: Flow,
+                                                _ flow2: Flow,
+                                                _ flow3: Flow,
+                                                when strategy: ExecuteStrategy,
+                                                block: @escaping (
+        _ flow1Root: Root1,
+        _ flow2Root: Root2,
+        _ flow3Root: Root3) -> Void) where
+        Root1: UIViewController,
+        Root2: UIViewController,
+        Root3: UIViewController {
             guard
-                let root1 = flow1.root as? RootType1,
-                let root2 = flow2.root as? RootType2,
-                let root3 = flow3.root as? RootType3 else {
+                let root1 = flow1.root as? Root1,
+                let root2 = flow2.root as? Root2,
+                let root3 = flow3.root as? Root3 else {
                     fatalError("Type mismatch, Flows roots types do not match the types awaited in the block")
             }
 
-            _ = Single.zip(flow1.rxFlowReady,
-                           flow2.rxFlowReady,
-                           flow3.rxFlowReady) { _, _, _ in Void() }
-                .asDriver(onErrorJustReturn: Void())
-                .drive(onNext: { _ in
-                    block(root1, root2, root3)
-                })
+            switch strategy {
+            case .created:
+                block(root1, root2, root3)
+            case .ready:
+                _ = Single.zip(flow1.rxFlowReady,
+                               flow2.rxFlowReady,
+                               flow3.rxFlowReady) { _, _, _ in Void() }
+                    .asDriver(onErrorJustReturn: Void())
+                    .drive(onNext: { _ in
+                        block(root1, root2, root3)
+                    })
+            }
     }
 
-    /// Allow to be triggered only when Flows given as parameters are ready to be displayed.
+    /// Allow to be triggered etiher when Flows given as parameters are ready to be displayed or right after their instantiation
     /// Once it is the case, the block is executed
     ///
     /// - Parameters:
     ///   - flow1: first Flow to be observed
     ///   - flow2: second Flow to be observed
     ///   - block: block to execute whenever the Flows are ready to use
-    public static func whenReady<RootType1: UIViewController, RootType2: UIViewController> (flow1: Flow,
-                                                                                            flow2: Flow,
-                                                                                            block: @escaping (_ flow1Root: RootType1,
-        _ flow2Root: RootType2) -> Void) {
-        guard   let root1 = flow1.root as? RootType1,
-            let root2 = flow2.root as? RootType2 else {
-                fatalError("Type mismatch, Flows root types do not match the types awaited in the block")
-        }
+    public static func use<Root1, Root2>(_ flow1: Flow,
+                                         _ flow2: Flow,
+                                         when strategy: ExecuteStrategy,
+                                         block: @escaping (
+        _ flow1Root: Root1,
+        _ flow2Root: Root2) -> Void) where
+        Root1: UIViewController,
+        Root2: UIViewController {
+            guard
+                let root1 = flow1.root as? Root1,
+                let root2 = flow2.root as? Root2 else {
+                    fatalError("Type mismatch, Flows roots types do not match the types awaited in the block")
+            }
 
-        _ = Single.zip(flow1.rxFlowReady,
-                       flow2.rxFlowReady) { _, _ in Void() }
-            .asDriver(onErrorJustReturn: Void())
-            .drive(onNext: { _ in
+            switch strategy {
+            case .created:
                 block(root1, root2)
-            })
+            case .ready:
+                _ = Single.zip(flow1.rxFlowReady,
+                               flow2.rxFlowReady) { _, _ in Void() }
+                    .asDriver(onErrorJustReturn: Void())
+                    .drive(onNext: { _ in
+                        block(root1, root2)
+                    })
+            }
     }
 
-    /// Allow to be triggered only when Flow given as parameters is ready to be displayed.
+    /// Allow to be triggered etiher when Flows given as parameters are ready to be displayed or right after their instantiation
     /// Once it is the case, the block is executed
     ///
     /// - Parameters:
-    ///   - flow1: Flow to be observed
-    ///   - block: block to execute whenever the Flow is ready to use
-    public static func whenReady<RootType: UIViewController> (flow1: Flow, block: @escaping (_ flowRoot1: RootType) -> Void) {
-        guard let root = flow1.root as? RootType else {
-            fatalError("Type mismatch, Flow root type does not match the type awaited in the block")
-        }
+    ///   - flow1: first Flow to be observed
+    ///   - block: block to execute whenever the Flows are ready to use
+    public static func use<Root>(_ flow: Flow,
+                                 when strategy: ExecuteStrategy,
+                                 block: @escaping (_ flowRoot: Root) -> Void)
+        where
+        Root: UIViewController {
+            guard
+                let root = flow.root as? Root else {
+                    fatalError("Type mismatch, Flows roots types do not match the types awaited in the block")
+            }
 
-        _ = flow1
-            .rxFlowReady
-            .asDriver(onErrorJustReturn: true)
-            .drive(onNext: { _ in
+            switch strategy {
+            case .created:
                 block(root)
-            })
+            case .ready:
+                _ = flow
+                    .rxFlowReady
+                    .asDriver(onErrorJustReturn: true)
+                    .drive(onNext: { _ in
+                        block(root)
+                    })
+            }
     }
 }
 

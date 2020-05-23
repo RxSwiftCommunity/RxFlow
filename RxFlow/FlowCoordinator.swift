@@ -11,10 +11,6 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-/// typealias to allow compliance with older versions of RxFlow. Coordinator should be replaced by FlowCoordinator
-@available(*, deprecated, message: "You should use FlowCoordinator")
-public typealias Coordinator = FlowCoordinator
-
 /// A FlowCoordinator handles the navigation of a Flow, based on its Stepper and the FlowContributors it emits
 public final class FlowCoordinator: NSObject {
     private let disposeBag = DisposeBag()

@@ -247,7 +247,7 @@ final class FlowCoordinatorTests: XCTestCase {
         flowCoordinator.coordinate(flow: deepLinkFlow, with: OneStepper(withSingleStep: TestSteps.one))
 
         // When: the main Flow is ready and we force a navigation
-        Flows.whenReady(flow1: deepLinkFlow) { (_) in
+        Flows.use(deepLinkFlow, when: .ready) { (_) in
             flowCoordinator.navigate(to: TestSteps.three)
             exp.fulfill()
         }

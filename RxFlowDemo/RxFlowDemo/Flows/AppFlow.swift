@@ -53,7 +53,7 @@ class AppFlow: Flow {
 
         let dashboardFlow = DashboardFlow(withServices: self.services)
 
-        Flows.whenReady(flow1: dashboardFlow) { [unowned self] root in
+        Flows.use(dashboardFlow, when: .created) { [unowned self] root in
             self.rootViewController.pushViewController(root, animated: false)
         }
 
@@ -65,7 +65,7 @@ class AppFlow: Flow {
 
         let onboardingFlow = OnboardingFlow(withServices: self.services)
 
-        Flows.whenReady(flow1: onboardingFlow) { [unowned self] root in
+        Flows.use(onboardingFlow, when: .created) { [unowned self] root in
             DispatchQueue.main.async {
                 self.rootViewController.present(root, animated: true)
             }
