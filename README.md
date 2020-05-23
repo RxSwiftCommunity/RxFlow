@@ -205,6 +205,21 @@ class WatchedFlow: Flow {
 }
 ```
 
+### How to handle Deeplinks
+
+From the AppDelegate you can reach the FlowCoordinator and call the `navigate(to:)` function when receiving a notification for instance.
+
+The step passed to the function will then be passed to all the existing Flows so you can adapt the navigation.
+
+```swift
+func userNotificationCenter(_ center: UNUserNotificationCenter,
+                            didReceive response: UNNotificationResponse,
+                            withCompletionHandler completionHandler: @escaping () -> Void) {
+    // example of how DeepLink can be handled
+    self.coordinator.navigate(to: DemoStep.movieIsPicked(withId: 23452))
+}
+```
+
 ### How to adapt a Step before it triggers a navigation ?
 
 A Flow has a `adapt(step:) -> Single<Step>` function that by default returns the step it has been given
@@ -271,16 +286,21 @@ Of course, it is the aim of a Coordinator. Inside a Flow we can present UIViewCo
 For instance, from the WishlistFlow, we launch the SettingsFlow in a popup.
 
 ```swift
-    private func navigateToSettings() -> FlowContributors {
-        let settingsStepper = SettingsStepper()
-        let settingsFlow = SettingsFlow(withServices: self.services, andStepper: settingsStepper)
+private func navigateToSettings() -> FlowContributors {
+	let settingsStepper = SettingsStepper()
+	let settingsFlow = SettingsFlow(withServices: self.services, andStepper: settingsStepper)
 
-        Flows.whenReady(flow1: settingsFlow) { [unowned self] (root: UISplitViewController) in
-            self.rootViewController.present(root, animated: true)
-        }
-        return .one(flowContributor: .contribute(withNextPresentable: settingsFlow, withNextStepper: settingsStepper))
+    Flows.use(settingsFlow, when: .ready) { [unowned self] root in
+        self.rootViewController.present(root, animated: true)
+    }
+    
+    return .one(flowContributor: .contribute(withNextPresentable: settingsFlow, withNextStepper: settingsStepper))
     }
 ```
+
+The `Flows.use(when:)` takes an `ExecuteStrategy` as a second parameter. It has two possible values:
+- .created: The completion block will be executed instantly
+- .ready: The completion block will be executed once the sub flows (SettingsFlow in the example) have emitted a first step
 
 For more complex cases, see the **DashboardFlow.swift** and the **SettingsFlow.swift** files in which we handle a UITabBarController and a UISplitViewController.
 

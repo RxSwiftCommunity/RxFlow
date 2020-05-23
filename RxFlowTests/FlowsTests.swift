@@ -25,14 +25,14 @@ fileprivate class MockFlow: Flow {
 
 final class FlowsTests: XCTestCase {
 
-    func test_whenReady_triggers_block_when_one_flow_is_ready() {
-        let exp = expectation(description: "WhenReady expectation")
+    func test_use_triggers_block_when_one_flow_is_ready() {
+        let exp = expectation(description: ".ready expectation")
         var isBlockCalled = false
 
         // Given: a flow which we are waiting for its readiness to trigger a block execution
         let flow = MockFlow()
 
-        Flows.whenReady(flow1: flow) { _ in
+        Flows.use(flow, when: .ready) { _ in
             isBlockCalled = true
             exp.fulfill()
         }
@@ -46,15 +46,33 @@ final class FlowsTests: XCTestCase {
         XCTAssertTrue(isBlockCalled)
     }
 
-    func test_whenReady_triggers_block_when_two_flows_are_ready() {
-        let exp = expectation(description: "WhenReady expectation")
+    func test_use_triggers_block_when_one_flow_is_created() {
+        let exp = expectation(description: ".created expectation")
+        var isBlockCalled = false
+
+        // Given: a flow which we are not waiting for its readiness to trigger a block execution
+        let flow = MockFlow()
+
+        Flows.use(flow, when: .created) { _ in
+            isBlockCalled = true
+            exp.fulfill()
+        }
+
+        waitForExpectations(timeout: 1)
+
+        // Then: the block is executed
+        XCTAssertTrue(isBlockCalled)
+    }
+
+    func test_use_triggers_block_when_two_flows_are_ready() {
+        let exp = expectation(description: ".ready expectation")
         var isBlockCalled = false
 
         // Given: flows which we are waiting for their readiness to trigger a block execution
         let flow1 = MockFlow()
         let flow2 = MockFlow()
 
-        Flows.whenReady(flow1: flow1, flow2: flow2) { (_, _) in
+        Flows.use(flow1, flow2, when: .ready) { (_, _) in
             isBlockCalled = true
             exp.fulfill()
         }
@@ -69,8 +87,27 @@ final class FlowsTests: XCTestCase {
         XCTAssertTrue(isBlockCalled)
     }
 
-    func test_whenReady_triggers_block_when_three_flows_are_ready() {
-        let exp = expectation(description: "WhenReady expectation")
+    func test_use_triggers_block_when_two_flows_are_created() {
+        let exp = expectation(description: ".created expectation")
+        var isBlockCalled = false
+
+        // Given: flows which we are not waiting for their readiness to trigger a block execution
+        let flow1 = MockFlow()
+        let flow2 = MockFlow()
+
+        Flows.use(flow1, flow2, when: .created) { (_, _) in
+            isBlockCalled = true
+            exp.fulfill()
+        }
+
+        waitForExpectations(timeout: 1)
+
+        // Then: the block is executed
+        XCTAssertTrue(isBlockCalled)
+    }
+
+    func test_use_triggers_block_when_three_flows_are_ready() {
+        let exp = expectation(description: ".ready expectation")
         var isBlockCalled = false
 
         // Given: flows which we are waiting for their readiness to trigger a block execution
@@ -78,7 +115,7 @@ final class FlowsTests: XCTestCase {
         let flow2 = MockFlow()
         let flow3 = MockFlow()
 
-        Flows.whenReady(flow1: flow1, flow2: flow2, flow3: flow3) { (_, _, _) in
+        Flows.use(flow1, flow2, flow3, when: .ready) { (_, _, _) in
             isBlockCalled = true
             exp.fulfill()
         }
@@ -94,8 +131,28 @@ final class FlowsTests: XCTestCase {
         XCTAssertTrue(isBlockCalled)
     }
 
-    func test_whenReady_triggers_block_when_four_flows_are_ready() {
-        let exp = expectation(description: "WhenReady expectation")
+    func test_use_triggers_block_when_three_flows_are_created() {
+        let exp = expectation(description: ".created expectation")
+        var isBlockCalled = false
+
+        // Given: flows which we are not waiting for their readiness to trigger a block execution
+        let flow1 = MockFlow()
+        let flow2 = MockFlow()
+        let flow3 = MockFlow()
+
+        Flows.use(flow1, flow2, flow3, when: .created) { (_, _, _) in
+            isBlockCalled = true
+            exp.fulfill()
+        }
+
+        waitForExpectations(timeout: 1)
+
+        // Then: the block is executed
+        XCTAssertTrue(isBlockCalled)
+    }
+
+    func test_use_triggers_block_when_four_flows_are_ready() {
+        let exp = expectation(description: ".ready expectation")
         var isBlockCalled = false
 
         // Given: flows which we are waiting for their readiness to trigger a block execution
@@ -104,7 +161,7 @@ final class FlowsTests: XCTestCase {
         let flow3 = MockFlow()
         let flow4 = MockFlow()
 
-        Flows.whenReady(flow1: flow1, flow2: flow2, flow3: flow3, flow4: flow4) { (_, _, _, _) in
+        Flows.use(flow1, flow2, flow3, flow4, when: .ready) { (_, _, _, _) in
             isBlockCalled = true
             exp.fulfill()
         }
@@ -121,8 +178,29 @@ final class FlowsTests: XCTestCase {
         XCTAssertTrue(isBlockCalled)
     }
 
-    func test_whenReady_triggers_block_when_five_flows_are_ready() {
-        let exp = expectation(description: "WhenReady expectation")
+    func test_use_triggers_block_when_four_flows_are_created() {
+        let exp = expectation(description: ".created expectation")
+        var isBlockCalled = false
+
+        // Given: flows which we are not waiting for their readiness to trigger a block execution
+        let flow1 = MockFlow()
+        let flow2 = MockFlow()
+        let flow3 = MockFlow()
+        let flow4 = MockFlow()
+
+        Flows.use(flow1, flow2, flow3, flow4, when: .created) { (_, _, _, _) in
+            isBlockCalled = true
+            exp.fulfill()
+        }
+
+        waitForExpectations(timeout: 1)
+
+        // Then: the block is executed
+        XCTAssertTrue(isBlockCalled)
+    }
+
+    func test_use_triggers_block_when_five_flows_are_ready() {
+        let exp = expectation(description: ".ready expectation")
         var isBlockCalled = false
 
         // Given: flows which we are waiting for their readiness to trigger a block execution
@@ -132,7 +210,7 @@ final class FlowsTests: XCTestCase {
         let flow4 = MockFlow()
         let flow5 = MockFlow()
 
-        Flows.whenReady(flow1: flow1, flow2: flow2, flow3: flow3, flow4: flow4, flow5: flow5) { (_, _, _, _, _) in
+        Flows.use(flow1, flow2, flow3, flow4, flow5, when: .ready) { (_, _, _, _, _) in
             isBlockCalled = true
             exp.fulfill()
         }
@@ -150,8 +228,30 @@ final class FlowsTests: XCTestCase {
         XCTAssertTrue(isBlockCalled)
     }
 
-    func test_whenReady_triggers_block_when_array_of_flows_is_ready() {
-        let exp = expectation(description: "WhenReady expectation")
+    func test_use_triggers_block_when_five_flows_are_created() {
+        let exp = expectation(description: ".created expectation")
+        var isBlockCalled = false
+
+        // Given: flows which we are not waiting for their readiness to trigger a block execution
+        let flow1 = MockFlow()
+        let flow2 = MockFlow()
+        let flow3 = MockFlow()
+        let flow4 = MockFlow()
+        let flow5 = MockFlow()
+
+        Flows.use(flow1, flow2, flow3, flow4, flow5, when: .created) { (_, _, _, _, _) in
+            isBlockCalled = true
+            exp.fulfill()
+        }
+
+        waitForExpectations(timeout: 1)
+
+        // Then: the block is executed
+        XCTAssertTrue(isBlockCalled)
+    }
+
+    func test_use_triggers_block_when_array_of_flows_are_ready() {
+        let exp = expectation(description: ".ready expectation")
         var isBlockCalled = false
 
         // Given: an array of flows which we are waiting for their readiness to trigger a block execution
@@ -162,7 +262,7 @@ final class FlowsTests: XCTestCase {
         let flow5 = MockFlow()
         let flows = [flow1, flow2, flow3, flow4, flow5]
 
-        Flows.whenReady(flows: flows) { _ in
+        Flows.use(flows, when: .ready) { _ in
             isBlockCalled = true
             exp.fulfill()
         }
@@ -173,6 +273,29 @@ final class FlowsTests: XCTestCase {
         flow3.flowReadySubject.accept(true)
         flow4.flowReadySubject.accept(true)
         flow5.flowReadySubject.accept(true)
+
+        waitForExpectations(timeout: 1)
+
+        // Then: the block is executed
+        XCTAssertTrue(isBlockCalled)
+    }
+
+    func test_use_triggers_block_when_array_of_flows_are_created() {
+        let exp = expectation(description: ".created expectation")
+        var isBlockCalled = false
+
+        // Given: an array of flows which we are not waiting for their readiness to trigger a block execution
+        let flow1 = MockFlow()
+        let flow2 = MockFlow()
+        let flow3 = MockFlow()
+        let flow4 = MockFlow()
+        let flow5 = MockFlow()
+        let flows = [flow1, flow2, flow3, flow4, flow5]
+
+        Flows.use(flows, when: .created) { _ in
+            isBlockCalled = true
+            exp.fulfill()
+        }
 
         waitForExpectations(timeout: 1)
 

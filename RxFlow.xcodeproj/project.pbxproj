@@ -28,6 +28,8 @@
 		741801AC21CB31C200D25B4B /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741801AB21CB31C200D25B4B /* FlowCoordinator.swift */; };
 		74319EE8231C300A002294F3 /* FlowContributorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74319EE7231C300A002294F3 /* FlowContributorTests.swift */; };
 		74370EB023C65E20006CB8A6 /* FlowsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74370EAF23C65E20006CB8A6 /* FlowsTests.swift */; };
+		74855A472470544500334B8F /* DeprecatedFlows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74855A462470544500334B8F /* DeprecatedFlows.swift */; };
+		74855A492470552B00334B8F /* DeprecatedFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74855A482470552B00334B8F /* DeprecatedFlowCoordinator.swift */; };
 		749B02E822066518001BEBBB /* RxBlocking.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 749B02E722066518001BEBBB /* RxBlocking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		749B02EB22066538001BEBBB /* Reusable.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 749B02E922066537001BEBBB /* Reusable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		749B02EC22066538001BEBBB /* RxTest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 749B02EA22066538001BEBBB /* RxTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -97,6 +99,8 @@
 		741801AB21CB31C200D25B4B /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
 		74319EE7231C300A002294F3 /* FlowContributorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowContributorTests.swift; sourceTree = "<group>"; };
 		74370EAF23C65E20006CB8A6 /* FlowsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowsTests.swift; sourceTree = "<group>"; };
+		74855A462470544500334B8F /* DeprecatedFlows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeprecatedFlows.swift; sourceTree = "<group>"; };
+		74855A482470552B00334B8F /* DeprecatedFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeprecatedFlowCoordinator.swift; sourceTree = "<group>"; };
 		749B02E722066518001BEBBB /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
 		749B02E922066537001BEBBB /* Reusable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reusable.framework; path = Carthage/Build/iOS/Reusable.framework; sourceTree = "<group>"; };
 		749B02EA22066538001BEBBB /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 		1AF8548E1FF8328D00271B52 /* RxFlow */ = {
 			isa = PBXGroup;
 			children = (
+				74855A452470542000334B8F /* Deprecated */,
 				1AF8548F1FF8328D00271B52 /* RxFlow.h */,
 				1AF854901FF8328D00271B52 /* Info.plist */,
 				1A8FBE031FF8430F00389464 /* Extensions */,
@@ -215,6 +220,15 @@
 				1A8FBDED1FF8337700389464 /* Synchronizable.swift */,
 			);
 			path = RxFlow;
+			sourceTree = "<group>";
+		};
+		74855A452470542000334B8F /* Deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				74855A462470544500334B8F /* DeprecatedFlows.swift */,
+				74855A482470552B00334B8F /* DeprecatedFlowCoordinator.swift */,
+			);
+			path = Deprecated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,7 +383,9 @@
 				1A8FBDF41FF8337800389464 /* Stepper.swift in Sources */,
 				1A8FBDF31FF8337800389464 /* Reactive+UIViewController.swift in Sources */,
 				1A8FBDFA1FF8337800389464 /* Synchronizable.swift in Sources */,
+				74855A472470544500334B8F /* DeprecatedFlows.swift in Sources */,
 				1A8FBDFB1FF8337800389464 /* Presentable.swift in Sources */,
+				74855A492470552B00334B8F /* DeprecatedFlowCoordinator.swift in Sources */,
 				1A8FBDF21FF8337800389464 /* UIViewController+Presentable.swift in Sources */,
 				1A8FBDF71FF8337800389464 /* Reactive+UIWindow.swift in Sources */,
 				741801AC21CB31C200D25B4B /* FlowCoordinator.swift in Sources */,
@@ -571,7 +587,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2.8.0;
+				MARKETING_VERSION = 2.9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxFlow;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -602,7 +618,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2.8.0;
+				MARKETING_VERSION = 2.9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxFlow;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
