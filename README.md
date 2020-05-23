@@ -286,16 +286,21 @@ Of course, it is the aim of a Coordinator. Inside a Flow we can present UIViewCo
 For instance, from the WishlistFlow, we launch the SettingsFlow in a popup.
 
 ```swift
-    private func navigateToSettings() -> FlowContributors {
-        let settingsStepper = SettingsStepper()
-        let settingsFlow = SettingsFlow(withServices: self.services, andStepper: settingsStepper)
+private func navigateToSettings() -> FlowContributors {
+	let settingsStepper = SettingsStepper()
+	let settingsFlow = SettingsFlow(withServices: self.services, andStepper: settingsStepper)
 
-        Flows.whenReady(flow1: settingsFlow) { [unowned self] (root: UISplitViewController) in
-            self.rootViewController.present(root, animated: true)
-        }
-        return .one(flowContributor: .contribute(withNextPresentable: settingsFlow, withNextStepper: settingsStepper))
+    Flows.use(settingsFlow, when: .ready) { [unowned self] root in
+        self.rootViewController.present(root, animated: true)
+    }
+    
+    return .one(flowContributor: .contribute(withNextPresentable: settingsFlow, withNextStepper: settingsStepper))
     }
 ```
+
+The `Flows.use(when:)` takes an `ExecuteStrategy` as a second parameter. It has two possible values:
+- .created: The completion block will be executed instantly
+- .ready: The completion block will be executed once the sub flows (SettingsFlow in the example) have emitted a first step
 
 For more complex cases, see the **DashboardFlow.swift** and the **SettingsFlow.swift** files in which we handle a UITabBarController and a UISplitViewController.
 
