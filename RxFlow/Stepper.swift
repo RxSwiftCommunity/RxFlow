@@ -80,6 +80,10 @@ public class CompositeStepper: Stepper {
             .concat(nextSteps)
             .bind(to: self.steps)
             .disposed(by: self.disposeBag)
+
+        for stepper in innerSteppers {
+            stepper.readyToEmitSteps()
+        }
     }
 }
 
