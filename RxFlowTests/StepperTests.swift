@@ -28,10 +28,15 @@ final class StepperClass: Stepper {
     let steps = PublishRelay<Step>()
     let initialStep: Step
     let nextStep: Step
+    private(set) var madeReady = false
 
     init(with initialStep: Step, andNextStep nextStep: Step) {
         self.initialStep = initialStep
         self.nextStep = nextStep
+    }
+
+    func readyToEmitSteps() {
+        madeReady = true
     }
 
     func emitNextStep () {
@@ -119,6 +124,21 @@ final class StepperTests: XCTestCase {
         XCTAssertEqual(observer.events[0].value.element as? StepperTestsStep, StepperTestsStep.stepOne)
         XCTAssertEqual(observer.events[1].value.element as? StepperTestsStep, StepperTestsStep.stepTwo)
         XCTAssertEqual(observer.events[2].value.element as? StepperTestsStep, StepperTestsStep.stepThree)
+    }
+
+    func testCompositeStepperReadyToEmitSteps() {
+
+        // Given: a compositeStepper
+        let stepper1 = StepperClass(with: StepperTestsStep.stepOne, andNextStep: StepperTestsStep.stepTwo)
+        let stepper2 = StepperClass(with: StepperTestsStep.stepOne, andNextStep: StepperTestsStep.stepTwo)
+        let compositeStepper = CompositeStepper(steppers: [stepper1, stepper2])
+
+        // When: ready to emit steps
+        compositeStepper.readyToEmitSteps()
+
+        // Then: the composite steppers are made ready
+        XCTAssertTrue(stepper1.madeReady)
+        XCTAssertTrue(stepper2.madeReady)
     }
 
     func testCompositeStepper() {
