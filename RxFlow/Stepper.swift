@@ -81,7 +81,7 @@ public class CompositeStepper: Stepper {
             .bind(to: self.steps)
             .disposed(by: self.disposeBag)
 
-        for stepper in innerSteppers {
+        self.innerSteppers.forEach { stepper in
             stepper.readyToEmitSteps()
         }
     }
