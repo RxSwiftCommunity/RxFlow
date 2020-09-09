@@ -13,9 +13,9 @@ RxFlow is a navigation framework for iOS applications based on a **Reactive Flow
 This README is a short story of the whole conception process that led me to this framework.
 
 You will find a very detail explanation of the whole project on my blog:
-- [RxFlow Part 1: In Theory](https://twittemb.github.io/swift/coordinator/rxswift/rxflow/reactive%20programming/2017/11/08/rxflow-part-1-in-theory/)
-- [RxFlow Part 2: In Practice](https://twittemb.github.io/swift/coordinator/reactive/rxflow/reactive%20programming/2017/12/09/rxflow-part-2-in-practice/)
-- [RxFlow Part 3: Tips and Tricks](https://twittemb.github.io/swift/coordinator/reactive/rxswift/reactive%20programming/rxflow/2017/12/22/rxflow-part-3-tips-and-tricks/)
+- [RxFlow Part 1: In Theory](https://twittemb.github.io/posts/2017-11-08-RxFlow-Part1/)
+- [RxFlow Part 2: In Practice](https://twittemb.github.io/posts/2017-12-09-RxFlow-Part2/)
+- [RxFlow Part 3: Tips and Tricks](https://twittemb.github.io/posts/2017-12-22-RxFlow-Part3/)
 
 The Jazzy documentation can be seen here as well: [Documentation](http://community.rxswift.org/RxFlow/)
 
