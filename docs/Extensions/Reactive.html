@@ -8,13 +8,21 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Extension/Reactive" class="dashAnchor"></a>
     <a title="Reactive Extension Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">RxFlow Docs</a> (98% documented)</p>
+        <p><a href="../index.html">RxFlow 2.9.0 Docs</a> (0% documented)</p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -40,9 +48,6 @@
                 <a href="../Classes/FlowCoordinator.html">FlowCoordinator</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/Flows.html">Flows</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Classes/OneStepper.html">OneStepper</a>
               </li>
             </ul>
@@ -55,6 +60,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/FlowContributors.html">FlowContributors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Flows.html">Flows</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Flows/ExecuteStrategy.html">– ExecuteStrategy</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/RxFlowStep.html">RxFlowStep</a>
@@ -71,10 +82,10 @@
                 <a href="../Extensions/Reactive.html">Reactive</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/c:objc(cs)UIViewController">UIViewController</a>
+                <a href="../Extensions.html#/UIViewController">UIViewController</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/c:objc(cs)UIWindow">UIWindow</a>
+                <a href="../Extensions.html#/UIWindow">UIWindow</a>
               </li>
             </ul>
           </li>
@@ -88,24 +99,13 @@
                 <a href="../Protocols/Presentable.html">Presentable</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols.html#/s:6RxFlow4StepP">Step</a>
+                <a href="../Protocols.html#/Step">Step</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Stepper.html">Stepper</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols.html#/s:6RxFlow14SynchronizableP">Synchronizable</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="../Typealiases.html">Type Aliases</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="../Typealiases.html#/s:6RxFlow11Coordinatora">Coordinator</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Typealiases.html#/s:6RxFlow04NextB5Itemsa">NextFlowItems</a>
+                <a href="../Protocols.html#/Synchronizable">Synchronizable</a>
               </li>
             </ul>
           </li>
@@ -115,34 +115,17 @@
         <section>
           <section class="section">
             <h1>Reactive</h1>
-              <div class="declaration">
-                <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt">Reactive</span> <span class="k">where</span> <span class="kt">Base</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt">Reactive</span> <span class="k">where</span> <span class="kt">Base</span><span class="p">:</span> <span class="kt">UIWindow</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt">Reactive</span> <span class="k">where</span> <span class="kt">Base</span><span class="p">:</span> <span class="kt"><a href="../Classes/FlowCoordinator.html">FlowCoordinator</a></span></code></pre>
-
-                </div>
-              </div>
             
           </section>
           <section class="section task-group-section">
             <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Available%20where%20%60Base%60:%20%60UIViewController%60"></a>
-                <a name="//apple_ref/swift/Section/Available where `Base`: `UIViewController`" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Available%20where%20%60Base%60:%20%60UIViewController%60"></a>
-                  <h3 class="section-name"><p>Available where <code>Base</code>: <code>UIViewController</code></p>
-</h3>
-                </div>
-              </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7RxSwift8ReactiveV0A4FlowSo16UIViewControllerCRbzlE9dismissed0A5Cocoa12ControlEventVySbGvp"></a>
+                    <a name="/"></a>
                     <a name="//apple_ref/swift/Property/dismissed" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7RxSwift8ReactiveV0A4FlowSo16UIViewControllerCRbzlE9dismissed0A5Cocoa12ControlEventVySbGvp">dismissed</a>
+                    <a class="token" href="#/">dismissed</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -153,23 +136,15 @@
                         <p>Rx observable, triggered when the view is being dismissed</p>
 
                       </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">dismissed</span><span class="p">:</span> <span class="kt">ControlEvent</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7RxSwift8ReactiveV0A4FlowSo16UIViewControllerCRbzlE9displayedAA10ObservableCySbGvp"></a>
+                    <a name="/"></a>
                     <a name="//apple_ref/swift/Property/displayed" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7RxSwift8ReactiveV0A4FlowSo16UIViewControllerCRbzlE9displayedAA10ObservableCySbGvp">displayed</a>
+                    <a class="token" href="#/">displayed</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -180,36 +155,15 @@
                         <p>Rx observable, triggered when the view appearance state changes</p>
 
                       </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">displayed</span><span class="p">:</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Available%20where%20%60Base%60:%20%60UIWindow%60"></a>
-                <a name="//apple_ref/swift/Section/Available where `Base`: `UIWindow`" class="dashAnchor"></a>
-                <div class="section-name-container">
-                  <a class="section-name-link" href="#/Available%20where%20%60Base%60:%20%60UIWindow%60"></a>
-                  <h3 class="section-name"><p>Available where <code>Base</code>: <code>UIWindow</code></p>
-</h3>
-                </div>
-              </div>
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7RxSwift8ReactiveV0A4FlowSo8UIWindowCRbzlE15windowDidAppearAA10ObservableCyytGvp"></a>
+                    <a name="/"></a>
                     <a name="//apple_ref/swift/Property/windowDidAppear" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7RxSwift8ReactiveV0A4FlowSo8UIWindowCRbzlE15windowDidAppearAA10ObservableCyytGvp">windowDidAppear</a>
+                    <a class="token" href="#/">windowDidAppear</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -220,14 +174,6 @@
                         <p>Rx Observable that is triggered once the UIWindow is displayed</p>
 
                       </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">windowDidAppear</span><span class="p">:</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
                     </section>
                   </div>
                 </li>
@@ -235,11 +181,11 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Available%20where%20%60Base%60:%20%60FlowCoordinator%60"></a>
-                <a name="//apple_ref/swift/Section/Available where `Base`: `FlowCoordinator`" class="dashAnchor"></a>
+                <a name="/FlowCoordinator%20Reactive%20extensions"></a>
+                <a name="//apple_ref/swift/Section/FlowCoordinator Reactive extensions" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/Available%20where%20%60Base%60:%20%60FlowCoordinator%60"></a>
-                  <h3 class="section-name"><p>Available where <code>Base</code>: <code><a href="../Classes/FlowCoordinator.html">FlowCoordinator</a></code></p>
+                  <a class="section-name-link" href="#/FlowCoordinator%20Reactive%20extensions"></a>
+                  <h3 class="section-name"><p>FlowCoordinator Reactive extensions</p>
 </h3>
                 </div>
               </div>
@@ -247,9 +193,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7RxSwift8ReactiveV0A4FlowAD0D11CoordinatorCRbzlE12willNavigateAA10ObservableCyAD0D0_p_AD4Step_ptGvp"></a>
+                    <a name="/"></a>
                     <a name="//apple_ref/swift/Property/willNavigate" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7RxSwift8ReactiveV0A4FlowAD0D11CoordinatorCRbzlE12willNavigateAA10ObservableCyAD0D0_p_AD4Step_ptGvp">willNavigate</a>
+                    <a class="token" href="#/">willNavigate</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -260,23 +206,15 @@
                         <p>Rx Observable emitted before the navigation to a Step within a Flow</p>
 
                       </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">willNavigate</span><span class="p">:</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="p">(</span><span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols.html#/s:6RxFlow4StepP">Step</a></span><span class="p">)</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7RxSwift8ReactiveV0A4FlowAD0D11CoordinatorCRbzlE11didNavigateAA10ObservableCyAD0D0_p_AD4Step_ptGvp"></a>
+                    <a name="/"></a>
                     <a name="//apple_ref/swift/Property/didNavigate" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7RxSwift8ReactiveV0A4FlowAD0D11CoordinatorCRbzlE11didNavigateAA10ObservableCyAD0D0_p_AD4Step_ptGvp">didNavigate</a>
+                    <a class="token" href="#/">didNavigate</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -287,14 +225,6 @@
                         <p>Rx Observable emitted after the navigation to a Step within a Flow</p>
 
                       </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">didNavigate</span><span class="p">:</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="p">(</span><span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols.html#/s:6RxFlow4StepP">Step</a></span><span class="p">)</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
                     </section>
                   </div>
                 </li>
@@ -303,8 +233,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2020-01-10)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2020-09-09)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
