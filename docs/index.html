@@ -8,12 +8,20 @@
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a title="RxFlow  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">RxFlow Docs</a> (98% documented)</p>
+        <p><a href="index.html">RxFlow 2.9.0 Docs</a> (0% documented)</p>
+        <p class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -39,9 +47,6 @@
                 <a href="Classes/FlowCoordinator.html">FlowCoordinator</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/Flows.html">Flows</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Classes/OneStepper.html">OneStepper</a>
               </li>
             </ul>
@@ -54,6 +59,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="Enums/FlowContributors.html">FlowContributors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Flows.html">Flows</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Flows/ExecuteStrategy.html">– ExecuteStrategy</a>
               </li>
               <li class="nav-group-task">
                 <a href="Enums/RxFlowStep.html">RxFlowStep</a>
@@ -70,10 +81,10 @@
                 <a href="Extensions/Reactive.html">Reactive</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions.html#/c:objc(cs)UIViewController">UIViewController</a>
+                <a href="Extensions.html#/UIViewController">UIViewController</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions.html#/c:objc(cs)UIWindow">UIWindow</a>
+                <a href="Extensions.html#/UIWindow">UIWindow</a>
               </li>
             </ul>
           </li>
@@ -87,24 +98,13 @@
                 <a href="Protocols/Presentable.html">Presentable</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols.html#/s:6RxFlow4StepP">Step</a>
+                <a href="Protocols.html#/Step">Step</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/Stepper.html">Stepper</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols.html#/s:6RxFlow14SynchronizableP">Synchronizable</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="Typealiases.html">Type Aliases</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Typealiases.html#/s:6RxFlow11Coordinatora">Coordinator</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Typealiases.html#/s:6RxFlow04NextB5Itemsa">NextFlowItems</a>
+                <a href="Protocols.html#/Synchronizable">Synchronizable</a>
               </li>
             </ul>
           </li>
@@ -148,9 +148,9 @@
 <p>You will find a very detail explanation of the whole project on my blog:</p>
 
 <ul>
-<li><a href="https://twittemb.github.io/swift/coordinator/rxswift/rxflow/reactive%20programming/2017/11/08/rxflow-part-1-in-theory/">RxFlow Part 1: In Theory</a></li>
-<li><a href="https://twittemb.github.io/swift/coordinator/reactive/rxflow/reactive%20programming/2017/12/09/rxflow-part-2-in-practice/">RxFlow Part 2: In Practice</a></li>
-<li><a href="https://twittemb.github.io/swift/coordinator/reactive/rxswift/reactive%20programming/rxflow/2017/12/22/rxflow-part-3-tips-and-tricks/">RxFlow Part 3: Tips and Tricks</a></li>
+<li><a href="https://twittemb.github.io/posts/2017-11-08-RxFlow-Part1/">RxFlow Part 1: In Theory</a></li>
+<li><a href="https://twittemb.github.io/posts/2017-12-09-RxFlow-Part2/">RxFlow Part 2: In Practice</a></li>
+<li><a href="https://twittemb.github.io/posts/2017-12-22-RxFlow-Part3/">RxFlow Part 3: Tips and Tricks</a></li>
 </ul>
 
 <p>The Jazzy documentation can be seen here as well: <a href="http://community.rxswift.org/RxFlow/">Documentation</a></p>
@@ -272,7 +272,7 @@ Available only in Russian. To get English subtitles you should press the <em>sub
 <span class="p">}</span>
 </code></pre>
 
-<p>The idea is to keep the <strong>Steps</strong> <code>navigation independent</code> as much as possible. For instance, calling a <strong>Step</strong> <code>showMovieDetail(withId: Int)</code> might be a bad idea since it tighlty couples the fact of selecting a movie with the consequence of showing the movie detail screen. It is not up to the emitter of the <strong>Step</strong> to decide where to navigate, this decision belongs to the <strong>Flow</strong>. </p>
+<p>The idea is to keep the <strong>Steps</strong> <code>navigation independent</code> as much as possible. For instance, calling a <strong>Step</strong> <code>showMovieDetail(withId: Int)</code> might be a bad idea since it tightly couples the fact of selecting a movie with the consequence of showing the movie detail screen. It is not up to the emitter of the <strong>Step</strong> to decide where to navigate, this decision belongs to the <strong>Flow</strong>. </p>
 <h3 id='how-to-declare-a-strong-flow-strong' class='heading'>How to declare a <strong>Flow</strong></h3>
 
 <p>The following <strong>Flow</strong> is used as a Navigation stack. All you have to do is:</p>
@@ -347,6 +347,18 @@ Available only in Russian. To get English subtitles you should press the <em>sub
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
+<h3 id='how-to-handle-deeplinks' class='heading'>How to handle Deeplinks</h3>
+
+<p>From the AppDelegate you can reach the FlowCoordinator and call the <code>navigate(to:)</code> function when receiving a notification for instance.</p>
+
+<p>The step passed to the function will then be passed to all the existing Flows so you can adapt the navigation.</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">userNotificationCenter</span><span class="p">(</span><span class="n">_</span> <span class="nv">center</span><span class="p">:</span> <span class="kt">UNUserNotificationCenter</span><span class="p">,</span>
+                            <span class="n">didReceive</span> <span class="nv">response</span><span class="p">:</span> <span class="kt">UNNotificationResponse</span><span class="p">,</span>
+                            <span class="n">withCompletionHandler</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// example of how DeepLink can be handled</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">coordinator</span><span class="o">.</span><span class="nf">navigate</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="kt">DemoStep</span><span class="o">.</span><span class="nf">movieIsPicked</span><span class="p">(</span><span class="nv">withId</span><span class="p">:</span> <span class="mi">23452</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre>
 <h3 id='how-to-adapt-a-step-before-it-triggers-a-navigation' class='heading'>How to adapt a Step before it triggers a navigation ?</h3>
 
 <p>A Flow has a <code>adapt(step:) -&gt; Single&lt;Step&gt;</code> function that by default returns the step it has been given
@@ -405,16 +417,24 @@ to implement some logic that could for instance forbid a step to trigger a navig
 <p>Of course, it is the aim of a Coordinator. Inside a Flow we can present UIViewControllers and also new Flows. The function <strong>Flows.whenReady()</strong> allows to be triggered when the new <strong>Flow</strong> is ready to be displayed and gives us back its root <strong>Presentable</strong>.</p>
 
 <p>For instance, from the WishlistFlow, we launch the SettingsFlow in a popup.</p>
-<pre class="highlight swift"><code>    <span class="kd">private</span> <span class="kd">func</span> <span class="nf">navigateToSettings</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">FlowContributors</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="nv">settingsStepper</span> <span class="o">=</span> <span class="kt">SettingsStepper</span><span class="p">()</span>
-        <span class="k">let</span> <span class="nv">settingsFlow</span> <span class="o">=</span> <span class="kt">SettingsFlow</span><span class="p">(</span><span class="nv">withServices</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">services</span><span class="p">,</span> <span class="nv">andStepper</span><span class="p">:</span> <span class="n">settingsStepper</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">func</span> <span class="nf">navigateToSettings</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">FlowContributors</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">settingsStepper</span> <span class="o">=</span> <span class="kt">SettingsStepper</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">settingsFlow</span> <span class="o">=</span> <span class="kt">SettingsFlow</span><span class="p">(</span><span class="nv">withServices</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">services</span><span class="p">,</span> <span class="nv">andStepper</span><span class="p">:</span> <span class="n">settingsStepper</span><span class="p">)</span>
 
-        <span class="kt">Flows</span><span class="o">.</span><span class="nf">whenReady</span><span class="p">(</span><span class="nv">flow1</span><span class="p">:</span> <span class="n">settingsFlow</span><span class="p">)</span> <span class="p">{</span> <span class="p">[</span><span class="k">unowned</span> <span class="k">self</span><span class="p">]</span> <span class="p">(</span><span class="nv">root</span><span class="p">:</span> <span class="kt">UISplitViewController</span><span class="p">)</span> <span class="k">in</span>
-            <span class="k">self</span><span class="o">.</span><span class="n">rootViewController</span><span class="o">.</span><span class="nf">present</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="o">.</span><span class="nf">one</span><span class="p">(</span><span class="nv">flowContributor</span><span class="p">:</span> <span class="o">.</span><span class="nf">contribute</span><span class="p">(</span><span class="nv">withNextPresentable</span><span class="p">:</span> <span class="n">settingsFlow</span><span class="p">,</span> <span class="nv">withNextStepper</span><span class="p">:</span> <span class="n">settingsStepper</span><span class="p">))</span>
+    <span class="kt">Flows</span><span class="o">.</span><span class="nf">use</span><span class="p">(</span><span class="n">settingsFlow</span><span class="p">,</span> <span class="nv">when</span><span class="p">:</span> <span class="o">.</span><span class="n">ready</span><span class="p">)</span> <span class="p">{</span> <span class="p">[</span><span class="k">unowned</span> <span class="k">self</span><span class="p">]</span> <span class="n">root</span> <span class="k">in</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">rootViewController</span><span class="o">.</span><span class="nf">present</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="o">.</span><span class="nf">one</span><span class="p">(</span><span class="nv">flowContributor</span><span class="p">:</span> <span class="o">.</span><span class="nf">contribute</span><span class="p">(</span><span class="nv">withNextPresentable</span><span class="p">:</span> <span class="n">settingsFlow</span><span class="p">,</span> <span class="nv">withNextStepper</span><span class="p">:</span> <span class="n">settingsStepper</span><span class="p">))</span>
     <span class="p">}</span>
 </code></pre>
+
+<p>The <code>Flows.use(when:)</code> takes an <code>ExecuteStrategy</code> as a second parameter. It has two possible values:</p>
+
+<ul>
+<li>.created: The completion block will be executed instantly</li>
+<li>.ready: The completion block will be executed once the sub flows (SettingsFlow in the example) have emitted a first step</li>
+</ul>
 
 <p>For more complex cases, see the <strong>DashboardFlow.swift</strong> and the <strong>SettingsFlow.swift</strong> files in which we handle a UITabBarController and a UISplitViewController.</p>
 <h3 id='how-to-bootstrap-the-rxflow-process' class='heading'>How to bootstrap the RxFlow process</h3>
@@ -476,8 +496,8 @@ to implement some logic that could for instance forbid a step to trigger a navig
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2020-01-10)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2020-09-09)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

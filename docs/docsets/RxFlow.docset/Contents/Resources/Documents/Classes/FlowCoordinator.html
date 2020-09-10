@@ -8,13 +8,21 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Class/FlowCoordinator" class="dashAnchor"></a>
     <a title="FlowCoordinator Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">RxFlow Docs</a> (98% documented)</p>
+        <p><a href="../index.html">RxFlow 2.9.0 Docs</a> (0% documented)</p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -40,9 +48,6 @@
                 <a href="../Classes/FlowCoordinator.html">FlowCoordinator</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/Flows.html">Flows</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Classes/OneStepper.html">OneStepper</a>
               </li>
             </ul>
@@ -55,6 +60,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/FlowContributors.html">FlowContributors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Flows.html">Flows</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Flows/ExecuteStrategy.html">– ExecuteStrategy</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/RxFlowStep.html">RxFlowStep</a>
@@ -71,10 +82,10 @@
                 <a href="../Extensions/Reactive.html">Reactive</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/c:objc(cs)UIViewController">UIViewController</a>
+                <a href="../Extensions.html#/UIViewController">UIViewController</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/c:objc(cs)UIWindow">UIWindow</a>
+                <a href="../Extensions.html#/UIWindow">UIWindow</a>
               </li>
             </ul>
           </li>
@@ -88,24 +99,13 @@
                 <a href="../Protocols/Presentable.html">Presentable</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols.html#/s:6RxFlow4StepP">Step</a>
+                <a href="../Protocols.html#/Step">Step</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Stepper.html">Stepper</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols.html#/s:6RxFlow14SynchronizableP">Synchronizable</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="../Typealiases.html">Type Aliases</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="../Typealiases.html#/s:6RxFlow11Coordinatora">Coordinator</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Typealiases.html#/s:6RxFlow04NextB5Itemsa">NextFlowItems</a>
+                <a href="../Protocols.html#/Synchronizable">Synchronizable</a>
               </li>
             </ul>
           </li>
@@ -115,12 +115,6 @@
         <section>
           <section class="section">
             <h1>FlowCoordinator</h1>
-              <div class="declaration">
-                <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">FlowCoordinator</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
-
-                </div>
-              </div>
             <p>A FlowCoordinator handles the navigation of a Flow, based on its Stepper and the FlowContributors it emits</p>
 
           </section>
@@ -130,9 +124,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6RxFlow0B11CoordinatorC10coordinate4flow4withyAA0B0_p_AA7Stepper_ptF"></a>
+                    <a name="/"></a>
                     <a name="//apple_ref/swift/Method/coordinate(flow:with:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6RxFlow0B11CoordinatorC10coordinate4flow4withyAA0B0_p_AA7Stepper_ptF">coordinate(flow:with:)</a>
+                    <a class="token" href="#/">coordinate(flow:<wbr>with:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -140,16 +134,27 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Execute the navigation of the Flow</p>
 
                       </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">coordinate</span><span class="p">(</span><span class="nv">flow</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span> <span class="n">with</span> <span class="nv">stepper</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Stepper.html">Stepper</a></span> <span class="o">=</span> <span class="kt"><a href="../Classes/DefaultStepper.html">DefaultStepper</a></span><span class="p">())</span></code></pre>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/navigate(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">navigate(to:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>allow to drive the navigation from the outside of a flow</p>
 
-                        </div>
                       </div>
                     </section>
                   </div>
@@ -159,8 +164,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2020-01-10)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2020-09-09)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
