@@ -29,7 +29,7 @@ final class TestOneAndMultipleFlowCoordinatorFlow: Flow {
         let rxDismissed = Single<Void>.never()
     }
 
-    private let rootViewController = TestUIViewController.instantiate()
+    private let rootViewController = TestUIViewController()
     let recordedSteps = ReplaySubject<TestSteps>.create(bufferSize: 10)
     var stepOneCalled = false
 
@@ -68,7 +68,7 @@ final class TestAllowStepWhenPresentableNotPresentedFlow: Flow {
         let rxDismissed = Single<Void>.never()
     }
 
-    private let rootViewController = TestUIViewController.instantiate()
+    private let rootViewController = TestUIViewController()
     let recordedSteps = ReplaySubject<TestSteps>.create(bufferSize: 10)
 
     var root: Presentable {
@@ -99,7 +99,7 @@ final class TestFilterStepFlow: Flow {
         let rxDismissed = Single<Void>.never()
     }
 
-    private let rootViewController = TestUIViewController.instantiate()
+    private let rootViewController = TestUIViewController()
     private let replacementStepInFilter: TestSteps
     let recordedSteps = ReplaySubject<TestSteps>.create(bufferSize: 10)
 
@@ -136,7 +136,7 @@ final class TestFilterStepFlow: Flow {
 }
 
 final class TestDeepLinkFlow: Flow {
-    private let rootViewController = TestUIViewController.instantiate()
+    private let rootViewController = TestUIViewController()
 
     var root: Presentable {
         return self.rootViewController
