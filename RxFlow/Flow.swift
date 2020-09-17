@@ -19,6 +19,8 @@ public protocol Flow: AnyObject, Presentable, Synchronizable {
     /// the Presentable on which rely the navigation inside this Flow. This method must always give the same instance
     var root: Presentable { get }
 
+    var parentPresentable: Presentable? { get }
+
     /// Adapts an incoming step before the navigate(to:) function
     /// - Parameter step: the step emitted by a Stepper within the Flow
     /// - Returns: the step (possibly in the future) that should really by interpreted by the navigate(to:) function
@@ -34,6 +36,10 @@ public protocol Flow: AnyObject, Presentable, Synchronizable {
 }
 
 public extension Flow {
+    var parentPresentable: Presentable? {
+        nil
+    }
+
     func adapt(step: Step) -> Single<Step> {
         return .just(step)
     }

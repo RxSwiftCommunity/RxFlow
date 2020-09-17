@@ -44,7 +44,7 @@ public final class FlowCoordinator: NSObject {
         // listen for the internal steps relay that aggregates the flow's Stepper's steps and
         // the FlowContributors's Stepper's steps
         self.stepsRelay
-            .takeUntil(flow.rxDismissed.asObservable())
+            .takeUntil(flow.parentPresentable?.rxDismissed.asObservable() ?? flow.rxDismissed.asObservable())
             .do(onDispose: { [weak self] in
                 self?.childFlowCoordinators.removeAll()
                 self?.parentFlowCoordinator?.childFlowCoordinators.removeValue(forKey: self?.identifier ?? "")
@@ -100,7 +100,7 @@ public final class FlowCoordinator: NSObject {
             .do(onSubscribed: { stepper.readyToEmitSteps() })
             .startWith(stepper.initialStep)
             .filter { !($0 is NoneStep) }
-            .takeUntil(flow.rxDismissed.asObservable())
+            .takeUntil(flow.parentPresentable?.rxDismissed.asObservable() ?? flow.rxDismissed.asObservable())
             // for now commenting this line to allow a Stepper trigger "dismissing" steps
             // even if a flow is displayed on top of it
             // .pausable(afterCount: 1, withPauser: flow.rxVisible)
