@@ -19,6 +19,7 @@ public protocol Flow: AnyObject, Presentable, Synchronizable {
     /// the Presentable on which rely the navigation inside this Flow. This method must always give the same instance
     var root: Presentable { get }
 
+    /// the parent Presentable on which observing by the step to handle dismiss
     var parentPresentable: Presentable? { get }
 
     /// Adapts an incoming step before the navigate(to:) function
