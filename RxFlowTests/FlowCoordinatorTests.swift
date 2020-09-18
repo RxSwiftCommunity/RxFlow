@@ -12,6 +12,7 @@
 import XCTest
 import RxBlocking
 import RxSwift
+import RxCocoa
 import RxTest
 
 enum TestSteps: Step {
@@ -169,6 +170,94 @@ final class TestDeepLinkFlow: Flow {
     }
 }
 
+final class TestParentFlow: Flow {
+    private let rootViewController = TestUIViewController.instantiate()
+
+    var root: Presentable {
+        return self.rootViewController
+    }
+
+    let recordedStepsOne = ReplaySubject<TestSteps>.create(bufferSize: 10)
+
+    let rxDismissedRelayOne = PublishSubject<Void>()
+
+    let recordedStepsTwo = ReplaySubject<TestSteps>.create(bufferSize: 10)
+
+    let rxDismissedRelayTwo = PublishSubject<Void>()
+
+    private lazy var childOneFlow: TestChildFlow = {
+        TestChildFlow(recordedSteps: self.recordedStepsOne, rxDismissedRelay: self.rxDismissedRelayOne, parentFlowPresentable: self)
+    }()
+
+    private lazy var childTwoFlow: TestChildFlow = {
+        TestChildFlow(recordedSteps: self.recordedStepsTwo, rxDismissedRelay: self.rxDismissedRelayTwo, parentFlowPresentable: self)
+    }()
+
+    func navigate(to step: Step) -> FlowContributors {
+        guard let step = step as? TestSteps else { return .none }
+
+        switch step {
+        case .one:
+            return .multiple(flowContributors: [
+                .contribute(withNextPresentable: childOneFlow,
+                            withNextStepper: childOneFlow.stepper),
+                .contribute(withNextPresentable: childTwoFlow,
+                            withNextStepper: childTwoFlow.stepper)
+            ])
+        default:
+            return .none
+        }
+    }
+}
+
+final class TestChildFlow: Flow {
+    final private class PresentableWillDismiss: Presentable {
+        let rxVisible = Observable.just(false)
+
+        let rxDismissed: Single<Void>
+
+        init(rxDismissed: Single<Void>) {
+            self.rxDismissed = rxDismissed
+        }
+    }
+
+    final class ChildStepper: Stepper {
+        var steps = PublishRelay<Step>()
+
+        var initialStep: Step {
+            TestSteps.one
+        }
+    }
+
+    var root: Presentable {
+        rootViewController
+    }
+
+    var parentPresentable: Presentable? {
+        parentFlowPresentable
+    }
+
+    let stepper = ChildStepper()
+
+    private let rootViewController: Presentable
+
+    private let parentFlowPresentable: Presentable?
+
+    private let recordedSteps: ReplaySubject<TestSteps>
+
+    init(recordedSteps: ReplaySubject<TestSteps>, rxDismissedRelay: PublishSubject<Void>, parentFlowPresentable: Presentable?) {
+        self.recordedSteps = recordedSteps
+        self.parentFlowPresentable = parentFlowPresentable
+        self.rootViewController = PresentableWillDismiss(rxDismissed: rxDismissedRelay.asSingle())
+    }
+
+    func navigate(to step: Step) -> FlowContributors {
+        guard let step = step as? TestSteps else { return .none }
+        recordedSteps.onNext(step)
+        return .none
+    }
+}
+
 final class FlowCoordinatorTests: XCTestCase {
 
     func testCoordinateWithOneStepper() {
@@ -257,6 +346,33 @@ final class FlowCoordinatorTests: XCTestCase {
         // Then: All the 3 Flows receive the step
         let deepLinkSteps = try? recordedSteps.take(3).toBlocking().toArray()
         XCTAssertEqual(deepLinkSteps, [.three, .three, .three])
+    }
+
+    func testStepIsReceivedAfterChildDismissed() {
+        let exp = expectation(description: "Flow when ready")
+        let flowCoordinator = FlowCoordinator()
+        let parentFlow = TestParentFlow()
+
+        flowCoordinator.coordinate(flow: parentFlow, with: OneStepper(withSingleStep: TestSteps.one))
+
+        Flows.use(parentFlow, when: .ready) { (_) in
+            // check we will only stop monitoring when parent has dimissed instead of child
+            parentFlow.rxDismissedRelayOne.on(.next(()))
+            flowCoordinator.navigate(to: TestSteps.two)
+
+            parentFlow.rxDismissedRelayTwo.on(.next(()))
+            flowCoordinator.navigate(to: TestSteps.three)
+
+            exp.fulfill()
+        }
+
+        waitForExpectations(timeout: 1)
+
+        let recordedStepsOneSteps = try? parentFlow.recordedStepsOne.take(3).toBlocking().toArray()
+        XCTAssertEqual(recordedStepsOneSteps, [.one, .two, .three])
+
+        let recordedStepsTwoSteps = try? parentFlow.recordedStepsTwo.take(3).toBlocking().toArray()
+        XCTAssertEqual(recordedStepsTwoSteps, [.one, .two, .three])
     }
 }
 
