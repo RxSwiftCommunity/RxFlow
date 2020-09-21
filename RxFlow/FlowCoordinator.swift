@@ -39,6 +39,8 @@ public final class FlowCoordinator: NSObject {
     /// - Parameters:
     ///   - flow: the Flow that describes the navigation we want to coordinate
     ///   - stepper: the Stepper that drives the global navigation of the Flow
+    ///   - allowStepWhenDismissed: the flag that allow stepper to continue emit steps even
+    ///   the presentable has dismissed (e.g UIPageViewController's child)
     // swiftlint:disable function_body_length
     public func coordinate (flow: Flow, with stepper: Stepper = DefaultStepper(), allowStepWhenDismissed: Bool = false) {
         // listen for the internal steps relay that aggregates the flow's Stepper's steps and
