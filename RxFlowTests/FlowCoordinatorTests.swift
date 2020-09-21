@@ -170,62 +170,19 @@ final class TestDeepLinkFlow: Flow {
     }
 }
 
-final class TestParentFlow: Flow {
-    private let rootViewController = TestUIViewController.instantiate()
-
-    var root: Presentable {
-        return self.rootViewController
-    }
-
-    let recordedStepsOne = ReplaySubject<TestSteps>.create(bufferSize: 10)
-
-    let rxDismissedRelayOne = PublishSubject<Void>()
-
-    let recordedStepsTwo = ReplaySubject<TestSteps>.create(bufferSize: 10)
-
-    let rxDismissedRelayTwo = PublishSubject<Void>()
-
-    private lazy var childOneFlow: TestChildFlow = {
-        TestChildFlow(recordedSteps: self.recordedStepsOne, rxDismissedRelay: self.rxDismissedRelayOne, parentFlowPresentable: self)
-    }()
-
-    private lazy var childTwoFlow: TestChildFlow = {
-        TestChildFlow(recordedSteps: self.recordedStepsTwo, rxDismissedRelay: self.rxDismissedRelayTwo, parentFlowPresentable: self)
-    }()
-
-    func navigate(to step: Step) -> FlowContributors {
-        guard let step = step as? TestSteps else { return .none }
-
-        switch step {
-        case .one:
-            return .multiple(flowContributors: [
-                .contribute(withNextPresentable: childOneFlow,
-                            withNextStepper: childOneFlow.stepper),
-                .contribute(withNextPresentable: childTwoFlow,
-                            withNextStepper: childTwoFlow.stepper)
-            ])
-        default:
-            return .none
-        }
-    }
-}
-
-final class TestChildFlow: Flow {
-    final private class PresentableWillDismiss: Presentable {
+final class TestDismissedFlow: Flow {
+    final private class PresentableWillDismiss: UIViewController {
         let rxVisible = Observable.just(false)
 
         let rxDismissed: Single<Void>
 
         init(rxDismissed: Single<Void>) {
             self.rxDismissed = rxDismissed
+            super.init(nibName: nil, bundle: nil)
         }
-    }
 
-    final class ChildStepper: Stepper {
-        var steps = PublishRelay<Step>()
-
-        var initialStep: Step {
-            TestSteps.one
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
         }
     }
 
@@ -233,22 +190,14 @@ final class TestChildFlow: Flow {
         rootViewController
     }
 
-    var parentPresentable: Presentable? {
-        parentFlowPresentable
-    }
-
-    let stepper = ChildStepper()
-
     private let rootViewController: Presentable
 
-    private let parentFlowPresentable: Presentable?
+    let recordedSteps = ReplaySubject<TestSteps>.create(bufferSize: 10)
 
-    private let recordedSteps: ReplaySubject<TestSteps>
+    let rxDismissedRelay = PublishSubject<Void>()
 
-    init(recordedSteps: ReplaySubject<TestSteps>, rxDismissedRelay: PublishSubject<Void>, parentFlowPresentable: Presentable?) {
-        self.recordedSteps = recordedSteps
-        self.parentFlowPresentable = parentFlowPresentable
-        self.rootViewController = PresentableWillDismiss(rxDismissed: rxDismissedRelay.asSingle())
+    init() {
+        rootViewController = PresentableWillDismiss(rxDismissed: rxDismissedRelay.asSingle())
     }
 
     func navigate(to step: Step) -> FlowContributors {
@@ -348,19 +297,19 @@ final class FlowCoordinatorTests: XCTestCase {
         XCTAssertEqual(deepLinkSteps, [.three, .three, .three])
     }
 
-    func testStepIsReceivedAfterChildDismissed() {
+    func testStepIsReceivedAfterDismissed() {
         let exp = expectation(description: "Flow when ready")
         let flowCoordinator = FlowCoordinator()
-        let parentFlow = TestParentFlow()
+        let dismissedFlow = TestDismissedFlow()
 
-        flowCoordinator.coordinate(flow: parentFlow, with: OneStepper(withSingleStep: TestSteps.one))
+        flowCoordinator.coordinate(flow: dismissedFlow,
+                                   with: OneStepper(withSingleStep: TestSteps.one),
+                                   allowStepWhenDismissed: true)
 
-        Flows.use(parentFlow, when: .ready) { (_) in
+        Flows.use(dismissedFlow, when: .created) { (_) in
             // check we will only stop monitoring when parent has dimissed instead of child
-            parentFlow.rxDismissedRelayOne.on(.next(()))
+            dismissedFlow.rxDismissedRelay.on(.next(()))
             flowCoordinator.navigate(to: TestSteps.two)
-
-            parentFlow.rxDismissedRelayTwo.on(.next(()))
             flowCoordinator.navigate(to: TestSteps.three)
 
             exp.fulfill()
@@ -368,11 +317,8 @@ final class FlowCoordinatorTests: XCTestCase {
 
         waitForExpectations(timeout: 1)
 
-        let recordedStepsOneSteps = try? parentFlow.recordedStepsOne.take(3).toBlocking().toArray()
-        XCTAssertEqual(recordedStepsOneSteps, [.one, .two, .three])
-
-        let recordedStepsTwoSteps = try? parentFlow.recordedStepsTwo.take(3).toBlocking().toArray()
-        XCTAssertEqual(recordedStepsTwoSteps, [.one, .two, .three])
+        let recordedSteps = try? dismissedFlow.recordedSteps.take(3).toBlocking().toArray()
+        XCTAssertEqual(recordedSteps, [.one, .two, .three])
     }
 }
 
