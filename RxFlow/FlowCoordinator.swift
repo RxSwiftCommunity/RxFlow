@@ -40,11 +40,11 @@ public final class FlowCoordinator: NSObject {
     ///   - flow: the Flow that describes the navigation we want to coordinate
     ///   - stepper: the Stepper that drives the global navigation of the Flow
     // swiftlint:disable function_body_length
-    public func coordinate (flow: Flow, with stepper: Stepper = DefaultStepper()) {
+    public func coordinate (flow: Flow, with stepper: Stepper = DefaultStepper(), allowStepWhenDismissed: Bool = false) {
         // listen for the internal steps relay that aggregates the flow's Stepper's steps and
         // the FlowContributors's Stepper's steps
         self.stepsRelay
-            .takeUntil(flow.parentPresentable?.rxDismissed.asObservable() ?? flow.rxDismissed.asObservable())
+            .takeUntil(allowStepWhenDismissed ? .empty() : flow.rxDismissed.asObservable())
             .do(onDispose: { [weak self] in
                 self?.childFlowCoordinators.removeAll()
                 self?.parentFlowCoordinator?.childFlowCoordinators.removeValue(forKey: self?.identifier ?? "")
@@ -85,7 +85,9 @@ public final class FlowCoordinator: NSObject {
                     let childFlowCoordinator = FlowCoordinator()
                     childFlowCoordinator.parentFlowCoordinator = self
                     self?.childFlowCoordinators[childFlowCoordinator.identifier] = childFlowCoordinator
-                    childFlowCoordinator.coordinate(flow: childFlow, with: presentableAndStepper.stepper)
+                    childFlowCoordinator.coordinate(flow: childFlow,
+                                                    with: presentableAndStepper.stepper,
+                                                    allowStepWhenDismissed: presentableAndStepper.allowStepWhenDismissed)
                 }
             })
             .filter { !($0.presentable is Flow) }
@@ -100,7 +102,7 @@ public final class FlowCoordinator: NSObject {
             .do(onSubscribed: { stepper.readyToEmitSteps() })
             .startWith(stepper.initialStep)
             .filter { !($0 is NoneStep) }
-            .takeUntil(flow.parentPresentable?.rxDismissed.asObservable() ?? flow.rxDismissed.asObservable())
+            .takeUntil(allowStepWhenDismissed ? .empty() : flow.rxDismissed.asObservable())
             // for now commenting this line to allow a Stepper trigger "dismissing" steps
             // even if a flow is displayed on top of it
             // .pausable(afterCount: 1, withPauser: flow.rxVisible)
@@ -135,16 +137,21 @@ public final class FlowCoordinator: NSObject {
         switch flowContributors {
         case .none, .triggerParentFlow, .one(.forwardToCurrentFlow), .one(.forwardToParentFlow), .end:
             return []
-        case let .one(.contribute(nextPresentable, nextStepper, allowStepWhenNotPresented)):
+        case let .one(.contribute(nextPresentable, nextStepper, allowStepWhenNotPresented, allowStepWhenDismissed)):
             return [PresentableAndStepper(presentable: nextPresentable,
                                           stepper: nextStepper,
-                                          allowStepWhenNotPresented: allowStepWhenNotPresented)]
+                                          allowStepWhenNotPresented: allowStepWhenNotPresented,
+                                          allowStepWhenDismissed: allowStepWhenDismissed)]
         case .multiple(let flowContributors):
             return flowContributors.compactMap { flowContributor -> PresentableAndStepper? in
-                if case let .contribute(nextPresentable, nextStepper, allowStepWhenNotPresented) = flowContributor {
+                if case let .contribute(nextPresentable,
+                                        nextStepper,
+                                        allowStepWhenNotPresented,
+                                        allowStepWhenDismissed) = flowContributor {
                     return PresentableAndStepper(presentable: nextPresentable,
                                                  stepper: nextStepper,
-                                                 allowStepWhenNotPresented: allowStepWhenNotPresented)
+                                                 allowStepWhenNotPresented: allowStepWhenNotPresented,
+                                                 allowStepWhenDismissed: allowStepWhenDismissed)
                 }
 
                 return nil
@@ -216,11 +223,13 @@ private class PresentableAndStepper {
     fileprivate let presentable: Presentable
     fileprivate let stepper: Stepper
     fileprivate let allowStepWhenNotPresented: Bool
+    fileprivate let allowStepWhenDismissed: Bool
 
-    init(presentable: Presentable, stepper: Stepper, allowStepWhenNotPresented: Bool) {
+    init(presentable: Presentable, stepper: Stepper, allowStepWhenNotPresented: Bool, allowStepWhenDismissed: Bool) {
         self.presentable = presentable
         self.stepper = stepper
         self.allowStepWhenNotPresented = allowStepWhenNotPresented
+        self.allowStepWhenDismissed = allowStepWhenDismissed
     }
 }
 

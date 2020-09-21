@@ -19,7 +19,10 @@ public enum FlowContributor {
     /// the given stepper will emit steps, according to lifecycle of the given presentable, that will contribute to the current Flow
     /// an extra parameter `allowStepWhenNotPresented` can be passed to make the coordinator accept the steps from the stepper even id
     /// the presentable is not visible
-    case contribute(withNextPresentable: Presentable, withNextStepper: Stepper, allowStepWhenNotPresented: Bool = false)
+    case contribute(withNextPresentable: Presentable,
+                    withNextStepper: Stepper,
+                    allowStepWhenNotPresented: Bool = false,
+                    allowStepWhenDismissed: Bool = false)
     /// the "withStep" step will be forwarded to the current flow
     case forwardToCurrentFlow(withStep: Step)
     /// the "withStep" step will be forwarded to the parent flow
