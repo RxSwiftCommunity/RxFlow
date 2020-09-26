@@ -9,9 +9,8 @@
 #if canImport(UIKit)
 
 import UIKit
-import Reusable
 
-final class TestUIViewController: UIViewController, StoryboardBased {
+final class TestUIViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
