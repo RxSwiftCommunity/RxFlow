@@ -66,7 +66,7 @@ In your Package.swift:
 let package = Package(
   name: "Example",
   dependencies: [
-    .package(url: "https://github.com/RxSwiftCommunity/RxFlow.git", from: "2.5.0")
+    .package(url: "https://github.com/RxSwiftCommunity/RxFlow.git", from: "2.10.0")
   ],
   targets: [
     .target(name: "Example", dependencies: ["RxFlow"])
