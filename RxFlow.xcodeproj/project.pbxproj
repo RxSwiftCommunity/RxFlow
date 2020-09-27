@@ -31,7 +31,6 @@
 		74855A472470544500334B8F /* DeprecatedFlows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74855A462470544500334B8F /* DeprecatedFlows.swift */; };
 		74855A492470552B00334B8F /* DeprecatedFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74855A482470552B00334B8F /* DeprecatedFlowCoordinator.swift */; };
 		749B02E822066518001BEBBB /* RxBlocking.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 749B02E722066518001BEBBB /* RxBlocking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		749B02EB22066538001BEBBB /* Reusable.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 749B02E922066537001BEBBB /* Reusable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		749B02EC22066538001BEBBB /* RxTest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 749B02EA22066538001BEBBB /* RxTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		749B02EF22066618001BEBBB /* RxCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 749B02ED22066618001BEBBB /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		749B02F022066618001BEBBB /* RxSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 749B02EE22066618001BEBBB /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -65,7 +64,6 @@
 				74C6AD33227BAE7800B16A95 /* RxRelay.framework in CopyFiles */,
 				749B02EF22066618001BEBBB /* RxCocoa.framework in CopyFiles */,
 				749B02F022066618001BEBBB /* RxSwift.framework in CopyFiles */,
-				749B02EB22066538001BEBBB /* Reusable.framework in CopyFiles */,
 				749B02EC22066538001BEBBB /* RxTest.framework in CopyFiles */,
 				749B02E822066518001BEBBB /* RxBlocking.framework in CopyFiles */,
 			);
@@ -587,7 +585,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2.9.1;
+				MARKETING_VERSION = 2.10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxFlow;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -618,7 +616,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2.9.1;
+				MARKETING_VERSION = 2.10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxFlow;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

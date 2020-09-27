@@ -18,7 +18,7 @@ final class UIViewController_PresentableTests: XCTestCase {
 
     func testUIViewControllerVisible() {
         // Given: a UIViewController
-        let viewController = TestUIViewController.instantiate()
+        let viewController = TestUIViewController()
         let testScheduler = TestScheduler(initialClock: 0)
         let observer = testScheduler.createObserver(Bool.self)
         testScheduler.start()
@@ -44,7 +44,7 @@ final class UIViewController_PresentableTests: XCTestCase {
 
     func testUIViewControllerDismissed() {
         // Given: a UIViewController
-        let viewController = TestUIViewController.instantiate()
+        let viewController = TestUIViewController()
         let testScheduler = TestScheduler(initialClock: 0)
         let observer = testScheduler.createObserver(Void.self)
         testScheduler.start()
