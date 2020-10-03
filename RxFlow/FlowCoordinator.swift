@@ -95,7 +95,9 @@ public final class FlowCoordinator: NSObject {
             .filter { !($0.presentable is Flow) }
             // the FlowContributor is not related to a new Flow but to a Presentable/Stepper
             // this new Stepper will contribute to the current Flow.
-            .flatMap { [weak self] in self?.steps(from: $0, within: flow) ?? Signal.empty() }
+            .flatMap { [weak self] in
+                self?.steps(from: $0, within: flow, allowStepWhenDismissed: allowStepWhenDismissed) ?? Signal.empty()
+            }
             .emit(to: self.stepsRelay)
             .disposed(by: self.disposeBag)
 
@@ -166,14 +168,16 @@ public final class FlowCoordinator: NSObject {
     /// - Parameter nextPresentableAndStepper: the combination presentable/stepper that will generate new Steps
     /// - Parameter flow: the Flow in which the stepper emits new steps
     /// - Returns: the reactive sequence of Steps from the combination presentable/stepper
-    private func steps (from nextPresentableAndStepper: PresentableAndStepper, within flow: Flow) -> Signal<Step> {
+    private func steps (from nextPresentableAndStepper: PresentableAndStepper,
+                        within flow: Flow,
+                        allowStepWhenDismissed: Bool = false) -> Signal<Step> {
         var stepStream = nextPresentableAndStepper
             .stepper
             .steps
             .do(onSubscribed: { nextPresentableAndStepper.stepper.readyToEmitSteps() })
             .startWith(nextPresentableAndStepper.stepper.initialStep)
             .filter { !($0 is NoneStep) }
-            .takeUntil(nextPresentableAndStepper.presentable.rxDismissed.asObservable())
+            .takeUntil(allowStepWhenDismissed ? .empty() : nextPresentableAndStepper.presentable.rxDismissed.asObservable())
 
         // by default we cannot accept steps from a presentable that is not visible
         if nextPresentableAndStepper.allowStepWhenNotPresented == false {

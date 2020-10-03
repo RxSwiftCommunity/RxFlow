@@ -57,6 +57,17 @@
 		741F456A21D7BE3900E5FADA /* RxFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 741F456921D7BE3900E5FADA /* RxFlow.framework */; };
 		741F456B21D7BE3900E5FADA /* RxFlow.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 741F456921D7BE3900E5FADA /* RxFlow.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		74C6AD35227BC52B00B16A95 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74C6AD34227BC52B00B16A95 /* RxRelay.framework */; };
+		F69BD9D425233820005923F5 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69BD9D325233820005923F5 /* TrendingViewController.swift */; };
+		F69BD9D625236943005923F5 /* TrendingViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F69BD9D525236943005923F5 /* TrendingViewController.storyboard */; };
+		F69BD9D825236C62005923F5 /* TrendingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69BD9D725236C62005923F5 /* TrendingFlow.swift */; };
+		F69BD9DA25237029005923F5 /* TrendingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69BD9D925237029005923F5 /* TrendingViewModel.swift */; };
+		F69BD9DC25237C0C005923F5 /* TrendingMovieFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69BD9DB25237C0C005923F5 /* TrendingMovieFlow.swift */; };
+		F69BD9E525241E26005923F5 /* CastListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F69BD9E425241E26005923F5 /* CastListViewController.storyboard */; };
+		F69BD9E72524338E005923F5 /* CastListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69BD9E62524338E005923F5 /* CastListViewController.swift */; };
+		F69BD9E925243593005923F5 /* CastListFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69BD9E825243593005923F5 /* CastListFlow.swift */; };
+		F69BD9EB25243604005923F5 /* CastListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69BD9EA25243604005923F5 /* CastListViewModel.swift */; };
+		F69BDA092527626B005923F5 /* CastsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69BDA082527626B005923F5 /* CastsService.swift */; };
+		F69BDA0C252771C5005923F5 /* CastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69BDA0B252771C5005923F5 /* CastCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -125,6 +136,17 @@
 		1AF854BE1FF832AE00271B52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		741F456921D7BE3900E5FADA /* RxFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74C6AD34227BC52B00B16A95 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = ../Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
+		F69BD9D325233820005923F5 /* TrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
+		F69BD9D525236943005923F5 /* TrendingViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TrendingViewController.storyboard; sourceTree = "<group>"; };
+		F69BD9D725236C62005923F5 /* TrendingFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingFlow.swift; sourceTree = "<group>"; };
+		F69BD9D925237029005923F5 /* TrendingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewModel.swift; sourceTree = "<group>"; };
+		F69BD9DB25237C0C005923F5 /* TrendingMovieFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingMovieFlow.swift; sourceTree = "<group>"; };
+		F69BD9E425241E26005923F5 /* CastListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CastListViewController.storyboard; sourceTree = "<group>"; };
+		F69BD9E62524338E005923F5 /* CastListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastListViewController.swift; sourceTree = "<group>"; };
+		F69BD9E825243593005923F5 /* CastListFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastListFlow.swift; sourceTree = "<group>"; };
+		F69BD9EA25243604005923F5 /* CastListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastListViewModel.swift; sourceTree = "<group>"; };
+		F69BDA082527626B005923F5 /* CastsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastsService.swift; sourceTree = "<group>"; };
+		F69BDA0B252771C5005923F5 /* CastCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +186,9 @@
 				1A8FBE211FF8480B00389464 /* WishlistFlow.swift */,
 				1A8FBE251FF8480C00389464 /* WatchedFlow.swift */,
 				1A8FBE231FF8480C00389464 /* SettingsFlow.swift */,
+				F69BD9D725236C62005923F5 /* TrendingFlow.swift */,
+				F69BD9DB25237C0C005923F5 /* TrendingMovieFlow.swift */,
+				F69BD9E825243593005923F5 /* CastListFlow.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -177,6 +202,7 @@
 				1A8FBE311FF84B5300389464 /* MoviesRepository.swift */,
 				1A8FBE331FF84B5300389464 /* MoviesService.swift */,
 				1A25DE82202FB62500F1C4B8 /* PreferencesService.swift */,
+				F69BDA082527626B005923F5 /* CastsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -210,6 +236,7 @@
 		1A8FBE3F1FF84B9600389464 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				F69BD9D22523380E005923F5 /* Trending */,
 				1A8FBE4D1FF84BBC00389464 /* Wishlist */,
 				1A8FBE4E1FF84BC400389464 /* Watched */,
 			);
@@ -312,6 +339,28 @@
 			path = RxFlowDemo;
 			sourceTree = "<group>";
 		};
+		F69BD9D22523380E005923F5 /* Trending */ = {
+			isa = PBXGroup;
+			children = (
+				F69BDA0A252771B3005923F5 /* Cells */,
+				F69BD9D325233820005923F5 /* TrendingViewController.swift */,
+				F69BD9D525236943005923F5 /* TrendingViewController.storyboard */,
+				F69BD9D925237029005923F5 /* TrendingViewModel.swift */,
+				F69BD9E425241E26005923F5 /* CastListViewController.storyboard */,
+				F69BD9E62524338E005923F5 /* CastListViewController.swift */,
+				F69BD9EA25243604005923F5 /* CastListViewModel.swift */,
+			);
+			path = Trending;
+			sourceTree = "<group>";
+		};
+		F69BDA0A252771B3005923F5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F69BDA0B252771C5005923F5 /* CastCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -381,8 +430,10 @@
 				1AF854BD1FF832AE00271B52 /* LaunchScreen.storyboard in Resources */,
 				1A8FBE4B1FF84BB200389464 /* SettingsApiKeyViewController.storyboard in Resources */,
 				1A8FBE471FF84BB200389464 /* SettingsAboutViewController.storyboard in Resources */,
+				F69BD9E525241E26005923F5 /* CastListViewController.storyboard in Resources */,
 				1A8FBE661FF84BFE00389464 /* MovieDetailViewController.storyboard in Resources */,
 				1AF854BA1FF832AE00271B52 /* Assets.xcassets in Resources */,
+				F69BD9D625236943005923F5 /* TrendingViewController.storyboard in Resources */,
 				1A25DE872035185000F1C4B8 /* SettingsLoginViewController.storyboard in Resources */,
 				1A8FBE5F1FF84BFE00389464 /* CastDetailViewController.storyboard in Resources */,
 			);
@@ -437,12 +488,16 @@
 				1A8FBE2A1FF8480C00389464 /* WatchedFlow.swift in Sources */,
 				1A8FBE6F1FF84C2C00389464 /* WatchedViewController.swift in Sources */,
 				1A8FBE481FF84BB200389464 /* SettingsListViewController.swift in Sources */,
+				F69BD9EB25243604005923F5 /* CastListViewModel.swift in Sources */,
 				1A8FBE5E1FF84BFE00389464 /* WishlistViewModel.swift in Sources */,
 				1A8FBE631FF84BFE00389464 /* CastDetailViewModel.swift in Sources */,
 				1A8FBE611FF84BFE00389464 /* MovieDetailViewController.swift in Sources */,
 				1A8FBE3D1FF84B7E00389464 /* Cast.swift in Sources */,
+				F69BD9D425233820005923F5 /* TrendingViewController.swift in Sources */,
+				F69BD9D825236C62005923F5 /* TrendingFlow.swift in Sources */,
 				1A8FBE621FF84BFE00389464 /* MovieDetailViewModel.swift in Sources */,
 				1A8FBE381FF84B5300389464 /* MoviesService.swift in Sources */,
+				F69BD9DC25237C0C005923F5 /* TrendingMovieFlow.swift in Sources */,
 				1A8FBE4A1FF84BB200389464 /* SettingsAboutViewController.swift in Sources */,
 				1A8FBE701FF84C2C00389464 /* WatchedViewModel.swift in Sources */,
 				1A8FBE341FF84B5300389464 /* CastsHelper.swift in Sources */,
@@ -451,22 +506,27 @@
 				1A25DE8B20351E1D00F1C4B8 /* DashboardFlow.swift in Sources */,
 				1A8FBE281FF8480C00389464 /* SettingsFlow.swift in Sources */,
 				1A25DE8920351B8F00F1C4B8 /* SettingsLoginViewController.swift in Sources */,
+				F69BD9E925243593005923F5 /* CastListFlow.swift in Sources */,
 				1A8FBE641FF84BFE00389464 /* CastViewModel.swift in Sources */,
 				1A8FBE271FF8480C00389464 /* DemoStep.swift in Sources */,
 				1A8FBE601FF84BFE00389464 /* MovieViewModel.swift in Sources */,
+				F69BD9E72524338E005923F5 /* CastListViewController.swift in Sources */,
 				1A8FBE361FF84B5300389464 /* MoviesRepository.swift in Sources */,
 				1A8FBE681FF84BFE00389464 /* WishlistViewController.swift in Sources */,
 				1A8FBE3C1FF84B7E00389464 /* Movie.swift in Sources */,
 				1A25DE85203129F200F1C4B8 /* OnboardingFlow.swift in Sources */,
 				1A8FBE4C1FF84BB200389464 /* SettingsApiKeyViewController.swift in Sources */,
+				F69BD9DA25237029005923F5 /* TrendingViewModel.swift in Sources */,
 				1A350D062038F6E9002DDE02 /* SettingsApiKeyViewModel.swift in Sources */,
 				1A25DE83202FB62500F1C4B8 /* PreferencesService.swift in Sources */,
 				1A8FBE371FF84B5300389464 /* CastsRepository.swift in Sources */,
 				1A8FBE261FF8480C00389464 /* WishlistFlow.swift in Sources */,
+				F69BDA0C252771C5005923F5 /* CastCollectionViewCell.swift in Sources */,
 				1A8FBE2D1FF84B2500389464 /* ViewModelBased.swift in Sources */,
 				1A8FBE671FF84BFE00389464 /* CastDetailViewController.swift in Sources */,
 				1A8FBE6A1FF84C2400389464 /* MovieCollectionViewCell.swift in Sources */,
 				1AF854B31FF832AE00271B52 /* AppDelegate.swift in Sources */,
+				F69BDA092527626B005923F5 /* CastsService.swift in Sources */,
 				1A8FBE521FF84BF300389464 /* MovieViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
