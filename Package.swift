@@ -12,8 +12,23 @@ let package = Package(
         .package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "5.1.1")),
     ],
     targets: [
-        .target(name: "RxFlow", dependencies: ["RxSwift", "RxCocoa"], path: "RxFlow"),
-        .testTarget(name: "RxFlowTests", dependencies: ["RxFlow", "RxBlocking", "RxTest"], path: "RxFlowTests"),
+        .target(
+            name: "RxFlow",
+            dependencies: [
+                "RxSwift",
+                .product(name: "RxCocoa", package: "RxSwift")
+            ],
+            path: "RxFlow"
+        ),
+        .testTarget(
+            name: "RxFlowTests",
+            dependencies: [
+                "RxFlow",
+                .product(name: "RxBlocking", package: "RxSwift"),
+                .product(name: "RxTest", package: "RxSwift")
+            ],
+            path: "RxFlowTests"
+        ),
     ],
     swiftLanguageVersions: [.v5]
 )
