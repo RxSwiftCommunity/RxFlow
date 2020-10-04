@@ -12,6 +12,7 @@
 import XCTest
 import RxBlocking
 import RxSwift
+import RxCocoa
 import RxTest
 
 enum TestSteps: Step {
@@ -169,6 +170,43 @@ final class TestDeepLinkFlow: Flow {
     }
 }
 
+final class TestDismissedFlow: Flow {
+    final private class PresentableWillDismiss: UIViewController {
+        let rxVisible = Observable.just(false)
+
+        let rxDismissed: Single<Void>
+
+        init(rxDismissed: Single<Void>) {
+            self.rxDismissed = rxDismissed
+            super.init(nibName: nil, bundle: nil)
+        }
+
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+    }
+
+    var root: Presentable {
+        rootViewController
+    }
+
+    private let rootViewController: Presentable
+
+    let recordedSteps = ReplaySubject<TestSteps>.create(bufferSize: 10)
+
+    let rxDismissedRelay = PublishSubject<Void>()
+
+    init() {
+        rootViewController = PresentableWillDismiss(rxDismissed: rxDismissedRelay.asSingle())
+    }
+
+    func navigate(to step: Step) -> FlowContributors {
+        guard let step = step as? TestSteps else { return .none }
+        recordedSteps.onNext(step)
+        return .none
+    }
+}
+
 final class FlowCoordinatorTests: XCTestCase {
 
     func testCoordinateWithOneStepper() {
@@ -257,6 +295,30 @@ final class FlowCoordinatorTests: XCTestCase {
         // Then: All the 3 Flows receive the step
         let deepLinkSteps = try? recordedSteps.take(3).toBlocking().toArray()
         XCTAssertEqual(deepLinkSteps, [.three, .three, .three])
+    }
+
+    func testStepIsReceivedAfterDismissed() {
+        let exp = expectation(description: "Flow when ready")
+        let flowCoordinator = FlowCoordinator()
+        let dismissedFlow = TestDismissedFlow()
+
+        flowCoordinator.coordinate(flow: dismissedFlow,
+                                   with: OneStepper(withSingleStep: TestSteps.one),
+                                   allowStepWhenDismissed: true)
+
+        Flows.use(dismissedFlow, when: .created) { (_) in
+            // check we will only stop monitoring when parent has dimissed instead of child
+            dismissedFlow.rxDismissedRelay.on(.next(()))
+            flowCoordinator.navigate(to: TestSteps.two)
+            flowCoordinator.navigate(to: TestSteps.three)
+
+            exp.fulfill()
+        }
+
+        waitForExpectations(timeout: 1)
+
+        let recordedSteps = try? dismissedFlow.recordedSteps.take(3).toBlocking().toArray()
+        XCTAssertEqual(recordedSteps, [.one, .two, .three])
     }
 }
 

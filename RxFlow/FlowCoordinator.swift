@@ -39,12 +39,14 @@ public final class FlowCoordinator: NSObject {
     /// - Parameters:
     ///   - flow: the Flow that describes the navigation we want to coordinate
     ///   - stepper: the Stepper that drives the global navigation of the Flow
+    ///   - allowStepWhenDismissed: the flag that allow stepper to continue emit steps even
+    ///   the presentable has dismissed (e.g UIPageViewController's child)
     // swiftlint:disable function_body_length
-    public func coordinate (flow: Flow, with stepper: Stepper = DefaultStepper()) {
+    public func coordinate (flow: Flow, with stepper: Stepper = DefaultStepper(), allowStepWhenDismissed: Bool = false) {
         // listen for the internal steps relay that aggregates the flow's Stepper's steps and
         // the FlowContributors's Stepper's steps
         self.stepsRelay
-            .takeUntil(flow.rxDismissed.asObservable())
+            .takeUntil(allowStepWhenDismissed ? .empty() : flow.rxDismissed.asObservable())
             .do(onDispose: { [weak self] in
                 self?.childFlowCoordinators.removeAll()
                 self?.parentFlowCoordinator?.childFlowCoordinators.removeValue(forKey: self?.identifier ?? "")
@@ -85,13 +87,17 @@ public final class FlowCoordinator: NSObject {
                     let childFlowCoordinator = FlowCoordinator()
                     childFlowCoordinator.parentFlowCoordinator = self
                     self?.childFlowCoordinators[childFlowCoordinator.identifier] = childFlowCoordinator
-                    childFlowCoordinator.coordinate(flow: childFlow, with: presentableAndStepper.stepper)
+                    childFlowCoordinator.coordinate(flow: childFlow,
+                                                    with: presentableAndStepper.stepper,
+                                                    allowStepWhenDismissed: presentableAndStepper.allowStepWhenDismissed)
                 }
             })
             .filter { !($0.presentable is Flow) }
             // the FlowContributor is not related to a new Flow but to a Presentable/Stepper
             // this new Stepper will contribute to the current Flow.
-            .flatMap { [weak self] in self?.steps(from: $0, within: flow) ?? Signal.empty() }
+            .flatMap { [weak self] in
+                self?.steps(from: $0, within: flow, allowStepWhenDismissed: allowStepWhenDismissed) ?? Signal.empty()
+            }
             .emit(to: self.stepsRelay)
             .disposed(by: self.disposeBag)
 
@@ -100,7 +106,7 @@ public final class FlowCoordinator: NSObject {
             .do(onSubscribed: { stepper.readyToEmitSteps() })
             .startWith(stepper.initialStep)
             .filter { !($0 is NoneStep) }
-            .takeUntil(flow.rxDismissed.asObservable())
+            .takeUntil(allowStepWhenDismissed ? .empty() : flow.rxDismissed.asObservable())
             // for now commenting this line to allow a Stepper trigger "dismissing" steps
             // even if a flow is displayed on top of it
             // .pausable(afterCount: 1, withPauser: flow.rxVisible)
@@ -135,16 +141,21 @@ public final class FlowCoordinator: NSObject {
         switch flowContributors {
         case .none, .triggerParentFlow, .one(.forwardToCurrentFlow), .one(.forwardToParentFlow), .end:
             return []
-        case let .one(.contribute(nextPresentable, nextStepper, allowStepWhenNotPresented)):
+        case let .one(.contribute(nextPresentable, nextStepper, allowStepWhenNotPresented, allowStepWhenDismissed)):
             return [PresentableAndStepper(presentable: nextPresentable,
                                           stepper: nextStepper,
-                                          allowStepWhenNotPresented: allowStepWhenNotPresented)]
+                                          allowStepWhenNotPresented: allowStepWhenNotPresented,
+                                          allowStepWhenDismissed: allowStepWhenDismissed)]
         case .multiple(let flowContributors):
             return flowContributors.compactMap { flowContributor -> PresentableAndStepper? in
-                if case let .contribute(nextPresentable, nextStepper, allowStepWhenNotPresented) = flowContributor {
+                if case let .contribute(nextPresentable,
+                                        nextStepper,
+                                        allowStepWhenNotPresented,
+                                        allowStepWhenDismissed) = flowContributor {
                     return PresentableAndStepper(presentable: nextPresentable,
                                                  stepper: nextStepper,
-                                                 allowStepWhenNotPresented: allowStepWhenNotPresented)
+                                                 allowStepWhenNotPresented: allowStepWhenNotPresented,
+                                                 allowStepWhenDismissed: allowStepWhenDismissed)
                 }
 
                 return nil
@@ -157,14 +168,16 @@ public final class FlowCoordinator: NSObject {
     /// - Parameter nextPresentableAndStepper: the combination presentable/stepper that will generate new Steps
     /// - Parameter flow: the Flow in which the stepper emits new steps
     /// - Returns: the reactive sequence of Steps from the combination presentable/stepper
-    private func steps (from nextPresentableAndStepper: PresentableAndStepper, within flow: Flow) -> Signal<Step> {
+    private func steps (from nextPresentableAndStepper: PresentableAndStepper,
+                        within flow: Flow,
+                        allowStepWhenDismissed: Bool = false) -> Signal<Step> {
         var stepStream = nextPresentableAndStepper
             .stepper
             .steps
             .do(onSubscribed: { nextPresentableAndStepper.stepper.readyToEmitSteps() })
             .startWith(nextPresentableAndStepper.stepper.initialStep)
             .filter { !($0 is NoneStep) }
-            .takeUntil(nextPresentableAndStepper.presentable.rxDismissed.asObservable())
+            .takeUntil(allowStepWhenDismissed ? .empty() : nextPresentableAndStepper.presentable.rxDismissed.asObservable())
 
         // by default we cannot accept steps from a presentable that is not visible
         if nextPresentableAndStepper.allowStepWhenNotPresented == false {
@@ -216,11 +229,13 @@ private class PresentableAndStepper {
     fileprivate let presentable: Presentable
     fileprivate let stepper: Stepper
     fileprivate let allowStepWhenNotPresented: Bool
+    fileprivate let allowStepWhenDismissed: Bool
 
-    init(presentable: Presentable, stepper: Stepper, allowStepWhenNotPresented: Bool) {
+    init(presentable: Presentable, stepper: Stepper, allowStepWhenNotPresented: Bool, allowStepWhenDismissed: Bool) {
         self.presentable = presentable
         self.stepper = stepper
         self.allowStepWhenNotPresented = allowStepWhenNotPresented
+        self.allowStepWhenDismissed = allowStepWhenDismissed
     }
 }
 
