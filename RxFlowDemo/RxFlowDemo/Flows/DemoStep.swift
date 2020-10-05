@@ -40,4 +40,10 @@ enum DemoStep: Step {
     // About
     case aboutIsRequired
     case aboutIsComplete
+
+    // Trending
+    case trendingsAreRequired
+
+    // Cast List
+    case castListAreRequired
 }

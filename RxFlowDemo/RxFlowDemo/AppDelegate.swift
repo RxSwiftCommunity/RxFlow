@@ -19,8 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var coordinator = FlowCoordinator()
     let moviesService = MoviesService()
     let preferencesService = PreferencesService()
+    let castsService = CastsService()
     lazy var appServices = {
-        return AppServices(moviesService: self.moviesService, preferencesService: self.preferencesService)
+        return AppServices(moviesService: self.moviesService, preferencesService: self.preferencesService, castsService: self.castsService)
     }()
 
     func application(_ application: UIApplication,
@@ -64,7 +65,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 }
 
-struct AppServices: HasMoviesService, HasPreferencesService {
+struct AppServices: HasMoviesService, HasPreferencesService, HasCastsService {
     let moviesService: MoviesService
     let preferencesService: PreferencesService
+    let castsService: CastsService
 }
