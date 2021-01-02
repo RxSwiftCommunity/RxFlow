@@ -19,7 +19,7 @@ final class ObservableType_PausableTests: XCTestCase {
 
         // When: executing the sequence
         let values = try emitter
-            .takeUntil(self.rx.deallocated)
+            .take(until: self.rx.deallocated)
             .do(onNext: { (value) in
                 pauserSubject.onNext((value % 2) == 0)
             })
@@ -37,7 +37,7 @@ final class ObservableType_PausableTests: XCTestCase {
 
         // When: executing the sequence
         let values = try emitter
-            .takeUntil(self.rx.deallocated)
+            .take(until: self.rx.deallocated)
             .do(onNext: { (value) in
                 pauserSubject.onNext((value % 2) == 0)
             })

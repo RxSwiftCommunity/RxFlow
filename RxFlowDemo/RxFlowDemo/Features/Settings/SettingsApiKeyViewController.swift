@@ -23,7 +23,7 @@ class SettingsApiKeyViewController: UIViewController, StoryboardBased, ViewModel
 
         // Do any additional setup after loading the view.
         _ = proceedButton.rx.tap
-            .takeUntil(self.rx.deallocating)
+            .take(until: self.rx.deallocating)
             .subscribe(onNext: { [unowned self] _ in
                 self.viewModel.setApiKey()
             })

@@ -27,7 +27,7 @@ class WishlistViewController: UIViewController, StoryboardBased, ViewModelBased 
 
         _ = Observable<Int>
             .interval(.seconds(5), scheduler: MainScheduler.instance)
-            .takeUntil(self.rx.deallocating)
+            .take(until: self.rx.deallocating)
             .map { _ in return DemoStep.fakeStep }
             .bind(to: self.steps)
     }

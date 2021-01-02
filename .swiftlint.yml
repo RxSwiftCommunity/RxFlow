@@ -1,13 +1,10 @@
 included:
   - RxFlow
-excluded:
-  - Carthage
-  - Pods
 analyzer_rules:
 disabled_rules:
   - large_tuple
   - unused_declaration
-  - file_header
+  - unused_import
 opt_in_rules:
   - anyobject_protocol
   - array_init
@@ -25,7 +22,6 @@ opt_in_rules:
   - explicit_init
   - extension_access_modifier
   - fallthrough
-  - file_header
   - first_where
   - flatmap_over_map_reduce
   - identical_operands
@@ -83,10 +79,3 @@ identifier_name:
     - id
 number_separator:
   minimum_length: 5
-file_name:
-  excluded:
-    - main.swift
-    - LinuxMain.swift
-    - TestHelpers.swift
-    - shim.swift
-    - AutomaticRuleTests.generated.swift
