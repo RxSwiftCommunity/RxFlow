@@ -60,7 +60,7 @@ final class StepperTests: XCTestCase {
         let stepperClass = StepperClass(with: StepperTestsStep.stepOne, andNextStep: StepperTestsStep.stepTwo)
         let testScheduler = TestScheduler(initialClock: 0)
         let observer = testScheduler.createObserver(Step.self)
-        _ = stepperClass.steps.takeUntil(self.rx.deallocating).bind(to: observer)
+        _ = stepperClass.steps.take(until: self.rx.deallocating).bind(to: observer)
         testScheduler.start()
 
         // When: emitting a new step
@@ -78,7 +78,7 @@ final class StepperTests: XCTestCase {
         let stepperClass = OneStepper(withSingleStep: StepperTestsStep.stepOne)
         let testScheduler = TestScheduler(initialClock: 0)
         let observer = testScheduler.createObserver(Step.self)
-        _ = stepperClass.steps.takeUntil(self.rx.deallocating).bind(to: observer)
+        _ = stepperClass.steps.take(until: self.rx.deallocating).bind(to: observer)
         testScheduler.start()
 
         // When: emitting the initial step
@@ -94,7 +94,7 @@ final class StepperTests: XCTestCase {
         let stepperClass = NoneStepper()
         let testScheduler = TestScheduler(initialClock: 0)
         let observer = testScheduler.createObserver(Step.self)
-        _ = stepperClass.steps.takeUntil(self.rx.deallocating).bind(to: observer)
+        _ = stepperClass.steps.take(until: self.rx.deallocating).bind(to: observer)
         testScheduler.start()
 
         // When: emitting the initial step
@@ -113,7 +113,7 @@ final class StepperTests: XCTestCase {
         let compositeStepper = CompositeStepper(steppers: stepsToEmit.map { OneStepper(withSingleStep: $0) })
         let testScheduler = TestScheduler(initialClock: 0)
         let observer = testScheduler.createObserver(Step.self)
-        _ = compositeStepper.steps.takeUntil(self.rx.deallocating).bind(to: observer)
+        _ = compositeStepper.steps.take(until: self.rx.deallocating).bind(to: observer)
         testScheduler.start()
         
         // When: launching the steps sequence
@@ -151,7 +151,7 @@ final class StepperTests: XCTestCase {
         let compositeStepper = CompositeStepper(steppers: stepperClasses)
         let testScheduler = TestScheduler(initialClock: 0)
         let observer = testScheduler.createObserver(Step.self)
-        _ = compositeStepper.steps.takeUntil(self.rx.deallocating).bind(to: observer)
+        _ = compositeStepper.steps.take(until: self.rx.deallocating).bind(to: observer)
         testScheduler.start()
 
         // When: launching the steps sequence
@@ -178,7 +178,7 @@ final class StepperTests: XCTestCase {
         let compositeStepper = CustomCompositeStepper(with: StepperTestsStep.stepReference, andSteppers: stepperClasses)
         let testScheduler = TestScheduler(initialClock: 0)
         let observer = testScheduler.createObserver(Step.self)
-        _ = compositeStepper.steps.takeUntil(self.rx.deallocating).bind(to: observer)
+        _ = compositeStepper.steps.take(until: self.rx.deallocating).bind(to: observer)
         testScheduler.start()
 
         // When: launching the steps sequence

@@ -34,7 +34,7 @@ final class Flow_PresentableTests: XCTestCase {
         let testScheduler = TestScheduler(initialClock: 0)
         let observer = testScheduler.createObserver(Bool.self)
         testScheduler.start()
-        _ = testFlow.rxVisible.asObservable().takeUntil(self.rx.deallocating).bind(to: observer)
+        _ = testFlow.rxVisible.asObservable().take(until: self.rx.deallocating).bind(to: observer)
 
         // When: Displaying/Hiding it 3 times
         testFlow.rootViewController.viewDidAppear(false)
@@ -60,7 +60,7 @@ final class Flow_PresentableTests: XCTestCase {
         let testScheduler = TestScheduler(initialClock: 0)
         let observer = testScheduler.createObserver(Void.self)
         testScheduler.start()
-        _ = testFlow.rxDismissed.asObservable().takeUntil(self.rx.deallocating).bind(to: observer)
+        _ = testFlow.rxDismissed.asObservable().take(until: self.rx.deallocating).bind(to: observer)
 
         // When: Dismissing the Flow
         testFlow.rootViewController.didMove(toParent: nil)

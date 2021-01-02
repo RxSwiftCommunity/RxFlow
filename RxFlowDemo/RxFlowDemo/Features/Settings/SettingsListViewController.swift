@@ -31,13 +31,13 @@ class SettingsListViewController: UITableViewController, StoryboardBased, Steppe
         super.viewDidLoad()
 
         _ = Observable.of(settings)
-            .takeUntil(self.rx.deallocating)
+            .take(until: self.rx.deallocating)
             .bind(to: tableView.rx.items(cellIdentifier: "SettingCell")) { _, element, cell in
                 cell.textLabel?.text = element.title
         }
 
         _ = tableView.rx.modelSelected(SettingItem.self)
-            .takeUntil(self.rx.deallocating)
+            .take(until: self.rx.deallocating)
             .map { $0.step }
             .bind(to: self.steps)
     }
