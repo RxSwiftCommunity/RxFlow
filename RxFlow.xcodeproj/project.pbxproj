@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -32,11 +32,11 @@
 		74855A492470552B00334B8F /* DeprecatedFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74855A482470552B00334B8F /* DeprecatedFlowCoordinator.swift */; };
 		749B02E822066518001BEBBB /* RxBlocking.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 749B02E722066518001BEBBB /* RxBlocking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		749B02EC22066538001BEBBB /* RxTest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 749B02EA22066538001BEBBB /* RxTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		749B02EF22066618001BEBBB /* RxCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 749B02ED22066618001BEBBB /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		749B02EF22066618001BEBBB /* RxCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 749B02ED22066618001BEBBB /* RxCocoa.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		749B02F022066618001BEBBB /* RxSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 749B02EE22066618001BEBBB /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		749B02F12206665A001BEBBB /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749B02ED22066618001BEBBB /* RxCocoa.framework */; };
 		749B02F22206665A001BEBBB /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749B02EE22066618001BEBBB /* RxSwift.framework */; };
-		749B02F322066675001BEBBB /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749B02ED22066618001BEBBB /* RxCocoa.framework */; };
+		749B02F322066675001BEBBB /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749B02ED22066618001BEBBB /* RxCocoa.framework */; platformFilter = ios; };
 		749B02F422066675001BEBBB /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749B02EE22066618001BEBBB /* RxSwift.framework */; };
 		749B02F82206852D001BEBBB /* Flow+PresentableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749B02F72206852D001BEBBB /* Flow+PresentableTests.swift */; };
 		749B02FC220688EC001BEBBB /* FlowCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749B02FB220688EC001BEBBB /* FlowCoordinatorTests.swift */; };
@@ -417,7 +417,11 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = RxFlowTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxFlowTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -437,7 +441,11 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = RxFlowTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxFlowTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -484,6 +492,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -549,6 +558,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -560,7 +570,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
 				VALIDATE_WORKSPACE = NO;
@@ -588,7 +599,11 @@
 				INFOPLIST_FILE = RxFlow/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxFlow;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -619,7 +634,11 @@
 				INFOPLIST_FILE = RxFlow/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxFlow;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
