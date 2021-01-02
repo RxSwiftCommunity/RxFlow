@@ -1,5 +1,5 @@
-# carthage-build.sh
-# Usage example: ./carthage-build.sh --platform iOS
+# carthage-update.sh
+# Usage example: ./carthage-update.sh --platform iOS
 
 set -euo pipefail
 
