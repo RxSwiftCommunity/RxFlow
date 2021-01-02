@@ -17,7 +17,7 @@ public extension Reactive where Base: UIViewController {
     /// Rx observable, triggered when the view is being dismissed
     var dismissed: ControlEvent<Bool> {
         let dismissedSource = self.sentMessage(#selector(Base.viewDidDisappear))
-            .filter { [base] _ in base.isBeingDismissed }
+            .filter { [weak base] _ in base?.isBeingDismissed ?? true }
             .map { _ in false }
 
         let movedToParentSource = self.sentMessage(#selector(Base.didMove))

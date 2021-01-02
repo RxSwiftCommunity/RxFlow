@@ -22,7 +22,7 @@ final class UIViewController_PresentableTests: XCTestCase {
         let testScheduler = TestScheduler(initialClock: 0)
         let observer = testScheduler.createObserver(Bool.self)
         testScheduler.start()
-        _ = viewController.rxVisible.asObservable().takeUntil(self.rx.deallocating).bind(to: observer)
+        _ = viewController.rxVisible.asObservable().take(until: self.rx.deallocating).bind(to: observer)
 
         // When: Displaying/Hiding it 3 times
         viewController.viewDidAppear(false)
@@ -48,7 +48,7 @@ final class UIViewController_PresentableTests: XCTestCase {
         let testScheduler = TestScheduler(initialClock: 0)
         let observer = testScheduler.createObserver(Void.self)
         testScheduler.start()
-        _ = viewController.rxDismissed.asObservable().takeUntil(self.rx.deallocating).bind(to: observer)
+        _ = viewController.rxDismissed.asObservable().take(until: self.rx.deallocating).bind(to: observer)
 
         // When: Dismissing the ViewController
         viewController.didMove(toParent: nil)
