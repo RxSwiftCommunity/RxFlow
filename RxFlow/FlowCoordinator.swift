@@ -46,13 +46,11 @@ public final class FlowCoordinator: NSObject {
         // listen for the internal steps relay that aggregates the flow's Stepper's steps and
         // the FlowContributors's Stepper's steps
         self.stepsRelay
-            .take(until: allowStepWhenDismissed ? .empty() : flow.rxDismissed.asObservable())
             .do(onDispose: { [weak self] in
                 self?.childFlowCoordinators.removeAll()
                 self?.parentFlowCoordinator?.childFlowCoordinators.removeValue(forKey: self?.identifier ?? "")
             })
-            .asSignal(onErrorJustReturn: NoneStep())
-            .flatMapLatest { flow.adapt(step: $0).asSignal(onErrorJustReturn: NoneStep()) }
+            .flatMapLatest { flow.adapt(step: $0) }
             .do(onNext: { [weak self] in self?.willNavigateRelay.accept((flow, $0)) })
             .map { return (flowContributors: flow.navigate(to: $0), step: $0) }
             .do(onNext: { [weak self] in self?.didNavigateRelay.accept((flow, $0.step)) })
@@ -98,6 +96,8 @@ public final class FlowCoordinator: NSObject {
             .flatMap { [weak self] in
                 self?.steps(from: $0, within: flow, allowStepWhenDismissed: allowStepWhenDismissed) ?? Signal.empty()
             }
+            .take(until: allowStepWhenDismissed ? .empty() : flow.rxDismissed.asObservable())
+            .asSignal(onErrorJustReturn: NoneStep())
             .emit(to: self.stepsRelay)
             .disposed(by: self.disposeBag)
 

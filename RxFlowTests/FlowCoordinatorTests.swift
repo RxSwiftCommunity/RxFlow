@@ -207,6 +207,28 @@ final class TestDismissedFlow: Flow {
     }
 }
 
+final class TestLeakingFlow: Flow {
+    var root: Presentable = UIViewController()
+
+    var rxDismissed: Single<Void> { rxDismissedRelay.take(1).asSingle() }
+    let rxDismissedRelay = PublishRelay<Void>()
+
+    func navigate(to step: Step) -> FlowContributors {
+        guard let step = step as? TestSteps else { return .none }
+
+        switch step {
+        case .one:
+            let flowContributor = FlowContributor.contribute(
+                withNextPresentable: UIViewController(),
+                withNextStepper: DefaultStepper()
+            )
+            return .one(flowContributor: flowContributor)
+        default:
+            return .none
+        }
+    }
+}
+
 final class FlowCoordinatorTests: XCTestCase {
 
     func testCoordinateWithOneStepper() {
@@ -319,6 +341,31 @@ final class FlowCoordinatorTests: XCTestCase {
 
         let recordedSteps = try? dismissedFlow.recordedSteps.take(3).toBlocking().toArray()
         XCTAssertEqual(recordedSteps, [.one, .two, .three])
+    }
+
+    func testFlowIsNotLeakingWhenHasOneStep() throws {
+        weak var leakingFlowReference: TestLeakingFlow?
+        let exp = expectation(description: "Flow when ready")
+        let flowCoordinator = FlowCoordinator()
+
+        withExtendedLifetime(TestLeakingFlow()) { leakingFlow in
+            leakingFlowReference = leakingFlow
+
+            flowCoordinator.coordinate(flow: leakingFlow,
+                                       with: OneStepper(withSingleStep: TestSteps.one))
+
+            Flows.use(leakingFlow, when: .created) { (_) in
+                exp.fulfill()
+            }
+        }
+
+        waitForExpectations(timeout: 1)
+
+        XCTAssertNotNil(leakingFlowReference)
+
+        try XCTUnwrap(leakingFlowReference).rxDismissedRelay.accept(Void())
+
+        XCTAssertNil(leakingFlowReference)
     }
 }
 
