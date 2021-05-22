@@ -1,5 +1,5 @@
-# carthage-bootstrap.sh
-# Usage example: ./carthage-bootstrap.sh --platform iOS
+# carthage-update.sh
+# Usage example: ./carthage-archive.sh
 
 set -euo pipefail
 
@@ -16,4 +16,4 @@ echo 'EXCLUDED_ARCHS__EFFECTIVE_PLATFORM_SUFFIX_simulator__NATIVE_ARCH_64_BIT_x8
 echo 'EXCLUDED_ARCHS = $(inherited) $(EXCLUDED_ARCHS__EFFECTIVE_PLATFORM_SUFFIX_$(EFFECTIVE_PLATFORM_SUFFIX)__NATIVE_ARCH_64_BIT_$(NATIVE_ARCH_64_BIT)__XCODE_$(XCODE_VERSION_MAJOR))' >> $xcconfig
 
 export XCODE_XCCONFIG_FILE="$xcconfig"
-carthage bootstrap "$@" --cache-builds
+carthage build --archive --cache-builds
