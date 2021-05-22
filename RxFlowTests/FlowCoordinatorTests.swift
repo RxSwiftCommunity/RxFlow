@@ -8,6 +8,7 @@
 
 #if canImport(UIKit)
 
+import Dispatch
 @testable import RxFlow
 import XCTest
 import RxBlocking
@@ -366,6 +367,51 @@ final class FlowCoordinatorTests: XCTestCase {
         try XCTUnwrap(leakingFlowReference).rxDismissedRelay.accept(Void())
 
         XCTAssertNil(leakingFlowReference)
+    }
+
+    func testNavigate_executes_on_mainThread() {
+        class ThreadRecorderFlow: Flow {
+            let rootViewController = UINavigationController()
+            var root: Presentable {
+                return rootViewController
+            }
+
+            var recordedThreadName: String?
+
+            func adapt(step: Step) -> Single<Step> {
+                return Single.just(step).observe(on: SerialDispatchQueueScheduler(internalSerialQueueName: UUID().uuidString))
+            }
+
+            func navigate(to step: Step) -> FlowContributors {
+                self.recordedThreadName = DispatchQueue.currentLabel
+                return .none
+            }
+        }
+
+        let exp = expectation(description: "Navigates on main thread")
+
+        // Given: a Flow that records its navigation thread (and adapt on a background thread)
+        let recorderFlow = ThreadRecorderFlow()
+        let sut = FlowCoordinator()
+
+        Flows.use(recorderFlow, when: .ready) { (_) in
+            exp.fulfill()
+        }
+
+        // When: coordinating that flow
+        sut.coordinate(flow: recorderFlow,
+                       with: OneStepper(withSingleStep: TestSteps.one))
+
+        waitForExpectations(timeout: 0.5)
+
+        // Then: the flow navigates on the main thread
+        XCTAssertEqual(recorderFlow.recordedThreadName, "com.apple.main-thread")
+    }
+}
+
+extension DispatchQueue {
+    class var currentLabel: String {
+        return String(validatingUTF8: __dispatch_queue_get_label(nil))!
     }
 }
 
