@@ -50,7 +50,8 @@ public final class FlowCoordinator: NSObject {
                 self?.childFlowCoordinators.removeAll()
                 self?.parentFlowCoordinator?.childFlowCoordinators.removeValue(forKey: self?.identifier ?? "")
             })
-            .flatMapLatest { flow.adapt(step: $0) }
+            .asSignal(onErrorJustReturn: NoneStep())
+            .flatMapLatest { flow.adapt(step: $0).asSignal(onErrorJustReturn: NoneStep()) }
             .do(onNext: { [weak self] in self?.willNavigateRelay.accept((flow, $0)) })
             .map { return (flowContributors: flow.navigate(to: $0), step: $0) }
             .do(onNext: { [weak self] in self?.didNavigateRelay.accept((flow, $0.step)) })
@@ -77,8 +78,9 @@ public final class FlowCoordinator: NSObject {
             .do(onNext: { [weak self] presentableAndSteppers in
                 self?.setReadiness(for: flow, basedOn: presentableAndSteppers.map { $0.presentable })
             })
-            // transforms a FlowContributors in a sequence of individual FlowContributor
+
             .flatMap { Signal.from($0) }
+            // transforms a FlowContributors in a sequence of individual FlowContributor
             // the FlowContributor is related to a new Flow, we coordinate this new Flow
             .do(onNext: { [weak self] presentableAndStepper in
                 if let childFlow = presentableAndStepper.presentable as? Flow {
@@ -96,6 +98,7 @@ public final class FlowCoordinator: NSObject {
             .flatMap { [weak self] in
                 self?.steps(from: $0, within: flow, allowStepWhenDismissed: allowStepWhenDismissed) ?? Signal.empty()
             }
+            .asObservable()
             .take(until: allowStepWhenDismissed ? .empty() : flow.rxDismissed.asObservable())
             .asSignal(onErrorJustReturn: NoneStep())
             .emit(to: self.stepsRelay)
