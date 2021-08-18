@@ -604,7 +604,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.12.3;
+				MARKETING_VERSION = 2.12.4;
 				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxFlow;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -639,7 +639,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.12.3;
+				MARKETING_VERSION = 2.12.4;
 				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxFlow;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -1,3 +1,7 @@
+** Version 2.12.4 **:
+
+- fix reentrancy issue with forwardToCurrentFlow
+
 ** Version 2.12.3 **:
 
 - fix "Unhandled files" warnings in the Package.swift file

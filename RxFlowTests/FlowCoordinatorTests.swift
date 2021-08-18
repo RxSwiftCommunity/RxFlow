@@ -268,7 +268,7 @@ final class FlowCoordinatorTests: XCTestCase {
 
         // Then: Steps from .multiple FlowContributors are triggered.toArray()
         let actualSteps = try? testFlow.recordedSteps.take(3).toBlocking().toArray()
-        XCTAssertEqual(actualSteps, [.multiple, .one, .two])
+        XCTAssertEqual(actualSteps, [.multiple, .two, .one])
     }
 
     func testStepHasBeenFilteredBeforeNavigateForAFlowStepper() {
