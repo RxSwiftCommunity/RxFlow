@@ -1,3 +1,9 @@
+** Version 2.12.3 **:
+
+- fix "Unhandled files" warnings in the Package.swift file
+- fix re-entrancy issue in the FlowCoordinator file
+- revert to a strong retain policy in the Reactive+UIViewController file (see version 2.12.0)
+
 ** Version 2.12.2 **:
 
 - ensure the navigate function is called on the main thread (regression introduced in 2.12.1)

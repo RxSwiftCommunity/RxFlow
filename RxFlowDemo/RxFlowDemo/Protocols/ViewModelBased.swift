@@ -17,7 +17,7 @@ protocol ServicesViewModel: ViewModel {
     var services: Services! { get set }
 }
 
-protocol ViewModelBased: class {
+protocol ViewModelBased: AnyObject {
     associatedtype ViewModelType: ViewModel
     var viewModel: ViewModelType! { get set }
 }

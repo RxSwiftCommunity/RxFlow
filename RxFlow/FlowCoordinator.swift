@@ -46,6 +46,7 @@ public final class FlowCoordinator: NSObject {
         // listen for the internal steps relay that aggregates the flow's Stepper's steps and
         // the FlowContributors's Stepper's steps
         self.stepsRelay
+            .observe(on: CurrentThreadScheduler.instance)
             .do(onDispose: { [weak self] in
                 self?.childFlowCoordinators.removeAll()
                 self?.parentFlowCoordinator?.childFlowCoordinators.removeValue(forKey: self?.identifier ?? "")
@@ -127,7 +128,7 @@ public final class FlowCoordinator: NSObject {
     private func performSideEffects(with flowContributor: FlowContributor) {
         switch flowContributor {
         case let .forwardToCurrentFlow(step):
-            stepsRelay.accept(step)
+            self.stepsRelay.accept(step)
         case let .forwardToParentFlow(step):
             parentFlowCoordinator?.stepsRelay.accept(step)
         case .contribute:

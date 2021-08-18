@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.4
 
 import PackageDescription
 
@@ -18,7 +18,8 @@ let package = Package(
                 "RxSwift",
                 .product(name: "RxCocoa", package: "RxSwift")
             ],
-            path: "RxFlow"
+            path: "RxFlow",
+            exclude: ["Info.plist"]
         ),
         .testTarget(
             name: "RxFlowTests",
@@ -27,7 +28,8 @@ let package = Package(
                 .product(name: "RxBlocking", package: "RxSwift"),
                 .product(name: "RxTest", package: "RxSwift")
             ],
-            path: "RxFlowTests"
+            path: "RxFlowTests",
+            exclude: ["Info.plist"]
         ),
     ],
     swiftLanguageVersions: [.v5]
