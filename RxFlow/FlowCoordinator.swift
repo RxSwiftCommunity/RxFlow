@@ -96,7 +96,7 @@ public final class FlowCoordinator: NSObject {
             // the FlowContributor is not related to a new Flow but to a Presentable/Stepper
             // this new Stepper will contribute to the current Flow.
             .flatMap { [weak self] in
-                self?.steps(from: $0, within: flow, allowStepWhenDismissed: allowStepWhenDismissed) ?? Signal.empty()
+                self?.steps(from: $0, within: flow, allowStepWhenDismissed: $0.allowStepWhenDismissed) ?? Signal.empty()
             }
             .asObservable()
             .take(until: allowStepWhenDismissed ? .empty() : flow.rxDismissed.asObservable())

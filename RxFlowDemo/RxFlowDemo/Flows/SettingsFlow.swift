@@ -89,7 +89,7 @@ class SettingsFlow: Flow {
 
         return .multiple(flowContributors: [
             .contribute(withNext: settingsListViewController),
-            .contribute(withNext: settingsLoginViewController),
+            .contribute(withNextPresentable: settingsLoginViewController, withNextStepper: settingsLoginViewController, allowStepWhenDismissed: true),
             .forwardToCurrentFlow(withStep: DemoStep.alert("Demo of multiple Flow Contributor"))
         ])
     }
