@@ -145,7 +145,7 @@ The following **Flow** is used as a Navigation stack. All you have to do is:
 The **navigate(to:)** function returns a **FlowContributors**. This is how the next navigation actions will be produced. 
 
 For instance the value: ```.one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel)``` means:
-- ```viewController``` is a **Presentable** and its lifecycle will affect the way the associated **Stepper** will emit **Steps**. For instance, if a **Stepper** emits a **Step** while its associated **Presentable** is temporarely hidden, this **Step** won't be taken care of.
+- ```viewController``` is a **Presentable** and its lifecycle will affect the way the associated **Stepper** will emit **Steps**. For instance, if a **Stepper** emits a **Step** while its associated **Presentable** is temporarily hidden, this **Step** won't be taken care of.
 - ```viewController.viewModel``` is a **Stepper** and will contribute to the navigation in that **Flow** by emitting **Steps**, according to its associated **Presentable** lifecycle.
 
 ```swift
@@ -205,7 +205,7 @@ class WatchedFlow: Flow {
 }
 ```
 
-### How to handle Deeplinks
+### How to handle deep links
 
 From the AppDelegate you can reach the FlowCoordinator and call the `navigate(to:)` function when receiving a notification for instance.
 
@@ -226,7 +226,7 @@ A Flow has a `adapt(step:) -> Single<Step>` function that by default returns the
 as a parameter.
 
 This function is called by the FlowCoordinator before the `navigate(to:)` function. This is a perfect place
-to implement some logic that could for instance forbid a step to trigger a navigation. A common usecase would be to handle the navigation permissions within an application.
+to implement some logic that could for instance forbid a step to trigger a navigation. A common use case would be to handle the navigation permissions within an application.
 
 Let's say we have a PermissionManager:
 
@@ -247,7 +247,7 @@ later in the navigate(to:) function, the .unauthorized step could trigger an Ale
 
 Why return a Single<Step> and not directly a Step ? Because some filtering processes could be asynchronous and need a user action to be performed (for instance a filtering based on the authentication layer of the device with TouchID or FaceID)
 
-In order to improve the separation of concerns, a Flow could be injected with a delegate which purpose would be to handle the adaptions in the `adapt(step:)` function. The delegate could eventuelly be reused across multiple flows to ensure a consistency in the adaptations.
+In order to improve the separation of concerns, a Flow could be injected with a delegate which purpose would be to handle the adaptions in the `adapt(step:)` function. The delegate could eventually be reused across multiple flows to ensure a consistency in the adaptations.
 
 ### How to declare a **Stepper**
 
@@ -306,7 +306,7 @@ For more complex cases, see the **DashboardFlow.swift** and the **SettingsFlow.s
 
 ### How to bootstrap the RxFlow process
 
-The coordination process is pretty straightfoward and happens in the AppDelegate.
+The coordination process is pretty straightforward and happens in the AppDelegate.
 
 ```swift
 class AppDelegate: UIResponder, UIApplicationDelegate {
