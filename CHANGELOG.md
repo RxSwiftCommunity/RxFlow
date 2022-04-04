@@ -1,3 +1,7 @@
+** Version 2.12.5 **:
+
+- fix adapt method is disposed before being completed
+
 ** Version 2.12.4 **:
 
 - fix reentrancy issue with forwardToCurrentFlow
