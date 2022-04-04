@@ -52,7 +52,7 @@ public final class FlowCoordinator: NSObject {
                 self?.parentFlowCoordinator?.childFlowCoordinators.removeValue(forKey: self?.identifier ?? "")
             })
             .asSignal(onErrorJustReturn: NoneStep())
-            .flatMapLatest { flow.adapt(step: $0).asSignal(onErrorJustReturn: NoneStep()) }
+            .flatMap { flow.adapt(step: $0).asSignal(onErrorJustReturn: NoneStep()) }
             .do(onNext: { [weak self] in self?.willNavigateRelay.accept((flow, $0)) })
             .map { return (flowContributors: flow.navigate(to: $0), step: $0) }
             .do(onNext: { [weak self] in self?.didNavigateRelay.accept((flow, $0.step)) })
