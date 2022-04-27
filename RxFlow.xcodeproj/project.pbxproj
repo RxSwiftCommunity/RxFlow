@@ -267,9 +267,9 @@
 			buildConfigurationList = 1AF854A01FF8328D00271B52 /* Build configuration list for PBXNativeTarget "RxFlow" */;
 			buildPhases = (
 				1A8FBDE31FF8332B00389464 /* ⚙ Swiftlint Code Analysis */,
+				1AF854891FF8328D00271B52 /* Headers */,
 				1AF854871FF8328D00271B52 /* Sources */,
 				1AF854881FF8328D00271B52 /* Frameworks */,
-				1AF854891FF8328D00271B52 /* Headers */,
 				1AF8548A1FF8328D00271B52 /* Resources */,
 			);
 			buildRules = (
