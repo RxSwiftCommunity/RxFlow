@@ -1,6 +1,7 @@
-** Version 2.12.5 **:
+** Version 2.13.0 **:
 
-- fix adapt method is disposed before being completed
+- fix: use xcframeworks for RxFlow/RxFlowDemo deps to please Carthage
+- fix: adapt method is disposed before being completed
 
 ** Version 2.12.4 **:
 
