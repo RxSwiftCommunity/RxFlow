@@ -84,14 +84,8 @@
 		74370EAF23C65E20006CB8A6 /* FlowsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowsTests.swift; sourceTree = "<group>"; };
 		74855A462470544500334B8F /* DeprecatedFlows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeprecatedFlows.swift; sourceTree = "<group>"; };
 		74855A482470552B00334B8F /* DeprecatedFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeprecatedFlowCoordinator.swift; sourceTree = "<group>"; };
-		749B02E722066518001BEBBB /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
-		749B02E922066537001BEBBB /* Reusable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reusable.framework; path = Carthage/Build/iOS/Reusable.framework; sourceTree = "<group>"; };
-		749B02EA22066538001BEBBB /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
-		749B02ED22066618001BEBBB /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
-		749B02EE22066618001BEBBB /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		749B02F72206852D001BEBBB /* Flow+PresentableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Flow+PresentableTests.swift"; sourceTree = "<group>"; };
 		749B02FB220688EC001BEBBB /* FlowCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinatorTests.swift; sourceTree = "<group>"; };
-		74C6AD31227BAE6900B16A95 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,12 +130,6 @@
 				1A6097F728194A3500B91C15 /* RxCocoa.xcframework */,
 				1A6097F828194A3500B91C15 /* RxRelay.xcframework */,
 				1A6097F628194A3500B91C15 /* RxSwift.xcframework */,
-				74C6AD31227BAE6900B16A95 /* RxRelay.framework */,
-				749B02ED22066618001BEBBB /* RxCocoa.framework */,
-				749B02EE22066618001BEBBB /* RxSwift.framework */,
-				749B02E922066537001BEBBB /* Reusable.framework */,
-				749B02EA22066538001BEBBB /* RxTest.framework */,
-				749B02E722066518001BEBBB /* RxBlocking.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
