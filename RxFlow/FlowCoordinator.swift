@@ -128,8 +128,8 @@ public final class FlowCoordinator: NSObject {
     private func performSideEffects(with flowContributor: FlowContributor) {
         switch flowContributor {
         case let .forwardToCurrentFlow(step):
-            DispatchQueue.main.async { [weak self] in
-                self?.stepsRelay.accept(step)
+            DispatchQueue.main.async {
+                self.stepsRelay.accept(step)
             }
         case let .forwardToParentFlow(step):
             parentFlowCoordinator?.stepsRelay.accept(step)
