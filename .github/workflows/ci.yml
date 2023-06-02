@@ -10,7 +10,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        destination: ['platform=iOS Simulator,OS=16.2,name=iPhone 14 Pro']
+        destination: ['platform=iOS Simulator,OS=16.0,name=iPhone 14 Pro']
         swift-version: ['5.7']
     steps:
     - name: Install Swift
