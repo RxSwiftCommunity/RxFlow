@@ -1,6 +1,8 @@
 name: Tests
 
-on: [push]
+on:
+  push:
+  workflow_dispatch:
 
 jobs:
   test:
@@ -8,8 +10,8 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        destination: ['platform=iOS Simulator,OS=15.2,name=iPhone 13 Pro']
-        swift-version: ['5.3']
+        destination: ['platform=iOS Simulator,OS=16.0,name=iPhone 14 Pro']
+        swift-version: ['5.7']
     steps:
     - name: Install Swift
       uses: YOCKOW/Action-setup-swift@main
