@@ -1,3 +1,6 @@
+** *Unreleased* **:
+- fix: `displayed` and `rxVisible` now do not assume UIViewController starts not visible
+
 ** Version 2.13.0 **:
 
 - fix: use xcframeworks for RxFlow/RxFlowDemo deps to please Carthage
