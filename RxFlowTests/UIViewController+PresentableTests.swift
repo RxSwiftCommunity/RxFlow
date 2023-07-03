@@ -42,6 +42,30 @@ final class UIViewController_PresentableTests: XCTestCase {
         }
     }
 
+    func testUIViewControllerVisibleStartsVisible() {
+        // Given: a UIViewController that starts "displayed"
+        let window = UIWindow()
+        let viewController = TestUIViewController()
+        _ = viewController.view
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        let testScheduler = TestScheduler(initialClock: 0)
+        let observer = testScheduler.createObserver(Bool.self)
+        testScheduler.start()
+
+        // When: subscribing to rxVisible
+        _ = viewController.rxVisible.asObservable().take(until: self.rx.deallocating).bind(to: observer)
+
+        // Then: rxVisible emits the first value as true
+        let referenceVisible = [true]
+        XCTAssertEqual(observer.events.count, 1)
+        var index = 0
+        referenceVisible.forEach {
+            XCTAssertEqual(observer.events[index].value.element, $0)
+            index += 1
+        }
+    }
+
     func testUIViewControllerDismissed() {
         // Given: a UIViewController
         let viewController = TestUIViewController()
