@@ -58,7 +58,7 @@ extension Flow {
     }
 }
 
-/// Utility functions to synchronize Flows readyness
+/// Utility functions to synchronize Flows' readiness
 public enum Flows {
     public enum ExecuteStrategy {
         case ready
