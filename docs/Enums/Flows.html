@@ -17,18 +17,18 @@
     <a title="Flows Enumeration Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">RxFlow 2.9.0 Docs</a> (0% documented)</p>
-        <p class="header-right">
+        <p><a href="../index.html">RxFlow 2.13.0 Docs</a> (93% documented)</p>
+        <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
           </form>
-        </p>
+        </div>
       </div>
     </header>
     <div class="content-wrapper">
       <p id="breadcrumbs">
         <a href="../index.html">RxFlow Reference</a>
-        <img id="carat" src="../img/carat.png" />
+        <img id="carat" src="../img/carat.png" alt=""/>
         Flows Enumeration Reference
       </p>
     </div>
@@ -82,10 +82,10 @@
                 <a href="../Extensions/Reactive.html">Reactive</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/UIViewController">UIViewController</a>
+                <a href="../Extensions.html#/c:objc(cs)UIViewController">UIViewController</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/UIWindow">UIWindow</a>
+                <a href="../Extensions.html#/c:objc(cs)UIWindow">UIWindow</a>
               </li>
             </ul>
           </li>
@@ -99,13 +99,24 @@
                 <a href="../Protocols/Presentable.html">Presentable</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols.html#/Step">Step</a>
+                <a href="../Protocols.html#/s:6RxFlow4StepP">Step</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Stepper.html">Stepper</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols.html#/Synchronizable">Synchronizable</a>
+                <a href="../Protocols.html#/s:6RxFlow14SynchronizableP">Synchronizable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6RxFlow11Coordinatora">Coordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6RxFlow04NextB5Itemsa">NextFlowItems</a>
               </li>
             </ul>
           </li>
@@ -115,7 +126,14 @@
         <section>
           <section class="section">
             <h1>Flows</h1>
-            <p>Utility functions to synchronize Flows readyness</p>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Flows</span></code></pre>
+
+                </div>
+              </div>
+            <p>Utility functions to synchronize Flows&rsquo; readiness</p>
 
           </section>
           <section class="section task-group-section">
@@ -124,9 +142,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/"></a>
+                    <a name="/s:6RxFlow5FlowsO15ExecuteStrategyO"></a>
                     <a name="//apple_ref/swift/Enum/ExecuteStrategy" class="dashAnchor"></a>
-                    <a class="token" href="#/">ExecuteStrategy</a>
+                    <a class="token" href="#/s:6RxFlow5FlowsO15ExecuteStrategyO">ExecuteStrategy</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -134,18 +152,27 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Undocumented</p>
+
                         <a href="../Enums/Flows/ExecuteStrategy.html" class="slightly-smaller">See more</a>
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">ExecuteStrategy</span></code></pre>
+
+                        </div>
+                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/"></a>
+                    <a name="/s:6RxFlow5FlowsO3use_4when5blockySayAA0B0_pG_AC15ExecuteStrategyOySayxGctSo16UIViewControllerCRbzlFZ"></a>
                     <a name="//apple_ref/swift/Method/use(_:when:block:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">use(_:<wbr>when:<wbr>block:<wbr>)</a>
+                    <a class="token" href="#/s:6RxFlow5FlowsO3use_4when5blockySayAA0B0_pG_AC15ExecuteStrategyOySayxGctSo16UIViewControllerCRbzlFZ">use(_:<wbr>when:<wbr>block:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -153,7 +180,18 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">use</span><span class="o">&lt;</span><span class="kt">Root</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">flows</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">],</span>
+                                               <span class="n">when</span> <span class="nv">strategy</span><span class="p">:</span> <span class="kt"><a href="../Enums/Flows/ExecuteStrategy.html">ExecuteStrategy</a></span><span class="p">,</span>
+                                               <span class="nv">block</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt">Root</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -161,9 +199,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/"></a>
+                    <a name="/s:6RxFlow5FlowsO3use_____4when5blockyAA0B0_p_AaG_pAaG_pAaG_pAaG_pAC15ExecuteStrategyOyx_q_q0_q1_q2_tctSo16UIViewControllerCRbzAKRb_AKRb0_AKRb1_AKRb2_r3_lFZ"></a>
                     <a name="//apple_ref/swift/Method/use(_:_:_:_:_:when:block:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">use(_:<wbr>_:<wbr>_:<wbr>_:<wbr>_:<wbr>when:<wbr>block:<wbr>)</a>
+                    <a class="token" href="#/s:6RxFlow5FlowsO3use_____4when5blockyAA0B0_p_AaG_pAaG_pAaG_pAaG_pAC15ExecuteStrategyOyx_q_q0_q1_q2_tctSo16UIViewControllerCRbzAKRb_AKRb0_AKRb1_AKRb2_r3_lFZ">use(_:<wbr>_:<wbr>_:<wbr>_:<wbr>_:<wbr>when:<wbr>block:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -175,15 +213,119 @@
 Once it is the case, the block is executed</p>
 
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">use</span><span class="o">&lt;</span><span class="kt">Root1</span><span class="p">,</span> <span class="kt">Root2</span><span class="p">,</span> <span class="kt">Root3</span><span class="p">,</span> <span class="kt">Root4</span><span class="p">,</span> <span class="kt">Root5</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">flow1</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                          <span class="n">_</span> <span class="nv">flow2</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                          <span class="n">_</span> <span class="nv">flow3</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                          <span class="n">_</span> <span class="nv">flow4</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                          <span class="n">_</span> <span class="nv">flow5</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                          <span class="n">when</span> <span class="nv">strategy</span><span class="p">:</span> <span class="kt"><a href="../Enums/Flows/ExecuteStrategy.html">ExecuteStrategy</a></span><span class="p">,</span>
+                                                          <span class="nv">block</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span>
+    <span class="n">_</span> <span class="nv">flow1Root</span><span class="p">:</span> <span class="kt">Root1</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow2Root</span><span class="p">:</span> <span class="kt">Root2</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow3Root</span><span class="p">:</span> <span class="kt">Root3</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow4Root</span><span class="p">:</span> <span class="kt">Root4</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow5Root</span><span class="p">:</span> <span class="kt">Root5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span>
+    <span class="k">where</span>
+    <span class="kt">Root1</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">Root2</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">Root3</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">Root4</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">Root5</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow1</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>first Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow2</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>second Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow3</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>third Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow4</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>fourth Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow5</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>fifth Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>block</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>block to execute whenever the Flows are ready to use</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/"></a>
+                    <a name="/s:6RxFlow5FlowsO3use____4when5blockyAA0B0_p_AaG_pAaG_pAaG_pAC15ExecuteStrategyOyx_q_q0_q1_tctSo16UIViewControllerCRbzAKRb_AKRb0_AKRb1_r2_lFZ"></a>
                     <a name="//apple_ref/swift/Method/use(_:_:_:_:when:block:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">use(_:<wbr>_:<wbr>_:<wbr>_:<wbr>when:<wbr>block:<wbr>)</a>
+                    <a class="token" href="#/s:6RxFlow5FlowsO3use____4when5blockyAA0B0_p_AaG_pAaG_pAaG_pAC15ExecuteStrategyOyx_q_q0_q1_tctSo16UIViewControllerCRbzAKRb_AKRb0_AKRb1_r2_lFZ">use(_:<wbr>_:<wbr>_:<wbr>_:<wbr>when:<wbr>block:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -195,15 +337,103 @@ Once it is the case, the block is executed</p>
 Once it is the case, the block is executed</p>
 
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">use</span><span class="o">&lt;</span><span class="kt">Root1</span><span class="p">,</span> <span class="kt">Root2</span><span class="p">,</span> <span class="kt">Root3</span><span class="p">,</span> <span class="kt">Root4</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">flow1</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                   <span class="n">_</span> <span class="nv">flow2</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                   <span class="n">_</span> <span class="nv">flow3</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                   <span class="n">_</span> <span class="nv">flow4</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                   <span class="n">when</span> <span class="nv">strategy</span><span class="p">:</span> <span class="kt"><a href="../Enums/Flows/ExecuteStrategy.html">ExecuteStrategy</a></span><span class="p">,</span>
+                                                   <span class="nv">block</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span>
+    <span class="n">_</span> <span class="nv">flow1Root</span><span class="p">:</span> <span class="kt">Root1</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow2Root</span><span class="p">:</span> <span class="kt">Root2</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow3Root</span><span class="p">:</span> <span class="kt">Root3</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow4Root</span><span class="p">:</span> <span class="kt">Root4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">where</span>
+    <span class="kt">Root1</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">Root2</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">Root3</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">Root4</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow1</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>first Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow2</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>second Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow3</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>third Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow4</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>fourth Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>block</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>block to execute whenever the Flows are ready to use</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/"></a>
+                    <a name="/s:6RxFlow5FlowsO3use___4when5blockyAA0B0_p_AaG_pAaG_pAC15ExecuteStrategyOyx_q_q0_tctSo16UIViewControllerCRbzAKRb_AKRb0_r1_lFZ"></a>
                     <a name="//apple_ref/swift/Method/use(_:_:_:when:block:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">use(_:<wbr>_:<wbr>_:<wbr>when:<wbr>block:<wbr>)</a>
+                    <a class="token" href="#/s:6RxFlow5FlowsO3use___4when5blockyAA0B0_p_AaG_pAaG_pAC15ExecuteStrategyOyx_q_q0_tctSo16UIViewControllerCRbzAKRb_AKRb0_r1_lFZ">use(_:<wbr>_:<wbr>_:<wbr>when:<wbr>block:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -215,15 +445,88 @@ Once it is the case, the block is executed</p>
 Once it is the case, the block is executed</p>
 
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">use</span><span class="o">&lt;</span><span class="kt">Root1</span><span class="p">,</span> <span class="kt">Root2</span><span class="p">,</span> <span class="kt">Root3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">flow1</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                            <span class="n">_</span> <span class="nv">flow2</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                            <span class="n">_</span> <span class="nv">flow3</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                            <span class="n">when</span> <span class="nv">strategy</span><span class="p">:</span> <span class="kt"><a href="../Enums/Flows/ExecuteStrategy.html">ExecuteStrategy</a></span><span class="p">,</span>
+                                            <span class="nv">block</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span>
+    <span class="n">_</span> <span class="nv">flow1Root</span><span class="p">:</span> <span class="kt">Root1</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow2Root</span><span class="p">:</span> <span class="kt">Root2</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow3Root</span><span class="p">:</span> <span class="kt">Root3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">where</span>
+    <span class="kt">Root1</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">Root2</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">Root3</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow1</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>first Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow2</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>second Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow3</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>third Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>block</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>block to execute whenever the Flows are ready to use</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/"></a>
+                    <a name="/s:6RxFlow5FlowsO3use__4when5blockyAA0B0_p_AaG_pAC15ExecuteStrategyOyx_q_tctSo16UIViewControllerCRbzAKRb_r0_lFZ"></a>
                     <a name="//apple_ref/swift/Method/use(_:_:when:block:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">use(_:<wbr>_:<wbr>when:<wbr>block:<wbr>)</a>
+                    <a class="token" href="#/s:6RxFlow5FlowsO3use__4when5blockyAA0B0_p_AaG_pAC15ExecuteStrategyOyx_q_tctSo16UIViewControllerCRbzAKRb_r0_lFZ">use(_:<wbr>_:<wbr>when:<wbr>block:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -234,6 +537,648 @@ Once it is the case, the block is executed</p>
                         <p>Allow to be triggered etiher when Flows given as parameters are ready to be displayed or right after their instantiation
 Once it is the case, the block is executed</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">use</span><span class="o">&lt;</span><span class="kt">Root1</span><span class="p">,</span> <span class="kt">Root2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">flow1</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                     <span class="n">_</span> <span class="nv">flow2</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                     <span class="n">when</span> <span class="nv">strategy</span><span class="p">:</span> <span class="kt"><a href="../Enums/Flows/ExecuteStrategy.html">ExecuteStrategy</a></span><span class="p">,</span>
+                                     <span class="nv">block</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span>
+    <span class="n">_</span> <span class="nv">flow1Root</span><span class="p">:</span> <span class="kt">Root1</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow2Root</span><span class="p">:</span> <span class="kt">Root2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">where</span>
+    <span class="kt">Root1</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">Root2</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow1</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>first Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow2</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>second Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>block</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>block to execute whenever the Flows are ready to use</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow5FlowsO3use_4when5blockyAA0B0_p_AC15ExecuteStrategyOyxctSo16UIViewControllerCRbzlFZ"></a>
+                    <a name="//apple_ref/swift/Method/use(_:when:block:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow5FlowsO3use_4when5blockyAA0B0_p_AC15ExecuteStrategyOyxctSo16UIViewControllerCRbzlFZ">use(_:<wbr>when:<wbr>block:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Allow to be triggered etiher when Flows given as parameters are ready to be displayed or right after their instantiation
+Once it is the case, the block is executed</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">use</span><span class="o">&lt;</span><span class="kt">Root</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">flow</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                             <span class="n">when</span> <span class="nv">strategy</span><span class="p">:</span> <span class="kt"><a href="../Enums/Flows/ExecuteStrategy.html">ExecuteStrategy</a></span><span class="p">,</span>
+                             <span class="nv">block</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">flowRoot</span><span class="p">:</span> <span class="kt">Root</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span>
+    <span class="k">where</span>
+    <span class="kt">Root</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow1</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>first Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>block</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>block to execute whenever the Flows are ready to use</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow5FlowsO9whenReady5flows5blockySayAA0B0_pG_ySayxGctSo16UIViewControllerCRbzlFZ"></a>
+                    <a name="//apple_ref/swift/Method/whenReady(flows:block:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow5FlowsO9whenReady5flows5blockySayAA0B0_pG_ySayxGctSo16UIViewControllerCRbzlFZ">whenReady(flows:<wbr>block:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Allow to be triggered only when Flows given as parameters are ready to be displayed.
+Once it is the case, the block is executed</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated, message: "You should use Flows.use(﹚")</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="n">whenReady</span><span class="o">&lt;</span><span class="kt">RootType</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">flows</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">],</span>
+                                                  <span class="nv">block</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt">RootType</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flows</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Flow(s) to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>block</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>block to execute whenever the Flows are ready to use</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow5FlowsO9whenReady5flow15flow25flow35flow45flow55blockyAA0B0_p_AaK_pAaK_pAaK_pAaK_pyx_q_q0_q1_q2_tctSo16UIViewControllerCRbzAMRb_AMRb0_AMRb1_AMRb2_r3_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/whenReady(flow1:flow2:flow3:flow4:flow5:block:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow5FlowsO9whenReady5flow15flow25flow35flow45flow55blockyAA0B0_p_AaK_pAaK_pAaK_pAaK_pyx_q_q0_q1_q2_tctSo16UIViewControllerCRbzAMRb_AMRb0_AMRb1_AMRb2_r3_lFZ">whenReady(flow1:<wbr>flow2:<wbr>flow3:<wbr>flow4:<wbr>flow5:<wbr>block:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Allow to be triggered only when Flows given as parameters are ready to be displayed.
+Once it is the case, the block is executed</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated, message: "You should use Flows.use(﹚")</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="n">whenReady</span><span class="o">&lt;</span><span class="kt">RootType1</span><span class="p">,</span> <span class="kt">RootType2</span><span class="p">,</span> <span class="kt">RootType3</span><span class="p">,</span> <span class="kt">RootType4</span><span class="p">,</span> <span class="kt">RootType5</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">flow1</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                                             <span class="nv">flow2</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                                             <span class="nv">flow3</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                                             <span class="nv">flow4</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                                             <span class="nv">flow5</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                                             <span class="nv">block</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">flow1Root</span><span class="p">:</span> <span class="kt">RootType1</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow2Root</span><span class="p">:</span> <span class="kt">RootType2</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow3Root</span><span class="p">:</span> <span class="kt">RootType3</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow4Root</span><span class="p">:</span> <span class="kt">RootType4</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow5Root</span><span class="p">:</span> <span class="kt">RootType5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span>
+    <span class="k">where</span>
+    <span class="kt">RootType1</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">RootType2</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">RootType3</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">RootType4</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">RootType5</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow1</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>first Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow2</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>second Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow3</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>third Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow4</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>fourth Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow5</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>fifth Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>block</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>block to execute whenever the Flows are ready to use</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow5FlowsO9whenReady5flow15flow25flow35flow45blockyAA0B0_p_AaJ_pAaJ_pAaJ_pyx_q_q0_q1_tctSo16UIViewControllerCRbzALRb_ALRb0_ALRb1_r2_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/whenReady(flow1:flow2:flow3:flow4:block:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow5FlowsO9whenReady5flow15flow25flow35flow45blockyAA0B0_p_AaJ_pAaJ_pAaJ_pyx_q_q0_q1_tctSo16UIViewControllerCRbzALRb_ALRb0_ALRb1_r2_lFZ">whenReady(flow1:<wbr>flow2:<wbr>flow3:<wbr>flow4:<wbr>block:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Allow to be triggered only when Flows given as parameters are ready to be displayed.
+Once it is the case, the block is executed</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated, message: "You should use Flows.use(﹚")</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="n">whenReady</span><span class="o">&lt;</span><span class="kt">RootType1</span><span class="p">,</span> <span class="kt">RootType2</span><span class="p">,</span> <span class="kt">RootType3</span><span class="p">,</span> <span class="kt">RootType4</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">flow1</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                                  <span class="nv">flow2</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                                  <span class="nv">flow3</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                                  <span class="nv">flow4</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                                  <span class="nv">block</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">flow1Root</span><span class="p">:</span> <span class="kt">RootType1</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow2Root</span><span class="p">:</span> <span class="kt">RootType2</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow3Root</span><span class="p">:</span> <span class="kt">RootType3</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow4Root</span><span class="p">:</span> <span class="kt">RootType4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span>
+    <span class="k">where</span>
+    <span class="kt">RootType1</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">RootType2</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">RootType3</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">RootType4</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow1</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>first Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow2</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>second Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow3</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>third Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow4</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>fourth Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>block</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>block to execute whenever the Flows are ready to use</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow5FlowsO9whenReady5flow15flow25flow35blockyAA0B0_p_AaI_pAaI_pyx_q_q0_tctSo16UIViewControllerCRbzAKRb_AKRb0_r1_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/whenReady(flow1:flow2:flow3:block:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow5FlowsO9whenReady5flow15flow25flow35blockyAA0B0_p_AaI_pAaI_pyx_q_q0_tctSo16UIViewControllerCRbzAKRb_AKRb0_r1_lFZ">whenReady(flow1:<wbr>flow2:<wbr>flow3:<wbr>block:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Allow to be triggered only when Flows given as parameters are ready to be displayed.
+Once it is the case, the block is executed</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated, message: "You should use Flows.use(﹚")</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="n">whenReady</span><span class="o">&lt;</span><span class="kt">RootType1</span><span class="p">,</span> <span class="kt">RootType2</span><span class="p">,</span> <span class="kt">RootType3</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">flow1</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                       <span class="nv">flow2</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                       <span class="nv">flow3</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                       <span class="nv">block</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">flow1Root</span><span class="p">:</span> <span class="kt">RootType1</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow2Root</span><span class="p">:</span> <span class="kt">RootType2</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow3Root</span><span class="p">:</span> <span class="kt">RootType3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span>
+    <span class="k">where</span>
+    <span class="kt">RootType1</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">RootType2</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+    <span class="kt">RootType3</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow1</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>first Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow2</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>second Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow3</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>third Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>block</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>block to execute whenever the Flows are ready to use</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow5FlowsO9whenReady5flow15flow25blockyAA0B0_p_AaH_pyx_q_tctSo16UIViewControllerCRbzAJRb_r0_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/whenReady(flow1:flow2:block:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow5FlowsO9whenReady5flow15flow25blockyAA0B0_p_AaH_pyx_q_tctSo16UIViewControllerCRbzAJRb_r0_lFZ">whenReady(flow1:<wbr>flow2:<wbr>block:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Allow to be triggered only when Flows given as parameters are ready to be displayed.
+Once it is the case, the block is executed</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated, message: "You should use Flows.use(﹚")</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="n">whenReady</span><span class="o">&lt;</span><span class="kt">RootType1</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="kt">RootType2</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">flow1</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                                                <span class="nv">flow2</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                                                <span class="nv">block</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">flow1Root</span><span class="p">:</span> <span class="kt">RootType1</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">flow2Root</span><span class="p">:</span> <span class="kt">RootType2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow1</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>first Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow2</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>second Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>block</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>block to execute whenever the Flows are ready to use</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow5FlowsO9whenReady5flow15blockyAA0B0_p_yxctSo16UIViewControllerCRbzlFZ"></a>
+                    <a name="//apple_ref/swift/Method/whenReady(flow1:block:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow5FlowsO9whenReady5flow15blockyAA0B0_p_yxctSo16UIViewControllerCRbzlFZ">whenReady(flow1:<wbr>block:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Allow to be triggered only when Flow given as parameters is ready to be displayed.
+Once it is the case, the block is executed</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated, message: "You should use Flows.use(﹚")</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="n">whenReady</span><span class="o">&lt;</span><span class="kt">RootType</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">flow1</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Flow.html">Flow</a></span><span class="p">,</span>
+                                                  <span class="nv">block</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">flowRoot1</span><span class="p">:</span> <span class="kt">RootType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>flow1</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Flow to be observed</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>block</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>block to execute whenever the Flow is ready to use</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -243,11 +1188,10 @@ Once it is the case, the block is executed</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2020-09-09)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2023 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external noopener">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2023-11-27)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>
   </body>
-</div>
 </html>

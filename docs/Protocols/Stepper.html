@@ -17,18 +17,18 @@
     <a title="Stepper Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">RxFlow 2.9.0 Docs</a> (0% documented)</p>
-        <p class="header-right">
+        <p><a href="../index.html">RxFlow 2.13.0 Docs</a> (93% documented)</p>
+        <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
           </form>
-        </p>
+        </div>
       </div>
     </header>
     <div class="content-wrapper">
       <p id="breadcrumbs">
         <a href="../index.html">RxFlow Reference</a>
-        <img id="carat" src="../img/carat.png" />
+        <img id="carat" src="../img/carat.png" alt=""/>
         Stepper Protocol Reference
       </p>
     </div>
@@ -82,10 +82,10 @@
                 <a href="../Extensions/Reactive.html">Reactive</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/UIViewController">UIViewController</a>
+                <a href="../Extensions.html#/c:objc(cs)UIViewController">UIViewController</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/UIWindow">UIWindow</a>
+                <a href="../Extensions.html#/c:objc(cs)UIWindow">UIWindow</a>
               </li>
             </ul>
           </li>
@@ -99,13 +99,24 @@
                 <a href="../Protocols/Presentable.html">Presentable</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols.html#/Step">Step</a>
+                <a href="../Protocols.html#/s:6RxFlow4StepP">Step</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Stepper.html">Stepper</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols.html#/Synchronizable">Synchronizable</a>
+                <a href="../Protocols.html#/s:6RxFlow14SynchronizableP">Synchronizable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6RxFlow11Coordinatora">Coordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6RxFlow04NextB5Itemsa">NextFlowItems</a>
               </li>
             </ul>
           </li>
@@ -115,6 +126,13 @@
         <section>
           <section class="section">
             <h1>Stepper</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Stepper</span></code></pre>
+
+                </div>
+              </div>
             <p>a Stepper has only one purpose is: emits Steps that correspond to specific navigation states.
 The Step changes lead to navigation actions in the context of a specific Flow</p>
 
@@ -125,9 +143,9 @@ The Step changes lead to navigation actions in the context of a specific Flow</p
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/"></a>
+                    <a name="/s:6RxFlow7StepperP5steps0A5Relay07PublishE0CyAA4Step_pGvp"></a>
                     <a name="//apple_ref/swift/Property/steps" class="dashAnchor"></a>
-                    <a class="token" href="#/">steps</a>
+                    <a class="token" href="#/s:6RxFlow7StepperP5steps0A5Relay07PublishE0CyAA4Step_pGvp">steps</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -138,15 +156,23 @@ The Step changes lead to navigation actions in the context of a specific Flow</p
                         <p>the relay used to emit steps inside this Stepper</p>
 
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">steps</span><span class="p">:</span> <span class="kt">PublishRelay</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols.html#/s:6RxFlow4StepP">Step</a></span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/"></a>
+                    <a name="/s:6RxFlow7StepperP11initialStepAA0E0_pvp"></a>
                     <a name="//apple_ref/swift/Property/initialStep" class="dashAnchor"></a>
-                    <a class="token" href="#/">initialStep</a>
+                    <a class="token" href="#/s:6RxFlow7StepperP11initialStepAA0E0_pvp">initialStep</a>
                     </code>
                       <span class="declaration-note">
                         Default implementation
@@ -164,15 +190,23 @@ The Step changes lead to navigation actions in the context of a specific Flow</p
                       <div class="default_impl abstract">
                         
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">initialStep</span><span class="p">:</span> <span class="kt"><a href="../Protocols.html#/s:6RxFlow4StepP">Step</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/"></a>
+                    <a name="/s:6RxFlow7StepperP16readyToEmitStepsyyF"></a>
                     <a name="//apple_ref/swift/Method/readyToEmitSteps()" class="dashAnchor"></a>
-                    <a class="token" href="#/">readyToEmitSteps()</a>
+                    <a class="token" href="#/s:6RxFlow7StepperP16readyToEmitStepsyyF">readyToEmitSteps()</a>
                     </code>
                       <span class="declaration-note">
                         Default implementation
@@ -190,6 +224,14 @@ The Step changes lead to navigation actions in the context of a specific Flow</p
                       <div class="default_impl abstract">
                         
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">readyToEmitSteps</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -198,11 +240,10 @@ The Step changes lead to navigation actions in the context of a specific Flow</p
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2020-09-09)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2023 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external noopener">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2023-11-27)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>
   </body>
-</div>
 </html>
