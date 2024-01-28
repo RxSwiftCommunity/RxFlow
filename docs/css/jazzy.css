@@ -1,3 +1,7 @@
+/*! Jazzy - https://github.com/realm/jazzy
+ *  Copyright Realm Inc.
+ *  SPDX-License-Identifier: MIT
+ */
 html, body, div, span, h1, h3, h4, p, a, code, em, img, ul, li, table, tbody, tr, td {
   background: transparent;
   border: 0;
@@ -79,6 +83,18 @@ blockquote {
   padding: 0 10px;
   border-left: 4px solid #ccc; }
 
+hr {
+  height: 1px;
+  border: none;
+  background-color: #e2e2e2; }
+
+.footnote-ref {
+  display: inline-block;
+  scroll-margin-top: 70px; }
+
+.footnote-def {
+  scroll-margin-top: 70px; }
+
 .content-wrapper {
   margin: 0 auto;
   width: 980px; }
@@ -92,7 +108,7 @@ header {
   z-index: 3; }
   header img {
     padding-right: 6px;
-    vertical-align: -4px;
+    vertical-align: -3px;
     height: 16px; }
   header a {
     color: #fff; }

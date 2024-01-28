@@ -16,18 +16,18 @@
     <a title="RxFlow  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">RxFlow 2.9.0 Docs</a> (0% documented)</p>
-        <p class="header-right">
+        <p><a href="index.html">RxFlow 2.13.0 Docs</a> (93% documented)</p>
+        <div class="header-right">
           <form role="search" action="search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
           </form>
-        </p>
+        </div>
       </div>
     </header>
     <div class="content-wrapper">
       <p id="breadcrumbs">
         <a href="index.html">RxFlow Reference</a>
-        <img id="carat" src="img/carat.png" />
+        <img id="carat" src="img/carat.png" alt=""/>
         RxFlow  Reference
       </p>
     </div>
@@ -81,10 +81,10 @@
                 <a href="Extensions/Reactive.html">Reactive</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions.html#/UIViewController">UIViewController</a>
+                <a href="Extensions.html#/c:objc(cs)UIViewController">UIViewController</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions.html#/UIWindow">UIWindow</a>
+                <a href="Extensions.html#/c:objc(cs)UIWindow">UIWindow</a>
               </li>
             </ul>
           </li>
@@ -98,13 +98,24 @@
                 <a href="Protocols/Presentable.html">Presentable</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols.html#/Step">Step</a>
+                <a href="Protocols.html#/s:6RxFlow4StepP">Step</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/Stepper.html">Stepper</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols.html#/Synchronizable">Synchronizable</a>
+                <a href="Protocols.html#/s:6RxFlow14SynchronizableP">Synchronizable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:6RxFlow11Coordinatora">Coordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:6RxFlow04NextB5Itemsa">NextFlowItems</a>
               </li>
             </ul>
           </li>
@@ -200,7 +211,7 @@ Available only in Russian. To get English subtitles you should press the <em>sub
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">package</span> <span class="o">=</span> <span class="kt">Package</span><span class="p">(</span>
   <span class="nv">name</span><span class="p">:</span> <span class="s">"Example"</span><span class="p">,</span>
   <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
-    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/RxSwiftCommunity/RxFlow.git"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"2.5.0"</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/RxSwiftCommunity/RxFlow.git"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"2.10.0"</span><span class="p">)</span>
   <span class="p">],</span>
   <span class="nv">targets</span><span class="p">:</span> <span class="p">[</span>
     <span class="o">.</span><span class="nf">target</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Example"</span><span class="p">,</span> <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="s">"RxFlow"</span><span class="p">])</span>
@@ -289,7 +300,7 @@ Available only in Russian. To get English subtitles you should press the <em>sub
 <p>For instance the value: <code>.one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel)</code> means:</p>
 
 <ul>
-<li><code>viewController</code> is a <strong>Presentable</strong> and its lifecycle will affect the way the associated <strong>Stepper</strong> will emit <strong>Steps</strong>. For instance, if a <strong>Stepper</strong> emits a <strong>Step</strong> while its associated <strong>Presentable</strong> is temporarely hidden, this <strong>Step</strong> won&rsquo;t be taken care of.</li>
+<li><code>viewController</code> is a <strong>Presentable</strong> and its lifecycle will affect the way the associated <strong>Stepper</strong> will emit <strong>Steps</strong>. For instance, if a <strong>Stepper</strong> emits a <strong>Step</strong> while its associated <strong>Presentable</strong> is temporarily hidden, this <strong>Step</strong> won&rsquo;t be taken care of.</li>
 <li><code>viewController.viewModel</code> is a <strong>Stepper</strong> and will contribute to the navigation in that <strong>Flow</strong> by emitting <strong>Steps</strong>, according to its associated <strong>Presentable</strong> lifecycle.</li>
 </ul>
 <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">WatchedFlow</span><span class="p">:</span> <span class="kt">Flow</span> <span class="p">{</span>
@@ -347,7 +358,7 @@ Available only in Russian. To get English subtitles you should press the <em>sub
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
-<h3 id='how-to-handle-deeplinks' class='heading'>How to handle Deeplinks</h3>
+<h3 id='how-to-handle-deep-links' class='heading'>How to handle deep links</h3>
 
 <p>From the AppDelegate you can reach the FlowCoordinator and call the <code>navigate(to:)</code> function when receiving a notification for instance.</p>
 
@@ -365,7 +376,7 @@ Available only in Russian. To get English subtitles you should press the <em>sub
 as a parameter.</p>
 
 <p>This function is called by the FlowCoordinator before the <code>navigate(to:)</code> function. This is a perfect place
-to implement some logic that could for instance forbid a step to trigger a navigation. A common usecase would be to handle the navigation permissions within an application.</p>
+to implement some logic that could for instance forbid a step to trigger a navigation. A common use case would be to handle the navigation permissions within an application.</p>
 
 <p>Let&rsquo;s say we have a PermissionManager:</p>
 <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">adapt</span><span class="p">(</span><span class="nv">step</span><span class="p">:</span> <span class="kt">Step</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Single</span><span class="o">&lt;</span><span class="kt">Step</span><span class="o">&gt;</span> <span class="p">{</span>
@@ -384,7 +395,7 @@ to implement some logic that could for instance forbid a step to trigger a navig
 
 <p>Why return a Single<Step> and not directly a Step ? Because some filtering processes could be asynchronous and need a user action to be performed (for instance a filtering based on the authentication layer of the device with TouchID or FaceID)</p>
 
-<p>In order to improve the separation of concerns, a Flow could be injected with a delegate which purpose would be to handle the adaptions in the <code>adapt(step:)</code> function. The delegate could eventuelly be reused across multiple flows to ensure a consistency in the adaptations.</p>
+<p>In order to improve the separation of concerns, a Flow could be injected with a delegate which purpose would be to handle the adaptions in the <code>adapt(step:)</code> function. The delegate could eventually be reused across multiple flows to ensure a consistency in the adaptations.</p>
 <h3 id='how-to-declare-a-strong-stepper-strong' class='heading'>How to declare a <strong>Stepper</strong></h3>
 
 <p>In theory a <strong>Stepper</strong>, as it is a protocol, can be anything (a UIViewController for instance) but a good practice is to isolate that behavior in a ViewModel or something similar.</p>
@@ -439,7 +450,7 @@ to implement some logic that could for instance forbid a step to trigger a navig
 <p>For more complex cases, see the <strong>DashboardFlow.swift</strong> and the <strong>SettingsFlow.swift</strong> files in which we handle a UITabBarController and a UISplitViewController.</p>
 <h3 id='how-to-bootstrap-the-rxflow-process' class='heading'>How to bootstrap the RxFlow process</h3>
 
-<p>The coordination process is pretty straightfoward and happens in the AppDelegate.</p>
+<p>The coordination process is pretty straightforward and happens in the AppDelegate.</p>
 <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">AppDelegate</span><span class="p">:</span> <span class="kt">UIResponder</span><span class="p">,</span> <span class="kt">UIApplicationDelegate</span> <span class="p">{</span>
 
     <span class="k">let</span> <span class="nv">disposeBag</span> <span class="o">=</span> <span class="kt">DisposeBag</span><span class="p">()</span>
@@ -496,11 +507,10 @@ to implement some logic that could for instance forbid a step to trigger a navig
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2020-09-09)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2023 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external noopener">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2023-11-27)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>
   </body>
-</div>
 </html>

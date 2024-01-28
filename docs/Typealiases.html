@@ -8,19 +8,27 @@
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Section/Type Aliases" class="dashAnchor"></a>
     <a title="Type Aliases  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">RxFlow Docs</a> (98% documented)</p>
+        <p><a href="index.html">RxFlow 2.13.0 Docs</a> (93% documented)</p>
+        <div class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
       </div>
     </header>
     <div class="content-wrapper">
       <p id="breadcrumbs">
         <a href="index.html">RxFlow Reference</a>
-        <img id="carat" src="img/carat.png" />
+        <img id="carat" src="img/carat.png" alt=""/>
         Type Aliases  Reference
       </p>
     </div>
@@ -40,9 +48,6 @@
                 <a href="Classes/FlowCoordinator.html">FlowCoordinator</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/Flows.html">Flows</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Classes/OneStepper.html">OneStepper</a>
               </li>
             </ul>
@@ -55,6 +60,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="Enums/FlowContributors.html">FlowContributors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Flows.html">Flows</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Flows/ExecuteStrategy.html">– ExecuteStrategy</a>
               </li>
               <li class="nav-group-task">
                 <a href="Enums/RxFlowStep.html">RxFlowStep</a>
@@ -124,34 +135,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:6RxFlow04NextB5Itemsa"></a>
-                    <a name="//apple_ref/swift/Alias/NextFlowItems" class="dashAnchor"></a>
-                    <a class="token" href="#/s:6RxFlow04NextB5Itemsa">NextFlowItems</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>typealias to allow compliance with older versions of RxFlow. NextFlowItems should be replaced by FlowContributors</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"You should use FlowContributors"</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">NextFlowItems</span> <span class="o">=</span> <span class="kt"><a href="Enums/FlowContributors.html">FlowContributors</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:6RxFlow11Coordinatora"></a>
                     <a name="//apple_ref/swift/Alias/Coordinator" class="dashAnchor"></a>
                     <a class="token" href="#/s:6RxFlow11Coordinatora">Coordinator</a>
@@ -169,8 +152,36 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"You should use FlowCoordinator"</span><span class="p">)</span>
+                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated, message: "You should use FlowCoordinator")</span>
 <span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">Coordinator</span> <span class="o">=</span> <span class="kt"><a href="Classes/FlowCoordinator.html">FlowCoordinator</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6RxFlow04NextB5Itemsa"></a>
+                    <a name="//apple_ref/swift/Alias/NextFlowItems" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6RxFlow04NextB5Itemsa">NextFlowItems</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>typealias to allow compliance with older versions of RxFlow. NextFlowItems should be replaced by FlowContributors</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated, message: "You should use FlowContributors")</span>
+<span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">NextFlowItems</span> <span class="o">=</span> <span class="kt"><a href="Enums/FlowContributors.html">FlowContributors</a></span></code></pre>
 
                         </div>
                       </div>
@@ -182,11 +193,10 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2020-01-10)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2023 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external noopener">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2023-11-27)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>
   </body>
-</div>
 </html>

@@ -17,18 +17,18 @@
     <a title="ObservableType Extension Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">RxFlow 2.9.0 Docs</a> (0% documented)</p>
-        <p class="header-right">
+        <p><a href="../index.html">RxFlow 2.13.0 Docs</a> (93% documented)</p>
+        <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
           </form>
-        </p>
+        </div>
       </div>
     </header>
     <div class="content-wrapper">
       <p id="breadcrumbs">
         <a href="../index.html">RxFlow Reference</a>
-        <img id="carat" src="../img/carat.png" />
+        <img id="carat" src="../img/carat.png" alt=""/>
         ObservableType Extension Reference
       </p>
     </div>
@@ -82,10 +82,10 @@
                 <a href="../Extensions/Reactive.html">Reactive</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/UIViewController">UIViewController</a>
+                <a href="../Extensions.html#/c:objc(cs)UIViewController">UIViewController</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/UIWindow">UIWindow</a>
+                <a href="../Extensions.html#/c:objc(cs)UIWindow">UIWindow</a>
               </li>
             </ul>
           </li>
@@ -99,13 +99,24 @@
                 <a href="../Protocols/Presentable.html">Presentable</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols.html#/Step">Step</a>
+                <a href="../Protocols.html#/s:6RxFlow4StepP">Step</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Stepper.html">Stepper</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols.html#/Synchronizable">Synchronizable</a>
+                <a href="../Protocols.html#/s:6RxFlow14SynchronizableP">Synchronizable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6RxFlow11Coordinatora">Coordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6RxFlow04NextB5Itemsa">NextFlowItems</a>
               </li>
             </ul>
           </li>
@@ -115,6 +126,13 @@
         <section>
           <section class="section">
             <h1>ObservableType</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt">ObservableType</span></code></pre>
+
+                </div>
+              </div>
             
           </section>
           <section class="section task-group-section">
@@ -123,9 +141,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/"></a>
+                    <a name="/s:7RxSwift14ObservableTypeP0A4FlowE8pausable10withPauserAA0C0Cy7ElementQzGqd___tAaBRd__SbAIRtd__lF"></a>
                     <a name="//apple_ref/swift/Method/pausable(withPauser:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">pausable(withPauser:<wbr>)</a>
+                    <a class="token" href="#/s:7RxSwift14ObservableTypeP0A4FlowE8pausable10withPauserAA0C0Cy7ElementQzGqd___tAaBRd__SbAIRtd__lF">pausable(withPauser:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -138,15 +156,46 @@ Elements are ignored unless the second sequence has most recently emitted <code>
 seealso: <a href="http://reactivex.io/documentation/operators/backpressure.html">pausable operator on reactivex.io</a></p>
 
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">pausable</span><span class="o">&lt;</span><span class="kt">P</span><span class="o">&gt;</span><span class="p">(</span><span class="n">withPauser</span> <span class="nv">pauser</span><span class="p">:</span> <span class="kt">P</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">P</span> <span class="p">:</span> <span class="kt">ObservableType</span><span class="p">,</span> <span class="kt">P</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pauser</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The observable sequence used to pause the source observable sequence.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The observable sequence which is paused based upon the pauser observable sequence.</p>
+                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/"></a>
+                    <a name="/s:7RxSwift14ObservableTypeP0A4FlowE8pausable10afterCount10withPauserAA0C0Cy7ElementQzGSi_qd__tAaBRd__SbAJRtd__lF"></a>
                     <a name="//apple_ref/swift/Method/pausable(afterCount:withPauser:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">pausable(afterCount:<wbr>withPauser:<wbr>)</a>
+                    <a class="token" href="#/s:7RxSwift14ObservableTypeP0A4FlowE8pausable10afterCount10withPauserAA0C0Cy7ElementQzGSi_qd__tAaBRd__SbAJRtd__lF">pausable(afterCount:<wbr>withPauser:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -161,6 +210,52 @@ has most recently emitted <code>true</code>.
 seealso: <a href="http://reactivex.io/documentation/operators/backpressure.html">pausable operator on reactivex.io</a></p>
 
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">pausable</span><span class="o">&lt;</span><span class="kt">P</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">afterCount</span> <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">withPauser</span> <span class="nv">pauser</span><span class="p">:</span> <span class="kt">P</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span>
+    <span class="k">where</span>
+    <span class="kt">P</span><span class="p">:</span> <span class="kt">ObservableType</span><span class="p">,</span>
+    <span class="kt">P</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>count</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the number of events before considering the pauser parameter</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pauser</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The observable sequence used to pause the source observable sequence.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The observable sequence which is paused based upon the pauser observable sequence.</p>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -169,11 +264,10 @@ seealso: <a href="http://reactivex.io/documentation/operators/backpressure.html"
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2020-09-09)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2023 <a class="link" href="https://github.com/RxSwiftCommunity/RxFlow" target="_blank" rel="external noopener">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2023-11-27)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>
   </body>
-</div>
 </html>
