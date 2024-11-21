@@ -1,4 +1,5 @@
 ** *Unreleased* **:
+- fix: presentable `allowStepWhenDismissed` now are not ignored and not overridden by parent flow
 - fix: `displayed` and `rxVisible` now do not assume UIViewController starts not visible
 
 ** Version 2.13.0 **:
