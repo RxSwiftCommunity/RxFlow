@@ -230,6 +230,36 @@ final class TestLeakingFlow: Flow {
     }
 }
 
+final class TestChildLeakingFlow: Flow {
+    final class ChildViewController: UIViewController {
+        var onDeinit: (() -> Void)? = nil
+        
+        deinit {
+            onDeinit?()
+        }
+    }
+    
+    var root: Presentable = UIViewController()
+    weak var childViewController: ChildViewController? = nil
+    
+    func navigate(to step: Step) -> FlowContributors {
+        guard let step = step as? TestSteps else { return .none }
+
+        switch step {
+        case .one:
+            let viewController = ChildViewController()
+            childViewController = viewController
+            let flowContributor = FlowContributor.contribute(
+                withNextPresentable: viewController,
+                withNextStepper: DefaultStepper()
+            )
+            return .one(flowContributor: flowContributor)
+        default:
+            return .none
+        }
+    }
+}
+
 final class FlowCoordinatorTests: XCTestCase {
 
     func testCoordinateWithOneStepper() {
@@ -367,6 +397,33 @@ final class FlowCoordinatorTests: XCTestCase {
         try XCTUnwrap(leakingFlowReference).rxDismissedRelay.accept(Void())
 
         XCTAssertNil(leakingFlowReference)
+    }
+    
+    func testChildViewControllerIsNotLeakingWhenParentFlowAllowsStepWhenDismissed() throws {
+        let exp = expectation(description: "Flow when ready")
+        let flowCoordinator = FlowCoordinator()
+        let parentFlow = TestChildLeakingFlow()
+        
+        flowCoordinator.coordinate(flow: parentFlow,
+                                   with: OneStepper(withSingleStep: TestSteps.one),
+                                   allowStepWhenDismissed: true)
+        
+        Flows.use(parentFlow, when: .created) { (_) in
+            exp.fulfill()
+        }
+
+        waitForExpectations(timeout: 1)
+        
+        XCTAssertNotNil(parentFlow.childViewController)
+        
+        let deallocExp = expectation(description: "Child view controller deallocated")
+        parentFlow.childViewController?.onDeinit = { deallocExp.fulfill() }
+
+        try XCTUnwrap(parentFlow.childViewController).didMove(toParent: nil)
+        
+        waitForExpectations(timeout: 1)
+            
+        XCTAssertNil(parentFlow.childViewController)
     }
 
     func testNavigate_executes_on_mainThread() {
