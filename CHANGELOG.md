@@ -1,4 +1,5 @@
 ** *Unreleased* **:
+- fix: flow is not released when embedded in UINavigationController
 - fix: `displayed` and `rxVisible` now do not assume UIViewController starts not visible
 
 ** Version 2.13.0 **:
