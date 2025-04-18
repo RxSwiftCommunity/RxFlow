@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "RxFlow"
-  s.version = "2.13.1"
+  s.version = "2.13.2"
   s.swift_version = '5.4'
   s.summary = "RxFlow is a navigation framework for iOS applications, based on a Reactive Coordinator pattern."
 

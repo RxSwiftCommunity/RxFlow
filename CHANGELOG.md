@@ -1,5 +1,9 @@
 ** _Unreleased_ **:
 
+** Version 2.13.2 **:
+
+- fix: allow arm64 simulator builds
+
 ** Version 2.13.1 **:
 
 - fix: flow is not released when embedded in UINavigationController
